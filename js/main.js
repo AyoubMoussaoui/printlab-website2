@@ -311,9 +311,6 @@
   /* ------------------------------------------------------------------------
      5. ACTIVE SECTION HIGHLIGHTING
      ------------------------------------------------------------------------ */
-  /* ------------------------------------------------------------------------
-     5. ACTIVE SECTION HIGHLIGHTING
-     ------------------------------------------------------------------------ */
   const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
   const sections = Array.from(document.querySelectorAll('[data-section]'));
 
@@ -327,28 +324,41 @@
   }
 
   function highlightCurrentSection() {
-    // Prüfe die genaue Mitte des Bildschirms in Pixeln
-    const scrollPos = window.scrollY + (window.innerHeight / 2);
+    // Measure 1/3 down from the top of the screen (highly reliable on mobile browsers)
+    const triggerPoint = window.innerHeight / 3;
     let currentId = '';
 
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionBottom = sectionTop + section.offsetHeight;
-
-      // Liegt die Bildschirmmitte innerhalb dieser Sektion?
-      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+      // getBoundingClientRect measures exactly where the section is on your physical screen right now
+      const rect = section.getBoundingClientRect();
+      
+      if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
         currentId = section.id;
       }
     });
+
+    // Fallback: If you scroll to the absolute bottom, highlight the last section (e.g., Kontakt)
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+      if (sections.length) currentId = sections[sections.length - 1].id;
+    }
 
     if (currentId) {
       setActive(currentId);
     }
   }
 
+  // Check on scroll, resize, and mobile touch events
   window.addEventListener('scroll', highlightCurrentSection, { passive: true });
+  window.addEventListener('resize', highlightCurrentSection);
+  window.addEventListener('touchend', highlightCurrentSection);
   
-  // Direkt beim Laden einmal ausführen
+  // Force a recalculation the exact moment the hamburger menu is tapped
+  const hamburgerBtn = document.querySelector('[data-menu-toggle]');
+  if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', () => setTimeout(highlightCurrentSection, 50));
+  }
+
+  // Run once immediately on load
   highlightCurrentSection();
 
   /* ------------------------------------------------------------------------
