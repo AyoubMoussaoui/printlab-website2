@@ -139,7 +139,7 @@
     'form.message': 'Message',
     'form.messagePh': 'Tell us briefly about your idea …',
     'form.file': 'Upload file',
-    'form.fileHint': 'Choose logo or artwork (PNG, JPG, PDF, SVG)',
+    'form.fileHint': 'Choose logo or artwork (max. 3 files, PNG, JPG, PDF, SVG)',
     'form.submit': 'Request quote',
     'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
@@ -399,8 +399,8 @@
       fileInput.value = ''; // Hard clear the input
       
       const defaultText = document.documentElement.lang === 'en' 
-        ? 'Select logo or design (PNG, JPG, PDF, SVG)' 
-        : 'Logo oder Motiv auswählen (PNG, JPG, PDF, SVG)';
+        ? 'Choose logo or artwork (max. 3 files, PNG, JPG, PDF, SVG)' 
+        : 'Logo oder Motiv auswählen (max. 3 Dateien, PNG, JPG, PDF, SVG)';
       fileLabel.textContent = defaultText;
       
       if (fileClearBtn) fileClearBtn.hidden = true;
