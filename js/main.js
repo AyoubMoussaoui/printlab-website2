@@ -164,7 +164,7 @@
       error: 'Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns per WhatsApp.',
       menuOpen: 'Menü öffnen',
       menuClose: 'Menü schließen',
-      waText: 'Hallo PRINT LAB, ich habe eine Anfrage:'
+      waText: 'Hallo Team PRINT LAB, ich habe eine Anfrage: '
     },
     en: {
       required: 'Please fill in this field.',
