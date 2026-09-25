@@ -1300,30 +1300,32 @@ a.contact-list__item:hover {
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 
-/* --- FIX DESKTOP CONTACT GRID --- */
+/* --- PRO DESKTOP CONTACT GRID --- */
 @media (min-width: 992px) {
   .contact {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content 1fr; /* Zwingt die 1. Zeile, sich exakt an die Höhe des Textes anzupassen */
-    column-gap: 60px;
-    row-gap: 40px; /* Steuert den Abstand zwischen Text und Karten */
-    align-items: start;
+    /* Asymmetrical split: Tighter text column, wider form column */
+    grid-template-columns: 4.5fr 7.5fr; 
+    /* Row 1 hugs the text exactly, Row 2 fills the rest */
+    grid-template-rows: max-content 1fr; 
+    column-gap: 8vw; /* Responsive gap based on screen size */
+    align-items: start; /* Prevents stretching */
   }
 
   .contact__info {
     grid-column: 1;
     grid-row: 1;
+    margin-bottom: 40px; /* Exact spacing between text and cards */
   }
 
   .quote-form {
     grid-column: 2;
-    grid-row: 1 / span 2; /* Formular erstreckt sich über die gesamte rechte Seite */
+    grid-row: 1 / span 2;
   }
 
   .contact-list {
     grid-column: 1;
     grid-row: 2;
-    margin-top: 0;
+    align-self: start; /* Locks the cards directly under the text */
   }
 }
