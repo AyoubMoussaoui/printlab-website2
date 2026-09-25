@@ -311,6 +311,9 @@
   /* ------------------------------------------------------------------------
      5. ACTIVE SECTION HIGHLIGHTING
      ------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------
+     5. ACTIVE SECTION HIGHLIGHTING
+     ------------------------------------------------------------------------ */
   const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
   const sections = Array.from(document.querySelectorAll('[data-section]'));
 
@@ -323,20 +326,30 @@
     });
   }
 
-  if ('IntersectionObserver' in window && sections.length) {
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    }, {
-      // Evaluates a single horizontal line at the exact center of the viewport
-      rootMargin: '-50% 0px -50% 0px',
-      threshold: 0
+  function highlightCurrentSection() {
+    // Prüfe die genaue Mitte des Bildschirms in Pixeln
+    const scrollPos = window.scrollY + (window.innerHeight / 2);
+    let currentId = '';
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      // Liegt die Bildschirmmitte innerhalb dieser Sektion?
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        currentId = section.id;
+      }
     });
-    sections.forEach((s) => sectionObserver.observe(s));
+
+    if (currentId) {
+      setActive(currentId);
+    }
   }
+
+  window.addEventListener('scroll', highlightCurrentSection, { passive: true });
+  
+  // Direkt beim Laden einmal ausführen
+  highlightCurrentSection();
 
   /* ------------------------------------------------------------------------
      6. FLOATING WHATSAPP — hide while primary CTAs are on screen
