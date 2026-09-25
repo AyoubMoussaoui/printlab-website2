@@ -1299,3 +1299,24 @@ a.contact-list__item:hover {
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
+
+/* --- FIX DESKTOP CONTACT GRID --- */
+@media (min-width: 992px) {
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 40px;
+  }
+  
+  .quote-form {
+    grid-column: 2;
+    grid-row: 1 / span 2; /* Forces the form to span the entire right side */
+  }
+
+  .contact-list {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: -20px; /* Pulls the cards up slightly closer to the text */
+  }
+}
