@@ -604,3 +604,52 @@
   // This is the critical line that applies the WhatsApp link injection!
   applyLanguage(initialLang);
 })();
+
+/* ==========================================================================
+   REAL-TIME FORM VALIDATION
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('quote-form');
+  if (!form) return;
+
+  // Select all required fields in the form
+  const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+  inputs.forEach(input => {
+    // Validate when user clicks away from the field
+    input.addEventListener('blur', () => {
+      validateInput(input);
+    });
+
+    // Validate in real-time ONLY if they are trying to fix an error or if they type a correct value
+    input.addEventListener('input', () => {
+      if (input.classList.contains('is-invalid') || input.checkValidity()) {
+        validateInput(input);
+      }
+    });
+  });
+
+  function validateInput(input) {
+    const errorTarget = form.querySelector(`[data-error-for="${input.id}"]`);
+    
+    if (input.checkValidity()) {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+      if (errorTarget) errorTarget.textContent = '';
+    } else {
+      input.classList.remove('is-valid');
+      input.classList.add('is-invalid');
+      
+      // Inject specific error messages based on what went wrong
+      if (errorTarget) {
+        if (input.validity.valueMissing) {
+          errorTarget.textContent = 'Dieses Feld ist erforderlich.';
+        } else if (input.validity.typeMismatch) {
+          errorTarget.textContent = 'Bitte gib eine gültige Formatierung ein (z. B. E-Mail).';
+        } else {
+          errorTarget.textContent = 'Eingabe ungültig.';
+        }
+      }
+    }
+  }
+});

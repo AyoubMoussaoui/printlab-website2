@@ -1331,3 +1331,50 @@ a.contact-list__item:hover {
     align-self: start; /* Locks the cards directly under the text */
   }
 }
+
+/* --- TRUST BADGES --- */
+.trust-badges {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trust-badges li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.trust-badges svg {
+  width: 24px;
+  height: 24px;
+  color: #e5007f; /* Print Lab Pink */
+  flex-shrink: 0;
+}
+
+/* --- REAL-TIME VALIDATION STATES --- */
+.field__input.is-valid {
+  border-color: #22c55e !important; /* Success Green */
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+.field__input.is-invalid {
+  border-color: #ef4444 !important; /* Error Red */
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.field__error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 8px;
+  display: none;
+}
+
+.field__input.is-invalid ~ .field__error {
+  display: block;
+}
