@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <radialGradient id="l" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity="0.1"/><stop offset="1" stop-color="#000" stop-opacity="0.35"/></radialGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.10"/><stop offset="1" stop-color="#000" stop-opacity="0.22"/></linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="#2A2A2D"/>
+  <rect width="800" height="1000" fill="url(#l)"/>
+  <ellipse cx="400" cy="835" rx="230" ry="26" fill="#000" opacity="0.18"/>
+  <g transform="translate(400 520)">
+    <path d="M-62 -170 C-50 -205 -25 -222 0 -222 C25 -222 50 -205 62 -170 L130 -140 L172 60 L128 72 L112 -10 L112 196 L-112 196 L-112 -10 L-128 72 L-172 60 L-130 -140 Z" fill="#C91F6F" fill-rule="evenodd"/>
+    <path d="M-62 -170 C-50 -205 -25 -222 0 -222 C25 -222 50 -205 62 -170 L130 -140 L172 60 L128 72 L112 -10 L112 196 L-112 196 L-112 -10 L-128 72 L-172 60 L-130 -140 Z" fill="url(#g)" fill-rule="evenodd"/>
+    <g transform="translate(0 -30)">
+      <rect x="-58" y="-58" width="116" height="116" rx="18" fill="#F5F3EE" opacity="0.95"/>
+      <circle cx="26" cy="-26" r="12" fill="#C91F6F"/>
+      <text x="0" y="96" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" letter-spacing="3" fill="#F5F3EE">PRINT LAB</text>
+    </g>
+  </g>
+</svg>

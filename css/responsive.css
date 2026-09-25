@@ -1,0 +1,540 @@
+/* ==========================================================================
+   Responsive — explicit, non-overlapping breakpoints.
+
+     Desktop (default) ........ ≥ 1100px   → layout.css / components.css
+     Small desktop ............ 1100–1279px
+     Tablet ................... 768–1099px
+     Mobile ................... ≤ 767px    (all mobile-only components)
+     Small mobile ............. ≤ 359px
+
+   Tablet and mobile queries never overlap, so a change in one can not
+   leak into the other or into desktop.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SMALL DESKTOP  1100–1279px
+   -------------------------------------------------------------------------- */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .site-header-desktop__inner {
+    column-gap: 20px;
+  }
+
+  .desktop-nav__link {
+    padding-inline: 9px;
+    font-size: 14px;
+  }
+
+  .desktop-actions {
+    gap: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   TABLET  768–1099px
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1099px) {
+  :root {
+    --container-pad: 28px;
+    --header-h: 118px;
+    --section-pad: 96px;
+  }
+
+  /* Header: two rows — brand + actions on top, nav below */
+  .site-header-desktop__inner {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "brand actions"
+      "nav   nav";
+    row-gap: 0;
+    min-height: 0;
+    padding-top: 14px;
+  }
+
+  .desktop-actions {
+    justify-self: end;
+  }
+
+  .desktop-nav {
+    justify-self: stretch;
+    margin-top: 8px;
+    border-top: 1px solid var(--color-line-dark);
+  }
+
+  .desktop-nav__list {
+    justify-content: space-between;
+    padding-block: 4px;
+  }
+
+  .desktop-nav__link {
+    padding-inline: 8px;
+    font-size: 14px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 0;
+    padding-block: 88px 80px;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__visual {
+    display: none;
+  }
+
+  /* Grids */
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .method-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+
+  .forwho,
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .design-service__box {
+    padding: 48px;
+  }
+
+  .contact__info {
+    max-width: 640px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE  ≤767px
+   Everything mobile-specific is scoped here.
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  :root {
+    --container-pad: 20px;
+    --header-h: 64px;
+    --section-pad: 72px;
+    --btn-h: 54px;
+  }
+
+  /* ---- Header swap ---- */
+  .site-header-desktop {
+    display: none;
+  }
+
+  .site-header-mobile {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background-color: rgba(11, 11, 11, 0.97);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--color-line-dark);
+  }
+
+  .site-header-mobile__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: var(--header-h);
+    padding-inline: var(--container-pad);
+  }
+
+  .brand--mobile .brand__mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .brand--mobile .brand__word {
+    font-size: 17px;
+  }
+
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mobile-actions__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-on-dark-soft);
+  }
+
+  .mobile-actions__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-actions__cta {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-magenta);
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* ---- Hamburger ---- */
+  .hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-right: -8px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+  }
+
+  .hamburger__line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--color-offwhite);
+    transition: transform var(--dur) var(--ease), opacity var(--dur-fast) var(--ease);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ---- Mobile menu: compact list, all 6 links visible at once ---- */
+  .mobile-menu {
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100svh - var(--header-h));
+    overflow-y: auto;
+    border-top: 1px solid var(--color-line-dark);
+    background-color: var(--color-black);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+
+  .mobile-menu[hidden] {
+    display: none;
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu__list {
+    margin: 0;
+    padding: 4px var(--container-pad) 12px;
+    list-style: none;
+  }
+
+  .mobile-menu__list > li + li {
+    border-top: 1px solid var(--color-line-dark);
+  }
+
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    color: var(--color-offwhite);
+    font-size: 18px;
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+  }
+
+  .mobile-menu__link::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid rgba(245, 243, 238, 0.35);
+    border-right: 2px solid rgba(245, 243, 238, 0.35);
+    transform: rotate(45deg);
+  }
+
+  .mobile-menu__link.is-active {
+    color: var(--color-magenta);
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    min-height: 0;
+    padding-block: 40px 44px;
+    background-image:
+      linear-gradient(180deg, rgba(11, 11, 11, 0.78) 0%, rgba(11, 11, 11, 0.88) 55%, rgba(11, 11, 11, 0.96) 100%),
+      url("../assets/images/hero-workshop.jpg"),
+      radial-gradient(ellipse at 80% 10%, #3A2A31 0%, #1A1517 45%, var(--color-black) 80%);
+    background-size: cover, cover, cover;
+    background-position: center, 70% center, center;
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .hero__visual {
+    display: none;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+
+  .hero__title {
+    font-size: clamp(40px, 10vw, 54px);
+  }
+
+  .hero__lead {
+    margin-top: 18px;
+    font-size: 16px;
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .btn--hero {
+    width: 100%;
+  }
+
+  /* ---- Trust points: compact vertical pills ---- */
+  .trust {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .trust__item {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  /* ---- Marquee ---- */
+  .marquee {
+    height: 52px;
+  }
+
+  .marquee__item {
+    padding-inline: 16px;
+    font-size: 13px;
+  }
+
+  /* ---- Section heads ---- */
+  .section-head {
+    margin-bottom: 36px;
+  }
+
+  .section-head__title {
+    font-size: clamp(30px, 8.4vw, 40px);
+  }
+
+  .section-head__intro,
+  .forwho__text,
+  .contact__lead {
+    font-size: 16px;
+  }
+
+  /* ---- Grids ---- */
+  .grid--3 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .service-card {
+    padding: 24px;
+  }
+
+  .service-card__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+  }
+
+  .method-card {
+    padding: 28px 24px;
+  }
+
+  .method-card__num {
+    margin-bottom: 18px;
+  }
+
+  .method-card__title {
+    font-size: 24px;
+  }
+
+  /* ---- Steps: vertical timeline ---- */
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    grid-template-areas:
+      "num title"
+      "num text";
+    column-gap: 12px;
+    padding-block: 20px;
+    border-top-width: 1px;
+  }
+
+  .step--final {
+    border-top-width: 2px;
+  }
+
+  .step__num {
+    grid-area: num;
+    font-size: 30px;
+  }
+
+  .step__title {
+    grid-area: title;
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  .step__text {
+    grid-area: text;
+    margin-top: 4px;
+  }
+
+  /* ---- Für wen ---- */
+  .forwho {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .audience {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .audience__item {
+    padding: 16px 14px;
+  }
+
+  .audience__title {
+    font-size: 17px;
+  }
+
+  .audience__sub {
+    font-size: 13px;
+  }
+
+  /* ---- Design service ---- */
+  .design-service__box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding: 32px 24px;
+  }
+
+  .design-service__text {
+    font-size: 16px;
+  }
+
+  /* ---- Referenzen ---- */
+  .ref-more {
+    margin-top: 32px;
+  }
+
+  .text-link__handle {
+    display: none;
+  }
+
+  /* ---- Kontakt ---- */
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .contact-list {
+    margin-top: 28px;
+  }
+
+  .quote-form {
+    padding: 24px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .quote-form__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  /* ---- Footer: leave room for the floating WhatsApp button ---- */
+  .site-footer {
+    padding-block: 32px 96px;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  /* ---- Floating WhatsApp ---- */
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+    background-color: #25D366;
+    border-color: transparent;
+    color: var(--color-white);
+  }
+
+  .wa-float__icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SMALL MOBILE  ≤359px — drop the header CTA when space runs out
+   -------------------------------------------------------------------------- */
+@media (max-width: 359px) {
+  .mobile-actions__cta {
+    display: none;
+  }
+
+  .audience {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

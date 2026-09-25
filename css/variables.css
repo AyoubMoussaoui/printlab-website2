@@ -1,0 +1,74 @@
+/* ==========================================================================
+   PRINT LAB Trier — Design tokens
+   All colors, radii, spacing and type scales live here.
+   ========================================================================== */
+
+:root {
+  /* Brand colors */
+  --color-black: #0B0B0B;
+  --color-charcoal: #151515;
+  --color-graphite: #1E1E1E;
+  --color-offwhite: #F5F3EE;
+  --color-white: #FFFFFF;
+  --color-magenta: #C91F6F;
+  --color-magenta-hover: #B01A61;
+  --color-magenta-soft: rgba(201, 31, 111, 0.10);
+  --color-muted: #777777;
+
+  /* Sparse accents — use very sparingly */
+  --color-cyan: #2BB3C8;
+  --color-yellow: #E8C547;
+
+  /* Surfaces & lines */
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #ECE9E2;
+  --color-line: rgba(11, 11, 11, 0.10);
+  --color-line-strong: rgba(11, 11, 11, 0.18);
+  --color-line-dark: rgba(245, 243, 238, 0.12);
+  --color-text: var(--color-black);
+  --color-text-soft: #4A4A4A;
+  --color-text-on-dark: var(--color-offwhite);
+  --color-text-on-dark-soft: rgba(245, 243, 238, 0.72);
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-pad: 32px;
+  --header-h: 76px;
+  --section-pad: 120px;
+
+  /* Typography */
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  --fs-hero: clamp(64px, 6vw, 92px);
+  --fs-h2: clamp(36px, 4vw, 56px);
+  --fs-h3: 21px;
+  --fs-lead: 19px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-xs: 12px;
+
+  /* Buttons */
+  --btn-h: 54px;
+  --btn-w: 220px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --marquee-duration: 38s;
+
+  /* Layers */
+  --z-header: 100;
+  --z-float: 90;
+}
