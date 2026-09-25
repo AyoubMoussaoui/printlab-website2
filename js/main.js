@@ -406,20 +406,28 @@
       window.addEventListener('pageshow', resetFileInput);
 
       fileInput.addEventListener('change', () => {
-        const file = fileInput.files && fileInput.files[0];
-        if (file) {
-          fileLabel.textContent = file.name;
+        const files = fileInput.files;
+        
+        if (files && files.length > 0) {
+          // Block the upload if more than 3 files are selected
+          if (files.length > 3) {
+            const warningMsg = document.documentElement.lang === 'en' 
+              ? 'You can only upload a maximum of 3 files.' 
+              : 'Du kannst maximal 3 Dateien hochladen.';
+            alert(warningMsg);
+            resetFileInput();
+            return;
+          }
+          
+          // Extract all file names and join them with a comma
+          const fileNames = Array.from(files).map(f => f.name).join(', ');
+          fileLabel.textContent = fileNames;
           if (fileClearBtn) fileClearBtn.hidden = false;
         } else {
           resetFileInput();
         }
       });
 
-      if (fileClearBtn) {
-        fileClearBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          resetFileInput();
-        });
       }
     }
 
