@@ -1350,11 +1350,12 @@ a.contact-list__item:hover {
   font-weight: 500;
 }
 
-.trust-badges svg {
-  width: 24px;
-  height: 24px;
-  color: #e5007f; /* Print Lab Pink */
-  flex-shrink: 0;
+.trust-badges li svg {
+  width: 24px !important;
+  height: 24px !important;
+  flex: 0 0 24px;
+  fill: #e5007f;
+  color: #e5007f;
 }
 
 /* --- REAL-TIME VALIDATION STATES --- */

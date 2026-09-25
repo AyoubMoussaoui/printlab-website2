@@ -612,21 +612,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('quote-form');
   if (!form) return;
 
-  // Select all required fields in the form
   const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
 
   inputs.forEach(input => {
-    // Validate when user clicks away from the field
-    input.addEventListener('blur', () => {
-      validateInput(input);
-    });
-
-    // Validate in real-time ONLY if they are trying to fix an error or if they type a correct value
+    input.addEventListener('blur', () => validateInput(input));
     input.addEventListener('input', () => {
       if (input.classList.contains('is-invalid') || input.checkValidity()) {
         validateInput(input);
       }
     });
+  });
+
+  // Blockiert das Absenden bei Fehlern
+  form.addEventListener('submit', (e) => {
+    let isFormValid = true;
+    
+    inputs.forEach(input => {
+      validateInput(input);
+      if (!input.checkValidity()) {
+        isFormValid = false;
+      }
+    });
+
+    if (!isFormValid) {
+      e.preventDefault(); 
+    }
   });
 
   function validateInput(input) {
@@ -640,7 +650,6 @@ document.addEventListener('DOMContentLoaded', () => {
       input.classList.remove('is-valid');
       input.classList.add('is-invalid');
       
-      // Inject specific error messages based on what went wrong
       if (errorTarget) {
         if (input.validity.valueMissing) {
           errorTarget.textContent = 'Dieses Feld ist erforderlich.';
