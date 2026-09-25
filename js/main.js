@@ -501,6 +501,14 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      // --- HONEYPOT SPAM-SCHUTZ ---
+      const honeypot = document.getElementById('f-website');
+      if (honeypot && honeypot.value.trim() !== '') {
+        e.stopImmediatePropagation(); // Tötet alle anderen Skripte ab!
+        return; 
+      }
+      // ----------------------------
+
       let firstInvalid = null;
       requiredInputs.forEach((input) => {
         const message = validateInput(input);

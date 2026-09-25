@@ -432,6 +432,14 @@
 
         <form class="quote-form reveal-on-scroll delay-200" id="quote-form" novalidate data-quote-form>
           <div class="quote-form__grid">
+
+<!-- ==========================================
+         HONEYPOT TRAP (Unsichtbar für echte Nutzer)
+         ========================================== -->
+            <div class="field-hidden" aria-hidden="true">
+              <label for="f-website">Website</label>
+              <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="field">
               <label class="field__label" for="f-name"><span data-i18n="form.name">Name</span> <span class="field__req" aria-hidden="true">*</span></label>
               <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" required>
