@@ -15,9 +15,9 @@
      ------------------------------------------------------------------------ */
   const CONFIG = {
     // TODO: real WhatsApp number in international format, digits only
-    whatsappNumber: '4900000000000',
+    whatsappNumber: '4915901378917',
     // TODO: inbox that receives quote requests (used for the mailto fallback)
-    email: 'hallo@printlab-trier.de',
+    email: 'just-click@live.fr',
     // Optional: form backend (e.g. Formspree, Netlify, own API). When set,
     // the form is POSTed there as multipart/form-data instead of mailto.
     formEndpoint: '',
