@@ -324,16 +324,16 @@
   }
 
   if ('IntersectionObserver' in window && sections.length) {
-    const visible = new Map();
     const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0));
-      // Pick the first section (in document order) that occupies the reading band.
-      const current = sections.find((s) => visible.get(s.id) > 0);
-      setActive(current ? current.id : '');
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
     }, {
-      // A thin band ~35% down the viewport decides which section is "current".
-      rootMargin: '-35% 0px -60% 0px',
-      threshold: [0, 0.01]
+      // Evaluates a single horizontal line at the exact center of the viewport
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
     });
     sections.forEach((s) => sectionObserver.observe(s));
   }
