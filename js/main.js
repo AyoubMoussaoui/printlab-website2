@@ -1,10 +1,10 @@
 /* ==========================================================================
    PRINT LAB Trier — main.js
    Vanilla JS, no dependencies. Modules:
-     1. Config          5. Active section highlighting
-     2. i18n (DE / EN)  6. Floating WhatsApp visibility
-     3. Mobile menu     7. Quote form
-     4. Header state    8. Small utilities (marquee, year, links)
+     1. Config         5. Active section highlighting
+     2. i18n (DE / EN) 6. Floating WhatsApp visibility
+     3. Mobile menu    7. Quote form
+     4. Header state   8. Small utilities (marquee, year, links)
    ========================================================================== */
 
 (function () {
@@ -14,12 +14,8 @@
      1. CONFIG — replace the placeholders before going live
      ------------------------------------------------------------------------ */
   const CONFIG = {
-    // TODO: real WhatsApp number in international format, digits only
     whatsappNumber: '4915901378917',
-    // TODO: inbox that receives quote requests (used for the mailto fallback)
     email: 'just-click@live.fr',
-    // Optional: form backend (e.g. Formspree, Netlify, own API). When set,
-    // the form is POSTed there as multipart/form-data instead of mailto.
     formEndpoint: '',
     instagram: 'https://instagram.com/printlab_trier'
   };
@@ -183,7 +179,6 @@
   const LANG_KEY = 'printlab-lang';
   let currentLang = 'de';
 
-  // Snapshot the German source strings once so we can switch back.
   const i18nNodes = Array.from(document.querySelectorAll('[data-i18n]'));
   const i18nPhNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
   const DE = {};
@@ -245,7 +240,6 @@
     mobileMenu.hidden = false;
     menuToggle.setAttribute('aria-expanded', 'true');
     document.body.classList.add('is-locked');
-    // next frame → trigger the CSS transition
     requestAnimationFrame(() => mobileMenu.classList.add('is-open'));
     updateMenuLabel();
   }
@@ -270,23 +264,13 @@
     }
   });
 
-// Close the menu when clicking outside (e.g., on the logo or background)
   document.addEventListener('click', (e) => {
-    // 1. If the menu is closed, do nothing (saves performance)
     if (!isMenuOpen()) return;
-
-    // 2. If the click happened inside the menu, do nothing
     if (mobileMenu && mobileMenu.contains(e.target)) return;
-
-    // 3. If the click was on the hamburger button, do nothing 
-    // (its own click listener handles opening/closing)
     if (menuToggle && menuToggle.contains(e.target)) return;
-
-    // 4. If we reach this point, the click was definitely outside. Close it.
     closeMenu();
   });
 
-  // Close the menu if the viewport grows past the mobile breakpoint.
   const onBreakpointChange = (e) => { if (!e.matches) closeMenu(); };
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', onBreakpointChange);
   else if (mqMobile.addListener) mqMobile.addListener(onBreakpointChange);
@@ -303,7 +287,6 @@
     if (history.replaceState) history.replaceState(null, '', hash);
   }
 
-  // Mobile links: close first (so the layout settles), then scroll.
   document.querySelectorAll('[data-mobile-link]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const hash = link.getAttribute('href');
@@ -341,16 +324,11 @@
   }
 
   function determineActiveSection() {
-    // CRITICAL FIX: If the mobile menu is open, the body is locked. 
-    // This alters the DOM layout. Do NOT recalculate coordinates while locked.
     if (document.body.classList.contains('is-locked')) return;
 
-    // Trigger line: 40% down the screen
     const triggerPoint = window.innerHeight * 0.4;
     let foundId = '';
 
-    // Loop backwards (bottom to top). The first section whose top edge 
-    // is above the trigger line is guaranteed to be the active one.
     for (let i = sections.length - 1; i >= 0; i--) {
       const section = sections[i];
       const rect = section.getBoundingClientRect();
@@ -361,39 +339,20 @@
       }
     }
 
-    // Fallback: If scrolled to the absolute bottom of the document
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
       if (sections.length) foundId = sections[sections.length - 1].id;
     }
 
-    // Only update the DOM if the active section actually changed
     if (foundId && foundId !== activeSectionId) {
       activeSectionId = foundId;
       updateActiveNav();
     }
   }
 
-  // Use passive listeners for high performance
   window.addEventListener('scroll', determineActiveSection, { passive: true });
   window.addEventListener('resize', determineActiveSection);
   window.addEventListener('touchend', determineActiveSection);
-  
-  // Run once immediately on load
   determineActiveSection();
-
-  // Check on scroll, resize, and mobile touch events
-  window.addEventListener('scroll', highlightCurrentSection, { passive: true });
-  window.addEventListener('resize', highlightCurrentSection);
-  window.addEventListener('touchend', highlightCurrentSection);
-  
-  // Force a recalculation the exact moment the hamburger menu is tapped
-  const hamburgerBtn = document.querySelector('[data-menu-toggle]');
-  if (hamburgerBtn) {
-    hamburgerBtn.addEventListener('click', () => setTimeout(highlightCurrentSection, 50));
-  }
-
-  // Run once immediately on load
-  highlightCurrentSection();
 
   /* ------------------------------------------------------------------------
      6. FLOATING WHATSAPP — hide while primary CTAs are on screen
@@ -415,7 +374,11 @@
 
   function updateWhatsAppLinks() {
     const href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(t('waText'));
-    document.querySelectorAll('[data-whatsapp-link]').forEach((a) => { a.href = href; });
+    document.querySelectorAll('[data-whatsapp-link]').forEach((a) => { 
+      a.href = href; 
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -526,7 +489,6 @@
         return;
       }
 
-      // Fallback: open the visitor's mail client with a pre-filled request.
       const subject = 'Anfrage: ' + (data.get('product') || 'Textildruck') + ' – ' + data.get('quantity') + ' Stk.';
       window.location.href = 'mailto:' + CONFIG.email +
         '?subject=' + encodeURIComponent(subject) +
@@ -538,8 +500,6 @@
   /* ------------------------------------------------------------------------
      8. UTILITIES
      ------------------------------------------------------------------------ */
-  // Seamless marquee: repeat the group until the track is at least twice the
-  // viewport width with an even group count, so translateX(-50%) loops cleanly.
   document.querySelectorAll('[data-marquee]').forEach((track) => {
     const group = track.querySelector('.marquee__group');
     if (!group) return;
@@ -552,17 +512,17 @@
       clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     }
-    // Keep a constant speed regardless of how many copies were added.
     track.style.animationDuration = Math.round((groupWidth * count) / 2 / 40) + 's';
   });
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
-  // Initial language: stored choice, otherwise German.
   let initialLang = 'de';
   try {
     const stored = localStorage.getItem(LANG_KEY);
     if (stored) initialLang = stored;
   } catch (e) { /* storage unavailable */ }
+  
+  // This is the critical line that applies the WhatsApp link injection!
   applyLanguage(initialLang);
 })();
