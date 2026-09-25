@@ -313,39 +313,57 @@
      ------------------------------------------------------------------------ */
   const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
   const sections = Array.from(document.querySelectorAll('[data-section]'));
+  let activeSectionId = '';
 
-  function setActive(id) {
+  function updateActiveNav() {
     navLinks.forEach((link) => {
-      const active = link.getAttribute('href') === '#' + id;
-      link.classList.toggle('is-active', active);
-      if (active) link.setAttribute('aria-current', 'location');
+      const isActive = link.getAttribute('href') === '#' + activeSectionId;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
   }
 
-  function highlightCurrentSection() {
-    // Measure 40% down the screen (accounts for your sticky mobile header)
+  function determineActiveSection() {
+    // CRITICAL FIX: If the mobile menu is open, the body is locked. 
+    // This alters the DOM layout. Do NOT recalculate coordinates while locked.
+    if (document.body.classList.contains('is-locked')) return;
+
+    // Trigger line: 40% down the screen
     const triggerPoint = window.innerHeight * 0.4;
-    let currentId = '';
+    let foundId = '';
 
-    // Since sections are in order, it checks them from top to bottom.
-    // The LAST section whose top edge has scrolled past the trigger point wins.
-    sections.forEach((section) => {
+    // Loop backwards (bottom to top). The first section whose top edge 
+    // is above the trigger line is guaranteed to be the active one.
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
       const rect = section.getBoundingClientRect();
+      
       if (rect.top <= triggerPoint) {
-        currentId = section.id;
+        foundId = section.id;
+        break;
       }
-    });
-
-    // Fallback: If scrolled to the absolute bottom, always highlight the last section
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-      if (sections.length) currentId = sections[sections.length - 1].id;
     }
 
-    if (currentId) {
-      setActive(currentId);
+    // Fallback: If scrolled to the absolute bottom of the document
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+      if (sections.length) foundId = sections[sections.length - 1].id;
+    }
+
+    // Only update the DOM if the active section actually changed
+    if (foundId && foundId !== activeSectionId) {
+      activeSectionId = foundId;
+      updateActiveNav();
     }
   }
+
+  // Use passive listeners for high performance
+  window.addEventListener('scroll', determineActiveSection, { passive: true });
+  window.addEventListener('resize', determineActiveSection);
+  window.addEventListener('touchend', determineActiveSection);
+  
+  // Run once immediately on load
+  determineActiveSection();
 
   // Check on scroll, resize, and mobile touch events
   window.addEventListener('scroll', highlightCurrentSection, { passive: true });
