@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Layout — containers, headers, sections, grids, footer.
+   Desktop-first defaults (≥1100px). Tablet & mobile overrides live in
+   responsive.css inside explicit, non-overlapping breakpoints.
+   ========================================================================== */
+
+/* ---------- Container ---------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--container-pad) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* ---------- Desktop header ---------- */
+.site-header-desktop {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: rgba(11, 11, 11, 0.96);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--color-line-dark);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.site-header-desktop.is-scrolled {
+  background: rgba(11, 11, 11, 0.99);
+}
+
+.site-header-desktop__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "brand nav actions";
+  align-items: center;
+  column-gap: 32px;
+  min-height: var(--header-h);
+}
+
+.site-header-desktop .brand {
+  grid-area: brand;
+}
+
+.desktop-nav {
+  grid-area: nav;
+  justify-self: center;
+}
+
+.desktop-actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ---------- Mobile header (hidden by default, enabled ≤767px) ---------- */
+.site-header-mobile {
+  display: none;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  padding-block: 96px 88px;
+  color: var(--color-text-on-dark);
+  background-color: var(--color-black);
+  /* Layer order (top → bottom):
+     1. directional overlay: strongest behind the text column
+     2. bottom fade into the marquee
+     3. workshop photo (drop a real photo at assets/images/hero-workshop.jpg)
+     4. fallback studio lighting if the photo is missing */
+  background-image:
+    linear-gradient(90deg, rgba(11, 11, 11, 0.94) 0%, rgba(11, 11, 11, 0.82) 38%, rgba(11, 11, 11, 0.42) 68%, rgba(11, 11, 11, 0.30) 100%),
+    linear-gradient(180deg, rgba(11, 11, 11, 0) 60%, rgba(11, 11, 11, 0.85) 100%),
+    url("../assets/images/hero-workshop.jpg"),
+    radial-gradient(ellipse at 78% 40%, #3A2A31 0%, #1A1517 45%, var(--color-black) 80%);
+  background-size: cover, cover, cover, cover;
+  background-position: center, center, center right, center;
+  background-repeat: no-repeat;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 48px;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero__visual {
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding-block: var(--section-pad);
+}
+
+.section--light {
+  background-color: var(--color-offwhite);
+  color: var(--color-text);
+}
+
+.section--alt {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.section--dark {
+  background-color: var(--color-black);
+  color: var(--color-text-on-dark);
+}
+
+/* ---------- Generic grid ---------- */
+.grid {
+  display: grid;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ---------- Ablauf ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Für wen ---------- */
+.forwho {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* ---------- Design service ---------- */
+.design-service {
+  padding-block: 0 var(--section-pad);
+  background-color: var(--color-surface-alt);
+}
+
+/* ---------- Kontakt ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  align-items: start;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background-color: var(--color-black);
+  color: var(--color-text-on-dark-soft);
+  border-top: 1px solid var(--color-line-dark);
+  padding-block: 36px;
+}
+
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}

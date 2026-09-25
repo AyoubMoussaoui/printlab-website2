@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 620" width="560" height="620">
+  <defs>
+    <linearGradient id="board" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B2B2E"/><stop offset="1" stop-color="#18181A"/></linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F3EE"/><stop offset="1" stop-color="#D8D3C8"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.25"/><stop offset="1" stop-color="#000" stop-opacity="0.12"/></linearGradient>
+    <linearGradient id="print" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C91F6F"/><stop offset="1" stop-color="#8F1450"/></linearGradient>
+    <linearGradient id="film" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.16"/><stop offset="1" stop-color="#fff" stop-opacity="0.04"/></linearGradient>
+  </defs>
+
+  <!-- platen / print board -->
+  <rect x="40" y="70" width="480" height="520" rx="28" fill="url(#board)" stroke="#fff" stroke-opacity="0.08"/>
+  <!-- registration marks -->
+  <g stroke="#F5F3EE" stroke-opacity="0.35" stroke-width="1.5" fill="none">
+    <circle cx="84" cy="114" r="10"/><path d="M70 114h28M84 100v28"/>
+    <circle cx="476" cy="546" r="10"/><path d="M462 546h28M476 532v28"/>
+  </g>
+
+  <!-- t-shirt -->
+  <g transform="translate(280 350)">
+    <path d="M-120 -170 L-52 -198 C-40 -170 -22 -158 0 -158 C22 -158 40 -170 52 -198 L120 -170 L176 -70 L122 -44 L100 -80 L100 200 L-100 200 L-100 -80 L-122 -44 L-176 -70 Z" fill="url(#shirt)"/>
+    <path d="M-120 -170 L-52 -198 C-40 -170 -22 -158 0 -158 C22 -158 40 -170 52 -198 L120 -170 L176 -70 L122 -44 L100 -80 L100 200 L-100 200 L-100 -80 L-122 -44 L-176 -70 Z" fill="url(#shade)"/>
+    <path d="M-52 -198 C-40 -170 -22 -158 0 -158 C22 -158 40 -170 52 -198" fill="none" stroke="#000" stroke-opacity="0.12" stroke-width="3"/>
+
+    <!-- printed motif -->
+    <g transform="translate(0 -30)">
+      <rect x="-74" y="-66" width="148" height="148" rx="24" fill="url(#print)"/>
+      <circle cx="36" cy="-28" r="16" fill="#F5F3EE"/>
+      <text x="0" y="116" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="22" letter-spacing="4" fill="#0B0B0B">DEIN DESIGN</text>
+    </g>
+  </g>
+
+  <!-- DTF transfer film peeling off -->
+  <g transform="translate(330 96) rotate(9)">
+    <rect width="170" height="118" rx="10" fill="url(#film)" stroke="#fff" stroke-opacity="0.28"/>
+    <rect x="18" y="18" width="58" height="58" rx="10" fill="#C91F6F" opacity="0.85"/>
+    <rect x="88" y="22" width="62" height="10" rx="5" fill="#2BB3C8" opacity="0.8"/>
+    <rect x="88" y="42" width="44" height="10" rx="5" fill="#E8C547" opacity="0.8"/>
+    <rect x="88" y="62" width="54" height="10" rx="5" fill="#F5F3EE" opacity="0.5"/>
+  </g>
+
+  <!-- squeegee -->
+  <g transform="translate(40 36) rotate(-8)">
+    <rect x="0" y="0" width="210" height="30" rx="8" fill="#0B0B0B" stroke="#fff" stroke-opacity="0.12"/>
+    <rect x="12" y="30" width="186" height="10" rx="3" fill="#C91F6F"/>
+  </g>
+
+  <!-- ink swatches -->
+  <g transform="translate(76 520)">
+    <circle cx="0" cy="0" r="12" fill="#C91F6F"/>
+    <circle cx="30" cy="0" r="12" fill="#2BB3C8"/>
+    <circle cx="60" cy="0" r="12" fill="#E8C547"/>
+    <circle cx="90" cy="0" r="12" fill="#F5F3EE"/>
+  </g>
+</svg>
