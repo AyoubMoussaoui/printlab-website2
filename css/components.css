@@ -1299,6 +1299,8 @@ a.contact-list__item:hover {
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
 
 /* --- PRO DESKTOP CONTACT GRID --- */
 @media (min-width: 992px) {
