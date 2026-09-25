@@ -972,6 +972,22 @@ a.contact-list__item:hover {
   text-align: center;
 }
 
+.quote-form__privacy {
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.quote-form__privacy-link {
+  color: var(--color-text-on-dark-soft);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.quote-form__privacy-link:hover {
+  color: var(--color-offwhite);
+}
+
 .quote-form__status {
   margin-top: 16px;
   font-size: 15px;
@@ -1054,4 +1070,149 @@ a.contact-list__item:hover {
 .wa-float__icon {
   width: 24px;
   height: 24px;
+}
+
+/* ---------- Legal pages (Impressum, Datenschutz) ---------- */
+.legal-header {
+  background-color: var(--color-black);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.legal-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--header-h);
+}
+
+.legal-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.legal-header__back:hover {
+  color: var(--color-offwhite);
+}
+
+.legal-header__back svg {
+  width: 18px;
+  height: 18px;
+  transform: rotate(180deg);
+}
+
+.legal {
+  padding-block: 72px 112px;
+  background-color: var(--color-offwhite);
+}
+
+.legal__inner {
+  max-width: 760px;
+}
+
+.legal__title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-black);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  /* long German compounds ("Datenschutzerklärung") on narrow screens */
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.legal__updated {
+  margin-top: 16px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.legal__toc {
+  display: grid;
+  gap: 6px;
+  margin-top: 40px;
+  padding: 24px 28px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  list-style: decimal inside;
+}
+
+.legal__toc-link {
+  color: var(--color-text);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.legal__toc-link:hover {
+  color: var(--color-magenta);
+}
+
+.legal__section {
+  margin-top: 48px;
+}
+
+.legal__h2 {
+  margin-bottom: 14px;
+  font-size: 24px;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.legal__h3 {
+  margin: 24px 0 8px;
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+}
+
+.legal__text {
+  color: var(--color-text-soft);
+}
+
+.legal__text + .legal__text,
+.legal__list + .legal__text,
+.legal__text + .legal__list,
+.legal__address + .legal__text {
+  margin-top: 12px;
+}
+
+.legal__list {
+  display: grid;
+  gap: 6px;
+  padding-left: 20px;
+  color: var(--color-text-soft);
+}
+
+.legal__address {
+  color: var(--color-text);
+  font-style: normal;
+  line-height: 1.7;
+}
+
+.legal__link {
+  color: var(--color-magenta);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.legal__link:hover {
+  color: var(--color-magenta-hover);
+}
+
+/* Unfilled details — highlighted so they cannot go live unnoticed */
+.legal__todo {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  font-weight: var(--fw-semibold);
 }

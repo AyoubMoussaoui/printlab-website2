@@ -498,6 +498,32 @@
     gap: 16px;
   }
 
+  /* ---- Legal pages ---- */
+  .legal {
+    padding-block: 44px 72px;
+  }
+
+  .legal__title {
+    font-size: clamp(32px, 9vw, 40px);
+  }
+
+  .legal__toc {
+    margin-top: 28px;
+    padding: 18px 20px;
+  }
+
+  .legal__section {
+    margin-top: 36px;
+  }
+
+  .legal__h2 {
+    font-size: 21px;
+  }
+
+  .legal-header__back {
+    font-size: 14px;
+  }
+
   /* ---- Footer: leave room for the floating WhatsApp button ---- */
   .site-footer {
     padding-block: 32px 96px;

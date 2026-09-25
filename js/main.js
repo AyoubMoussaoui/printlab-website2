@@ -146,6 +146,8 @@
     'form.fileHint': 'Choose logo or artwork (PNG, JPG, PDF, SVG)',
     'form.submit': 'Request quote',
     'form.note': 'Free & non-binding. Reply within 24 hours.',
+    'form.privacy': 'How we handle your details is explained in our',
+    'form.privacyLink': 'privacy policy (German)',
     'footer.tag': 'Custom textile printing from 1 piece',
     'footer.imprint': 'Imprint',
     'footer.privacy': 'Privacy'
