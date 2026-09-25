@@ -516,6 +516,18 @@
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
+// Back-to-Top Button Sichtbarkeit umschalten
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.add('is-visible');
+      } else {
+        backToTop.classList.remove('is-visible');
+      }
+    }, { passive: true });
+  }
+
   let initialLang = 'de';
   try {
     const stored = localStorage.getItem(LANG_KEY);

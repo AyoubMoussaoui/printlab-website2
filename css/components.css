@@ -1216,3 +1216,37 @@ a.contact-list__item:hover {
   color: var(--color-black);
   font-weight: var(--fw-semibold);
 }
+
+/* --- BACK TO TOP BUTTON --- */
+.back-to-top {
+  position: fixed;
+  bottom: 90px; /* Sits just above the WhatsApp button */
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background-color: #222; 
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.3s ease;
+  z-index: 40; 
+  text-decoration: none;
+}
+
+/* Class added via JavaScript when scrolled */
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover, .back-to-top:focus {
+  background-color: #e5005a; 
+  color: #fff;
+}
