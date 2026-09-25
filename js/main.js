@@ -287,12 +287,20 @@
     if (history.replaceState) history.replaceState(null, '', hash);
   }
 
-  document.querySelectorAll('[data-mobile-link]').forEach((link) => {
+  // Universal smooth scroll for ALL internal links (menu, logo, back-to-top)
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const hash = link.getAttribute('href');
-      if (!hash || hash.charAt(0) !== '#') return;
+      // Ignore empty hashes used as fallbacks
+      if (!hash || hash === '#') return; 
+      
       e.preventDefault();
-      closeMenu();
+      
+      // Close the menu only if it is currently open
+      if (isMenuOpen()) {
+        closeMenu();
+      }
+      
       requestAnimationFrame(() => scrollToHash(hash));
     });
   });
