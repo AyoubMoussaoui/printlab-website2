@@ -324,20 +324,20 @@
   }
 
   function highlightCurrentSection() {
-    // Measure 1/3 down from the top of the screen (highly reliable on mobile browsers)
-    const triggerPoint = window.innerHeight / 3;
+    // Measure 40% down the screen (accounts for your sticky mobile header)
+    const triggerPoint = window.innerHeight * 0.4;
     let currentId = '';
 
+    // Since sections are in order, it checks them from top to bottom.
+    // The LAST section whose top edge has scrolled past the trigger point wins.
     sections.forEach((section) => {
-      // getBoundingClientRect measures exactly where the section is on your physical screen right now
       const rect = section.getBoundingClientRect();
-      
-      if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
+      if (rect.top <= triggerPoint) {
         currentId = section.id;
       }
     });
 
-    // Fallback: If you scroll to the absolute bottom, highlight the last section (e.g., Kontakt)
+    // Fallback: If scrolled to the absolute bottom, always highlight the last section
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
       if (sections.length) currentId = sections[sections.length - 1].id;
     }
