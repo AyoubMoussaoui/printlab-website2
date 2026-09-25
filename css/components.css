@@ -263,11 +263,6 @@
   margin-top: 40px;
 }
 
-.hero__visual-img {
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
-}
 
 /* ---------- Trust points ---------- */
 .trust {

@@ -25,7 +25,7 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 
 1. **Contact details:** set `CONFIG.whatsappNumber` and `CONFIG.email` in `js/main.js`. Both are placeholders now.
 2. **Form backend (optional):** set `CONFIG.formEndpoint` (Formspree, Netlify Forms or your own API). Without it, the form opens the visitor's mail app with a pre-filled request, and file attachments must be added by hand.
-3. **Hero photo:** add a real workshop photo at `assets/images/hero-workshop.jpg` (about 2400px wide, subject on the right). Until then a dark studio gradient is shown.
+3. **Hero photo:** `assets/images/hero-workshop.jpg` is the current workshop photo (1024px wide). For sharper results on large screens, replace it with a version about 2400px wide, keeping the subject on the right.
 4. **References:** replace the `assets/images/ref-*.svg` placeholders with real photos (4:5) and update the `src` attributes in `index.html`.
 5. **Legal pages:** the footer links to `impressum.html` and `datenschutz.html`, which German law requires. Create both pages.
 
