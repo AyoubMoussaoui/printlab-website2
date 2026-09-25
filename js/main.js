@@ -563,6 +563,26 @@
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
+// Scroll Reveal Animations
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  
+  if (revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target); // Unobserve so it only animates once
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1, // Triggers when 10% of the element is visible
+      rootMargin: "0px 0px -50px 0px" // Triggers slightly before the element hits the bottom of the screen
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
 // Back-to-Top Button Sichtbarkeit umschalten
   const backToTop = document.getElementById('back-to-top');
   if (backToTop) {
