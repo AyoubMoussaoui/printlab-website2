@@ -662,3 +662,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+/* ==========================================================================
+   MULTI-FILE UPLOAD ENGINE (MAX 3, APPEND MODE)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.getElementById('f-file');
+  const fileLabel = document.querySelector('[data-file-label]');
+  const fileClearBtn = document.getElementById('file-clear');
+  let selectedFiles = []; 
+
+  if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+      const newFiles = Array.from(e.target.files);
+      
+      // Prüfen, ob das Limit von 3 Dateien überschritten wird
+      if (selectedFiles.length + newFiles.length > 3) {
+        alert('Du kannst maximal 3 Dateien hochladen.');
+        const spaceLeft = 3 - selectedFiles.length;
+        selectedFiles = selectedFiles.concat(newFiles.slice(0, spaceLeft));
+      } else {
+        selectedFiles = selectedFiles.concat(newFiles);
+      }
+      updateFileInput();
+    });
+
+    // Lösch-Button Logik
+    if (fileClearBtn) {
+      fileClearBtn.addEventListener('click', () => {
+        selectedFiles = [];
+        updateFileInput();
+      });
+    }
+  }
+
+  function updateFileInput() {
+    // Synchronisiere das Array mit dem tatsächlichen HTML-Input
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    fileInput.files = dataTransfer.files;
+
+    // UI aktualisieren (Namen anzeigen und X-Button einblenden)
+    if (selectedFiles.length > 0) {
+      const fileNames = selectedFiles.map(f => f.name).join(', ');
+      fileLabel.textContent = fileNames;
+      if (fileClearBtn) fileClearBtn.hidden = false;
+    } else {
+      fileLabel.textContent = 'Logo oder Motiv auswählen (max. 3 Dateien, PNG, JPG, PDF, SVG)';
+      if (fileClearBtn) fileClearBtn.hidden = true;
+    }
+  }
+});

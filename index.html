@@ -439,7 +439,7 @@
             </div>
             <div class="field">
               <label class="field__label" for="f-email"><span data-i18n="form.email">E-Mail</span> <span class="field__req" aria-hidden="true">*</span></label>
-              <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+              <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" required>
               <p class="field__error" data-error-for="f-email"></p>
             </div>
             <div class="field">
