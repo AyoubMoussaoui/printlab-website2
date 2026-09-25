@@ -270,6 +270,22 @@
     }
   });
 
+// Close the menu when clicking outside (e.g., on the logo or background)
+  document.addEventListener('click', (e) => {
+    // 1. If the menu is closed, do nothing (saves performance)
+    if (!isMenuOpen()) return;
+
+    // 2. If the click happened inside the menu, do nothing
+    if (mobileMenu && mobileMenu.contains(e.target)) return;
+
+    // 3. If the click was on the hamburger button, do nothing 
+    // (its own click listener handles opening/closing)
+    if (menuToggle && menuToggle.contains(e.target)) return;
+
+    // 4. If we reach this point, the click was definitely outside. Close it.
+    closeMenu();
+  });
+
   // Close the menu if the viewport grows past the mobile breakpoint.
   const onBreakpointChange = (e) => { if (!e.matches) closeMenu(); };
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', onBreakpointChange);
