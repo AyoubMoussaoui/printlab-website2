@@ -15,9 +15,7 @@
 
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -527,6 +525,7 @@
           <div class="quote-form__footer" data-hide-float>
             <button class="btn btn--primary btn--block" type="submit" data-i18n="form.submit">Angebot anfragen</button>
             <p class="quote-form__note" data-i18n="form.note">Unverbindlich &amp; kostenlos. Antwort innerhalb von 24 Stunden.</p>
+            <p class="quote-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
           </div>
           <p class="quote-form__status" role="status" aria-live="polite" data-form-status></p>
         </form>
