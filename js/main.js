@@ -355,21 +355,11 @@
   determineActiveSection();
 
   /* ------------------------------------------------------------------------
-     6. FLOATING WHATSAPP — hide while primary CTAs are on screen
+     6. FLOATING WHATSAPP
      ------------------------------------------------------------------------ */
   const waFloat = document.querySelector('[data-wa-float]');
-  const hideZones = Array.from(document.querySelectorAll('[data-hide-float]'));
-
-  if (waFloat && 'IntersectionObserver' in window && hideZones.length) {
-    const inView = new Set();
-    const floatObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) inView.add(entry.target);
-        else inView.delete(entry.target);
-      });
-      waFloat.classList.toggle('is-hidden', inView.size > 0);
-    }, { threshold: 0 });
-    hideZones.forEach((zone) => floatObserver.observe(zone));
+  if (waFloat) {
+    waFloat.classList.remove('is-hidden'); 
   }
 
   function updateWhatsAppLinks() {
