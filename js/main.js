@@ -287,22 +287,23 @@
     if (history.replaceState) history.replaceState(null, '', hash);
   }
 
-  // Universal smooth scroll for ALL internal links (menu, logo, back-to-top)
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const hash = link.getAttribute('href');
-      // Ignore empty hashes used as fallbacks
-      if (!hash || hash === '#') return; 
-      
-      e.preventDefault();
-      
-      // Close the menu only if it is currently open
-      if (isMenuOpen()) {
-        closeMenu();
-      }
-      
-      requestAnimationFrame(() => scrollToHash(hash));
-    });
+  // Universal smooth scroll with Event Delegation (safely ignores WhatsApp)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    
+    // If it is an external link (like WhatsApp), do nothing and let it open normally
+    if (!href || !href.startsWith('#')) return;
+
+    // It is an internal page link, so intercept it for smooth scrolling
+    e.preventDefault();
+    if (isMenuOpen()) closeMenu();
+
+    // If the link is just "#" (like your logo), route it smoothly to "#top"
+    const targetHash = href === '#' ? '#top' : href;
+    requestAnimationFrame(() => scrollToHash(targetHash));
   });
 
   /* ------------------------------------------------------------------------
