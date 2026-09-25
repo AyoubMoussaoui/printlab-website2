@@ -392,12 +392,35 @@
     const submitBtn = form.querySelector('[type="submit"]');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+    const fileClearBtn = document.getElementById('file-clear');
+
+    function resetFileInput() {
+      if (!fileInput || !fileLabel) return;
+      fileInput.value = ''; // Hard clear the input
+      fileLabel.textContent = currentLang === 'en' ? EN['form.fileHint'] : DE['form.fileHint'];
+      if (fileClearBtn) fileClearBtn.hidden = true;
+    }
+
     if (fileInput && fileLabel) {
+      // Force clear on page load to prevent sticky browser cache
+      window.addEventListener('pageshow', resetFileInput);
+
       fileInput.addEventListener('change', () => {
         const file = fileInput.files && fileInput.files[0];
-        if (file) fileLabel.textContent = file.name;
-        else fileLabel.textContent = currentLang === 'en' ? EN['form.fileHint'] : DE['form.fileHint'];
+        if (file) {
+          fileLabel.textContent = file.name;
+          if (fileClearBtn) fileClearBtn.hidden = false;
+        } else {
+          resetFileInput();
+        }
       });
+
+      if (fileClearBtn) {
+        fileClearBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          resetFileInput();
+        });
+      }
     }
 
     function setError(input, message) {

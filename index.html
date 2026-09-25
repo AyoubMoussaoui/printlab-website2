@@ -421,27 +421,7 @@
           <p class="section-head__kicker" data-i18n="contact.kicker">Kontakt</p>
           <h2 class="section-head__title" id="contact-title" data-i18n="contact.title">Lass uns dein Projekt starten.</h2>
           <p class="contact__lead" data-i18n="contact.lead">Schick uns deine Anfrage – du erhältst innerhalb von 24 Stunden ein unverbindliches Angebot.</p>
-
-          <ul class="contact-list" role="list">
-            <li>
-              <a class="contact-list__item" href="https://instagram.com/printlab_trier" target="_blank" rel="noopener">
-                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-instagram"></use></svg></span>
-                <span class="contact-list__body"><span class="contact-list__label">Instagram</span><span class="contact-list__value">@printlab_trier</span></span>
-              </a>
-            </li>
-            <li>
-              <a class="contact-list__item" href="#" target="_blank" rel="noopener" data-whatsapp-link>
-                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg></span>
-                <span class="contact-list__body"><span class="contact-list__label">WhatsApp</span><span class="contact-list__value" data-i18n="contact.wa">Schreib uns direkt</span></span>
-              </a>
-            </li>
-            <li>
-              <div class="contact-list__item contact-list__item--static">
-                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-pin"></use></svg></span>
-                <span class="contact-list__body"><span class="contact-list__label" data-i18n="contact.loc">Standort</span><span class="contact-list__value">Trier, Deutschland</span></span>
-              </div>
-            </li>
-          </ul>
+         
         </aside>
 
         <form class="quote-form" id="quote-form" novalidate data-quote-form>
@@ -514,11 +494,19 @@
             </div>
             <div class="field field--full">
               <span class="field__label"><span data-i18n="form.file">Datei hochladen</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></span>
-              <label class="upload" for="f-file">
-                <input class="upload__input" id="f-file" name="file" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps" data-file-input>
-                <svg class="upload__icon" aria-hidden="true"><use href="#icon-upload"></use></svg>
-                <span class="upload__text" data-file-label data-i18n="form.fileHint">Logo oder Motiv auswählen (PNG, JPG, PDF, SVG)</span>
-              </label>
+              <div class="file-upload-wrapper">
+                <label class="upload" for="f-file">
+                  <input class="upload__input" id="f-file" name="file" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps" data-file-input>
+                  <svg class="upload__icon" aria-hidden="true"><use href="#icon-upload"></use></svg>
+                  <span class="upload__text" data-file-label data-i18n="form.fileHint">Logo oder Motiv auswählen (PNG, JPG, PDF, SVG)</span>
+                </label>
+                <!-- New Delete Button -->
+                <button type="button" id="file-clear" class="file-clear" aria-label="Datei entfernen" hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -529,6 +517,27 @@
           </div>
           <p class="quote-form__status" role="status" aria-live="polite" data-form-status></p>
         </form>
+        <ul class="contact-list" role="list">
+            <li>
+              <a class="contact-list__item" href="https://instagram.com/printlab_trier" target="_blank" rel="noopener">
+                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-instagram"></use></svg></span>
+                <span class="contact-list__body"><span class="contact-list__label">Instagram</span><span class="contact-list__value">@printlab_trier</span></span>
+              </a>
+            </li>
+            <li>
+              <a class="contact-list__item" href="#" target="_blank" rel="noopener" data-whatsapp-link>
+                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-whatsapp"></use></svg></span>
+                <span class="contact-list__body"><span class="contact-list__label">WhatsApp</span><span class="contact-list__value" data-i18n="contact.wa">Schreib uns direkt</span></span>
+              </a>
+            </li>
+            <li>
+              <div class="contact-list__item contact-list__item--static">
+                <span class="contact-list__icon"><svg aria-hidden="true"><use href="#icon-pin"></use></svg></span>
+                <span class="contact-list__body"><span class="contact-list__label" data-i18n="contact.loc">Standort</span><span class="contact-list__value">Trier, Deutschland</span></span>
+              </div>
+            </li>
+          </ul>
+
       </div>
     </section>
   </main>

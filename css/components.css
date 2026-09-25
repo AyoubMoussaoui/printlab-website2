@@ -1250,3 +1250,32 @@ a.contact-list__item:hover {
   background-color: #e5005a; 
   color: #fff;
 }
+
+/* --- FILE UPLOAD CLEAR BUTTON --- */
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Adds a nice gap between the upload box and the X button */
+}
+
+.upload {
+  flex: 1; /* Ensures the upload box takes up the maximum available space */
+}
+
+.file-clear {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.file-clear:hover, .file-clear:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e5005a; /* Your brand pink */
+}
