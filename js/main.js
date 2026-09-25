@@ -380,7 +380,7 @@
     });
   }
 
-  /* ------------------------------------------------------------------------
+/* ------------------------------------------------------------------------
      7. QUOTE FORM
      ------------------------------------------------------------------------ */
   const form = document.querySelector('[data-quote-form]');
@@ -397,7 +397,12 @@
     function resetFileInput() {
       if (!fileInput || !fileLabel) return;
       fileInput.value = ''; // Hard clear the input
-      fileLabel.textContent = currentLang === 'en' ? EN['form.fileHint'] : DE['form.fileHint'];
+      
+      const defaultText = document.documentElement.lang === 'en' 
+        ? 'Select logo or design (PNG, JPG, PDF, SVG)' 
+        : 'Logo oder Motiv auswählen (PNG, JPG, PDF, SVG)';
+      fileLabel.textContent = defaultText;
+      
       if (fileClearBtn) fileClearBtn.hidden = true;
     }
 
@@ -428,6 +433,11 @@
         }
       });
 
+      if (fileClearBtn) {
+        fileClearBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          resetFileInput();
+        });
       }
     }
 
@@ -471,8 +481,14 @@
         ['Design vorhanden', data.get('has_design')],
         ['Nachricht', data.get('message')]
       ];
-      const file = data.get('file');
-      if (file && file.name) rows.push(['Datei', file.name + ' (bitte anhängen)']);
+      
+      // Dynamically map all multiple file names for the email summary
+      const files = fileInput && fileInput.files ? Array.from(fileInput.files) : [];
+      if (files.length > 0) {
+        const fileNames = files.map(f => f.name).join(', ');
+        rows.push(['Dateien', fileNames + ' (bitte im E-Mail-Programm anhängen)']);
+      }
+      
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
@@ -509,7 +525,7 @@
           });
           if (!res.ok) throw new Error('HTTP ' + res.status);
           form.reset();
-          if (fileLabel) fileLabel.textContent = currentLang === 'en' ? EN['form.fileHint'] : DE['form.fileHint'];
+          resetFileInput();
           showStatus(t('success'), 'success');
         } catch (err) {
           showStatus(t('error'), 'error');
