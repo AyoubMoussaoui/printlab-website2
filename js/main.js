@@ -2,9 +2,9 @@
    PRINT LAB Trier — main.js
    Vanilla JS, no dependencies. Modules:
      1. Config         5. Active section highlighting
-     2. i18n (DE / EN) 6. Floating WhatsApp visibility
-     3. Mobile menu    7. Quote form (Cleaned & Consolidated)
-     4. Header state   8. Small utilities (marquee, year, links)
+     2. i18n (DE / EN) 6. Floating buttons (WhatsApp, back to top)
+     3. Mobile menu    7. Quote form
+     4. Header state   8. Small utilities (marquee, year, reveal)
    ========================================================================== */
 
 (function () {
@@ -16,8 +16,23 @@
   const CONFIG = {
     whatsappNumber: '4915901378917',
     email: 'just-click@live.fr',
+    instagram: 'https://instagram.com/printlab_trier',
+
+    /* Form service. Leave formEndpoint empty to use the built-in fallback
+       (visitor sends the prepared request by e-mail or WhatsApp).
+       Examples:
+         Formspree:  formEndpoint: 'https://formspree.io/f/XXXXXXX'
+         Web3Forms:  formEndpoint: 'https://api.web3forms.com/submit',
+                     formFields: { access_key: 'YOUR-KEY' }
+       Set formFileUploads to true only if the service plan accepts files.
+       Remember to name the service in datenschutz.html. */
     formEndpoint: '',
-    instagram: 'https://instagram.com/printlab_trier'
+    formFields: {},
+    formFileUploads: false,
+
+    maxFiles: 3,
+    maxFileSizeMB: 10,
+    fileTypes: ['png', 'jpg', 'jpeg', 'pdf', 'svg', 'ai', 'eps']
   };
 
   const mqMobile = window.matchMedia('(max-width: 767px)');
@@ -79,12 +94,16 @@
     'form.pos4': 'Sleeve', 'form.pos5': 'Multiple positions', 'form.pos6': 'Not sure yet',
     'form.hasDesign': 'Design available?', 'form.yes': 'Yes', 'form.no': 'No',
     'form.message': 'Message', 'form.messagePh': 'Tell us briefly about your idea …',
-    'form.file': 'Upload file', 'form.fileHint': 'Choose logo or artwork (max. 3 files, PNG, JPG, PDF, SVG)',
+    'form.file': 'Upload file', 'form.fileHint': 'Choose logo or artwork (max. 3 files of 10 MB: PNG, JPG, PDF, SVG, AI, EPS)',
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
     'footer.tag': 'Custom textile printing from 1 piece',
-    'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
+    'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
+    'badge.1': 'Printing from 1 piece', 'badge.2': 'Local production in Trier', 'badge.3': 'Free artwork check',
+    'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier – home', 'aria.nav': 'Main navigation',
+    'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier – back to top',
+    'aria.wa': 'Message us on WhatsApp', 'aria.fileClear': 'Remove files', 'aria.backTop': 'Back to top'
   };
 
   const MESSAGES = {
@@ -94,8 +113,14 @@
       qty: 'Bitte gib eine Stückzahl ab 1 an.',
       sending: 'Wird gesendet …',
       success: 'Danke! Deine Anfrage ist bei uns – wir melden uns innerhalb von 24 Stunden.',
-      mailto: 'Dein E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte hänge deine Datei dort an.',
+      successNoFiles: 'Danke! Deine Anfrage ist bei uns. Schick uns deine Dateien bitte noch per WhatsApp oder E-Mail – wir melden uns innerhalb von 24 Stunden.',
       error: 'Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns per WhatsApp.',
+      fallbackTitle: 'Fast geschafft! Wie möchtest du deine Anfrage senden?',
+      fallbackFiles: 'Deine Dateien hängst du im nächsten Schritt direkt in der E-Mail oder im WhatsApp-Chat an.',
+      viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
+      fileMax: 'Maximal {n} Dateien – nur die ersten wurden übernommen.',
+      fileType: '„{f}“ hat ein nicht unterstütztes Format.',
+      fileSize: '„{f}“ ist größer als {n} MB.',
       menuOpen: 'Menü öffnen', menuClose: 'Menü schließen', waText: 'Hallo Team PRINT LAB, ich habe eine Anfrage: '
     },
     en: {
@@ -104,9 +129,15 @@
       qty: 'Please enter a quantity of at least 1.',
       sending: 'Sending …',
       success: 'Thank you! We have received your request and will reply within 24 hours.',
-      mailto: 'Your email app will open with the prepared request. Please attach your file there.',
+      successNoFiles: 'Thank you! We have received your request. Please send us your files via WhatsApp or email – we will reply within 24 hours.',
       error: 'Something went wrong. Please try again or message us on WhatsApp.',
-      menuOpen: 'Open menu', menuClose: 'Close menu', waText: 'Hi PRINT LAB, I have a request:'
+      fallbackTitle: 'Almost done! How would you like to send your request?',
+      fallbackFiles: 'You can attach your files in the next step, directly in the email or WhatsApp chat.',
+      viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
+      fileMax: 'Maximum {n} files – only the first ones were added.',
+      fileType: '"{f}" has an unsupported format.',
+      fileSize: '"{f}" is larger than {n} MB.',
+      menuOpen: 'Open menu', menuClose: 'Close menu', waText: 'Hi PRINT LAB, I have a request: '
     }
   };
 
@@ -115,11 +146,19 @@
 
   const i18nNodes = Array.from(document.querySelectorAll('[data-i18n]'));
   const i18nPhNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
+  const i18nAriaNodes = Array.from(document.querySelectorAll('[data-i18n-aria]'));
   const DE = {};
   i18nNodes.forEach((el) => { DE[el.dataset.i18n] = DE[el.dataset.i18n] || el.textContent; });
   i18nPhNodes.forEach((el) => { DE[el.dataset.i18nPlaceholder] = el.getAttribute('placeholder'); });
+  i18nAriaNodes.forEach((el) => { DE[el.dataset.i18nAria] = DE[el.dataset.i18nAria] || el.getAttribute('aria-label'); });
 
-  const t = (key) => (MESSAGES[currentLang] || MESSAGES.de)[key];
+  const t = (key, vars) => {
+    let msg = (MESSAGES[currentLang] || MESSAGES.de)[key] || '';
+    if (vars) Object.keys(vars).forEach((k) => { msg = msg.split('{' + k + '}').join(vars[k]); });
+    return msg;
+  };
+  /* Text of any data-i18n key in the current language */
+  const tr = (key) => (currentLang === 'en' ? EN[key] : DE[key]) || DE[key] || '';
 
   function applyLanguage(lang) {
     currentLang = lang === 'en' ? 'en' : 'de';
@@ -132,6 +171,10 @@
     i18nPhNodes.forEach((el) => {
       const value = dict[el.dataset.i18nPlaceholder];
       if (value !== undefined) el.setAttribute('placeholder', value);
+    });
+    i18nAriaNodes.forEach((el) => {
+      const value = dict[el.dataset.i18nAria];
+      if (value !== undefined) el.setAttribute('aria-label', value);
     });
 
     document.documentElement.lang = currentLang;
@@ -146,6 +189,7 @@
 
     updateMenuLabel();
     updateWhatsAppLinks();
+    document.dispatchEvent(new CustomEvent('printlab:lang'));
     try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
   }
 
@@ -204,6 +248,13 @@
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
     if (history.replaceState) history.replaceState(null, '', hash);
+
+    // Move keyboard focus with the scroll (skip link, screen readers)
+    const focusTarget = hash === '#top' ? document.getElementById('main') : target;
+    if (focusTarget) {
+      if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+      focusTarget.focus({ preventScroll: true });
+    }
   }
 
   document.addEventListener('click', (e) => {
@@ -264,19 +315,45 @@
   determineActiveSection();
 
   /* ------------------------------------------------------------------------
-     6. FLOATING WHATSAPP
+     6. FLOATING BUTTONS
+     WhatsApp stays visible; both buttons step aside only while they would
+     cover an element marked [data-hide-float] (hero CTAs, form submit).
      ------------------------------------------------------------------------ */
   const waFloat = document.querySelector('[data-wa-float]');
-  if (waFloat) waFloat.classList.remove('is-hidden'); 
+  const backToTop = document.getElementById('back-to-top');
+  const floats = [waFloat, backToTop].filter(Boolean);
+  const hideZones = Array.from(document.querySelectorAll('[data-hide-float]'));
+
+  function overlaps(a, b) {
+    return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+  }
+
+  let floatsQueued = false;
+  function updateFloats() {
+    floatsQueued = false;
+    if (backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    const zones = hideZones.map((z) => z.getBoundingClientRect());
+    floats.forEach((btn) => {
+      const r = btn.getBoundingClientRect();
+      btn.classList.toggle('is-hidden', zones.some((z) => overlaps(r, z)));
+    });
+  }
+  function queueFloats() {
+    if (!floatsQueued) { floatsQueued = true; requestAnimationFrame(updateFloats); }
+  }
+  window.addEventListener('scroll', queueFloats, { passive: true });
+  window.addEventListener('resize', queueFloats);
+  updateFloats();
+
   function updateWhatsAppLinks() {
     const href = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(t('waText'));
-    document.querySelectorAll('[data-whatsapp-link]').forEach((a) => { 
+    document.querySelectorAll('[data-whatsapp-link]').forEach((a) => {
       a.href = href; a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener noreferrer');
     });
   }
 
   /* ------------------------------------------------------------------------
-     7. QUOTE FORM (CLEANED)
+     7. QUOTE FORM
      ------------------------------------------------------------------------ */
   const form = document.querySelector('[data-quote-form]');
 
@@ -284,71 +361,77 @@
     const status = form.querySelector('[data-form-status]');
     const fileInput = form.querySelector('[data-file-input]');
     const fileLabel = form.querySelector('[data-file-label]');
+    const fileError = form.querySelector('[data-upload-error]');
+    const fileClearBtn = form.querySelector('#file-clear');
     const submitBtn = form.querySelector('[type="submit"]');
+    const honeypot = form.querySelector('#f-website');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const fileClearBtn = document.getElementById('file-clear');
-    
-    // ZENTRALE FILE UPLOAD LOGIK
-    let selectedFiles = []; 
+    const canSetFiles = (() => { try { return !!new DataTransfer(); } catch (e) { return false; } })();
 
-    function updateFileInput() {
-      const dataTransfer = new DataTransfer();
-      selectedFiles.forEach(file => dataTransfer.items.add(file));
-      if (fileInput) fileInput.files = dataTransfer.files;
+    /* ---- Files: keep a list so visitors can add files in several steps */
+    let selectedFiles = [];
 
-      if (selectedFiles.length > 0) {
-        const fileNames = selectedFiles.map(f => f.name).join(', ');
-        if (fileLabel) fileLabel.textContent = fileNames;
-        if (fileClearBtn) fileClearBtn.hidden = false;
-      } else {
-        const defaultText = document.documentElement.lang === 'en' 
-          ? 'Choose logo or artwork (max. 3 files, PNG, JPG, PDF, SVG)' 
-          : 'Logo oder Motiv auswählen (max. 3 Dateien, PNG, JPG, PDF, SVG)';
-        if (fileLabel) fileLabel.textContent = defaultText;
-        if (fileClearBtn) fileClearBtn.hidden = true;
+    function renderFiles() {
+      if (canSetFiles && fileInput) {
+        const dt = new DataTransfer();
+        selectedFiles.forEach((f) => dt.items.add(f));
+        fileInput.files = dt.files;
       }
+      if (fileLabel) {
+        fileLabel.textContent = selectedFiles.length
+          ? selectedFiles.map((f) => f.name).join(', ')
+          : tr('form.fileHint');
+      }
+      if (fileClearBtn) fileClearBtn.hidden = selectedFiles.length === 0;
     }
 
-    function resetFileInput() {
+    function resetFiles() {
       selectedFiles = [];
-      updateFileInput();
+      if (fileInput) fileInput.value = '';
+      if (fileError) fileError.textContent = '';
+      renderFiles();
     }
 
-    if (fileInput && fileLabel) {
-      window.addEventListener('pageshow', resetFileInput);
+    function checkFile(file) {
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      if (!CONFIG.fileTypes.includes(ext)) return t('fileType', { f: file.name });
+      if (file.size > CONFIG.maxFileSizeMB * 1024 * 1024) return t('fileSize', { f: file.name, n: CONFIG.maxFileSizeMB });
+      return '';
+    }
 
-      fileInput.addEventListener('change', (e) => {
-        const newFiles = Array.from(e.target.files);
-        if (selectedFiles.length + newFiles.length > 3) {
-          alert(document.documentElement.lang === 'en' 
-            ? 'You can only upload a maximum of 3 files. Only the first 3 fitting files were added.' 
-            : 'Du kannst maximal 3 Dateien hochladen. Es wurden nur die passenden Dateien hinzugefügt.');
-          const spaceLeft = 3 - selectedFiles.length;
-          selectedFiles = selectedFiles.concat(newFiles.slice(0, spaceLeft));
+    if (fileInput) {
+      window.addEventListener('pageshow', resetFiles);
+      fileInput.addEventListener('change', () => {
+        const errors = [];
+        let incoming = Array.from(fileInput.files || []);
+        if (canSetFiles) {
+          incoming = incoming.filter((f) => {
+            const err = checkFile(f);
+            if (err) errors.push(err);
+            return !err;
+          });
+          const room = CONFIG.maxFiles - selectedFiles.length;
+          if (incoming.length > room) errors.push(t('fileMax', { n: CONFIG.maxFiles }));
+          selectedFiles = selectedFiles.concat(incoming.slice(0, Math.max(0, room)));
         } else {
-          selectedFiles = selectedFiles.concat(newFiles);
+          // Older browsers: the native input keeps only the latest selection
+          selectedFiles = incoming.filter((f) => !checkFile(f)).slice(0, CONFIG.maxFiles);
         }
-        updateFileInput();
+        if (fileError) fileError.textContent = errors.join(' ');
+        renderFiles();
       });
-
-      if (fileClearBtn) {
-        fileClearBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          resetFileInput();
-        });
-      }
+      if (fileClearBtn) fileClearBtn.addEventListener('click', resetFiles);
     }
 
+    /* ---- Validation */
     function setError(input, message) {
       const field = input.closest('.field');
       const errorEl = form.querySelector('[data-error-for="' + input.id + '"]');
       if (field) field.classList.toggle('is-invalid', Boolean(message));
       if (errorEl) errorEl.textContent = message || '';
       input.setAttribute('aria-invalid', message ? 'true' : 'false');
-      
       input.classList.toggle('is-invalid', Boolean(message));
-      input.classList.toggle('is-valid', !Boolean(message) && input.value.trim() !== '');
-      
+      input.classList.toggle('is-valid', !message && input.value.trim() !== '');
       if (errorEl && message) {
         errorEl.id = errorEl.id || input.id + '-error';
         input.setAttribute('aria-describedby', errorEl.id);
@@ -371,6 +454,21 @@
       });
     });
 
+    // Re-translate visible messages when the language changes
+    document.addEventListener('printlab:lang', () => {
+      renderFiles();
+      requiredInputs.forEach((input) => {
+        if (input.getAttribute('aria-invalid') === 'true') setError(input, validateInput(input));
+      });
+    });
+
+    /* ---- Status area */
+    function showStatus(message, type) {
+      status.textContent = message;
+      status.classList.toggle('is-success', type === 'success');
+      status.classList.toggle('is-error', type === 'error');
+    }
+
     function buildSummary(data) {
       const rows = [
         ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Telefon', data.get('phone')],
@@ -378,28 +476,75 @@
         ['Druckposition', data.get('position')], ['Design vorhanden', data.get('has_design')],
         ['Nachricht', data.get('message')]
       ];
-      
-      if (selectedFiles.length > 0) {
-        const fileNames = selectedFiles.map(f => f.name).join(', ');
-        rows.push(['Dateien', fileNames + ' (bitte im E-Mail-Programm anhängen)']);
-      }
+      if (selectedFiles.length) rows.push(['Dateien', selectedFiles.map((f) => f.name).join(', ') + ' (werden angehängt)']);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
-    function showStatus(message, type) {
-      status.textContent = message;
-      status.classList.toggle('is-success', type === 'success');
-      status.classList.toggle('is-error', type === 'error');
+    /* No form service configured: let the visitor choose e-mail or WhatsApp
+       instead of silently firing a mailto: link that may do nothing. */
+    function showFallback(data) {
+      const subject = 'Anfrage: ' + (data.get('product') || 'Textildruck') + ' – ' + data.get('quantity') + ' Stk.';
+      const summary = buildSummary(data);
+      const mailHref = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(summary);
+      const waHref = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(t('waText') + '\n\n' + summary);
+
+      status.textContent = '';
+      status.classList.remove('is-error');
+      status.classList.add('is-success');
+
+      const title = document.createElement('p');
+      title.className = 'quote-form__fallback-title';
+      title.textContent = t('fallbackTitle');
+
+      const actions = document.createElement('div');
+      actions.className = 'quote-form__fallback-actions';
+      [[mailHref, t('viaEmail'), 'btn--light'], [waHref, t('viaWhatsApp'), 'btn--whatsapp']].forEach(([href, label, mod]) => {
+        const a = document.createElement('a');
+        a.className = 'btn ' + mod;
+        a.href = href;
+        a.textContent = label;
+        if (href.startsWith('https:')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+        actions.appendChild(a);
+      });
+
+      status.appendChild(title);
+      status.appendChild(actions);
+      if (selectedFiles.length) {
+        const note = document.createElement('p');
+        note.className = 'quote-form__fallback-note';
+        note.textContent = t('fallbackFiles');
+        status.appendChild(note);
+      }
+      actions.firstChild.focus();
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    async function sendToService(data) {
+      Object.keys(CONFIG.formFields).forEach((k) => data.set(k, CONFIG.formFields[k]));
+      if (!data.has('subject')) data.set('subject', 'Neue Anfrage über die PRINT LAB Website');
+      const hadFiles = selectedFiles.length > 0;
+      if (!CONFIG.formFileUploads) data.delete('files[]');
 
-      const honeypot = document.getElementById('f-website');
-      if (honeypot && honeypot.value.trim() !== '') {
-        e.stopImmediatePropagation(); 
-        return; 
+      submitBtn.disabled = true;
+      showStatus(t('sending'));
+      try {
+        const res = await fetch(CONFIG.formEndpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        let body = {};
+        try { body = await res.json(); } catch (e) { /* non-JSON reply */ }
+        if (!res.ok || body.success === false || body.ok === false) throw new Error('HTTP ' + res.status);
+        form.reset();
+        resetFiles();
+        form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
+        showStatus(hadFiles && !CONFIG.formFileUploads ? t('successNoFiles') : t('success'), 'success');
+      } catch (err) {
+        showStatus(t('error'), 'error');
+      } finally {
+        submitBtn.disabled = false;
       }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (honeypot && honeypot.value.trim() !== '') return; // bot filled the hidden field
 
       let firstInvalid = null;
       requiredInputs.forEach((input) => {
@@ -407,31 +552,12 @@
         setError(input, message);
         if (message && !firstInvalid) firstInvalid = input;
       });
-      if (firstInvalid) {
-        firstInvalid.focus();
-        return;
-      }
+      if (firstInvalid) { firstInvalid.focus(); return; }
 
       const data = new FormData(form);
-
-      if (CONFIG.formEndpoint) {
-        submitBtn.disabled = true;
-        showStatus(t('sending'));
-        try {
-          const res = await fetch(CONFIG.formEndpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          form.reset();
-          resetFileInput();
-          showStatus(t('success'), 'success');
-        } catch (err) {
-          showStatus(t('error'), 'error');
-        } finally { submitBtn.disabled = false; }
-        return;
-      }
-
-      const subject = 'Anfrage: ' + (data.get('product') || 'Textildruck') + ' – ' + data.get('quantity') + ' Stk.';
-      window.location.href = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(buildSummary(data));
-      showStatus(t('mailto'), 'success');
+      data.delete('website'); // honeypot is never sent
+      if (CONFIG.formEndpoint) sendToService(data);
+      else showFallback(data);
     });
   }
 
@@ -453,25 +579,22 @@
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
+  // Scroll reveal. Content is only hidden while html.js is set (see CSS),
+  // so it is revealed immediately where the observer is unavailable.
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
-  if (revealElements.length > 0) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!('IntersectionObserver' in window) || reduceMotion) {
+    revealElements.forEach((el) => el.classList.add('is-revealed'));
+  } else if (revealElements.length) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target); 
+          observer.unobserve(entry.target);
         }
       });
-    }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-    revealElements.forEach(el => revealObserver.observe(el));
-  }
-
-  const backToTop = document.getElementById('back-to-top');
-  if (backToTop) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) backToTop.classList.add('is-visible');
-      else backToTop.classList.remove('is-visible');
-    }, { passive: true });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach((el) => revealObserver.observe(el));
   }
 
   let initialLang = 'de';

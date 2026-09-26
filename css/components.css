@@ -5,6 +5,23 @@
    defined exclusively inside the ≤767px query in responsive.css.
    ========================================================================== */
 
+/* ---------- Dark surfaces: re-scope text tokens for contrast ---------- */
+.site-header-desktop,
+.site-header-mobile,
+.legal-header,
+.section--dark,
+.site-footer {
+  --color-muted: var(--color-muted-on-dark);
+}
+
+.section--dark .section-head__kicker {
+  color: var(--color-magenta-on-dark);
+}
+
+.section--alt .section-head__kicker {
+  color: var(--color-magenta-hover);
+}
+
 /* ---------- Brand / logo ---------- */
 .brand {
   display: inline-flex;
@@ -484,7 +501,7 @@
 
 .method-card__num {
   margin-bottom: 28px;
-  color: var(--color-magenta);
+  color: var(--color-magenta-on-dark);
   font-size: 14px;
   font-weight: var(--fw-bold);
   letter-spacing: 0.1em;
@@ -818,7 +835,7 @@ a.contact-list__item:hover {
 }
 
 .field__req {
-  color: var(--color-magenta);
+  color: var(--color-magenta-on-dark);
 }
 
 .field__opt {
@@ -1011,6 +1028,40 @@ a.contact-list__item:hover {
   border-radius: var(--radius-sm);
   background-color: rgba(43, 179, 200, 0.12);
   color: var(--color-offwhite);
+}
+
+.quote-form__fallback-title {
+  margin-bottom: 14px;
+  font-weight: var(--fw-semibold);
+}
+
+.quote-form__fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quote-form__fallback-actions .btn {
+  flex: 1 1 200px;
+  min-height: 48px;
+}
+
+.quote-form__fallback-note {
+  margin-top: 12px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 13px;
+}
+
+.btn--whatsapp {
+  background-color: #25D366;
+  border-color: #25D366;
+  color: #0B0B0B;
+}
+
+.btn--whatsapp:hover {
+  background-color: #1EBE5A;
+  border-color: #1EBE5A;
 }
 
 .quote-form__status.is-error {
@@ -1227,35 +1278,48 @@ a.contact-list__item:hover {
 /* --- BACK TO TOP BUTTON --- */
 .back-to-top {
   position: fixed;
-  bottom: 90px; /* Sits just above the WhatsApp button */
-  right: 20px;
-  width: 48px;
-  height: 48px;
-  background-color: #222; 
-  color: #fff;
-  border-radius: 50%;
+  right: 24px;
+  bottom: 84px; /* sits above the WhatsApp button */
+  z-index: var(--z-float);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background-color: rgba(21, 21, 21, 0.92);
+  color: var(--color-white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
   opacity: 0;
   visibility: hidden;
   transform: translateY(15px);
-  transition: all 0.3s ease;
-  z-index: 40; 
-  text-decoration: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+    visibility var(--dur), background-color var(--dur-fast) var(--ease);
 }
 
-/* Class added via JavaScript when scrolled */
 .back-to-top.is-visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.back-to-top:hover, .back-to-top:focus {
-  background-color: #e5005a; 
-  color: #fff;
+/* Floating buttons step aside while they would cover a CTA or the form submit */
+.back-to-top.is-visible.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.9);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background-color: var(--color-magenta);
+}
+
+.back-to-top svg {
+  width: 22px;
+  height: 22px;
 }
 
 /* --- FILE UPLOAD CLEAR BUTTON --- */
@@ -1270,36 +1334,64 @@ a.contact-list__item:hover {
 }
 
 .file-clear {
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 8px;
   display: flex;
+  flex: none;
   align-items: center;
   justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
-  transition: all 0.2s ease;
+  background: none;
+  color: var(--color-offwhite);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 
-.file-clear:hover, .file-clear:focus {
+/* display:flex above would otherwise override the hidden attribute */
+.file-clear[hidden] {
+  display: none;
+}
+
+.file-clear:hover,
+.file-clear:focus-visible {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #e5005a; /* Your brand pink */
+  color: var(--color-magenta-on-dark);
+}
+
+.upload-error {
+  margin-top: 8px;
+  color: var(--color-error);
+  font-size: 13px;
+}
+
+.upload-error:empty {
+  display: none;
 }
 
 /* ==========================================================================
    SCROLL REVEAL ANIMATIONS
    ========================================================================== */
-.reveal-on-scroll {
+/* Content stays visible if JavaScript is off or fails: the hidden start
+   state only applies once main.js has marked <html> with .js */
+.js .reveal-on-scroll {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
-.reveal-on-scroll.is-revealed {
+.js .reveal-on-scroll.is-revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Optional: Use these classes to create a cascading "stagger" effect for lists */
@@ -1358,26 +1450,32 @@ a.contact-list__item:hover {
 }
 
 .trust-badges li svg {
-  width: 24px !important;
-  height: 24px !important;
   flex: 0 0 24px;
-  fill: #e5007f;
-  color: #e5007f;
+  width: 24px;
+  height: 24px;
+  color: var(--color-magenta-on-dark);
 }
 
 /* --- REAL-TIME VALIDATION STATES --- */
 .field__input.is-valid {
-  border-color: #22c55e !important; /* Success Green */
+  border-color: var(--color-success);
   background-color: rgba(34, 197, 94, 0.05);
 }
 
 .field__input.is-invalid {
-  border-color: #ef4444 !important; /* Error Red */
+  border-color: var(--color-error);
   background-color: rgba(239, 68, 68, 0.05);
 }
 
+/* Keep a visible focus indicator whatever the validation state */
+.field__input:focus,
+.field__input.is-valid:focus,
+.field__input.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(228, 88, 154, 0.35);
+}
+
 .field__error {
-  color: #ef4444;
+  color: var(--color-error);
   font-size: 0.875rem;
   margin-top: 8px;
   display: none;

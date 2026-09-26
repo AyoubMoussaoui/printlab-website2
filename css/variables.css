@@ -13,7 +13,11 @@
   --color-magenta: #C91F6F;
   --color-magenta-hover: #B01A61;
   --color-magenta-soft: rgba(201, 31, 111, 0.10);
-  --color-muted: #777777;
+  --color-muted: #666666;          /* ≥4.5:1 on off-white and #ECE9E2 */
+  --color-muted-on-dark: #9A9A9A;  /* ≥4.5:1 on black and graphite */
+  --color-magenta-on-dark: #E4589A; /* small magenta text on dark surfaces */
+  --color-success: #22C55E;
+  --color-error: #FF8A8E;          /* readable on dark form surface */
 
   /* Sparse accents — use very sparingly */
   --color-cyan: #2BB3C8;

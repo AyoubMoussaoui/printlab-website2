@@ -16,6 +16,9 @@ js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
 impressum.html     legal notice (§ 5 DDG)
 datenschutz.html   privacy policy (GDPR)
+404.html           "page not found" page (served by GitHub Pages)
+robots.txt, sitemap.xml   search engine files
+.github/           automatic checks (see "Checks")
 assets/
   fonts/           Archivo, self-hosted (no requests to Google), OFL license
   images/          hero + reference imagery
@@ -28,11 +31,48 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 ## Before going live
 
 1. **Contact details:** `CONFIG.whatsappNumber` and `CONFIG.email` in `js/main.js` are set. If they change, also update `impressum.html` and `datenschutz.html`.
-2. **Form backend (optional):** set `CONFIG.formEndpoint` (Formspree, Netlify Forms or your own API). Without it, the form opens the visitor's mail app with a pre-filled request, and file attachments must be added by hand.
+2. **Form service:** see "Quote form" below. Until one is connected, visitors send the prepared request themselves by e-mail or WhatsApp.
 3. **Hero photo:** `assets/images/hero-workshop.jpg` is the current workshop photo (1024px wide). For sharper results on large screens, replace it with a version about 2400px wide, keeping the subject on the right.
 4. **References:** replace the `assets/images/ref-*.svg` placeholders with real photos (4:5) and update the `src` attributes in `index.html`.
-5. **Legal pages:** fill in every yellow-highlighted placeholder (`.legal__todo`) in `impressum.html` and `datenschutz.html`: owner name, street address, postcode, VAT status and hosting provider. Remove the highlight once each is filled in. Have both texts checked before launch; they are templates, not legal advice.
-6. **Privacy policy upkeep:** `datenschutz.html` describes the site as it is now: no cookies, no tracking, self-hosted fonts, and a form that opens the visitor's email program. Adding a form backend, analytics or any embedded third-party service requires updating it.
+5. **Legal pages:** have both texts checked before launch; they are templates, not legal advice.
+6. **Privacy policy upkeep:** `datenschutz.html` must describe what the site actually does. Connecting a form service, adding analytics or embedding any third-party content requires updating it.
+7. **Own domain:** the site address `https://ayoubmoussaoui.github.io/printlab-website2/` is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml`, `robots.txt` and `404.html` (`<base href>`). Replace it everywhere when moving to your own domain.
+
+## Quote form
+
+Configured in `CONFIG` at the top of `js/main.js`:
+
+| Setting | Meaning |
+| --- | --- |
+| `formEndpoint` | URL of the form service. Empty = fallback: after validation the visitor chooses "Per E-Mail senden" or "Per WhatsApp senden", both pre-filled with the request. |
+| `formFields` | Extra fields the service needs, e.g. `{ access_key: '…' }` for Web3Forms. |
+| `formFileUploads` | `true` only if the service plan accepts file uploads. If `false`, files are not sent and the visitor is asked to send them via WhatsApp or e-mail. |
+| `maxFiles`, `maxFileSizeMB`, `fileTypes` | Upload limits checked in the browser (defaults: 3 files, 10 MB, PNG/JPG/PDF/SVG/AI/EPS). |
+
+Any service that accepts a `multipart/form-data` POST and answers with JSON works (Formspree, Web3Forms, Getform, Netlify Forms, your own API). A hidden honeypot field filters simple spam bots and is never sent.
+
+## Checks
+
+Every push to `main` and every pull request runs `.github/workflows/site-checks.yml`:
+
+- HTML validation (`html-validate`, rules in `.htmlvalidate.json`)
+- JavaScript syntax check
+- `.github/scripts/check-links.mjs`: every local link, image, stylesheet, script, CSS `url()` and in-page anchor must resolve
+
+Run them locally before pushing:
+
+```
+npx html-validate index.html impressum.html datenschutz.html 404.html
+node --check js/main.js
+node .github/scripts/check-links.mjs
+```
+
+## Accessibility & behaviour notes
+
+- Text colors meet WCAG AA contrast. Use `--color-muted` for secondary text (it switches automatically on dark sections) and `--color-magenta-on-dark` for small magenta text on dark backgrounds.
+- Scroll-reveal animations only hide content once JavaScript has run (`html.js`), so the page stays readable without JavaScript.
+- Translatable screen-reader labels use `data-i18n-aria="key"`, alongside `data-i18n` (text) and `data-i18n-placeholder`.
+- The floating WhatsApp and back-to-top buttons step aside only while they would cover an element marked `data-hide-float` (hero buttons, form submit).
 
 ## Webshop-ready
 

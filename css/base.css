@@ -146,6 +146,11 @@ button {
   outline-offset: 3px;
 }
 
+/* Sections focused by in-page navigation (skip link, menu) need no ring */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
 ::selection {
   background: var(--color-magenta);
   color: var(--color-white);

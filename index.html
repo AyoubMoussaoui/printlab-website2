@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PRINT LAB Trier – Textildruck ab 1 Stück | DTF, Siebdruck & mehr</title>
+  <title>PRINT LAB Trier – Textildruck ab 1 Stück | DTF, Siebdruck &amp; mehr</title>
   <meta name="description" content="PRINT LAB Trier: Wir drucken dein Logo oder Design auf jedes Textil – scharf, farbecht und persönlich. DTF-Druck, Siebdruck und Spezialdruck ab einem einzigen Stück. Angebot in 24 Stunden.">
   <meta name="theme-color" content="#0B0B0B">
+  <link rel="canonical" href="https://ayoubmoussaoui.github.io/printlab-website2/">
+
+  <!-- Marks JS as available before first paint (scroll-reveal only hides content then) -->
+  <script>document.documentElement.classList.add('js');</script>
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="PRINT LAB Trier – Dein Design. Dein Textil.">
   <meta property="og:description" content="Textildruck in Trier ab 1 Stück. DTF-Druck, Siebdruck, Spezialdruck. Angebot in 24 Stunden.">
-  <meta property="og:image" content="assets/images/hero-workshop.jpg">
+  <meta property="og:url" content="https://ayoubmoussaoui.github.io/printlab-website2/">
+  <meta property="og:site_name" content="PRINT LAB Trier">
+  <meta property="og:image" content="https://ayoubmoussaoui.github.io/printlab-website2/assets/images/hero-workshop.jpg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="572">
+  <meta property="og:image:alt" content="Die Werkstatt von PRINT LAB Trier">
   <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -30,7 +40,19 @@
     "@type": "LocalBusiness",
     "name": "PRINT LAB Trier",
     "description": "Individueller Textildruck ab 1 Stück: DTF-Druck, Siebdruck und Spezialdruck.",
-    "address": { "@type": "PostalAddress", "addressLocality": "Trier", "addressCountry": "DE" },
+    "url": "https://ayoubmoussaoui.github.io/printlab-website2/",
+    "logo": "https://ayoubmoussaoui.github.io/printlab-website2/assets/images/logo/printlab-logo-on-light.png",
+    "image": "https://ayoubmoussaoui.github.io/printlab-website2/assets/images/hero-workshop.jpg",
+    "telephone": "+49 159 01378917",
+    "email": "just-click@live.fr",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Simone-de-Beauvoir-Str. 45",
+      "postalCode": "54294",
+      "addressLocality": "Trier",
+      "addressCountry": "DE"
+    },
+    "areaServed": "DE",
     "sameAs": ["https://instagram.com/printlab_trier"]
   }
   </script>
@@ -58,9 +80,9 @@
   <!-- =====================================================================
        DESKTOP / TABLET HEADER  (hidden ≤767px)
        ===================================================================== -->
-  <header class="site-header-desktop" data-header>
+  <header class="site-header-desktop" aria-label="Kopfzeile" data-header>
     <div class="container site-header-desktop__inner">
-      <a class="brand" href="#top" aria-label="PRINT LAB Trier – Startseite">
+      <a class="brand" href="#top" aria-label="PRINT LAB Trier – Startseite" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -68,7 +90,7 @@
         </span>
       </a>
 
-      <nav class="desktop-nav" aria-label="Hauptnavigation">
+      <nav class="desktop-nav" aria-label="Hauptnavigation" data-i18n-aria="aria.nav">
         <ul class="desktop-nav__list" role="list">
           <li><a class="desktop-nav__link" href="#services" data-nav-link data-i18n="nav.services">Leistungen</a></li>
           <li><a class="desktop-nav__link" href="#methods" data-nav-link data-i18n="nav.methods">Drucktechniken</a></li>
@@ -83,7 +105,7 @@
         <a class="icon-link" href="https://instagram.com/printlab_trier" target="_blank" rel="noopener" aria-label="Instagram @printlab_trier">
           <svg class="icon-link__svg" aria-hidden="true"><use href="#icon-instagram"></use></svg>
         </a>
-        <div class="lang-switch" role="group" aria-label="Sprache wählen">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
           <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
           <span class="lang-switch__sep" aria-hidden="true">/</span>
           <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -96,9 +118,9 @@
   <!-- =====================================================================
        MOBILE HEADER  (visible ≤767px only)
        ===================================================================== -->
-  <header class="site-header-mobile" data-mobile-header>
+  <header class="site-header-mobile" aria-label="Kopfzeile mobil" data-mobile-header>
     <div class="site-header-mobile__bar">
-      <a class="brand brand--mobile" href="#top" aria-label="PRINT LAB Trier – Startseite">
+      <a class="brand brand--mobile" href="#top" aria-label="PRINT LAB Trier – Startseite" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -108,7 +130,7 @@
 
       <div class="mobile-actions">
 
-        <div class="lang-switch" role="group" aria-label="Sprache wählen">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
           <button class="lang-switch__btn is-active" type="button" data-lang="de">DE</button>
           <span class="lang-switch__sep" aria-hidden="true">/</span>
           <button class="lang-switch__btn" type="button" data-lang="en">EN</button>
@@ -126,7 +148,7 @@
       </div>
     </div>
 
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation" data-mobile-menu hidden>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation" data-i18n-aria="aria.navMobile" data-mobile-menu hidden>
       <ul class="mobile-menu__list" role="list">
         <li><a class="mobile-menu__link" href="#services" data-mobile-link data-nav-link data-i18n="nav.services">Leistungen</a></li>
         <li><a class="mobile-menu__link" href="#methods" data-mobile-link data-nav-link data-i18n="nav.methods">Drucktechniken</a></li>
@@ -159,7 +181,7 @@
           </div>
 
           <!-- TRUST POINTS -->
-          <ul class="trust" role="list" aria-label="Unsere Vorteile">
+          <ul class="trust" role="list" aria-label="Unsere Vorteile" data-i18n-aria="aria.trust">
             <li class="trust__item"><span class="trust__dot trust__dot--magenta" aria-hidden="true"></span><span data-i18n="trust.1">Ab 1 Stück — kein Minimum</span></li>
             <li class="trust__item"><span class="trust__dot trust__dot--cyan" aria-hidden="true"></span><span data-i18n="trust.2">Angebot in 24 Stunden</span></li>
             <li class="trust__item"><span class="trust__dot trust__dot--yellow" aria-hidden="true"></span><span data-i18n="trust.3">Lieferung deutschlandweit</span></li>
@@ -438,9 +460,9 @@
           
           <!-- TRUST BADGES -->
           <ul class="trust-badges reveal-on-scroll delay-200" role="list">
-            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> Druck ab 1 Stück</li>
-            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> Lokale Produktion in Trier</li>
-            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> Kostenloser Datencheck</li>
+            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> <span data-i18n="badge.1">Druck ab 1 Stück</span></li>
+            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> <span data-i18n="badge.2">Lokale Produktion in Trier</span></li>
+            <li><svg aria-hidden="true"><use href="#icon-check"></use></svg> <span data-i18n="badge.3">Kostenloser Datencheck</span></li>
           </ul>
         </aside>
 
@@ -526,15 +548,15 @@
                 <label class="upload" for="f-file">
                   <input class="upload__input" id="f-file" name="files[]" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps" multiple data-file-input>
                   <svg class="upload__icon" aria-hidden="true"><use href="#icon-upload"></use></svg>
-                  <span class="upload__text" data-file-label data-i18n="form.fileHint">Logo oder Motiv auswählen (max. 3 Dateien, PNG, JPG, PDF, SVG)</span>
+                  <span class="upload__text" data-file-label data-i18n="form.fileHint">Logo oder Motiv auswählen (max. 3 Dateien à 10 MB: PNG, JPG, PDF, SVG, AI, EPS)</span>
                 </label>
-                <!-- New Delete Button -->
-                <button type="button" id="file-clear" class="file-clear" aria-label="Datei entfernen" hidden>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <button type="button" id="file-clear" class="file-clear" aria-label="Dateien entfernen" data-i18n-aria="aria.fileClear" hidden>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"></path>
                   </svg>
                 </button>
               </div>
+              <p class="upload-error" role="alert" data-upload-error></p>
             </div>
           </div>
 
@@ -543,7 +565,7 @@
             <p class="quote-form__note" data-i18n="form.note">Unverbindlich &amp; kostenlos. Antwort innerhalb von 24 Stunden.</p>
             <p class="quote-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
           </div>
-          <p class="quote-form__status" role="status" aria-live="polite" data-form-status></p>
+          <div class="quote-form__status" role="status" aria-live="polite" data-form-status></div>
         </form>
         <ul class="contact-list reveal-on-scroll delay-300" role="list">
             <li>
@@ -574,7 +596,7 @@
        ===================================================================== -->
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="#top" aria-label="PRINT LAB Trier – nach oben">
+      <a class="brand brand--footer" href="#top" aria-label="PRINT LAB Trier – nach oben" data-i18n-aria="aria.top">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -592,19 +614,19 @@
   <!-- =====================================================================
        FLOATING WHATSAPP
        ===================================================================== -->
-  <a class="wa-float" href="#" target="_blank" rel="noopener" aria-label="Per WhatsApp schreiben" data-whatsapp-link data-wa-float>
+  <a class="wa-float" href="#" target="_blank" rel="noopener" aria-label="Per WhatsApp schreiben" data-i18n-aria="aria.wa" data-whatsapp-link data-wa-float>
     <svg class="wa-float__icon" aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
+  </a>
+
+  <!-- =====================================================================
+       BACK TO TOP
+       ===================================================================== -->
+  <a href="#top" id="back-to-top" class="back-to-top" aria-label="Nach oben scrollen" data-i18n-aria="aria.backTop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
   </a>
 
   <script src="js/main.js" defer></script>
 </body>
 </html>
-
-  <!-- =====================================================================
-       Back to Top Button
-       ===================================================================== -->
-<a href="#top" id="back-to-top" class="back-to-top" aria-label="Nach oben scrollen">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M18 15l-6-6-6 6"/>
-  </svg>
-</a>
