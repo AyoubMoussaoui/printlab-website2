@@ -5,7 +5,7 @@
      Small desktop ............ 1100–1279px
      Tablet ................... 768–1099px
      Mobile ................... ≤ 767px    (all mobile-only components)
-     Small mobile ............. ≤ 359px
+     Small mobile ............. ≤ 419px (no header CTA), ≤ 359px
 
    Tablet and mobile queries never overlap, so a change in one can not
    leak into the other or into desktop.
@@ -145,9 +145,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 10px;
     height: var(--header-h);
-    padding-inline: var(--container-pad);
+    padding-inline: 16px;
+  }
+
+  .brand--mobile {
+    flex: none;
+    gap: 8px;
   }
 
   .brand--mobile .brand__mark {
@@ -162,12 +167,17 @@
 
   .brand--mobile .brand__word {
     font-size: 17px;
+    white-space: nowrap;
   }
 
   .mobile-actions {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
+  }
+
+  .mobile-actions .lang-switch__btn {
+    padding: 8px 5px;
   }
 
   .mobile-actions__icon {
@@ -558,11 +568,24 @@
 }
 
 /* --------------------------------------------------------------------------
-   SMALL MOBILE  ≤359px — drop the header CTA when space runs out
+   SMALL MOBILE  ≤419px — drop the header CTA; ≤359px — compact brand
    -------------------------------------------------------------------------- */
-@media (max-width: 359px) {
+@media (max-width: 419px) {
+  /* Header CTA is "if space allows": logo, DE/EN, Instagram and menu
+     need the room; the hero's "Jetzt anfragen" sits right below. */
   .mobile-actions__cta {
     display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .brand--mobile .brand__mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand--mobile .brand__word {
+    font-size: 15px;
   }
 
   .audience {
