@@ -19,6 +19,7 @@ datenschutz.html   privacy policy (GDPR)
 assets/
   fonts/           Archivo, self-hosted (no requests to Google), OFL license
   images/          hero + reference imagery
+  images/logo/     logo files (see "Logo" below)
   icons/           favicon, standalone icon SVGs
 ```
 
@@ -36,3 +37,21 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 ## Webshop-ready
 
 Each section is self-contained and IDs are stable (`#services`, `#methods`, …). A shop can be added as its own route (for example `/shop`) that reuses `variables.css`, `base.css` and the header and footer components. The product categories in "Leistungen" and in the form's product select can be linked to shop categories later.
+
+## Logo
+
+The logo is a P/L monogram inside a rounded frame (a nod to a screen-printing screen), with the "PRINT LAB" wordmark and the "Textildruck · Trier" tagline. All text in the logo files is converted to outlines, so they don't depend on the font being installed.
+
+| File | Use |
+| --- | --- |
+| `printlab-logo-on-dark.svg` / `.png` | Full logo on black or dark backgrounds (the website version) |
+| `printlab-logo-on-light.svg` / `.png` | Full logo on white or light backgrounds |
+| `printlab-logo-black.svg` | One color, black: stamps, single-color screen printing, invoices |
+| `printlab-logo-white.svg` | One color, white: dark textiles, magenta backgrounds |
+| `printlab-mark-*.svg` | Monogram only (`on-dark`, `on-light`, `black`, `white`, `magenta`): neck labels, sleeve prints, embroidery |
+| `printlab-profile-1080.png` | Instagram and WhatsApp profile picture |
+
+Colors: magenta `#C91F6F`, black `#0B0B0B`, off-white `#F5F3EE`. Keep clear space around the logo of at least half the monogram's height, and don't use the monogram smaller than 16px on screen or about 12mm in print.
+
+The favicon (`assets/icons/favicon.svg`) and Apple touch icon (`assets/icons/apple-touch-icon.png`) use the same monogram.
+
