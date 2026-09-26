@@ -151,8 +151,13 @@
   }
 
   .brand--mobile .brand__mark {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Tagline would crowd the header actions on phones */
+  .brand--mobile .brand__tagline {
+    display: none;
   }
 
   .brand--mobile .brand__word {

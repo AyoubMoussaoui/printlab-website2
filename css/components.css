@@ -16,24 +16,31 @@
 
 .brand__mark {
   flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background:
-    radial-gradient(circle at 70% 30%, var(--color-offwhite) 0 3.5px, transparent 4px),
-    var(--color-magenta);
+  width: 38px;
+  height: 38px;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .brand__word {
   font-size: 19px;
   font-weight: var(--fw-black);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   line-height: 1;
 }
 
-.brand__word-accent {
-  margin-left: 4px;
+.brand__tagline {
   color: var(--color-magenta);
+  font-size: 8.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.3em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* ---------- Desktop navigation ---------- */
