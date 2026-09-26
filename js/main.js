@@ -320,7 +320,9 @@
       fileInput.addEventListener('change', (e) => {
         const newFiles = Array.from(e.target.files);
         if (selectedFiles.length + newFiles.length > 3) {
-          alert(document.documentElement.lang === 'en' ? 'You can only upload a maximum of 3 files.' : 'Du kannst maximal 3 Dateien hochladen.');
+          alert(document.documentElement.lang === 'en' 
+            ? 'You can only upload a maximum of 3 files. Only the first 3 fitting files were added.' 
+            : 'Du kannst maximal 3 Dateien hochladen. Es wurden nur die passenden Dateien hinzugefügt.');
           const spaceLeft = 3 - selectedFiles.length;
           selectedFiles = selectedFiles.concat(newFiles.slice(0, spaceLeft));
         } else {
