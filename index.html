@@ -542,7 +542,7 @@
               <label class="field__label" for="f-message" data-i18n="form.message">Nachricht</label>
               <textarea class="field__input field__input--area" id="f-message" name="message" rows="4" placeholder="Erzähl uns kurz von deiner Idee …" data-i18n-placeholder="form.messagePh"></textarea>
             </div>
-            <div class="field field--full">
+            <div class="field field--full" data-file-field>
               <span class="field__label"><span data-i18n="form.file">Datei hochladen</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></span>
               <div class="file-upload-wrapper">
                 <label class="upload" for="f-file">
@@ -557,6 +557,17 @@
                 </button>
               </div>
               <p class="upload-error" role="alert" data-upload-error></p>
+            </div>
+            <!-- Shown instead of the file picker when CONFIG.uploadLink is set (js/main.js) -->
+            <div class="field field--full" data-upload-link-field hidden>
+              <span class="field__label"><span data-i18n="form.file">Datei hochladen</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></span>
+              <a class="upload upload--link" href="#" target="_blank" rel="noopener noreferrer" data-upload-link>
+                <svg class="upload__icon" aria-hidden="true"><use href="#icon-upload"></use></svg>
+                <span class="upload__text">
+                  <span class="upload__title" data-i18n="upload.cta">Logo oder Motiv hochladen</span>
+                  <span class="upload__sub" data-i18n="upload.sub">Öffnet unseren sicheren Datei-Upload in einem neuen Tab – ohne Konto. PNG, JPG, PDF, SVG, AI oder EPS.</span>
+                </span>
+              </a>
             </div>
           </div>
 

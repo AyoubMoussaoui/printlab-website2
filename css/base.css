@@ -104,6 +104,11 @@ button {
   color: inherit;
 }
 
+/* The hidden attribute must win over component display rules (e.g. .field { display: flex }) */
+[hidden] {
+  display: none !important;
+}
+
 /* Neutral reset only — visual button styles live in components.css */
 button {
   cursor: pointer;

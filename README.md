@@ -47,6 +47,7 @@ Configured in `CONFIG` at the top of `js/main.js`:
 | `formEndpoint` | URL of the form service. Empty = fallback: after validation the visitor chooses "Per E-Mail senden" or "Per WhatsApp senden", both pre-filled with the request. |
 | `formFields` | Extra fields the service needs, e.g. `{ access_key: '…' }` for Web3Forms. |
 | `formFileUploads` | `true` only if the service plan accepts file uploads. If `false`, files are not sent and the visitor is asked to send them via WhatsApp or e-mail. |
+| `uploadLink` | Link to an upload page such as a Dropbox "File request". When set, the file picker is replaced by a "Logo oder Motiv hochladen" button, and the e-mail/WhatsApp choice offers the upload too. E-mail and WhatsApp links can't carry attachments, so this is how files reach you without a paid form service. Name the upload provider in `datenschutz.html`. |
 | `maxFiles`, `maxFileSizeMB`, `fileTypes` | Upload limits checked in the browser (defaults: 3 files, 10 MB, PNG/JPG/PDF/SVG/AI/EPS). |
 
 Any service that accepts a `multipart/form-data` POST and answers with JSON works (Formspree, Web3Forms, Getform, Netlify Forms, your own API). A hidden honeypot field filters simple spam bots and is never sent.

@@ -30,6 +30,11 @@
     formFields: {},
     formFileUploads: false,
 
+    /* Upload page for logos/artwork, e.g. a Dropbox "File request" link.
+       When set, the form shows an upload button instead of the file picker,
+       and the e-mail/WhatsApp choice offers it too. Empty = file picker. */
+    uploadLink: '',
+
     maxFiles: 3,
     maxFileSizeMB: 10,
     fileTypes: ['png', 'jpg', 'jpeg', 'pdf', 'svg', 'ai', 'eps']
@@ -103,7 +108,9 @@
     'badge.1': 'Printing from 1 piece', 'badge.2': 'Local production in Trier', 'badge.3': 'Free artwork check',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier – home', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier – back to top',
-    'aria.wa': 'Message us on WhatsApp', 'aria.fileClear': 'Remove files', 'aria.backTop': 'Back to top'
+    'aria.wa': 'Message us on WhatsApp', 'aria.fileClear': 'Remove files', 'aria.backTop': 'Back to top',
+    'upload.cta': 'Upload logo or artwork',
+    'upload.sub': 'Opens our secure file upload in a new tab – no account needed. PNG, JPG, PDF, SVG, AI or EPS.'
   };
 
   const MESSAGES = {
@@ -118,6 +125,9 @@
       fallbackTitle: 'Fast geschafft! Wie möchtest du deine Anfrage senden?',
       fallbackFiles: 'Deine Dateien hängst du im nächsten Schritt direkt in der E-Mail oder im WhatsApp-Chat an.',
       viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
+      uploadPrompt: 'Hast du ein Logo oder Motiv? Lade es hier hoch – es landet direkt bei uns:',
+      viaUpload: 'Dateien hochladen',
+      uploadNote: 'Druckdateien lade ich über euren Upload-Link hoch.',
       fileMax: 'Maximal {n} Dateien – nur die ersten wurden übernommen.',
       fileType: '„{f}“ hat ein nicht unterstütztes Format.',
       fileSize: '„{f}“ ist größer als {n} MB.',
@@ -134,6 +144,9 @@
       fallbackTitle: 'Almost done! How would you like to send your request?',
       fallbackFiles: 'You can attach your files in the next step, directly in the email or WhatsApp chat.',
       viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
+      uploadPrompt: 'Have a logo or artwork? Upload it here – it goes straight to us:',
+      viaUpload: 'Upload files',
+      uploadNote: 'I will upload my artwork via your upload link.',
       fileMax: 'Maximum {n} files – only the first ones were added.',
       fileType: '"{f}" has an unsupported format.',
       fileSize: '"{f}" is larger than {n} MB.',
@@ -368,6 +381,18 @@
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const canSetFiles = (() => { try { return !!new DataTransfer(); } catch (e) { return false; } })();
 
+    /* ---- Upload link replaces the file picker when configured */
+    const useUploadLink = Boolean(CONFIG.uploadLink);
+    if (useUploadLink) {
+      const pickerField = form.querySelector('[data-file-field]');
+      const linkField = form.querySelector('[data-upload-link-field]');
+      const link = form.querySelector('[data-upload-link]');
+      if (pickerField) pickerField.hidden = true;
+      if (fileInput) fileInput.disabled = true; // disabled inputs are not submitted
+      if (link) link.href = CONFIG.uploadLink;
+      if (linkField) linkField.hidden = false;
+    }
+
     /* ---- Files: keep a list so visitors can add files in several steps */
     let selectedFiles = [];
 
@@ -477,6 +502,7 @@
         ['Nachricht', data.get('message')]
       ];
       if (selectedFiles.length) rows.push(['Dateien', selectedFiles.map((f) => f.name).join(', ') + ' (werden angehängt)']);
+      if (useUploadLink && data.get('has_design') === 'Ja') rows.push(['Dateien', t('uploadNote')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
@@ -509,7 +535,22 @@
 
       status.appendChild(title);
       status.appendChild(actions);
-      if (selectedFiles.length) {
+      if (useUploadLink) {
+        const row = document.createElement('div');
+        row.className = 'quote-form__fallback-upload';
+        const prompt = document.createElement('p');
+        prompt.className = 'quote-form__fallback-note';
+        prompt.textContent = t('uploadPrompt');
+        const up = document.createElement('a');
+        up.className = 'btn btn--glass';
+        up.href = CONFIG.uploadLink;
+        up.target = '_blank';
+        up.rel = 'noopener noreferrer';
+        up.textContent = t('viaUpload');
+        row.appendChild(prompt);
+        row.appendChild(up);
+        status.appendChild(row);
+      } else if (selectedFiles.length) {
         const note = document.createElement('p');
         note.className = 'quote-form__fallback-note';
         note.textContent = t('fallbackFiles');
