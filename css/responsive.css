@@ -297,7 +297,7 @@
   }
 
   .mobile-menu__link.is-active {
-    color: var(--color-magenta);
+    color: var(--color-magenta-on-dark);
   }
 
   /* ---- Hero ---- */
@@ -564,6 +564,12 @@
   .wa-float__icon {
     width: 28px;
     height: 28px;
+  }
+
+  /* Centered above the larger mobile WhatsApp button */
+  .back-to-top {
+    right: 20px;
+    bottom: 84px;
   }
 }
 
