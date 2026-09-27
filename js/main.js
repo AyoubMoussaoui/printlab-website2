@@ -18,21 +18,16 @@
     email: 'just-click@live.fr',
     instagram: 'https://instagram.com/printlab_trier',
 
-    /* Form service. Leave formEndpoint empty to use the built-in fallback
-       (visitor sends the prepared request by e-mail or WhatsApp).
-       Examples:
+    /* Optional form service. Leave formEndpoint empty to use the built-in
+       flow: the visitor sends the prepared request by e-mail or WhatsApp and
+       attaches their design file there.
+       Examples (text only, free plans are enough):
          Formspree:  formEndpoint: 'https://formspree.io/f/XXXXXXX'
          Web3Forms:  formEndpoint: 'https://api.web3forms.com/submit',
                      formFields: { access_key: 'YOUR-KEY' }
-       Set formFileUploads to true only if the service plan accepts files.
        Remember to name the service in datenschutz.html. */
     formEndpoint: '',
-    formFields: {},
-    formFileUploads: false,
-
-    maxFiles: 3,
-    maxFileSizeMB: 10,
-    fileTypes: ['png', 'jpg', 'jpeg', 'pdf', 'svg', 'ai', 'eps']
+    formFields: {}
   };
 
   const mqMobile = window.matchMedia('(max-width: 767px)');
@@ -94,7 +89,8 @@
     'form.pos4': 'Sleeve', 'form.pos5': 'Multiple positions', 'form.pos6': 'Not sure yet',
     'form.hasDesign': 'Design available?', 'form.yes': 'Yes', 'form.no': 'No',
     'form.message': 'Message', 'form.messagePh': 'Tell us briefly about your idea …',
-    'form.file': 'Upload file', 'form.fileHint': 'Choose logo or artwork (max. 3 files of 10 MB: PNG, JPG, PDF, SVG, AI, EPS)',
+    'form.hintYes': 'Great! You attach your file (logo, artwork) in the next step, directly to the email or WhatsApp chat.',
+    'form.hintNo': 'No problem – we are happy to create several design proposals for you.',
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
@@ -103,7 +99,7 @@
     'badge.1': 'Printing from 1 piece', 'badge.2': 'Local production in Trier', 'badge.3': 'Free artwork check',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier – home', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier – back to top',
-    'aria.wa': 'Message us on WhatsApp', 'aria.fileClear': 'Remove files', 'aria.backTop': 'Back to top'
+    'aria.wa': 'Message us on WhatsApp', 'aria.backTop': 'Back to top'
   };
 
   const MESSAGES = {
@@ -113,14 +109,12 @@
       qty: 'Bitte gib eine Stückzahl ab 1 an.',
       sending: 'Wird gesendet …',
       success: 'Danke! Deine Anfrage ist bei uns – wir melden uns innerhalb von 24 Stunden.',
-      successNoFiles: 'Danke! Deine Anfrage ist bei uns. Schick uns deine Dateien bitte noch per WhatsApp oder E-Mail – wir melden uns innerhalb von 24 Stunden.',
+      successWithFile: 'Danke! Deine Anfrage ist bei uns. Schick uns deine Datei (Logo, Motiv) bitte noch per WhatsApp oder E-Mail – wir melden uns innerhalb von 24 Stunden.',
       error: 'Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns per WhatsApp.',
       fallbackTitle: 'Fast geschafft! Wie möchtest du deine Anfrage senden?',
-      fallbackFiles: 'Deine Dateien hängst du im nächsten Schritt direkt in der E-Mail oder im WhatsApp-Chat an.',
       viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
-      fileMax: 'Maximal {n} Dateien – nur die ersten wurden übernommen.',
-      fileType: '„{f}“ hat ein nicht unterstütztes Format.',
-      fileSize: '„{f}“ ist größer als {n} MB.',
+      steps: ['Wähle E-Mail oder WhatsApp – deine Anfrage ist schon ausgefüllt.', 'Hänge deine Datei (Logo, Motiv) mit der Büroklammer 📎 an.', 'Nachricht absenden – fertig!'],
+      fileLine: 'hänge ich an',
       menuOpen: 'Menü öffnen', menuClose: 'Menü schließen', waText: 'Hallo Team PRINT LAB, ich habe eine Anfrage: '
     },
     en: {
@@ -129,14 +123,12 @@
       qty: 'Please enter a quantity of at least 1.',
       sending: 'Sending …',
       success: 'Thank you! We have received your request and will reply within 24 hours.',
-      successNoFiles: 'Thank you! We have received your request. Please send us your files via WhatsApp or email – we will reply within 24 hours.',
+      successWithFile: 'Thank you! We have received your request. Please send us your file (logo, artwork) via WhatsApp or email – we will reply within 24 hours.',
       error: 'Something went wrong. Please try again or message us on WhatsApp.',
       fallbackTitle: 'Almost done! How would you like to send your request?',
-      fallbackFiles: 'You can attach your files in the next step, directly in the email or WhatsApp chat.',
       viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
-      fileMax: 'Maximum {n} files – only the first ones were added.',
-      fileType: '"{f}" has an unsupported format.',
-      fileSize: '"{f}" is larger than {n} MB.',
+      steps: ['Choose email or WhatsApp – your request is already filled in.', 'Attach your file (logo, artwork) with the paperclip 📎.', 'Send the message – done!'],
+      fileLine: 'attached',
       menuOpen: 'Open menu', menuClose: 'Close menu', waText: 'Hi PRINT LAB, I have a request: '
     }
   };
@@ -154,11 +146,9 @@
 
   const t = (key, vars) => {
     let msg = (MESSAGES[currentLang] || MESSAGES.de)[key] || '';
-    if (vars) Object.keys(vars).forEach((k) => { msg = msg.split('{' + k + '}').join(vars[k]); });
+    if (vars && typeof msg === 'string') Object.keys(vars).forEach((k) => { msg = msg.split('{' + k + '}').join(vars[k]); });
     return msg;
   };
-  /* Text of any data-i18n key in the current language */
-  const tr = (key) => (currentLang === 'en' ? EN[key] : DE[key]) || DE[key] || '';
 
   function applyLanguage(lang) {
     currentLang = lang === 'en' ? 'en' : 'de';
@@ -359,69 +349,19 @@
 
   if (form) {
     const status = form.querySelector('[data-form-status]');
-    const fileInput = form.querySelector('[data-file-input]');
-    const fileLabel = form.querySelector('[data-file-label]');
-    const fileError = form.querySelector('[data-upload-error]');
-    const fileClearBtn = form.querySelector('#file-clear');
     const submitBtn = form.querySelector('[type="submit"]');
     const honeypot = form.querySelector('#f-website');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const canSetFiles = (() => { try { return !!new DataTransfer(); } catch (e) { return false; } })();
+    const hasDesign = () => (form.querySelector('input[name="has_design"]:checked') || {}).value === 'Ja';
 
-    /* ---- Files: keep a list so visitors can add files in several steps */
-    let selectedFiles = [];
-
-    function renderFiles() {
-      if (canSetFiles && fileInput) {
-        const dt = new DataTransfer();
-        selectedFiles.forEach((f) => dt.items.add(f));
-        fileInput.files = dt.files;
-      }
-      if (fileLabel) {
-        fileLabel.textContent = selectedFiles.length
-          ? selectedFiles.map((f) => f.name).join(', ')
-          : tr('form.fileHint');
-      }
-      if (fileClearBtn) fileClearBtn.hidden = selectedFiles.length === 0;
+    /* ---- Hint under "Design vorhanden?": attach the file in the next step */
+    const designHints = Array.from(form.querySelectorAll('[data-design-hint]'));
+    function updateDesignHint() {
+      const choice = hasDesign() ? 'Ja' : 'Nein';
+      designHints.forEach((el) => { el.hidden = el.dataset.designHint !== choice; });
     }
-
-    function resetFiles() {
-      selectedFiles = [];
-      if (fileInput) fileInput.value = '';
-      if (fileError) fileError.textContent = '';
-      renderFiles();
-    }
-
-    function checkFile(file) {
-      const ext = (file.name.split('.').pop() || '').toLowerCase();
-      if (!CONFIG.fileTypes.includes(ext)) return t('fileType', { f: file.name });
-      if (file.size > CONFIG.maxFileSizeMB * 1024 * 1024) return t('fileSize', { f: file.name, n: CONFIG.maxFileSizeMB });
-      return '';
-    }
-
-    if (fileInput) {
-      window.addEventListener('pageshow', resetFiles);
-      fileInput.addEventListener('change', () => {
-        const errors = [];
-        let incoming = Array.from(fileInput.files || []);
-        if (canSetFiles) {
-          incoming = incoming.filter((f) => {
-            const err = checkFile(f);
-            if (err) errors.push(err);
-            return !err;
-          });
-          const room = CONFIG.maxFiles - selectedFiles.length;
-          if (incoming.length > room) errors.push(t('fileMax', { n: CONFIG.maxFiles }));
-          selectedFiles = selectedFiles.concat(incoming.slice(0, Math.max(0, room)));
-        } else {
-          // Older browsers: the native input keeps only the latest selection
-          selectedFiles = incoming.filter((f) => !checkFile(f)).slice(0, CONFIG.maxFiles);
-        }
-        if (fileError) fileError.textContent = errors.join(' ');
-        renderFiles();
-      });
-      if (fileClearBtn) fileClearBtn.addEventListener('click', resetFiles);
-    }
+    form.querySelectorAll('input[name="has_design"]').forEach((r) => r.addEventListener('change', updateDesignHint));
+    updateDesignHint();
 
     /* ---- Validation */
     function setError(input, message) {
@@ -456,7 +396,6 @@
 
     // Re-translate visible messages when the language changes
     document.addEventListener('printlab:lang', () => {
-      renderFiles();
       requiredInputs.forEach((input) => {
         if (input.getAttribute('aria-invalid') === 'true') setError(input, validateInput(input));
       });
@@ -476,7 +415,7 @@
         ['Druckposition', data.get('position')], ['Design vorhanden', data.get('has_design')],
         ['Nachricht', data.get('message')]
       ];
-      if (selectedFiles.length) rows.push(['Dateien', selectedFiles.map((f) => f.name).join(', ') + ' (werden angehängt)']);
+      if (data.get('has_design') === 'Ja') rows.push(['Datei', t('fileLine')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
@@ -509,11 +448,15 @@
 
       status.appendChild(title);
       status.appendChild(actions);
-      if (selectedFiles.length) {
-        const note = document.createElement('p');
-        note.className = 'quote-form__fallback-note';
-        note.textContent = t('fallbackFiles');
-        status.appendChild(note);
+      if (data.get('has_design') === 'Ja') {
+        const steps = document.createElement('ol');
+        steps.className = 'quote-form__steps';
+        t('steps').forEach((text) => {
+          const li = document.createElement('li');
+          li.textContent = text;
+          steps.appendChild(li);
+        });
+        status.appendChild(steps);
       }
       actions.firstChild.focus();
     }
@@ -521,8 +464,7 @@
     async function sendToService(data) {
       Object.keys(CONFIG.formFields).forEach((k) => data.set(k, CONFIG.formFields[k]));
       if (!data.has('subject')) data.set('subject', 'Neue Anfrage über die PRINT LAB Website');
-      const hadFiles = selectedFiles.length > 0;
-      if (!CONFIG.formFileUploads) data.delete('files[]');
+      const withFile = hasDesign();
 
       submitBtn.disabled = true;
       showStatus(t('sending'));
@@ -532,9 +474,9 @@
         try { body = await res.json(); } catch (e) { /* non-JSON reply */ }
         if (!res.ok || body.success === false || body.ok === false) throw new Error('HTTP ' + res.status);
         form.reset();
-        resetFiles();
+        updateDesignHint();
         form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
-        showStatus(hadFiles && !CONFIG.formFileUploads ? t('successNoFiles') : t('success'), 'success');
+        showStatus(withFile ? t('successWithFile') : t('success'), 'success');
       } catch (err) {
         showStatus(t('error'), 'error');
       } finally {

@@ -67,7 +67,7 @@
     <symbol id="icon-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="icon-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
-    <symbol id="icon-upload" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="icon-clip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 1 1-2.8-2.8l8.5-8.5"/></symbol>
     <!-- Service icons -->
     <symbol id="icon-tshirt" viewBox="0 0 32 32"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M11.5 4.5 5 7.5l-2.5 6 4.5 2 1.5-2.5V27.5h15V13l1.5 2.5 4.5-2-2.5-6-6.5-3c-.5 2-2.3 3.5-4.5 3.5s-4-1.5-4.5-3.5Z"/></symbol>
     <symbol id="icon-hoodie" viewBox="0 0 32 32"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 5c1-1.6 2.4-2.5 4-2.5s3 .9 4 2.5l5.5 2.5 3 12-3.5 1.2-1-4V28.5H8v-11.8l-1 4-3.5-1.2 3-12L12 5Z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 5c.5 3 2 5 4 5s3.5-2 4-5M14.5 10v4M17.5 10v4M11 21h10v5H11z"/></symbol>
@@ -538,25 +538,20 @@
                 </label>
               </div>
             </fieldset>
+            <!-- Switches with the Ja/Nein choice above (js/main.js) -->
+            <div class="field field--full design-hint" aria-live="polite">
+              <p class="design-hint__text" data-design-hint="Ja">
+                <svg class="design-hint__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
+                <span data-i18n="form.hintYes">Super! Deine Datei (Logo, Motiv) hängst du gleich im nächsten Schritt direkt an die E-Mail oder den WhatsApp-Chat an.</span>
+              </p>
+              <p class="design-hint__text" data-design-hint="Nein" hidden>
+                <svg class="design-hint__icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+                <span data-i18n="form.hintNo">Kein Problem – wir erstellen dir gerne verschiedene Designvorschläge.</span>
+              </p>
+            </div>
             <div class="field field--full">
               <label class="field__label" for="f-message" data-i18n="form.message">Nachricht</label>
               <textarea class="field__input field__input--area" id="f-message" name="message" rows="4" placeholder="Erzähl uns kurz von deiner Idee …" data-i18n-placeholder="form.messagePh"></textarea>
-            </div>
-            <div class="field field--full">
-              <span class="field__label"><span data-i18n="form.file">Datei hochladen</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></span>
-              <div class="file-upload-wrapper">
-                <label class="upload" for="f-file">
-                  <input class="upload__input" id="f-file" name="files[]" type="file" accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps" multiple data-file-input>
-                  <svg class="upload__icon" aria-hidden="true"><use href="#icon-upload"></use></svg>
-                  <span class="upload__text" data-file-label data-i18n="form.fileHint">Logo oder Motiv auswählen (max. 3 Dateien à 10 MB: PNG, JPG, PDF, SVG, AI, EPS)</span>
-                </label>
-                <button type="button" id="file-clear" class="file-clear" aria-label="Dateien entfernen" data-i18n-aria="aria.fileClear" hidden>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M18 6L6 18M6 6l12 12"></path>
-                  </svg>
-                </button>
-              </div>
-              <p class="upload-error" role="alert" data-upload-error></p>
             </div>
           </div>
 
