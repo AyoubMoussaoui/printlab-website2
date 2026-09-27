@@ -103,7 +103,8 @@
   }
 
   .forwho,
-  .contact {
+  .contact,
+  .faq {
     grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
@@ -515,6 +516,26 @@
   .quote-form__grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
+  }
+
+  /* ---- FAQ ---- */
+  .faq {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .faq__text {
+    font-size: 16px;
+  }
+
+  .faq-item__q {
+    padding: 18px 0;
+    font-size: 16px;
+  }
+
+  .faq-item__a {
+    padding: 0 0 18px;
+    font-size: 15px;
   }
 
   /* ---- Preise ---- */
