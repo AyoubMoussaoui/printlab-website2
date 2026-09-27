@@ -55,12 +55,25 @@ Every push to `main` and every pull request runs `.github/workflows/site-checks.
 - JavaScript syntax check
 - `.github/scripts/check-links.mjs`: every local link, image, stylesheet, script, CSS `url()` and in-page anchor must resolve
 
-Run them locally before pushing:
+- `.github/scripts/stamp-assets.mjs --check`: every page must reference the current CSS/JS version (see below)
+
+### After changing any CSS or JS file
+
+Run this once before committing:
+
+```
+node .github/scripts/stamp-assets.mjs
+```
+
+It adds a fingerprint (`?v=…`) to all CSS/JS links in the HTML pages. Without it, visitors' browsers can combine the new HTML with an old cached stylesheet right after a deploy, and new elements then look broken. The check above fails if this step was forgotten.
+
+Run all checks locally before pushing:
 
 ```
 npx html-validate index.html impressum.html datenschutz.html 404.html
 node --check js/main.js
 node .github/scripts/check-links.mjs
+node .github/scripts/stamp-assets.mjs --check
 ```
 
 ## Accessibility & behaviour notes
