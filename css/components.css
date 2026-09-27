@@ -822,8 +822,8 @@
 
 .price-shipping__icon {
   flex: none;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   color: var(--color-magenta);
 }
 

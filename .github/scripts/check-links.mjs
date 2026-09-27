@@ -23,7 +23,8 @@ for (const file of htmlFiles) {
   const html = readFileSync(join(root, file), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
   for (const [, attr, url] of html.matchAll(/\s(href|src)="([^"]*)"/g)) {
     if (!url || isExternal(url)) continue;
-    const [path, frag] = url.split('#');
+    const [pathWithQuery, frag] = url.split('#');
+    const path = pathWithQuery.split('?')[0]; // ignore cache-busting ?v=
     const target = path ? normalize(join(dirname(file), path)) : file;
     if (path && !existsSync(join(root, target))) errors.push(`${file}: ${attr}="${url}" → missing file`);
     else if (frag && target.endsWith('.html') && !ids(target).has(frag)) errors.push(`${file}: ${attr}="${url}" → no id="${frag}"`);
