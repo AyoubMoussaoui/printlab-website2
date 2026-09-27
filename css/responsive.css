@@ -632,9 +632,54 @@
     height: 28px;
   }
 
-  /* Centered above the larger mobile WhatsApp button */
+  /* ---- Sticky request bar replaces the floating WhatsApp button ---- */
+  .wa-float {
+    display: none;
+  }
+
+  .mobile-cta {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(--z-float);
+    display: flex;
+    gap: 10px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-line-dark);
+    background-color: rgba(11, 11, 11, 0.96);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    backdrop-filter: saturate(140%) blur(14px);
+    transform: translateY(110%);
+    visibility: hidden;
+    transition: transform var(--dur) var(--ease), visibility var(--dur);
+  }
+
+  .mobile-cta.is-visible {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .mobile-cta__btn {
+    flex: 1;
+    min-height: 48px;
+  }
+
+  .mobile-cta__wa {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background-color: #25D366;
+    color: var(--color-white);
+  }
+
+  /* Sits just above the sticky bar */
   .back-to-top {
-    right: 20px;
+    right: 16px;
     bottom: 84px;
   }
 }

@@ -250,6 +250,7 @@
     document.body.classList.add('is-locked');
     requestAnimationFrame(() => mobileMenu.classList.add('is-open'));
     updateMenuLabel();
+    updateMobileCta();
   }
   function closeMenu() {
     if (!menuToggle || !mobileMenu) return;
@@ -258,6 +259,7 @@
     menuToggle.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('is-locked');
     updateMenuLabel();
+    updateMobileCta();
   }
 
   if (menuToggle) menuToggle.addEventListener('click', () => (isMenuOpen() ? closeMenu() : openMenu()));
@@ -362,9 +364,25 @@
     return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
   }
 
+  // Phones: sticky request bar once the hero buttons are gone, but not
+  // in the contact section (the form has its own button) or with the menu open
+  const mobileCta = document.querySelector('[data-mobile-cta]');
+  const heroCtas = document.querySelector('.hero__ctas');
+  const contactSection = document.getElementById('contact');
+
+  function updateMobileCta() {
+    if (!mobileCta || !heroCtas || !contactSection) return;
+    const pastHero = heroCtas.getBoundingClientRect().bottom < 0;
+    const c = contactSection.getBoundingClientRect();
+    const inContact = c.top < window.innerHeight && c.bottom > 0;
+    const menuOpen = document.body.classList.contains('is-locked');
+    mobileCta.classList.toggle('is-visible', pastHero && !inContact && !menuOpen);
+  }
+
   let floatsQueued = false;
   function updateFloats() {
     floatsQueued = false;
+    updateMobileCta();
     if (backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
     const zones = hideZones.map((z) => z.getBoundingClientRect());
     floats.forEach((btn) => {
