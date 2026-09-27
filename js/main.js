@@ -115,7 +115,31 @@
     'prices.bulkText': 'For clubs, companies, teams, bachelor parties and larger quantities we create an individual quote with a matching volume price.',
     'prices.bulkCta': 'Request a quote',
     'ship.title': 'Shipping within Germany', 'ship.standard': 'Standard', 'ship.express': 'Express',
-    'ship.free': 'Free shipping from', 'ship.freeSuffix': 'order value'
+    'ship.free': 'Free shipping from', 'ship.freeSuffix': 'order value',
+    'faq.title': 'Frequently asked questions.',
+    'faq.intro': 'Your question is not here? Just write to us –', 'faq.introLink': 'send a request',
+    'faq.q1': 'Is there a minimum order?',
+    'faq.a1': 'No – you can order from a single piece. We offer screen printing from 10 pieces; for smaller quantities we recommend DTF printing.',
+    'faq.q2': 'How long does my order take?',
+    'faq.a2': 'Once you approve the design, production usually takes 5 working days. Shipping adds 1–3 working days. Have a fixed date, for example an event or a bachelor party? Just add it to your request – we will tell you honestly whether it works.',
+    'faq.q3': 'When will I get my quote?',
+    'faq.a3': 'Within 24 hours of your request – free and non-binding.',
+    'faq.q4': "I don't have a design yet – can you help?",
+    'faq.a4': 'Of course! We create several design proposals and you pick your favourite. The cost depends on the effort – we tell you the price upfront in the quote.',
+    'faq.q5': 'Which files should I send?',
+    'faq.a5': 'Ideally a vector file (PDF, SVG, AI or EPS). PNG or JPG work too – in good quality if possible. Not sure? Just send what you have: we check your file for free and get back to you if anything is missing.',
+    'faq.q6': 'How do I send you my file?',
+    'faq.a6': 'Fill in the request form and choose email or WhatsApp when sending. Your request is already prepared there – just attach your file with the paperclip and send the message.',
+    'faq.q7': 'Which printing method is right for me?',
+    'faq.a7': 'DTF printing suits single pieces, small quantities and detailed, colourful designs. Screen printing is ideal from 10 pieces for larger runs and is especially durable. For special materials such as plastic or EVA there is special printing. We are happy to advise which method fits your project.',
+    'faq.q8': 'Can I bring my own textile?',
+    'faq.a8': 'Yes! Just bring your piece in. We first check whether the material and surface are suitable for printing. The transfer alone starts at €10.00.',
+    'faq.q10': 'How long does the print last?',
+    'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
+    'faq.q11': 'How can I pay?',
+    'faq.a11': 'You pay conveniently by bank transfer in advance (prepayment).',
+    'faq.q9': 'How much is shipping?',
+    'faq.a9': 'Within Germany, standard shipping costs €7.50 and express €14.00. Orders from €199 ship free. If you pick up your order in Trier by arrangement, there are no shipping costs.'
   };
 
   const MESSAGES = {

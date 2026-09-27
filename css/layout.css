@@ -158,6 +158,14 @@
   background-color: var(--color-surface-alt);
 }
 
+/* ---------- FAQ ---------- */
+.faq {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  align-items: start;
+}
+
 /* ---------- Kontakt ---------- */
 .contact {
   display: grid;
