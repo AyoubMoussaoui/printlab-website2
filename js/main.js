@@ -115,6 +115,8 @@
       viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
       steps: ['Wähle E-Mail oder WhatsApp – deine Anfrage ist schon ausgefüllt.', 'Hänge deine Datei (Logo, Motiv) mit der Büroklammer 📎 an.', 'Nachricht absenden – fertig!'],
       fileLine: 'hänge ich an',
+      altEmail: 'Öffnet sich kein E-Mail-Programm? Kopiere deine Anfrage und schick sie an',
+      copy: 'Anfrage kopieren', copied: 'Kopiert ✓',
       menuOpen: 'Menü öffnen', menuClose: 'Menü schließen', waText: 'Hallo Team PRINT LAB, ich habe eine Anfrage: '
     },
     en: {
@@ -129,6 +131,8 @@
       viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
       steps: ['Choose email or WhatsApp – your request is already filled in.', 'Attach your file (logo, artwork) with the paperclip 📎.', 'Send the message – done!'],
       fileLine: 'attached',
+      altEmail: 'No email app opening? Copy your request and send it to',
+      copy: 'Copy request', copied: 'Copied ✓',
       menuOpen: 'Open menu', menuClose: 'Close menu', waText: 'Hi PRINT LAB, I have a request: '
     }
   };
@@ -324,7 +328,11 @@
     if (backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
     const zones = hideZones.map((z) => z.getBoundingClientRect());
     floats.forEach((btn) => {
-      const r = btn.getBoundingClientRect();
+      // Layout box (offset*) ignores the hide animation's transform, so the
+      // check doesn't flip-flop at the edge; 8px margin keeps a small gap.
+      const m = 8;
+      const r = { left: btn.offsetLeft - m, top: btn.offsetTop - m,
+        right: btn.offsetLeft + btn.offsetWidth + m, bottom: btn.offsetTop + btn.offsetHeight + m };
       btn.classList.toggle('is-hidden', zones.some((z) => overlaps(r, z)));
     });
   }
@@ -448,6 +456,29 @@
 
       status.appendChild(title);
       status.appendChild(actions);
+
+      // Webmail users (e.g. Gmail in the browser) may have no mail app for mailto:
+      const alt = document.createElement('p');
+      alt.className = 'quote-form__alt';
+      alt.appendChild(document.createTextNode(t('altEmail') + ' '));
+      const addr = document.createElement('strong');
+      addr.className = 'quote-form__alt-address';
+      addr.textContent = CONFIG.email;
+      alt.appendChild(addr);
+      if (navigator.clipboard && window.isSecureContext) {
+        const copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'quote-form__copy';
+        copyBtn.textContent = t('copy');
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(subject + '\n\n' + summary).then(() => {
+            copyBtn.textContent = t('copied');
+          }).catch(() => {});
+        });
+        alt.appendChild(document.createTextNode(' '));
+        alt.appendChild(copyBtn);
+      }
+      status.appendChild(alt);
       if (data.get('has_design') === 'Ja') {
         const steps = document.createElement('ol');
         steps.className = 'quote-form__steps';
