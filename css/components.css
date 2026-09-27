@@ -1030,6 +1030,36 @@ a.contact-list__item:hover {
   min-height: 48px;
 }
 
+.quote-form__alt {
+  margin-top: 12px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 13px;
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+}
+
+.quote-form__alt-address {
+  color: var(--color-offwhite);
+  font-weight: var(--fw-semibold);
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+
+.quote-form__copy {
+  margin-left: 4px;
+  padding: 3px 10px;
+  border: 1px solid rgba(245, 243, 238, 0.35);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-offwhite);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+}
+
+.quote-form__copy:hover {
+  border-color: var(--color-offwhite);
+}
+
 .quote-form__steps {
   display: grid;
   gap: 6px;
