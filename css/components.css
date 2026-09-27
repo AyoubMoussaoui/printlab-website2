@@ -269,7 +269,47 @@
 }
 
 .hero__title-line--accent {
+  position: relative; /* anchors the squeegee bar below */
+  display: inline-block;
   color: var(--color-magenta);
+  /* "Ink pull": the line is revealed left to right like a squeegee stroke */
+  animation: ink-pull 1s cubic-bezier(0.65, 0, 0.35, 1) 0.35s both;
+}
+
+/* The squeegee: a light bar travelling with the edge of the reveal */
+.hero__title-line--accent::after {
+  content: "";
+  position: absolute; /* decorative overlay — unavoidable */
+  top: 4%;
+  bottom: 4%;
+  left: 0;
+  width: 5px;
+  border-radius: 3px;
+  background-color: var(--color-offwhite);
+  opacity: 0;
+  transform: translateX(-100%); /* stay just inside the revealed area */
+  animation: squeegee 1s cubic-bezier(0.65, 0, 0.35, 1) 0.35s both;
+}
+
+@keyframes ink-pull {
+  from { clip-path: inset(-15% 100% -15% 0); }
+  to { clip-path: inset(-15% 0 -15% 0); }
+}
+
+@keyframes squeegee {
+  0% { left: 0; opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title-line--accent {
+    animation: none;
+  }
+
+  .hero__title-line--accent::after {
+    display: none;
+  }
 }
 
 .hero__lead {
@@ -1392,6 +1432,11 @@ a.contact-list__item:hover {
 
 .footer-links__link:hover {
   color: var(--color-offwhite);
+}
+
+/* ---------- Sticky request bar (enabled on phones in responsive.css) ---------- */
+.mobile-cta {
+  display: none;
 }
 
 /* ---------- Floating WhatsApp ---------- */
