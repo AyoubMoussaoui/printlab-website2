@@ -40,16 +40,12 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 
 ## Quote form
 
-Configured in `CONFIG` at the top of `js/main.js`:
+After a valid submit the visitor chooses **"Per E-Mail senden"** or **"Per WhatsApp senden"**; both open with the request already filled in. E-mail and WhatsApp links can't carry attachments, so the form has no file picker. Instead:
 
-| Setting | Meaning |
-| --- | --- |
-| `formEndpoint` | URL of the form service. Empty = fallback: after validation the visitor chooses "Per E-Mail senden" or "Per WhatsApp senden", both pre-filled with the request. |
-| `formFields` | Extra fields the service needs, e.g. `{ access_key: '…' }` for Web3Forms. |
-| `formFileUploads` | `true` only if the service plan accepts file uploads. If `false`, files are not sent and the visitor is asked to send them via WhatsApp or e-mail. |
-| `maxFiles`, `maxFileSizeMB`, `fileTypes` | Upload limits checked in the browser (defaults: 3 files, 10 MB, PNG/JPG/PDF/SVG/AI/EPS). |
+- When "Design vorhanden?" is **Ja**, a hint under the choice explains that the file (logo, artwork) is attached in the next step, and the send box shows three short steps (choose channel → attach with 📎 → send). The pre-filled message includes "Datei: hänge ich an".
+- When it is **Nein**, the hint says PRINT LAB will create design proposals.
 
-Any service that accepts a `multipart/form-data` POST and answers with JSON works (Formspree, Web3Forms, Getform, Netlify Forms, your own API). A hidden honeypot field filters simple spam bots and is never sent.
+Optional: set `formEndpoint` in `CONFIG` (`js/main.js`) to a form service such as Formspree or Web3Forms (text only, free plans suffice; extra fields like an access key go in `formFields`). The request is then sent automatically; if a design exists, the success message asks the visitor to send the file via WhatsApp or e-mail. Name the service in `datenschutz.html`. A hidden honeypot field filters simple spam bots and is never sent.
 
 ## Checks
 

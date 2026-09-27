@@ -944,43 +944,26 @@ a.contact-list__item:hover {
   outline-offset: 2px;
 }
 
-/* File upload placeholder */
-.upload {
+/* Hint under "Design vorhanden?" */
+.design-hint__text {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 64px;
-  padding: 14px 18px;
-  border: 1px dashed rgba(245, 243, 238, 0.24);
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(228, 88, 154, 0.35);
   border-radius: var(--radius-sm);
-  color: var(--color-text-on-dark-soft);
-  font-size: 15px;
-  cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease);
+  background-color: rgba(201, 31, 111, 0.10);
+  color: var(--color-offwhite);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-.upload:hover,
-.upload:focus-within {
-  border-color: var(--color-magenta);
-}
-
-.upload__input {
-  position: absolute; /* visually hidden but focusable — unavoidable */
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-
-.upload__icon {
+.design-hint__icon {
   flex: none;
-  width: 22px;
-  height: 22px;
-  color: var(--color-magenta);
-}
-
-.upload__text {
-  min-width: 0;
-  overflow-wrap: anywhere;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--color-magenta-on-dark);
 }
 
 .quote-form__footer {
@@ -1045,6 +1028,40 @@ a.contact-list__item:hover {
 .quote-form__fallback-actions .btn {
   flex: 1 1 200px;
   min-height: 48px;
+}
+
+.quote-form__steps {
+  display: grid;
+  gap: 6px;
+  max-width: 420px;
+  margin: 16px auto 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--color-line-dark);
+  counter-reset: step;
+  list-style: none;
+  text-align: left;
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+}
+
+.quote-form__steps li {
+  display: flex;
+  gap: 10px;
+  counter-increment: step;
+}
+
+.quote-form__steps li::before {
+  content: counter(step);
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-magenta);
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: var(--fw-bold);
 }
 
 .quote-form__fallback-note {
@@ -1320,54 +1337,6 @@ a.contact-list__item:hover {
 .back-to-top svg {
   width: 22px;
   height: 22px;
-}
-
-/* --- FILE UPLOAD CLEAR BUTTON --- */
-.file-upload-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px; /* Adds a nice gap between the upload box and the X button */
-}
-
-.upload {
-  flex: 1; /* Ensures the upload box takes up the maximum available space */
-}
-
-.file-clear {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--color-offwhite);
-  cursor: pointer;
-  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
-}
-
-/* display:flex above would otherwise override the hidden attribute */
-.file-clear[hidden] {
-  display: none;
-}
-
-.file-clear:hover,
-.file-clear:focus-visible {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--color-magenta-on-dark);
-}
-
-.upload-error {
-  margin-top: 8px;
-  color: var(--color-error);
-  font-size: 13px;
-}
-
-.upload-error:empty {
-  display: none;
 }
 
 /* ==========================================================================
