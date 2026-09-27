@@ -800,6 +800,60 @@
   line-height: 1.5;
 }
 
+.price-shipping {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.price-shipping__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+}
+
+.price-shipping__icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--color-magenta);
+}
+
+.price-shipping__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.price-shipping__item {
+  padding: 6px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-offwhite);
+  color: var(--color-text-soft);
+  font-size: 14px;
+}
+
+.price-shipping__item strong {
+  color: var(--color-black);
+}
+
+.price-shipping__item--free {
+  border-color: rgba(201, 31, 111, 0.35);
+  background-color: var(--color-magenta-soft);
+}
+
 .price-footnote {
   display: flex;
   flex-direction: column;

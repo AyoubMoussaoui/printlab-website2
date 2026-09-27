@@ -107,13 +107,15 @@
     'prices.premium': 'Premium / oversize shirt', 'prices.transfer': 'Transfer without textile',
     'prices.transferNote': 'You bring your own textile – the price depends on size, printing method and quantity.',
     'prices.footnote': 'Print size, additional print positions, printing method and choice of textile can affect the final price.',
-    'prices.legal': 'All prices are final prices. No VAT is charged under the small business rule (§ 19 UStG).',
+    'prices.legal': 'All prices are final prices plus shipping (none for pick-up). No VAT is charged under the small business rule (§ 19 UStG).',
     'prices.moreTitle': 'Other products',
     'prices.moreText': 'Caps, bags, slides, accessories and special items: prices vary more here depending on product, material, printing method, print area and quantity, so we calculate them individually.',
     'prices.moreCta': 'Ask for a price',
     'prices.bulkTitle': 'For larger orders',
     'prices.bulkText': 'For clubs, companies, teams, bachelor parties and larger quantities we create an individual quote with a matching volume price.',
-    'prices.bulkCta': 'Request a quote'
+    'prices.bulkCta': 'Request a quote',
+    'ship.title': 'Shipping within Germany', 'ship.standard': 'Standard', 'ship.express': 'Express',
+    'ship.free': 'Free shipping from', 'ship.freeSuffix': 'order value'
   };
 
   const MESSAGES = {
