@@ -37,7 +37,7 @@
      ------------------------------------------------------------------------ */
   const EN = {
     'skip': 'Skip to content', 'nav.services': 'Services', 'nav.methods': 'Techniques',
-    'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Work',
+    'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
     'nav.contact': 'Contact', 'cta.inquire': 'Enquire', 'hero.eyebrow': 'Textile printing in Trier',
     'hero.title1': 'Your design.', 'hero.title2': 'Your textile.',
     'hero.lead': 'We print your logo or design on any textile – sharp, colourfast and personal. Starting from a single piece.',
@@ -75,7 +75,8 @@
     'forwho.6.t': 'Private customers', 'forwho.6.d': 'Gifts & one-offs',
     'design.title': 'No design yet? No problem.', 'design.text': 'We are happy to create several design proposals for you – and you pick your favourite.',
     'design.cta': 'Request a design',
-    'refs.kicker': 'References', 'refs.title': 'Our work.',
+    'refs.kicker': 'Examples', 'refs.title': 'What your print could look like.',
+    'refs.note': 'Example images for illustration – photos of our real jobs are coming soon.',
     'refs.1': 'T-shirts', 'refs.2': 'Hoodies & sweatshirts', 'refs.5': 'Bachelor & event sets',
     'refs.6': 'Teamwear & club apparel', 'refs.more': 'More on Instagram',
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
