@@ -637,6 +637,10 @@
     display: none;
   }
 
+  :root {
+    --mobile-cta-h: 68px; /* bar height without the safe-area inset */
+  }
+
   .mobile-cta {
     position: fixed;
     right: 0;
@@ -645,7 +649,8 @@
     z-index: var(--z-float);
     display: flex;
     gap: 10px;
-    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    min-height: calc(var(--mobile-cta-h) + env(safe-area-inset-bottom, 0px));
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid var(--color-line-dark);
     background-color: rgba(11, 11, 11, 0.96);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
@@ -677,10 +682,12 @@
     color: var(--color-white);
   }
 
-  /* Sits just above the sticky bar */
+  /* Sits just above the sticky bar. Includes the same safe-area inset as
+     the bar: iOS Safari adds it when its toolbar collapses on scroll, which
+     makes the bar taller — without it the button would overlap the bar. */
   .back-to-top {
     right: 16px;
-    bottom: 84px;
+    bottom: calc(var(--mobile-cta-h) + 16px + env(safe-area-inset-bottom, 0px));
   }
 }
 
