@@ -67,6 +67,7 @@
     <symbol id="icon-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="icon-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="icon-truck" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3.2v2.8h-7"/><circle cx="6.5" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="icon-clip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 1 1-2.8-2.8l8.5-8.5"/></symbol>
     <!-- Service icons -->
     <symbol id="icon-tshirt" viewBox="0 0 32 32"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M11.5 4.5 5 7.5l-2.5 6 4.5 2 1.5-2.5V27.5h15V13l1.5 2.5 4.5-2-2.5-6-6.5-3c-.5 2-2.3 3.5-4.5 3.5s-4-1.5-4.5-3.5Z"/></symbol>
@@ -482,14 +483,26 @@
           </li>
           <li class="price-card price-card--accent reveal-on-scroll delay-400">
             <h3 class="price-card__title" data-i18n="prices.transfer">Transfer ohne Textil</h3>
-            <p class="price-card__price"><span class="price-card__from" data-i18n="prices.from">ab</span> 5,00&nbsp;€</p>
+            <p class="price-card__price"><span class="price-card__from" data-i18n="prices.from">ab</span> 10,00&nbsp;€</p>
             <p class="price-card__note" data-i18n="prices.transferNote">Du bringst dein Textil selbst mit – der Preis richtet sich nach Größe, Druckverfahren und Stückzahl.</p>
           </li>
         </ul>
 
+        <div class="price-shipping">
+          <p class="price-shipping__title">
+            <svg class="price-shipping__icon" aria-hidden="true"><use href="#icon-truck"></use></svg>
+            <span data-i18n="ship.title">Versand innerhalb Deutschlands</span>
+          </p>
+          <ul class="price-shipping__list" role="list">
+            <li class="price-shipping__item"><span data-i18n="ship.standard">Standard</span> <strong>7,50&nbsp;€</strong></li>
+            <li class="price-shipping__item"><span data-i18n="ship.express">Express</span> <strong>14,00&nbsp;€</strong></li>
+            <li class="price-shipping__item price-shipping__item--free"><span data-i18n="ship.free">Versandkostenfrei ab</span> <strong>199&nbsp;€</strong> <span data-i18n="ship.freeSuffix">Bestellwert</span></li>
+          </ul>
+        </div>
+
         <p class="price-footnote">
           <span data-i18n="prices.footnote">Druckgröße, weitere Druckpositionen, Druckverfahren und Textilauswahl können den Endpreis beeinflussen.</span>
-          <span data-i18n="prices.legal">Alle Preise sind Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span>
+          <span data-i18n="prices.legal">Alle Preise sind Endpreise zzgl. Versandkosten (bei Abholung entfallen diese). Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span>
         </p>
 
         <div class="price-extras">
