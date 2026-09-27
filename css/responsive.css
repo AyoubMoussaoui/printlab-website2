@@ -93,6 +93,10 @@
     grid-column: 1 / -1;
   }
 
+  .price-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .steps {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     row-gap: 40px;
@@ -513,6 +517,47 @@
     gap: 16px;
   }
 
+  /* ---- Preise ---- */
+  .price-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .price-card {
+    padding: 18px 16px;
+  }
+
+  .price-card__title {
+    font-size: 16px;
+  }
+
+  .price-card__price {
+    margin-top: 12px;
+    font-size: 26px;
+  }
+
+  .price-card__from {
+    font-size: 13px;
+  }
+
+  .price-card__note {
+    font-size: 13px;
+  }
+
+  .price-extras {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .price-extra {
+    padding: 24px 20px;
+  }
+
+  .price-extra .btn {
+    width: 100%;
+  }
+
   /* ---- Legal pages ---- */
   .legal {
     padding-block: 44px 72px;
@@ -585,6 +630,10 @@
 }
 
 @media (max-width: 359px) {
+  .price-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .brand--mobile .brand__mark {
     width: 28px;
     height: 28px;

@@ -38,7 +38,7 @@
   const EN = {
     'skip': 'Skip to content', 'nav.services': 'Services', 'nav.methods': 'Techniques',
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
-    'nav.contact': 'Contact', 'cta.inquire': 'Enquire', 'hero.eyebrow': 'Textile printing in Trier',
+    'nav.prices': 'Prices', 'nav.contact': 'Contact', 'cta.inquire': 'Enquire', 'hero.eyebrow': 'Textile printing in Trier',
     'hero.title1': 'Your design.', 'hero.title2': 'Your textile.',
     'hero.lead': 'We print your logo or design on any textile – sharp, colourfast and personal. Starting from a single piece.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
@@ -100,7 +100,20 @@
     'badge.1': 'Printing from 1 piece', 'badge.2': 'Local production in Trier', 'badge.3': 'Free artwork check',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier – home', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier – back to top',
-    'aria.wa': 'Message us on WhatsApp', 'aria.backTop': 'Back to top'
+    'aria.wa': 'Message us on WhatsApp', 'aria.backTop': 'Back to top',
+    'prices.kicker': 'Prices', 'prices.title': 'Fair prices. Clearly calculated.',
+    'prices.intro': 'With us you know what you are paying for. Your price depends on the textile, print size, print position (front, back or both), printing method and quantity. The larger your order, the lower the price per piece can be.',
+    'prices.label': 'Guide prices', 'prices.from': 'from', 'prices.incl': 'incl. print',
+    'prices.premium': 'Premium / oversize shirt', 'prices.transfer': 'Transfer without textile',
+    'prices.transferNote': 'You bring your own textile – the price depends on size, printing method and quantity.',
+    'prices.footnote': 'Print size, additional print positions, printing method and choice of textile can affect the final price.',
+    'prices.legal': 'All prices are final prices. No VAT is charged under the small business rule (§ 19 UStG).',
+    'prices.moreTitle': 'Other products',
+    'prices.moreText': 'Caps, bags, slides, accessories and special items: prices vary more here depending on product, material, printing method, print area and quantity, so we calculate them individually.',
+    'prices.moreCta': 'Ask for a price',
+    'prices.bulkTitle': 'For larger orders',
+    'prices.bulkText': 'For clubs, companies, teams, bachelor parties and larger quantities we create an individual quote with a matching volume price.',
+    'prices.bulkCta': 'Request a quote'
   };
 
   const MESSAGES = {
