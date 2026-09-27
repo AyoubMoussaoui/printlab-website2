@@ -33,7 +33,7 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 1. **Contact details:** `CONFIG.whatsappNumber` and `CONFIG.email` in `js/main.js` are set. If they change, also update `impressum.html` and `datenschutz.html`.
 2. **Form service:** see "Quote form" below. Until one is connected, visitors send the prepared request themselves by e-mail or WhatsApp.
 3. **Hero photo:** `assets/images/hero-workshop.jpg` is the current workshop photo (1024px wide). For sharper results on large screens, replace it with a version about 2400px wide, keeping the subject on the right.
-4. **References:** replace the `assets/images/ref-*.svg` placeholders with real photos (4:5) and update the `src` attributes in `index.html`.
+4. **Examples → real work:** the `#references` section is titled "So kann dein Druck aussehen" with a "Beispielbilder" note while it shows example images. When real job photos are in, rename it back to "Unsere Arbeiten" (nav label `nav.references`, `refs.kicker`, `refs.title`), remove the `refs.note` paragraph and update the image `alt` texts, in `index.html` and the EN strings in `js/main.js`.
 5. **Legal pages:** have both texts checked before launch; they are templates, not legal advice.
 6. **Privacy policy upkeep:** `datenschutz.html` must describe what the site actually does. Connecting a form service, adding analytics or embedding any third-party content requires updating it.
 7. **Own domain:** the site address `https://ayoubmoussaoui.github.io/printlab-website2/` is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml`, `robots.txt` and `404.html` (`<base href>`). Replace it everywhere when moving to your own domain.
