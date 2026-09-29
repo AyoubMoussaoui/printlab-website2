@@ -326,11 +326,6 @@
     display: none;
   }
 
-  .hero__eyebrow {
-    margin-bottom: 18px;
-    font-size: 12px;
-  }
-
   .hero__title {
     font-size: clamp(40px, 10vw, 54px);
   }
@@ -351,17 +346,17 @@
     width: 100%;
   }
 
-  /* ---- Trust points: compact vertical pills ---- */
-  .trust {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 24px;
+  /* ---- Hero facts: one per line ---- */
+  .hero-facts {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
   }
 
-  .trust__item {
-    padding: 7px 14px;
-    font-size: 13px;
+  .hero-facts__item {
+    font-size: 14px;
   }
 
   /* ---- Marquee ---- */
