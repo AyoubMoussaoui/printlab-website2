@@ -95,10 +95,12 @@ The logo is a P/L monogram inside a rounded frame (a nod to a screen-printing sc
 | --- | --- |
 | `printlab-logo-on-dark.svg` / `.png` | Full logo on black or dark backgrounds (the website version) |
 | `printlab-logo-on-light.svg` / `.png` | Full logo on white or light backgrounds |
-| `printlab-logo-black.svg` | One color, black: stamps, single-color screen printing, invoices |
-| `printlab-logo-white.svg` | One color, white: dark textiles, magenta backgrounds |
+| `printlab-logo-black.svg` / `.png` | One color, black: stamps, single-color screen printing, invoices |
+| `printlab-logo-white.svg` / `.png` | One color, white: dark textiles, magenta backgrounds |
 | `printlab-mark-*.svg` | Monogram only (`on-dark`, `on-light`, `black`, `white`, `magenta`): neck labels, sleeve prints, embroidery |
 | `printlab-profile-1080.png` | Instagram and WhatsApp profile picture |
+
+The `on-dark` and `white` SVG/PNG files have a transparent background and light colors. Opened in a viewer with a white background they look empty; that is expected. The `black` and `white` PNGs are transparent, 2000px wide, for print shops and apps that don't take SVG.
 
 Colors: magenta `#C91F6F`, black `#0B0B0B`, off-white `#F5F3EE`. Keep clear space around the logo of at least half the monogram's height, and don't use the monogram smaller than 16px on screen or about 12mm in print.
 
