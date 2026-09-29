@@ -279,7 +279,11 @@
     const headerH = mqMobile.matches && mobileHeader
       ? mobileHeader.querySelector('.site-header-mobile__bar').offsetHeight
       : (document.querySelector('[data-header]') || { offsetHeight: 0 }).offsetHeight;
-    const top = hash === '#top' ? 0 : target.getBoundingClientRect().top + window.pageYOffset - headerH;
+    // Skip most of the section's top padding so its title lands just under the header
+    const gap = mqMobile.matches ? 28 : 48;
+    const padTop = parseFloat(getComputedStyle(target).paddingTop) || 0;
+    const skip = Math.max(0, padTop - gap);
+    const top = hash === '#top' ? 0 : target.getBoundingClientRect().top + window.pageYOffset - headerH + skip;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
     if (history.replaceState) history.replaceState(null, '', hash);
@@ -301,6 +305,12 @@
     if (isMenuOpen()) closeMenu();
     const targetHash = href === '#' ? '#top' : href;
     requestAnimationFrame(() => scrollToHash(targetHash));
+  });
+
+  // Arriving with a hash (e.g. index.html#faq from another page): use the same offset
+  window.addEventListener('load', () => {
+    const hash = window.location.hash;
+    if (/^#[\w-]+$/.test(hash) && hash !== '#top' && document.querySelector(hash)) scrollToHash(hash);
   });
 
   /* ------------------------------------------------------------------------
