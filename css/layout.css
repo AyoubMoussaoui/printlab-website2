@@ -62,8 +62,14 @@
 .hero {
   display: flex;
   align-items: center;
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
+  /* Hero + marquee fill one full screen, so the top of the page never
+     shows a strip of the next section. Sized to the LARGE viewport (lvh):
+     after a programmatic scroll to the top (back-to-top button) mobile
+     Safari keeps its toolbars collapsed, and the screen is taller than
+     the small viewport (svh). --header-real is the measured header height
+     (set in main.js); the fallback adds the header's 1px bottom border. */
+  min-height: calc(100vh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
+  min-height: calc(100lvh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
   padding-block: 96px 88px;
   color: var(--color-text-on-dark);
   background-color: var(--color-black);

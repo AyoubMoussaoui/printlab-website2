@@ -317,6 +317,14 @@
      4. HEADER STATE
      ------------------------------------------------------------------------ */
   const desktopHeader = document.querySelector('[data-header]');
+
+  // Measured header height, so the hero + marquee fill exactly one screen
+  const heroEl = document.querySelector('.hero');
+  const setHeaderReal = () => {
+    if (heroEl) document.documentElement.style.setProperty('--header-real', heroEl.offsetTop + 'px');
+  };
+  setHeaderReal();
+  window.addEventListener('resize', setHeaderReal, { passive: true });
   const onScroll = () => { if (desktopHeader) desktopHeader.classList.toggle('is-scrolled', window.scrollY > 8); };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -349,7 +357,7 @@
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
       if (sections.length) foundId = sections[sections.length - 1].id;
     }
-    if (foundId && foundId !== activeSectionId) {
+    if (foundId !== activeSectionId) { // '' at the top clears the highlight
       activeSectionId = foundId;
       updateActiveNav();
     }
