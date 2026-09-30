@@ -62,8 +62,12 @@
 .hero {
   display: flex;
   align-items: center;
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
+  /* Hero + marquee fill exactly one screen, so the top of the page
+     never shows a strip of the next section */
+  /* --header-real is the measured header height (set in main.js);
+     the fallback adds the header's 1px bottom border */
+  min-height: calc(100vh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
+  min-height: calc(100svh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
   padding-block: 96px 88px;
   color: var(--color-text-on-dark);
   background-color: var(--color-black);

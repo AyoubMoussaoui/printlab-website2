@@ -340,7 +340,7 @@
 .marquee {
   display: flex;
   align-items: center;
-  height: 60px;
+  height: var(--marquee-h);
   overflow: hidden;
   background-color: var(--color-charcoal);
   color: rgba(245, 243, 238, 0.82);
