@@ -14,6 +14,45 @@
   --color-muted: var(--color-muted-on-dark);
 }
 
+/* Sections alternate light and dark so each one reads as its own chapter.
+   On dark sections the light-theme tokens switch to their dark values, so
+   cards, lines and secondary text adapt without per-component rules. */
+.section--dark {
+  --color-text-soft: var(--color-text-on-dark-soft);
+  --color-line: var(--color-line-dark);
+  --color-line-strong: rgba(245, 243, 238, 0.22);
+  --color-surface: var(--color-graphite);
+}
+
+/* Components that use fixed light colours */
+.section--dark .audience__item,
+.section--dark .price-card--accent {
+  background-color: var(--color-graphite);
+}
+
+.section--dark .price-card__price,
+.section--dark .price-shipping__item strong,
+.section--dark .btn--outline {
+  color: var(--color-offwhite);
+}
+
+.section--dark .price-shipping__item {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.section--dark .price-shipping__icon {
+  color: var(--color-magenta-on-dark);
+}
+
+.section--dark .price-extra--dark {
+  border-color: var(--color-line-dark);
+  background-color: var(--color-charcoal);
+}
+
+.section--dark .btn--outline:hover {
+  color: var(--color-offwhite);
+}
+
 .section--dark .section-head__kicker {
   color: var(--color-magenta-on-dark);
 }
