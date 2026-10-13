@@ -28,11 +28,11 @@
 
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=40fe502a">
-  <link rel="stylesheet" href="css/base.css?v=40fe502a">
-  <link rel="stylesheet" href="css/layout.css?v=40fe502a">
-  <link rel="stylesheet" href="css/components.css?v=40fe502a">
-  <link rel="stylesheet" href="css/responsive.css?v=40fe502a">
+  <link rel="stylesheet" href="css/variables.css?v=d41203bb">
+  <link rel="stylesheet" href="css/base.css?v=d41203bb">
+  <link rel="stylesheet" href="css/layout.css?v=d41203bb">
+  <link rel="stylesheet" href="css/components.css?v=d41203bb">
+  <link rel="stylesheet" href="css/responsive.css?v=d41203bb">
 
   <script type="application/ld+json">
   {
@@ -106,7 +106,7 @@
         "name": "Wie schicke ich euch meine Datei?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Fülle das Anfrageformular aus und wähle beim Absenden E-Mail oder WhatsApp. Deine Anfrage ist dort schon vorbereitet. Du hängst deine Datei einfach mit der Büroklammer an und schickst die Nachricht ab."
+          "text": "Lade deine Datei einfach direkt im Anfrageformular hoch, bis zu 3 Dateien gleichzeitig. Du kannst sie uns auch später per E-Mail oder WhatsApp schicken."
         }
       },
       {
@@ -652,7 +652,7 @@
           </details>
           <details class="faq-item">
             <summary class="faq-item__q" data-i18n="faq.q6">Wie schicke ich euch meine Datei?</summary>
-            <p class="faq-item__a" data-i18n="faq.a6">Fülle das Anfrageformular aus und wähle beim Absenden E-Mail oder WhatsApp. Deine Anfrage ist dort schon vorbereitet. Du hängst deine Datei einfach mit der Büroklammer an und schickst die Nachricht ab.</p>
+            <p class="faq-item__a" data-i18n="faq.a6">Lade deine Datei einfach direkt im Anfrageformular hoch, bis zu 3 Dateien gleichzeitig. Du kannst sie uns auch später per E-Mail oder WhatsApp schicken.</p>
           </details>
           <details class="faq-item">
             <summary class="faq-item__q" data-i18n="faq.q7">Welches Druckverfahren ist das richtige?</summary>
@@ -689,7 +689,7 @@
           <p class="contact__lead reveal-on-scroll delay-100" data-i18n="contact.lead">Schick uns deine Anfrage und du erhältst innerhalb von 24 Stunden ein unverbindliches Angebot.</p>
         </aside>
 
-        <form class="quote-form reveal-on-scroll delay-200" id="quote-form" novalidate data-quote-form>
+        <form class="quote-form reveal-on-scroll delay-200" id="quote-form" action="anfrage.php" method="post" enctype="multipart/form-data" novalidate data-quote-form>
           <div class="quote-form__grid">
 
 <!-- ==========================================
@@ -748,6 +748,11 @@
                 <option value="Noch unklar" data-i18n="form.pos6">Noch unklar</option>
               </select>
             </div>
+            <div class="field">
+              <label class="field__label" for="f-deadline"><span data-i18n="form.deadline">Wunschtermin</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+              <input class="field__input field__input--date" id="f-deadline" name="deadline" type="date">
+              <p class="field__hint" data-i18n="form.deadlineHint">Zum Beispiel für ein Event oder einen JGA.</p>
+            </div>
             <fieldset class="field field--radio">
               <legend class="field__label" data-i18n="form.hasDesign">Design vorhanden?</legend>
               <div class="choice-group">
@@ -761,13 +766,38 @@
                 </label>
               </div>
             </fieldset>
+            <fieldset class="field field--radio" data-required-group="delivery">
+              <legend class="field__label"><span data-i18n="form.delivery">Abholung oder Versand?</span> <span class="field__req" aria-hidden="true">*</span></legend>
+              <div class="choice-group">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="delivery" value="Abholung in Trier">
+                  <span class="choice__label" data-i18n="form.pickup">Abholung in Trier</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="delivery" value="Versand">
+                  <span class="choice__label" data-i18n="form.shipping">Versand</span>
+                </label>
+              </div>
+              <p class="field__error" data-error-for="delivery"></p>
+              <div class="field__sub" data-shipping-only hidden>
+                <label class="field__label" for="f-zip"><span data-i18n="form.zip">PLZ und Ort</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+                <input class="field__input" id="f-zip" name="zip" type="text" autocomplete="postal-code" placeholder="z. B. 54290 Trier" data-i18n-placeholder="form.zipPh">
+              </div>
+            </fieldset>
             <!-- Switches with the Ja/Nein choice above (js/main.js) -->
-            <div class="field field--full design-hint" aria-live="polite">
-              <p class="design-hint__text" data-design-hint="Ja">
-                <svg class="design-hint__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
-                <span data-i18n="form.hintYes">Super! Deine Datei (Logo, Motiv) hängst du gleich im nächsten Schritt direkt an die E-Mail oder den WhatsApp-Chat an.</span>
-              </p>
-              <p class="design-hint__text" data-design-hint="Nein" hidden>
+            <div class="field field--full upload" data-design-hint="Ja">
+              <label class="field__label" for="f-files"><span data-i18n="form.files">Deine Datei (Logo, Motiv)</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+              <div class="upload__zone">
+                <input class="upload__input" id="f-files" name="files[]" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps,.psd,.tif,.tiff,.webp,.heic">
+                <svg class="upload__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
+                <span class="upload__cta" data-i18n="form.filesCta">Datei auswählen oder hierher ziehen</span>
+                <span class="upload__hint" data-i18n="form.filesHint">PNG, JPG, PDF, SVG, AI oder EPS. Bis zu 3 Dateien, zusammen max. 15 MB.</span>
+              </div>
+              <ul class="upload__list" role="list" data-file-list></ul>
+              <p class="field__error" data-error-for="f-files"></p>
+            </div>
+            <div class="field field--full design-hint" data-design-hint="Nein" hidden>
+              <p class="design-hint__text">
                 <svg class="design-hint__icon" aria-hidden="true"><use href="#icon-check"></use></svg>
                 <span data-i18n="form.hintNo">Kein Problem, wir erstellen dir gerne verschiedene Designvorschläge.</span>
               </p>
@@ -783,7 +813,7 @@
             <p class="quote-form__note" data-i18n="form.note">Unverbindlich &amp; kostenlos. Antwort innerhalb von 24 Stunden.</p>
             <p class="quote-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
           </div>
-          <div class="quote-form__status" role="status" aria-live="polite" data-form-status data-hide-float></div>
+          <div class="quote-form__status" role="status" aria-live="polite" tabindex="-1" data-form-status data-hide-float></div>
         </form>
         <ul class="contact-list reveal-on-scroll delay-300" role="list">
             <li>
@@ -857,6 +887,6 @@
     </svg>
   </a>
 
-  <script src="js/main.js?v=40fe502a" defer></script>
+  <script src="js/main.js?v=d41203bb" defer></script>
 </body>
 </html>

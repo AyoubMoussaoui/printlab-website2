@@ -41,21 +41,24 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 
 ## Quote form
 
-After a valid submit the visitor chooses **"Per E-Mail senden"** or **"Per WhatsApp senden"**; both open with the request already filled in. E-mail and WhatsApp links can't carry attachments, so the form has no file picker. Instead:
+The form posts to `anfrage.php` on the netcup server (`CONFIG.formEndpoint` in `js/main.js`). The script:
 
-- When "Design vorhanden?" is **Ja**, a hint under the choice explains that the file (logo, artwork) is attached in the next step, and the send box shows three short steps (choose channel → attach with 📎 → send). The pre-filled message includes "Datei: hänge ich an".
-- When it is **Nein**, the hint says PRINT LAB will create design proposals.
+- checks the fields again (name, e-mail, product, quantity, Abholung/Versand, optional Wunschtermin and PLZ),
+- e-mails the request to `info@printlab-trier.de` with up to 3 uploaded files attached (PNG, JPG, PDF, SVG, AI, EPS, PSD, TIF, WebP, HEIC; max. 15 MB together). "Reply-To" is the customer, so replying in the mail app answers them directly,
+- sends the customer a short confirmation (fixed text plus product, quantity, date and delivery; their free text is never echoed back),
+- filters bots with a hidden honeypot field and a time check (submissions faster than 3 seconds are ignored), and limits each IP to 5 sent requests per hour (only a one-way hash of the IP is kept, for at most a day).
 
-Optional: set `formEndpoint` in `CONFIG` (`js/main.js`) to a form service such as Formspree or Web3Forms (text only, free plans suffice; extra fields like an access key go in `formFields`). The request is then sent automatically; if a design exists, the success message asks the visitor to send the file via WhatsApp or e-mail. Name the service in `datenschutz.html`. A hidden honeypot field filters simple spam bots and is never sent.
+The upload area appears when "Design vorhanden?" is **Ja**; for **Nein** a short note says PRINT LAB will create design proposals. If sending fails (server or mail problem), the visitor gets the previous fallback: the request opens pre-filled in their e-mail app or WhatsApp, plus a copy button.
+
+PHP 7.4 or newer is enough; in Plesk (PHP-Einstellungen) choose the newest 8.x version. Uploads need `upload_max_filesize` ≥ 15M and `post_max_size` ≥ 16M (netcup's defaults are higher). If the e-mail settings ever change, update `SHOP_EMAIL` at the top of `anfrage.php` and the privacy policy.
 
 ## Checks
 
 Every push to `main` and every pull request runs `.github/workflows/site-checks.yml`:
 
 - HTML validation (`html-validate`, rules in `.htmlvalidate.json`)
-- JavaScript syntax check
+- JavaScript and PHP syntax checks
 - `.github/scripts/check-links.mjs`: every local link, image, stylesheet, script, CSS `url()` and in-page anchor must resolve
-
 - `.github/scripts/stamp-assets.mjs --check`: every page must reference the current CSS/JS version (see below)
 
 ### After changing any CSS or JS file

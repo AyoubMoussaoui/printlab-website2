@@ -1232,6 +1232,142 @@ a.contact-list__item:hover {
   color: var(--color-magenta-on-dark);
 }
 
+/* Small helper line under a field */
+.field__hint {
+  color: var(--color-muted-on-dark);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Field nested in a fieldset (PLZ under "Versand") */
+.field__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Date input: dark native picker icon, same height as the other inputs */
+.field__input--date {
+  color-scheme: dark;
+  min-height: 50px;
+}
+
+.field__input--date::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+/* File upload: the real input covers the zone, so click and drag & drop
+   both work natively */
+.upload__zone {
+  position: relative; /* anchors the invisible input */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 16px;
+  border: 1px dashed rgba(245, 243, 238, 0.28);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.03);
+  text-align: center;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+
+.upload__zone:hover,
+.upload__zone.is-dragover {
+  border-color: var(--color-magenta-on-dark);
+  background-color: rgba(201, 31, 111, 0.08);
+}
+
+.upload__zone:focus-within {
+  outline: 2px solid var(--color-magenta);
+  outline-offset: 2px;
+}
+
+.upload__input {
+  position: absolute; /* invisible, covers the whole zone */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-magenta-on-dark);
+}
+
+.upload__cta {
+  color: var(--color-offwhite);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+}
+
+.upload__hint {
+  color: var(--color-muted-on-dark);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.upload__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload__list:empty {
+  display: none;
+}
+
+.upload__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(245, 243, 238, 0.14);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-offwhite);
+  font-size: 14px;
+}
+
+.upload__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload__size {
+  flex: none;
+  color: var(--color-muted-on-dark);
+  font-size: 13px;
+}
+
+.upload__remove {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-on-dark-soft);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.upload__remove:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-offwhite);
+}
+
 .quote-form__footer {
   display: flex;
   flex-direction: column;
