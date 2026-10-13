@@ -15,7 +15,7 @@
      ------------------------------------------------------------------------ */
   const CONFIG = {
     whatsappNumber: '4915901378917',
-    email: 'just-click@live.fr',
+    email: 'info@printlab-trier.de',
     instagram: 'https://instagram.com/printlab_trier',
 
     /* Optional form service. Leave formEndpoint empty to use the built-in
