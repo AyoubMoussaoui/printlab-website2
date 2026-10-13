@@ -18,16 +18,14 @@
     email: 'info@printlab-trier.de',
     instagram: 'https://instagram.com/printlab_trier',
 
-    /* Optional form service. Leave formEndpoint empty to use the built-in
-       flow: the visitor sends the prepared request by e-mail or WhatsApp and
-       attaches their design file there.
-       Examples (text only, free plans are enough):
-         Formspree:  formEndpoint: 'https://formspree.io/f/XXXXXXX'
-         Web3Forms:  formEndpoint: 'https://api.web3forms.com/submit',
-                     formFields: { access_key: 'YOUR-KEY' }
-       Remember to name the service in datenschutz.html. */
-    formEndpoint: '',
-    formFields: {}
+    /* The form posts to anfrage.php on our own server, which e-mails the
+       request (with uploaded files) to CONFIG.email and sends the customer a
+       confirmation. If that fails, the visitor can still send the prepared
+       request by e-mail or WhatsApp. Set to '' to only offer that choice. */
+    formEndpoint: 'anfrage.php',
+    maxFiles: 3,
+    maxTotalBytes: 15 * 1024 * 1024,
+    fileTypes: ['png', 'jpg', 'jpeg', 'pdf', 'svg', 'ai', 'eps', 'psd', 'tif', 'tiff', 'webp', 'heic']
   };
 
   const mqMobile = window.matchMedia('(max-width: 767px)');
@@ -90,7 +88,11 @@
     'form.pos4': 'Sleeve', 'form.pos5': 'Multiple positions', 'form.pos6': 'Not sure yet',
     'form.hasDesign': 'Design available?', 'form.yes': 'Yes', 'form.no': 'No',
     'form.message': 'Message', 'form.messagePh': 'Tell us briefly about your idea …',
-    'form.hintYes': 'Great! You attach your file (logo, artwork) in the next step, directly to the email or WhatsApp chat.',
+    'form.deadline': 'Preferred date', 'form.deadlineHint': 'For example for an event or a bachelor party.',
+    'form.delivery': 'Pickup or shipping?', 'form.pickup': 'Pickup in Trier', 'form.shipping': 'Shipping',
+    'form.zip': 'Postcode and town', 'form.zipPh': 'e.g. 54290 Trier',
+    'form.files': 'Your file (logo, artwork)', 'form.filesCta': 'Choose a file or drop it here',
+    'form.filesHint': 'PNG, JPG, PDF, SVG, AI or EPS. Up to 3 files, max. 15 MB in total.',
     'form.hintNo': 'No problem, we are happy to create several design proposals for you.',
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
@@ -128,7 +130,7 @@
     'faq.q5': 'Which files should I send?',
     'faq.a5': 'Ideally a vector file (PDF, SVG, AI or EPS). PNG or JPG work too. Not sure? Just send what you have: we check your file for free and get back to you if anything is missing.',
     'faq.q6': 'How do I send you my file?',
-    'faq.a6': 'Fill in the request form and choose email or WhatsApp when sending. Your request is already prepared there. Just attach your file with the paperclip and send the message.',
+    'faq.a6': 'Simply upload your file directly in the request form, up to 3 files at once. You can also send it to us later by email or WhatsApp.',
     'faq.q7': 'Which printing method is right for me?',
     'faq.a7': 'DTF printing suits single pieces, small quantities and detailed, colourful designs. Screen printing is ideal from 10 pieces for larger runs and is especially durable. For special materials such as plastic or EVA there is special printing. We are happy to advise which method fits your project.',
     'faq.q8': 'Can I bring my own textile?',
@@ -146,11 +148,16 @@
       required: 'Bitte fülle dieses Feld aus.',
       email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
       qty: 'Bitte gib eine Stückzahl ab 1 an.',
+      delivery: 'Bitte wähle Abholung oder Versand.',
+      fileType: 'Dieses Dateiformat können wir leider nicht annehmen: {name}',
+      fileCount: 'Bitte höchstens 3 Dateien auswählen.',
+      fileSize: 'Die Dateien sind zusammen größer als 15 MB. Schick größere Dateien gerne per E-Mail oder WhatsApp.',
+      removeFile: '{name} entfernen',
       sending: 'Wird gesendet …',
-      success: 'Danke! Deine Anfrage ist bei uns. Wir melden uns innerhalb von 24 Stunden.',
-      successWithFile: 'Danke! Deine Anfrage ist bei uns. Schick uns deine Datei (Logo, Motiv) bitte noch per WhatsApp oder E-Mail. Wir melden uns innerhalb von 24 Stunden.',
-      error: 'Das hat leider nicht geklappt. Bitte versuche es erneut oder schreib uns per WhatsApp.',
+      success: 'Danke! Deine Anfrage ist bei uns angekommen. Du bekommst gleich eine Bestätigung per E-Mail, und wir melden uns innerhalb von 24 Stunden.',
+      rate: 'Du hast gerade schon mehrere Anfragen gesendet. Bitte versuche es später erneut oder schreib uns per WhatsApp.',
       fallbackTitle: 'Fast geschafft! Wie möchtest du deine Anfrage senden?',
+      sendFailed: 'Das Senden hat gerade nicht geklappt. Schick uns deine Anfrage einfach per E-Mail oder WhatsApp, sie ist schon ausgefüllt:',
       viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
       steps: ['Wähle E-Mail oder WhatsApp, deine Anfrage ist schon ausgefüllt.', 'Hänge deine Datei (Logo, Motiv) mit der Büroklammer 📎 an.', 'Nachricht absenden, fertig!'],
       fileLine: 'hänge ich an',
@@ -162,11 +169,16 @@
       required: 'Please fill in this field.',
       email: 'Please enter a valid email address.',
       qty: 'Please enter a quantity of at least 1.',
+      delivery: 'Please choose pickup or shipping.',
+      fileType: 'We cannot accept this file format: {name}',
+      fileCount: 'Please choose up to 3 files.',
+      fileSize: 'The files are larger than 15 MB in total. Feel free to send bigger files by email or WhatsApp.',
+      removeFile: 'Remove {name}',
       sending: 'Sending …',
-      success: 'Thank you! We have received your request and will reply within 24 hours.',
-      successWithFile: 'Thank you! We have received your request. Please send us your file (logo, artwork) via WhatsApp or email. We will reply within 24 hours.',
-      error: 'Something went wrong. Please try again or message us on WhatsApp.',
+      success: 'Thank you! Your request has arrived. You will get a confirmation by email shortly, and we will reply within 24 hours.',
+      rate: 'You have already sent several requests. Please try again later or message us on WhatsApp.',
       fallbackTitle: 'Almost done! How would you like to send your request?',
+      sendFailed: 'Sending did not work just now. Simply send your request by email or WhatsApp, it is already filled in:',
       viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
       steps: ['Choose email or WhatsApp, your request is already filled in.', 'Attach your file (logo, artwork) with the paperclip 📎.', 'Send the message, done!'],
       fileLine: 'attached',
@@ -436,8 +448,9 @@
     const honeypot = form.querySelector('#f-website');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const hasDesign = () => (form.querySelector('input[name="has_design"]:checked') || {}).value === 'Ja';
+    const formStart = Date.now();
 
-    /* ---- Hint under "Design vorhanden?": attach the file in the next step */
+    /* ---- "Design vorhanden?": upload area for Ja, a short note for Nein */
     const designHints = Array.from(form.querySelectorAll('[data-design-hint]'));
     function updateDesignHint() {
       const choice = hasDesign() ? 'Ja' : 'Nein';
@@ -445,6 +458,92 @@
     }
     form.querySelectorAll('input[name="has_design"]').forEach((r) => r.addEventListener('change', updateDesignHint));
     updateDesignHint();
+
+    /* ---- Wunschtermin: no dates in the past */
+    const deadline = form.querySelector('#f-deadline');
+    if (deadline) {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      deadline.min = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+    }
+
+    /* ---- Abholung oder Versand: PLZ field only for Versand */
+    const deliveryGroup = form.querySelector('[data-required-group="delivery"]');
+    const deliveryError = form.querySelector('[data-error-for="delivery"]');
+    const shippingOnly = Array.from(form.querySelectorAll('[data-shipping-only]'));
+    const deliveryValue = () => (form.querySelector('input[name="delivery"]:checked') || {}).value || '';
+    function setDeliveryError(message) {
+      if (deliveryError) deliveryError.textContent = message || '';
+      if (deliveryGroup) deliveryGroup.classList.toggle('is-invalid', Boolean(message));
+    }
+    function updateDelivery() {
+      shippingOnly.forEach((el) => { el.hidden = deliveryValue() !== 'Versand'; });
+      if (deliveryValue()) setDeliveryError('');
+    }
+    form.querySelectorAll('input[name="delivery"]').forEach((r) => r.addEventListener('change', updateDelivery));
+
+    /* ---- File upload: keep our own list so files can be added and removed */
+    const fileInput = form.querySelector('#f-files');
+    const fileList = form.querySelector('[data-file-list]');
+    const fileError = form.querySelector('[data-error-for="f-files"]');
+    const fileZone = fileInput ? fileInput.closest('.upload__zone') : null;
+    let selectedFiles = [];
+
+    const formatSize = (bytes) => (bytes < 1024 * 1024
+      ? Math.max(1, Math.round(bytes / 1024)) + ' KB'
+      : (bytes / 1024 / 1024).toFixed(1).replace('.', currentLang === 'de' ? ',' : '.') + ' MB');
+
+    function renderFiles() {
+      if (!fileList) return;
+      fileList.textContent = '';
+      selectedFiles.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.className = 'upload__item';
+        const name = document.createElement('span');
+        name.className = 'upload__name';
+        name.textContent = file.name;
+        const size = document.createElement('span');
+        size.className = 'upload__size';
+        size.textContent = formatSize(file.size);
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'upload__remove';
+        remove.setAttribute('aria-label', t('removeFile', { name: file.name }));
+        remove.textContent = '×';
+        remove.addEventListener('click', () => {
+          selectedFiles.splice(index, 1);
+          if (fileError) fileError.textContent = '';
+          renderFiles();
+          fileInput.focus();
+        });
+        li.append(name, size, remove);
+        fileList.appendChild(li);
+      });
+    }
+
+    function addFiles(list) {
+      let message = '';
+      Array.from(list).forEach((file) => {
+        const ext = (file.name.split('.').pop() || '').toLowerCase();
+        const total = selectedFiles.reduce((sum, f) => sum + f.size, 0) + file.size;
+        if (selectedFiles.some((f) => f.name === file.name && f.size === file.size)) return;
+        if (!CONFIG.fileTypes.includes(ext)) message = message || t('fileType', { name: file.name });
+        else if (selectedFiles.length >= CONFIG.maxFiles) message = message || t('fileCount');
+        else if (total > CONFIG.maxTotalBytes) message = message || t('fileSize');
+        else selectedFiles.push(file);
+      });
+      if (fileError) fileError.textContent = message;
+      renderFiles();
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', () => {
+        addFiles(fileInput.files);
+        fileInput.value = ''; // allows choosing the same file again after removing it
+      });
+      ['dragenter', 'dragover'].forEach((type) => fileInput.addEventListener(type, () => fileZone.classList.add('is-dragover')));
+      ['dragleave', 'drop'].forEach((type) => fileInput.addEventListener(type, () => fileZone.classList.remove('is-dragover')));
+    }
 
     /* ---- Validation */
     function setError(input, message) {
@@ -491,12 +590,15 @@
       status.classList.toggle('is-error', type === 'error');
     }
 
+    const formatDate = (value) => (value && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value.split('-').reverse().join('.') : value || '');
+
     function buildSummary(data) {
       const rows = [
         ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Telefon', data.get('phone')],
         ['Produkt', data.get('product')], ['Stückzahl', data.get('quantity')], ['Farbe', data.get('color')],
-        ['Druckposition', data.get('position')], ['Design vorhanden', data.get('has_design')],
-        ['Nachricht', data.get('message')]
+        ['Druckposition', data.get('position')], ['Wunschtermin', formatDate(data.get('deadline'))],
+        ['Lieferung', data.get('delivery')], ['PLZ und Ort', data.get('delivery') === 'Versand' ? data.get('zip') : ''],
+        ['Design vorhanden', data.get('has_design')], ['Nachricht', data.get('message')]
       ];
       if (data.get('has_design') === 'Ja') rows.push(['Datei', t('fileLine')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
@@ -504,7 +606,7 @@
 
     /* No form service configured: let the visitor choose e-mail or WhatsApp
        instead of silently firing a mailto: link that may do nothing. */
-    function showFallback(data) {
+    function showFallback(data, failed) {
       const subject = 'Anfrage: ' + (data.get('product') || 'Textildruck') + ', ' + data.get('quantity') + ' Stk.';
       const summary = buildSummary(data);
       const mailHref = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(summary);
@@ -516,7 +618,7 @@
 
       const title = document.createElement('p');
       title.className = 'quote-form__fallback-title';
-      title.textContent = t('fallbackTitle');
+      title.textContent = failed ? t('sendFailed') : t('fallbackTitle');
 
       const actions = document.createElement('div');
       actions.className = 'quote-form__fallback-actions';
@@ -567,24 +669,29 @@
       actions.firstChild.focus();
     }
 
-    async function sendToService(data) {
-      Object.keys(CONFIG.formFields).forEach((k) => data.set(k, CONFIG.formFields[k]));
-      if (!data.has('subject')) data.set('subject', 'Neue Anfrage über die PRINT LAB Website');
-      const withFile = hasDesign();
+    function resetForm() {
+      form.reset();
+      selectedFiles = [];
+      renderFiles();
+      updateDesignHint();
+      updateDelivery();
+      form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
+    }
 
+    async function sendToServer(data) {
       submitBtn.disabled = true;
       showStatus(t('sending'));
       try {
         const res = await fetch(CONFIG.formEndpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
         let body = {};
         try { body = await res.json(); } catch (e) { /* non-JSON reply */ }
-        if (!res.ok || body.success === false || body.ok === false) throw new Error('HTTP ' + res.status);
-        form.reset();
-        updateDesignHint();
-        form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
-        showStatus(withFile ? t('successWithFile') : t('success'), 'success');
+        if (res.status === 429) { showStatus(t('rate'), 'error'); return; }
+        if (!res.ok || body.ok !== true) throw new Error('HTTP ' + res.status);
+        resetForm();
+        showStatus(t('success'), 'success');
+        status.focus();
       } catch (err) {
-        showStatus(t('error'), 'error');
+        showFallback(data, true);
       } finally {
         submitBtn.disabled = false;
       }
@@ -600,11 +707,19 @@
         setError(input, message);
         if (message && !firstInvalid) firstInvalid = input;
       });
+      if (!deliveryValue()) {
+        setDeliveryError(t('delivery'));
+        if (!firstInvalid) firstInvalid = form.querySelector('input[name="delivery"]');
+      }
       if (firstInvalid) { firstInvalid.focus(); return; }
 
       const data = new FormData(form);
       data.delete('website'); // honeypot is never sent
-      if (CONFIG.formEndpoint) sendToService(data);
+      data.delete('files[]');
+      if (hasDesign()) selectedFiles.forEach((file) => data.append('files[]', file, file.name));
+      data.set('t', String(formStart));
+      data.set('lang', currentLang);
+      if (CONFIG.formEndpoint) sendToServer(data);
       else showFallback(data);
     });
   }
