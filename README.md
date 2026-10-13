@@ -16,7 +16,8 @@ js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
 impressum.html     legal notice (§ 5 DDG)
 datenschutz.html   privacy policy (GDPR)
-404.html           "page not found" page (served by GitHub Pages)
+404.html           "page not found" page (wired up in .htaccess)
+.htaccess          Apache settings for netcup/Plesk: www redirect, 404 page, caching, security headers
 robots.txt, sitemap.xml   search engine files
 .github/           automatic checks (see "Checks")
 assets/
@@ -36,7 +37,7 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 4. **Examples → real work:** the `#references` section shows example images (`assets/images/examples/`, square 1:1, AI-generated with their Content Credentials kept) under the title "So kann dein Druck aussehen" and a "Beispielbilder" note. When real job photos are in, replace the files, rename the section back to "Unsere Arbeiten" (nav label `nav.references`, `refs.kicker`, `refs.title`), remove the `refs.note` paragraph and update the image `alt` texts, in `index.html` and the EN strings in `js/main.js`.
 5. **Legal pages:** have both texts checked before launch; they are templates, not legal advice.
 6. **Privacy policy upkeep:** `datenschutz.html` must describe what the site actually does. Connecting a form service, adding analytics or embedding any third-party content requires updating it.
-7. **Own domain:** the site address `https://ayoubmoussaoui.github.io/printlab-website2/` is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml`, `robots.txt` and `404.html` (`<base href>`). Replace it everywhere when moving to your own domain.
+7. **Domain and hosting:** the site runs at `https://printlab-trier.de/` on netcup webhosting (Plesk). Plesk pulls the `main` branch from GitHub and deploys it to `/printlab-trier.de/httpdocs`. The address is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml` and `robots.txt`. GitHub is only used for the source code.
 
 ## Quote form
 

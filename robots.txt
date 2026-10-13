@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ayoubmoussaoui.github.io/printlab-website2/sitemap.xml
+Sitemap: https://printlab-trier.de/sitemap.xml
