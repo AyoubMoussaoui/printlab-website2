@@ -650,6 +650,21 @@
     transition: transform var(--dur) var(--ease), visibility var(--dur);
   }
 
+  /* Some mobile browsers hide their bottom toolbar on scroll without moving
+     fixed elements down, leaving a gap under the bar where page content
+     shows through. This dark extension below the bar covers that gap; when
+     there is no gap it sits off-screen. */
+  .mobile-cta::after {
+    content: "";
+    position: absolute; /* decorative filler below the bar */
+    top: 100%;
+    right: 0;
+    left: 0;
+    height: 160px;
+    background-color: rgb(11, 11, 11);
+    pointer-events: none;
+  }
+
   .mobile-cta.is-visible {
     transform: translateY(0);
     visibility: visible;
