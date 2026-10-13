@@ -164,6 +164,10 @@
   background-color: var(--color-surface-alt);
 }
 
+.design-service--dark {
+  background-color: var(--color-black);
+}
+
 /* ---------- FAQ ---------- */
 .faq {
   display: grid;
