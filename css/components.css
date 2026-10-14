@@ -1892,6 +1892,69 @@ a.contact-list__item:hover {
   gap: 10px;
 }
 
+/* ---------- Payment & delivery page (zahlung.html) ---------- */
+.terms__inner {
+  max-width: 860px;
+}
+
+.terms__title {
+  margin-bottom: 0;
+}
+
+.terms__lead {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.terms-card {
+  padding: 32px;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-graphite);
+}
+
+.terms-card + .terms-card {
+  margin-top: 16px;
+}
+
+.terms-card__title {
+  margin-bottom: 14px;
+  color: var(--color-offwhite);
+  font-size: 22px;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+}
+
+.terms-card__text {
+  color: var(--color-text-on-dark-soft);
+}
+
+.terms-card__text + .terms-card__text {
+  margin-top: 12px;
+}
+
+.terms-card__link {
+  color: var(--color-offwhite);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-card__btn {
+  margin-top: 20px;
+}
+
+.terms-steps {
+  margin-top: 6px;
+}
+
+.terms-pay {
+  margin: 16px 0;
+}
+
+.terms-contact {
+  margin-top: 16px;
+}
+
 /* ---------- Footer ---------- */
 .site-footer__meta {
   font-size: 14px;

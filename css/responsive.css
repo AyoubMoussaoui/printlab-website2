@@ -662,6 +662,15 @@
     white-space: nowrap;
   }
 
+  /* ---- Payment & delivery page ---- */
+  .terms-card {
+    padding: 24px 20px;
+  }
+
+  .terms-card__title {
+    font-size: 20px;
+  }
+
   /* ---- Jobs page ---- */
   .job-cards {
     grid-template-columns: minmax(0, 1fr);

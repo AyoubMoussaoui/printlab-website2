@@ -101,7 +101,7 @@
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
     'footer.tag': 'Custom textile printing from 1 piece',
-    'footer.claim': 'Claims', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
+    'footer.payment': 'Payment & delivery', 'footer.claim': 'Claims', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier home page', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier, back to top',
     'aria.wa': 'Message us on WhatsApp', 'aria.backTop': 'Back to top',
@@ -141,7 +141,7 @@
     'faq.q10': 'How long does the print last?',
     'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
     'faq.q11': 'How can I pay?',
-    'faq.a11': 'You pay conveniently by bank transfer in advance (prepayment).',
+    'faq.a11': 'Once you have approved the quote, you pay by bank transfer in advance (prepayment) or via PayPal. Production starts as soon as your payment has arrived.',
     'faq.q9': 'How much is shipping?',
     'faq.a9': 'Within Germany, standard shipping costs €7.50 and express €14.00. Orders from €199 ship free. If you pick up your order in Trier by arrangement, there are no shipping costs.'
   };
