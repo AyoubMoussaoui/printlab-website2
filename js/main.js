@@ -34,12 +34,12 @@
      2. i18n
      ------------------------------------------------------------------------ */
   const EN = {
-    'skip': 'Skip to content', 'nav.cfg': 'Design it', 'nav.services': 'Services', 'nav.methods': 'Techniques',
+    'skip': 'Skip to content', 'nav.services': 'Services', 'nav.methods': 'Techniques',
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
     'nav.prices': 'Prices', 'nav.contact': 'Contact', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your textile.',
     'hero.lead': 'We print your logo or design on any textile. Sharp, colourfast and personal. Starting from a single piece.',
-    'hero.cta1': 'Request a quote', 'hero.cta2': 'Test your logo',
+    'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Services', 'services.title': 'What we print on',
     'services.intro': 'With DTF or screen printing we can print on almost any textile. Bring your own piece or choose from our range.',
@@ -75,19 +75,6 @@
     'design.cta': 'Request a design',
     'refs.kicker': 'Examples', 'refs.title': 'What your print could look like.',
     'refs.note': 'Example images for illustration.',
-    'cfg.kicker': 'Live preview', 'cfg.title': 'See your design before it is printed.',
-    'cfg.intro': 'Upload your logo, choose textile, colour and position. Your file stays on your device.',
-    'cfg.canvasLabel': 'Preview of your design on the textile', 'cfg.view': 'View', 'cfg.front': 'Front', 'cfg.back': 'Back',
-    'cfg.step1': 'Your logo', 'cfg.upload': 'Upload logo', 'cfg.formats': 'PNG, JPG, SVG or PDF up to 15 MB. Or drop the file here.',
-    'cfg.remove': 'Remove file', 'cfg.removeBg': 'Remove white background',
-    'cfg.step2': 'Textile and colour', 'cfg.color': 'Colour', 'cfg.step3': 'Position and size', 'cfg.size': 'Size',
-    'cfg.hint': 'Drag to move, use two fingers to make it bigger or smaller.',
-    'cfg.cta': 'Send request', 'cfg.note': 'Free and non-binding. Quote within 24 hours.',
-    'cfg.dialogTitle': 'Send request', 'cfg.close': 'Close', 'cfg.sizes': 'Quantity per size',
-    'cfg.message': 'Message', 'cfg.messagePh': 'e.g. deadline, pickup or shipping, second print', 'cfg.submit': 'Send request',
-    'cfg.doneTitle': 'Thank you! Your request has arrived.',
-    'cfg.doneText': 'You will get a confirmation by email shortly. We will send you your quote within 24 hours.',
-    'cfg.doneClose': 'Close',
     'refs.1': 'T-shirts', 'refs.2': 'Hoodies & sweatshirts', 'refs.5': 'Bachelor & event sets',
     'refs.6': 'Teamwear & club apparel', 'refs.more': 'More on Instagram',
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
@@ -412,16 +399,13 @@
   const heroCtas = document.querySelector('.hero__ctas');
   const contactSection = document.getElementById('contact');
 
-  const cfgSection = document.getElementById('gestalten');
-  // Visible below the sticky header (a section scrolled behind the header doesn't count)
-  const inView = (elm) => { if (!elm) return false; const r = elm.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 80; };
-
   function updateMobileCta() {
     if (!mobileCta || !heroCtas || !contactSection) return;
     const pastHero = heroCtas.getBoundingClientRect().bottom < 0;
+    const c = contactSection.getBoundingClientRect();
+    const inContact = c.top < window.innerHeight && c.bottom > 0;
     const menuOpen = document.body.classList.contains('is-locked');
-    // The configurator and the contact form have their own buttons
-    mobileCta.classList.toggle('is-visible', pastHero && !inView(contactSection) && !inView(cfgSection) && !menuOpen);
+    mobileCta.classList.toggle('is-visible', pastHero && !inContact && !menuOpen);
   }
 
   let floatsQueued = false;
