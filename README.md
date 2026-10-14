@@ -14,6 +14,8 @@ css/
   responsive.css   explicit breakpoints: 1100–1279 / 768–1099 / ≤767 / ≤359
 js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
+  reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
+reklamation.html   claim page ("Reklamation & Mängelrüge"), linked in every footer
 impressum.html     legal notice (§ 5 DDG)
 datenschutz.html   privacy policy (GDPR)
 404.html           "page not found" page (wired up in .htaccess)
@@ -54,7 +56,11 @@ The form posts to `anfrage.php` on the netcup server (`CONFIG.formEndpoint` in `
 
 The upload area appears when "Design vorhanden?" is **Ja**; for **Nein** a short note says PRINT LAB will create design proposals. If sending fails (server or mail problem), the visitor gets the previous fallback: the request opens pre-filled in their e-mail app or WhatsApp, plus a copy button.
 
-PHP 7.4 or newer is enough; in Plesk (PHP-Einstellungen) choose the newest 8.x version. Uploads need `upload_max_filesize` ≥ 15M and `post_max_size` ≥ 16M (netcup's defaults are higher). If the e-mail settings ever change, update `SHOP_EMAIL` at the top of `anfrage.php` and the privacy policy.
+## Claim form (Reklamation)
+
+`reklamation.html` posts to the same `anfrage.php` with `form=reklamation`. Required: name, e-mail, type of issue, description, at least one photo of the defect (up to 4) and one of the whole item (up to 2); the order number is optional. Photos larger than 1.2 MB are redrawn in the browser at max. 2000 px as JPEG, so a claim is usually 1 to 3 MB. The shop mail has the photos attached (names start with `Mangel_` or `Artikel_`), the customer gets a short confirmation. Bot filter and the hourly limit are shared with the quote form. The issue types are listed twice: in `reklamation.html` and in `CLAIM_ISSUES` in `anfrage.php` (the server only accepts those values).
+
+PHP 7.4 or newer is enough; in Plesk (PHP-Einstellungen) choose the newest 8.x version. Uploads need `upload_max_filesize` ≥ 25M and `post_max_size` ≥ 26M (netcup's defaults are higher). If the e-mail settings ever change, update `SHOP_EMAIL` at the top of `anfrage.php` and the privacy policy.
 
 ## Checks
 
@@ -78,7 +84,7 @@ It adds a fingerprint (`?v=…`) to all CSS/JS links in the HTML pages. Without 
 Run all checks locally before pushing:
 
 ```
-npx html-validate index.html impressum.html datenschutz.html 404.html
+npx html-validate index.html reklamation.html impressum.html datenschutz.html 404.html
 node --check js/main.js
 node .github/scripts/check-links.mjs
 node .github/scripts/stamp-assets.mjs --check

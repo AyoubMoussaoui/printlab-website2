@@ -636,6 +636,27 @@
     font-size: 14px;
   }
 
+  /* Claim page: language switch and back link share the bar, so the link
+     shows only its arrow (the logo also leads home) */
+  .legal-header__actions {
+    gap: 8px;
+  }
+
+  .legal-header__actions .legal-header__back {
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .legal-header__actions .legal-header__back-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
   /* ---- Footer: leave room for the floating WhatsApp button ---- */
   .site-footer {
     padding-block: 32px 96px;

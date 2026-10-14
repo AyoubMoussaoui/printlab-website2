@@ -1584,6 +1584,177 @@ a.contact-list__item:hover {
   color: #FF8A8E;
 }
 
+/* ---------- Claim page (reklamation.html) ---------- */
+/* Dark all the way down, also when the page is shorter than the screen */
+.page-dark {
+  background-color: var(--color-black);
+}
+
+.legal-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.claim__title {
+  margin-bottom: 0;
+}
+
+.claim-steps {
+  display: grid;
+  gap: 18px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.claim-steps__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.claim-steps__num {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  color: var(--color-magenta-on-dark);
+  font-size: 14px;
+  font-weight: var(--fw-bold);
+}
+
+.claim-steps__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 4px;
+}
+
+.claim-steps__title {
+  color: var(--color-offwhite);
+  font-size: 16px;
+  font-weight: var(--fw-semibold);
+}
+
+.claim-steps__text {
+  color: var(--color-text-on-dark-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.claim-note {
+  margin-top: 32px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--color-magenta-on-dark);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-on-dark-soft);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.photo-upload.is-invalid .upload__zone {
+  border-color: #E5484D;
+}
+
+.photo-upload__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photo-upload__list:empty {
+  display: none;
+}
+
+.photo-upload__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px 8px 8px;
+  border: 1px solid rgba(245, 243, 238, 0.14);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-offwhite);
+  font-size: 14px;
+}
+
+.photo-upload__thumb {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  object-fit: cover;
+}
+
+.photo-upload__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.photo-upload__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-upload__size {
+  color: var(--color-muted-on-dark);
+  font-size: 12px;
+}
+
+.claim-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.claim-success:focus {
+  outline: none;
+}
+
+.claim-success__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--color-magenta);
+  color: var(--color-white);
+}
+
+.claim-success__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.claim-success__title {
+  color: var(--color-offwhite);
+  font-size: 24px;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+}
+
+.claim-success__text {
+  color: var(--color-text-on-dark-soft);
+}
+
+.claim-success__btn {
+  margin-top: 8px;
+}
+
 /* ---------- Footer ---------- */
 .site-footer__meta {
   font-size: 14px;
@@ -1927,11 +2098,6 @@ a.contact-list__item:hover {
   color: var(--color-error);
   font-size: 0.875rem;
   margin-top: 8px;
-  display: none;
-}
-
-.field__input.is-invalid ~ .field__error {
-  display: block;
 }
 
 /* --- SECURITY: HONEYPOT --- */
