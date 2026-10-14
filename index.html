@@ -28,11 +28,11 @@
 
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=a539ef41">
-  <link rel="stylesheet" href="css/base.css?v=a539ef41">
-  <link rel="stylesheet" href="css/layout.css?v=a539ef41">
-  <link rel="stylesheet" href="css/components.css?v=a539ef41">
-  <link rel="stylesheet" href="css/responsive.css?v=a539ef41">
+  <link rel="stylesheet" href="css/variables.css?v=9971fb08">
+  <link rel="stylesheet" href="css/base.css?v=9971fb08">
+  <link rel="stylesheet" href="css/layout.css?v=9971fb08">
+  <link rel="stylesheet" href="css/components.css?v=9971fb08">
+  <link rel="stylesheet" href="css/responsive.css?v=9971fb08">
 
   <script type="application/ld+json">
   {
@@ -276,7 +276,7 @@
 
           <div class="hero__ctas" data-hide-float>
             <a class="btn btn--primary btn--hero" href="#contact" data-i18n="hero.cta1">Jetzt anfragen</a>
-            <a class="btn btn--glass btn--hero" href="#services" data-i18n="hero.cta2">Unsere Leistungen</a>
+            <a class="btn btn--glass btn--hero" href="#preview" data-i18n="hero.cta2">Dein Logo testen</a>
           </div>
 
           <ul class="hero-facts" role="list" aria-label="Unsere Vorteile" data-i18n-aria="aria.trust">
@@ -493,10 +493,75 @@
           <div>
             <p class="section-head__kicker" data-i18n="refs.kicker">Beispiele</p>
             <h2 class="section-head__title reveal-on-scroll" id="references-title" data-i18n="refs.title">So kann dein Druck aussehen.</h2>
-            <!-- Remove this note (and rename back to "Unsere Arbeiten") once real job photos are in -->
-            <p class="section-head__intro reveal-on-scroll delay-100" data-i18n="refs.note">Beispielbilder zur Veranschaulichung.</p>
+            <p class="section-head__intro reveal-on-scroll delay-100" data-i18n="refs.intro">Lade dein Logo hoch und sieh sofort, wie es auf deinem Textil wirkt.</p>
           </div>
         </header>
+
+        <!-- ==========================================================
+             LIVE PREVIEW (js/main.js, section "Design preview").
+             Runs fully in the browser; files leave the device only when
+             the visitor sends the request.
+             ========================================================== -->
+        <div class="studio" id="preview" data-studio>
+          <div class="studio__stage">
+            <svg class="studio__svg" viewBox="0 0 500 560" role="img" aria-labelledby="studio-svg-title" data-studio-svg>
+              <title id="studio-svg-title" data-i18n="studio.svgTitle">Vorschau deines Designs auf dem Textil</title>
+            </svg>
+            <p class="studio__drag-hint" data-i18n="studio.dragHint">Tipp: Du kannst dein Logo auf dem Textil verschieben.</p>
+          </div>
+
+          <div class="studio__controls">
+            <div class="studio__upload">
+              <label class="btn btn--primary studio__upload-btn" for="studio-file">
+                <svg class="btn__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
+                <span data-i18n="studio.upload">Logo hochladen</span>
+              </label>
+              <input class="visually-hidden" id="studio-file" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp,image/heic,.png,.jpg,.jpeg,.svg,.webp,.heic,.pdf,.ai,.eps,.psd,.tif,.tiff">
+              <p class="studio__file" data-studio-empty data-i18n="studio.noFile">Noch kein Logo? Wir zeigen dir ein Beispiel.</p>
+              <p class="studio__file" data-studio-file hidden></p>
+              <label class="studio__check" data-studio-bg hidden>
+                <input type="checkbox" checked data-studio-bg-toggle>
+                <span data-i18n="studio.removeBg">Weißen Hintergrund entfernen</span>
+              </label>
+            </div>
+
+            <fieldset class="studio__group">
+              <legend class="studio__label" data-i18n="studio.product">Textil</legend>
+              <div class="choice-group choice-group--light">
+                <label class="choice"><input class="choice__input" type="radio" name="studio-product" value="tshirt" checked><span class="choice__label" data-i18n="studio.tshirt">T-Shirt</span></label>
+                <label class="choice"><input class="choice__input" type="radio" name="studio-product" value="hoodie"><span class="choice__label" data-i18n="studio.hoodie">Hoodie</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="studio__group">
+              <legend class="studio__label"><span data-i18n="studio.color">Farbe</span>: <span class="studio__value" data-studio-color-name>Schwarz</span></legend>
+              <div class="swatches" data-studio-swatches></div>
+            </fieldset>
+
+            <fieldset class="studio__group">
+              <legend class="studio__label" data-i18n="studio.position">Position</legend>
+              <div class="choice-group choice-group--light choice-group--three">
+                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="center" checked><span class="choice__label" data-i18n="studio.posCenter">Brust mittig</span></label>
+                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="left"><span class="choice__label" data-i18n="studio.posLeft">Brust links</span></label>
+                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="back"><span class="choice__label" data-i18n="studio.posBack">Rücken</span></label>
+              </div>
+            </fieldset>
+
+            <div class="studio__group">
+              <label class="studio__label" for="studio-size" data-i18n="studio.size">Größe</label>
+              <input class="studio__range" id="studio-size" type="range" min="25" max="100" value="80" data-studio-size>
+            </div>
+
+            <button class="btn btn--primary btn--block studio__cta" type="button" data-studio-cta>
+              <span data-i18n="studio.cta">Mit diesem Design anfragen</span>
+              <svg class="btn__icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
+            </button>
+            <p class="studio__note" data-i18n="studio.note">Unverbindliche Vorschau. Deine Datei bleibt auf deinem Gerät, bis du die Anfrage sendest.</p>
+          </div>
+        </div>
+
+        <h3 class="ref-subhead" data-i18n="refs.examples">Beispiele</h3>
+        <p class="ref-subnote" data-i18n="refs.note">Beispielbilder zur Veranschaulichung.</p>
 
         <!-- Replace the .svg placeholders with real photos (same file names, .jpg) -->
         <ul class="grid grid--3 ref-grid" role="list">
@@ -887,6 +952,6 @@
     </svg>
   </a>
 
-  <script src="js/main.js?v=a539ef41" defer></script>
+  <script src="js/main.js?v=9971fb08" defer></script>
 </body>
 </html>

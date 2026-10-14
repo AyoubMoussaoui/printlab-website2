@@ -39,6 +39,12 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 6. **Privacy policy upkeep:** `datenschutz.html` must describe what the site actually does. Connecting a form service, adding analytics or embedding any third-party content requires updating it.
 7. **Domain and hosting:** the site runs at `https://printlab-trier.de/` on netcup webhosting (Plesk). Plesk pulls the `main` branch from GitHub and deploys it to `/printlab-trier.de/httpdocs`. A GitHub webhook (Settings → Webhooks) tells Plesk about every push to `main`, so a merged pull request goes live within about a minute. If it doesn't, use **Jetzt Pull ausführen** in Plesk → Git. The address is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml` and `robots.txt`. GitHub is only used for the source code.
 
+## Live preview ("Dein Logo testen")
+
+At the top of the "Beispiele" section (`#preview`, linked from the hero's second button). Visitors upload a logo and see it on a T-shirt or hoodie (8 colours; Brust mittig, Brust links, Rücken; size slider; drag to move). Everything runs in the browser (`js/main.js`, section 7b): the garments are SVG drawings, a white background is removed automatically (only white connected to the image edge, so white inside a logo stays), and transparent margins are trimmed. PDF/AI/EPS files can't be previewed but are still passed on.
+
+"Mit diesem Design anfragen" fills the quote form (product, colour, position, Design: Ja) and attaches the original file plus a rendered preview image (`Vorschau-T-Shirt-Rot-Brustmittig.png`), so the request shows exactly what the customer saw. Colours and print areas are defined in `COLORS` and `GARMENTS` at the top of that section.
+
 ## Quote form
 
 The form posts to `anfrage.php` on the netcup server (`CONFIG.formEndpoint` in `js/main.js`). The script:
