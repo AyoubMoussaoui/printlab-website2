@@ -93,20 +93,15 @@
 }
 
 /* Phones and tablets: the hero reaches down to the bottom of the physical
-   screen, but its content is centred in the SMALL viewport (toolbars
-   shown), which never changes. So the text sits in the same place on
-   every load and in every toolbar state; only empty space at the bottom
-   varies. */
+   screen, and its content starts at a fixed distance under the header.
+   Nothing in the hero depends on viewport units, which some in-app
+   browsers (e.g. the Google app after pull-to-refresh) report wrongly:
+   the text sits in the same place on every load and in every toolbar
+   state; only the empty space at the bottom varies. */
 @media (hover: none) and (pointer: coarse) {
   .hero {
     align-items: flex-start;
     min-height: var(--hero-touch-h);
-  }
-
-  .hero__inner {
-    min-height: calc(100vh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h) - var(--hero-pad-t) - var(--hero-pad-b));
-    min-height: calc(100svh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h) - var(--hero-pad-t) - var(--hero-pad-b));
-    align-content: center;
   }
 }
 
