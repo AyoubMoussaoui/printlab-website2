@@ -625,7 +625,14 @@
   }
 
   .price-card__from {
-    font-size: 13px;
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .price-note {
+    gap: 10px;
+    padding: 14px;
+    font-size: 14px;
   }
 
   .price-card__note {
