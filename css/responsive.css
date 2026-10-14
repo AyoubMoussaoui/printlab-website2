@@ -176,9 +176,8 @@
     position: sticky;
     top: 0;
     z-index: var(--z-header);
-    background-color: rgba(11, 11, 11, 0.97);
-    -webkit-backdrop-filter: saturate(140%) blur(14px);
-    backdrop-filter: saturate(140%) blur(14px);
+    /* Solid, no backdrop blur (see .site-header-desktop) */
+    background-color: var(--color-black);
     border-bottom: 1px solid var(--color-line-dark);
   }
 
