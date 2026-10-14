@@ -42,6 +42,15 @@
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
+  /* Reviews page: overview above the list */
+  .rv__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rv-summary {
+    position: static;
+  }
+
   /* Jobs page: cards one below the other */
   .job-cards {
     grid-template-columns: minmax(0, 1fr);
@@ -707,6 +716,28 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
+  }
+
+  /* ---- Reviews page ---- */
+  .rv__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .rv-summary {
+    position: static;
+  }
+
+  .rv__write {
+    width: 100%;
+  }
+
+  .rv-card {
+    padding: 20px;
+  }
+
+  .rv-dialog__inner {
+    padding: 24px 20px;
   }
 
   /* ---- Payment & delivery page ---- */

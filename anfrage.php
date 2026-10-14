@@ -2,7 +2,7 @@
 /* ==========================================================================
    PRINT LAB Trier: receives the quote form (js/main.js posts here), the
    claim form (reklamation.html, js/reklamation.js, form=reklamation) and
-   the review form (bewertung.html, js/bewertung.js, form=bewertung) and
+   the review form (bewertungen.html, js/bewertungen.js, form=bewertung) and
    e-mails them to the shop with the uploaded files attached, plus a short
    confirmation to the customer. Answers with JSON: { "ok": true|false }.
    Compatible with PHP 7.4+. No database. The only thing stored is a
@@ -185,12 +185,13 @@ function field(string $name, int $max, bool $multiline = false): string
    of the whole item. Handled completely here, then the script ends.
    ========================================================================== */
 /* ==========================================================================
-   Review form (bewertung.html): goes to the shop only. Nothing is published
-   automatically; PRINT LAB checks each review and only shows it on the
-   website when the customer has agreed.
+   Review form (bewertungen.html): goes to the shop only. Nothing is published
+   automatically; PRINT LAB checks each review and adds it to reviews.json
+   (shown on bewertungen.html) only when the customer has agreed.
    ========================================================================== */
 if (field('form', 20) === 'bewertung') {
     $name    = field('name', 100);
+    if ($name === '') $name = 'Anonym';
     $role    = field('role', 40);
     $rating  = field('rating', 1);
     $email   = field('email', 160);
@@ -198,7 +199,6 @@ if (field('form', 20) === 'bewertung') {
     $consent = field('consent', 2) === 'ja';
 
     $errors = [];
-    if ($name === '') $errors[] = 'name';
     if ($role !== '' && !in_array($role, REVIEW_ROLES, true)) $errors[] = 'role';
     if (!in_array($rating, ['1', '2', '3', '4', '5'], true)) $errors[] = 'rating';
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
