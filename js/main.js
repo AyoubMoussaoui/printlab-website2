@@ -341,30 +341,20 @@
   setHeaderReal();
   window.addEventListener('resize', setHeaderReal, { passive: true });
 
-  /* Some mobile browsers hide their address bar after a jump to the top
-     (back-to-top button) and the screen then grows beyond the height CSS
-     knows about, so a strip of the next section shows under the marquee.
-     While the page is at the top, stretch the hero to close that gap. It
-     only grows, and only at the top, so nothing shifts while reading. */
-  const marqueeEl = document.querySelector('.marquee');
-  let heroFitQueued = false;
-  function fitHero() {
-    heroFitQueued = false;
-    if (!heroEl || !marqueeEl || window.scrollY > 4) return;
-    const gap = window.innerHeight - marqueeEl.getBoundingClientRect().bottom;
-    if (gap > 1 && gap < 260) heroEl.style.minHeight = Math.ceil(heroEl.offsetHeight + gap) + 'px';
-  }
-  const queueHeroFit = () => {
-    if (heroFitQueued) return;
-    heroFitQueued = true;
-    requestAnimationFrame(fitHero);
+  /* Phones and tablets: the visible height changes all the time (toolbars
+     appear and hide, pull-to-refresh), and browsers report it differently.
+     The hero is therefore sized from the physical screen height, which
+     never changes, so no toolbar state can show a strip of the next
+     section under the marquee. Set once, so nothing moves while scrolling. */
+  const setScreenHeight = () => {
+    const s = window.screen;
+    if (!s || !s.width || !s.height) return;
+    const landscape = window.matchMedia('(orientation: landscape)').matches;
+    const h = landscape ? Math.min(s.width, s.height) : Math.max(s.width, s.height);
+    document.documentElement.style.setProperty('--screen-h', h + 'px');
   };
-  window.addEventListener('scroll', () => { if (window.scrollY <= 4) queueHeroFit(); }, { passive: true });
-  window.addEventListener('resize', queueHeroFit, { passive: true });
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', queueHeroFit, { passive: true });
-  // A new orientation starts from the CSS size again
-  window.addEventListener('orientationchange', () => { if (heroEl) heroEl.style.minHeight = ''; setTimeout(queueHeroFit, 300); });
-  window.addEventListener('load', queueHeroFit);
+  setScreenHeight();
+  window.addEventListener('orientationchange', () => setTimeout(setScreenHeight, 200));
   const onScroll = () => { if (desktopHeader) desktopHeader.classList.toggle('is-scrolled', window.scrollY > 8); };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
