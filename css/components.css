@@ -311,6 +311,14 @@
   animation: squeegee 1s cubic-bezier(0.65, 0, 0.35, 1) 0.35s both;
 }
 
+/* Tablets and larger: "Deine Veredelung." stays on one line; it may run
+   into the (empty) right column of the hero, the photo shows there */
+@media (min-width: 768px) {
+  .hero__title-line--accent {
+    white-space: nowrap;
+  }
+}
+
 @keyframes ink-pull {
   from { clip-path: inset(-15% 100% -15% 0); }
   to { clip-path: inset(-15% 0 -15% 0); }
