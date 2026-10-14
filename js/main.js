@@ -84,19 +84,22 @@
     'contact.lead': 'Send us your request and you will receive a non-binding quote within 24 hours.',
     'contact.wa': 'Message us directly', 'contact.loc': 'Location',
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.optional': '(optional)',
-    'form.product': 'What would you like printed?', 'form.choose': 'Please choose',
-    'form.own': 'Own textile', 'form.other': 'Other', 'form.qty': 'Quantity',
+    'form.product': 'What would you like printed?',
+    'form.pTshirt': 'T-shirts', 'form.pHoodie': 'Hoodies', 'form.pCap': 'Caps & beanies', 'form.pBag': 'Bags',
+    'form.pBottle': 'Bottles', 'form.own': 'Own textile', 'form.other': 'Other', 'form.qty': 'Quantity',
     'form.color': 'Colour', 'form.colorPh': 'e.g. black', 'form.position': 'Print position',
-    'form.pos1': 'Left chest', 'form.pos2': 'Centre chest', 'form.pos3': 'Back',
-    'form.pos4': 'Sleeve', 'form.pos5': 'Multiple positions', 'form.pos6': 'Not sure yet',
-    'form.hasDesign': 'Design available?', 'form.yes': 'Yes', 'form.no': 'No',
-    'form.message': 'Message', 'form.messagePh': 'Tell us briefly about your idea …',
+    'form.posFront': 'Front', 'form.posBack': 'Back', 'form.posBoth': 'Front & back', 'form.posUnsure': 'Not sure yet',
+    'form.extras': 'Colour & preferred date',
+    'form.step1': 'Step 1 of 2', 'form.step1Title': 'Your project', 'form.step2': 'Step 2 of 2', 'form.step2Title': 'Contact & file',
+    'form.next': 'Next', 'form.nextNote': 'One more short step: contact and file.', 'form.back': 'Back', 'form.change': 'Change',
+    'form.message': 'Message', 'form.messagePh': 'Any other wishes or questions …',
     'form.deadline': 'Preferred date', 'form.deadlineHint': 'For example for an event or a bachelor party.',
     'form.delivery': 'Pickup or shipping?', 'form.pickup': 'Pickup in Trier', 'form.shipping': 'Shipping',
     'form.zip': 'Postcode and town', 'form.zipPh': 'e.g. 54290 Trier',
     'form.files': 'Your file (logo, artwork)', 'form.filesCta': 'Choose a file or drop it here',
     'form.filesHint': 'PNG, JPG, PDF, SVG, AI or EPS. Up to 3 files, max. 15 MB in total.',
-    'form.hintNo': 'No problem, we are happy to create several design proposals for you.',
+    'form.filesSafe': 'Your details and files are safe and do not leave your device before you send.',
+    'form.noDesign': 'No design yet? No problem, we are happy to create proposals for you.',
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
@@ -152,6 +155,7 @@
       email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
       qty: 'Bitte gib eine Stückzahl ab 1 an.',
       delivery: 'Bitte wähle Abholung oder Versand.',
+      product: 'Bitte wähle aus, was wir bedrucken sollen.', pcs: 'Stk.',
       fileType: 'Dieses Dateiformat können wir leider nicht annehmen: {name}',
       fileCount: 'Bitte höchstens 3 Dateien auswählen.',
       fileSize: 'Die Dateien sind zusammen größer als 15 MB. Schick größere Dateien gerne per E-Mail oder WhatsApp.',
@@ -173,6 +177,7 @@
       email: 'Please enter a valid email address.',
       qty: 'Please enter a quantity of at least 1.',
       delivery: 'Please choose pickup or shipping.',
+      product: 'Please choose what we should print on.', pcs: 'pcs',
       fileType: 'We cannot accept this file format: {name}',
       fileCount: 'Please choose up to 3 files.',
       fileSize: 'The files are larger than 15 MB in total. Feel free to send bigger files by email or WhatsApp.',
@@ -525,17 +530,48 @@
     const submitBtn = form.querySelector('[type="submit"]');
     const honeypot = form.querySelector('#f-website');
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const hasDesign = () => (form.querySelector('input[name="has_design"]:checked') || {}).value === 'Ja';
     const formStart = Date.now();
 
-    /* ---- "Design vorhanden?": upload area for Ja, a short note for Nein */
-    const designHints = Array.from(form.querySelectorAll('[data-design-hint]'));
-    function updateDesignHint() {
-      const choice = hasDesign() ? 'Ja' : 'Nein';
-      designHints.forEach((el) => { el.hidden = el.dataset.designHint !== choice; });
+    /* ---- Two steps: 1 = the project, 2 = contact and file. Step 1 is
+       checked before step 2 opens; going back keeps everything filled in. */
+    const steps = Array.from(form.querySelectorAll('[data-form-step]'));
+    const progress2 = form.querySelector('[data-progress-2]');
+    const summaryEl = form.querySelector('[data-form-summary]');
+    let currentStep = 1;
+    const radioValue = (name) => (form.querySelector('input[name="' + name + '"]:checked') || {}).value || '';
+
+    function updateSummary() {
+      if (!summaryEl) return;
+      const product = form.querySelector('input[name="product"]:checked');
+      const position = form.querySelector('input[name="position"]:checked');
+      const delivery = form.querySelector('input[name="delivery"]:checked');
+      const label = (input) => (input ? input.closest('label').textContent.trim() : '');
+      const qty = form.querySelector('#f-qty').value.trim();
+      summaryEl.textContent = [label(product), qty ? qty + ' ' + t('pcs') : '', label(position), label(delivery)]
+        .filter(Boolean).join(' · ');
     }
-    form.querySelectorAll('input[name="has_design"]').forEach((r) => r.addEventListener('change', updateDesignHint));
-    updateDesignHint();
+
+    function goStep(n, moveFocus) {
+      currentStep = n;
+      steps.forEach((el) => {
+        const active = Number(el.dataset.formStep) === n;
+        el.hidden = !active;
+        el.classList.toggle('is-entering', active && moveFocus);
+      });
+      if (progress2) progress2.classList.toggle('is-done', n === 2);
+      if (n === 2) updateSummary();
+      if (!moveFocus) return;
+      // Keep the top of the form in view, then lead the eye to the new step
+      const top = form.getBoundingClientRect().top;
+      if (top < 0 || top > window.innerHeight * 0.6) {
+        const offset = (document.querySelector('.site-header-mobile__bar') || {}).offsetHeight
+          || (document.querySelector('[data-header]') || {}).offsetHeight || 0;
+        window.scrollTo({ top: Math.max(0, top + window.pageYOffset - offset - 16), behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+      const title = steps[n - 1].querySelector('.form-step__title');
+      if (title) title.focus({ preventScroll: true });
+    }
+    document.addEventListener('printlab:lang', () => { if (currentStep === 2) updateSummary(); });
 
     /* ---- Wunschtermin: no dates in the past */
     const deadline = form.querySelector('#f-deadline');
@@ -549,11 +585,20 @@
     const deliveryGroup = form.querySelector('[data-required-group="delivery"]');
     const deliveryError = form.querySelector('[data-error-for="delivery"]');
     const shippingOnly = Array.from(form.querySelectorAll('[data-shipping-only]'));
-    const deliveryValue = () => (form.querySelector('input[name="delivery"]:checked') || {}).value || '';
+    const deliveryValue = () => radioValue('delivery');
     function setDeliveryError(message) {
       if (deliveryError) deliveryError.textContent = message || '';
       if (deliveryGroup) deliveryGroup.classList.toggle('is-invalid', Boolean(message));
     }
+
+    /* ---- Product cards */
+    const productGroup = form.querySelector('[data-required-group="product"]');
+    const productError = form.querySelector('[data-error-for="product"]');
+    function setProductError(message) {
+      if (productError) productError.textContent = message || '';
+      if (productGroup) productGroup.classList.toggle('is-invalid', Boolean(message));
+    }
+    form.querySelectorAll('input[name="product"]').forEach((r) => r.addEventListener('change', () => setProductError('')));
     function updateDelivery() {
       shippingOnly.forEach((el) => { el.hidden = deliveryValue() !== 'Versand'; });
       if (deliveryValue()) setDeliveryError('');
@@ -646,7 +691,7 @@
       return '';
     }
 
-    const requiredInputs = Array.from(form.querySelectorAll('[required]'));
+    const requiredInputs = Array.from(form.querySelectorAll('[required]')).filter((input) => input.type !== 'radio');
     requiredInputs.forEach((input) => {
       input.addEventListener('blur', () => { if (input.value) setError(input, validateInput(input)); });
       input.addEventListener('input', () => {
@@ -676,9 +721,9 @@
         ['Produkt', data.get('product')], ['Stückzahl', data.get('quantity')], ['Farbe', data.get('color')],
         ['Druckposition', data.get('position')], ['Wunschtermin', formatDate(data.get('deadline'))],
         ['Lieferung', data.get('delivery')], ['PLZ und Ort', data.get('delivery') === 'Versand' ? data.get('zip') : ''],
-        ['Design vorhanden', data.get('has_design')], ['Nachricht', data.get('message')]
+        ['Nachricht', data.get('message')]
       ];
-      if (data.get('has_design') === 'Ja') rows.push(['Datei', t('fileLine')]);
+      if (selectedFiles.length) rows.push(['Datei', t('fileLine')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
@@ -734,7 +779,7 @@
         alt.appendChild(copyBtn);
       }
       status.appendChild(alt);
-      if (data.get('has_design') === 'Ja') {
+      if (selectedFiles.length) {
         const steps = document.createElement('ol');
         steps.className = 'quote-form__steps';
         t('steps').forEach((text) => {
@@ -751,8 +796,8 @@
       form.reset();
       selectedFiles = [];
       renderFiles();
-      updateDesignHint();
       updateDelivery();
+      goStep(1, false);
       form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
     }
 
@@ -775,26 +820,50 @@
       }
     }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (honeypot && honeypot.value.trim() !== '') return; // bot filled the hidden field
-
+    /* ---- Step checks: returns the first invalid element of that step */
+    const inStep = (el, n) => Number(el.closest('[data-form-step]').dataset.formStep) === n;
+    function checkStep(n) {
       let firstInvalid = null;
-      requiredInputs.forEach((input) => {
+      if (n === 1 && !radioValue('product')) {
+        setProductError(t('product'));
+        firstInvalid = form.querySelector('input[name="product"]');
+      }
+      requiredInputs.filter((input) => inStep(input, n)).forEach((input) => {
         const message = validateInput(input);
         setError(input, message);
         if (message && !firstInvalid) firstInvalid = input;
       });
-      if (!deliveryValue()) {
+      if (n === 1 && !deliveryValue()) {
         setDeliveryError(t('delivery'));
         if (!firstInvalid) firstInvalid = form.querySelector('input[name="delivery"]');
       }
+      return firstInvalid;
+    }
+
+    function nextStep() {
+      const firstInvalid = checkStep(1);
+      if (firstInvalid) { firstInvalid.focus(); return; }
+      goStep(2, true);
+    }
+
+    form.querySelectorAll('[data-step-next]').forEach((btn) => btn.addEventListener('click', nextStep));
+    form.querySelectorAll('[data-step-back]').forEach((btn) => btn.addEventListener('click', () => goStep(1, true)));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (honeypot && honeypot.value.trim() !== '') return; // bot filled the hidden field
+      // Enter in a step 1 field means "Weiter"
+      if (currentStep === 1) { nextStep(); return; }
+
+      const invalidStep1 = checkStep(1);
+      if (invalidStep1) { goStep(1, true); invalidStep1.focus(); return; }
+      const firstInvalid = checkStep(2);
       if (firstInvalid) { firstInvalid.focus(); return; }
 
       const data = new FormData(form);
       data.delete('website'); // honeypot is never sent
       data.delete('files[]');
-      if (hasDesign()) selectedFiles.forEach((file) => data.append('files[]', file, file.name));
+      selectedFiles.forEach((file) => data.append('files[]', file, file.name));
       data.set('t', String(formStart));
       data.set('lang', currentLang);
       if (CONFIG.formEndpoint) sendToServer(data);
