@@ -540,10 +540,6 @@
     gap: 40px;
   }
 
-  .contact-list {
-    margin-top: 28px;
-  }
-
   .quote-form {
     padding: 24px 18px;
     border-radius: var(--radius-md);
