@@ -466,6 +466,8 @@
      6. FLOATING BUTTONS
      WhatsApp stays visible; both buttons step aside only while they would
      cover an element marked [data-hide-float] (hero CTAs, form submit).
+     Not the footer: at the end of the page "back to top" is most useful,
+     and the footer leaves room for the buttons instead.
      ------------------------------------------------------------------------ */
   const waFloat = document.querySelector('[data-wa-float]');
   const backToTop = document.getElementById('back-to-top');
