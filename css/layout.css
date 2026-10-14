@@ -17,15 +17,12 @@
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgba(11, 11, 11, 0.96);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
-  backdrop-filter: saturate(140%) blur(14px);
+  /* Solid, no backdrop blur: the blur was almost invisible at this
+     opacity, but iOS redraws it with a visible flash whenever the page
+     moves underneath (e.g. the position fix after a language switch). */
+  background: var(--color-black);
   border-bottom: 1px solid var(--color-line-dark);
   transition: background-color var(--dur) var(--ease);
-}
-
-.site-header-desktop.is-scrolled {
-  background: rgba(11, 11, 11, 0.99);
 }
 
 .site-header-desktop__inner {
