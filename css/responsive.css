@@ -32,6 +32,15 @@
 /* --------------------------------------------------------------------------
    TABLET  768–1099px
    -------------------------------------------------------------------------- */
+/* Footer links leave room for the floating buttons (WhatsApp, back to top)
+   on the right; from 1400px the page margin is wide enough. Phones: see
+   the ≤767px block. */
+@media (min-width: 768px) and (max-width: 1399px) {
+  .site-footer__inner > .footer-links {
+    padding-right: 64px;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1099px) {
   /* Jobs page: cards one below the other */
   .job-cards {
@@ -741,6 +750,7 @@
 
   .site-footer__inner > .footer-links {
     justify-content: flex-start;
+    padding-right: 56px; /* keeps the links clear of the "back to top" button */
   }
 
   /* ---- Floating WhatsApp ---- */
