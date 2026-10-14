@@ -23,18 +23,18 @@
   <meta property="og:locale" content="de_DE">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="favicon.ico?v=6b1089b4" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=6b1089b4" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=6b1089b4">
-  <link rel="manifest" href="site.webmanifest?v=6b1089b4">
+  <link rel="icon" href="favicon.ico?v=0e08e8a6" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=0e08e8a6" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=0e08e8a6">
+  <link rel="manifest" href="site.webmanifest?v=0e08e8a6">
 
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=6b1089b4">
-  <link rel="stylesheet" href="css/base.css?v=6b1089b4">
-  <link rel="stylesheet" href="css/layout.css?v=6b1089b4">
-  <link rel="stylesheet" href="css/components.css?v=6b1089b4">
-  <link rel="stylesheet" href="css/responsive.css?v=6b1089b4">
+  <link rel="stylesheet" href="css/variables.css?v=0e08e8a6">
+  <link rel="stylesheet" href="css/base.css?v=0e08e8a6">
+  <link rel="stylesheet" href="css/layout.css?v=0e08e8a6">
+  <link rel="stylesheet" href="css/components.css?v=0e08e8a6">
+  <link rel="stylesheet" href="css/responsive.css?v=0e08e8a6">
 
   <script type="application/ld+json">
   {
@@ -167,6 +167,8 @@
     <symbol id="icon-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
     <!-- truck: Lucide icon (ISC license) -->
     <symbol id="icon-truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></g></symbol>
+    <symbol id="icon-more" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="currentColor" d="M10.5 16a1.6 1.6 0 1 0 3.2 0 1.6 1.6 0 1 0-3.2 0M14.4 16a1.6 1.6 0 1 0 3.2 0 1.6 1.6 0 1 0-3.2 0M18.3 16a1.6 1.6 0 1 0 3.2 0 1.6 1.6 0 1 0-3.2 0"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></symbol>
     <symbol id="icon-clip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 1 1-2.8-2.8l8.5-8.5"/></symbol>
     <!-- Service icons -->
     <symbol id="icon-tshirt" viewBox="0 0 32 32"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M11.5 4.5 5 7.5l-2.5 6 4.5 2 1.5-2.5V27.5h15V13l1.5 2.5 4.5-2-2.5-6-6.5-3c-.5 2-2.3 3.5-4.5 3.5s-4-1.5-4.5-3.5Z"/></symbol>
@@ -694,128 +696,178 @@
         </aside>
 
         <form class="quote-form reveal-on-scroll delay-200" id="quote-form" action="anfrage.php" method="post" enctype="multipart/form-data" novalidate data-quote-form>
-          <div class="quote-form__grid">
+          <!-- Two steps: 1 = the project, 2 = contact and file (js/main.js) -->
+          <div class="form-progress" aria-hidden="true">
+            <span class="form-progress__bar is-done"></span>
+            <span class="form-progress__bar" data-progress-2></span>
+          </div>
 
-<!-- ==========================================
-         HONEYPOT TRAP (Unsichtbar für echte Nutzer)
-         ========================================== -->
-            <div class="field-hidden" aria-hidden="true">
-              <label for="f-website">Website</label>
-              <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-name"><span data-i18n="form.name">Name</span> <span class="field__req" aria-hidden="true">*</span></label>
-              <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" required>
-              <p class="field__error" data-error-for="f-name"></p>
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-email"><span data-i18n="form.email">E-Mail</span> <span class="field__req" aria-hidden="true">*</span></label>
-              <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" required>
-              <p class="field__error" data-error-for="f-email"></p>
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-phone"><span data-i18n="form.phone">Telefon</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
-              <input class="field__input" id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-product"><span data-i18n="form.product">Was möchtest du bedrucken?</span> <span class="field__req" aria-hidden="true">*</span></label>
-              <select class="field__input field__input--select" id="f-product" name="product" required>
-                <option value="" data-i18n="form.choose">Bitte wählen</option>
-                <option value="T-Shirts">T-Shirts</option>
-                <option value="Hoodies / Sweatshirts">Hoodies / Sweatshirts</option>
-                <option value="Caps / Mützen">Caps / Mützen</option>
-                <option value="Taschen / Beutel">Taschen / Beutel</option>
-                <option value="Flaschen / Zubehör">Flaschen / Zubehör</option>
-                <option value="Eigenes Textil" data-i18n="form.own">Eigenes Textil</option>
-                <option value="Sonstiges" data-i18n="form.other">Sonstiges</option>
-              </select>
-              <p class="field__error" data-error-for="f-product"></p>
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-qty"><span data-i18n="form.qty">Stückzahl</span> <span class="field__req" aria-hidden="true">*</span></label>
-              <input class="field__input" id="f-qty" name="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 25" required>
-              <p class="field__error" data-error-for="f-qty"></p>
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-color" data-i18n="form.color">Farbe</label>
-              <input class="field__input" id="f-color" name="color" type="text" placeholder="z. B. Schwarz" data-i18n-placeholder="form.colorPh">
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-position" data-i18n="form.position">Druckposition</label>
-              <select class="field__input field__input--select" id="f-position" name="position">
-                <option value="" data-i18n="form.choose">Bitte wählen</option>
-                <option value="Brust links" data-i18n="form.pos1">Brust links</option>
-                <option value="Brust mittig" data-i18n="form.pos2">Brust mittig</option>
-                <option value="Rücken" data-i18n="form.pos3">Rücken</option>
-                <option value="Ärmel" data-i18n="form.pos4">Ärmel</option>
-                <option value="Mehrere Positionen" data-i18n="form.pos5">Mehrere Positionen</option>
-                <option value="Noch unklar" data-i18n="form.pos6">Noch unklar</option>
-              </select>
-            </div>
-            <div class="field">
-              <label class="field__label" for="f-deadline"><span data-i18n="form.deadline">Wunschtermin</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
-              <input class="field__input field__input--date" id="f-deadline" name="deadline" type="date">
-              <p class="field__hint" data-i18n="form.deadlineHint">Zum Beispiel für ein Event oder einen JGA.</p>
-            </div>
-            <fieldset class="field field--radio">
-              <legend class="field__label" data-i18n="form.hasDesign">Design vorhanden?</legend>
-              <div class="choice-group">
-                <label class="choice">
-                  <input class="choice__input" type="radio" name="has_design" value="Ja" checked>
-                  <span class="choice__label" data-i18n="form.yes">Ja</span>
+          <div class="field-hidden" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- ===== Step 1: Das Projekt ===== -->
+          <div class="form-step" data-form-step="1">
+            <p class="form-step__count" data-i18n="form.step1">Schritt 1 von 2</p>
+            <h3 class="form-step__title" tabindex="-1" data-i18n="form.step1Title">Dein Projekt</h3>
+
+            <div class="quote-form__grid">
+              <fieldset class="field field--full" data-required-group="product">
+                <legend class="field__label"><span data-i18n="form.product">Was möchtest du bedrucken?</span> <span class="field__req" aria-hidden="true">*</span></legend>
+                <div class="pick-group">
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="T-Shirts" required>
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-tshirt"></use></svg><span class="pick__label" data-i18n="form.pTshirt">T-Shirts</span></span>
                 </label>
-                <label class="choice">
-                  <input class="choice__input" type="radio" name="has_design" value="Nein">
-                  <span class="choice__label" data-i18n="form.no">Nein</span>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Hoodies / Sweatshirts">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-hoodie"></use></svg><span class="pick__label" data-i18n="form.pHoodie">Hoodies</span></span>
                 </label>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Caps / Mützen">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-cap"></use></svg><span class="pick__label" data-i18n="form.pCap">Caps &amp; Mützen</span></span>
+                </label>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Taschen / Beutel">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-bag"></use></svg><span class="pick__label" data-i18n="form.pBag">Taschen</span></span>
+                </label>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Flaschen / Zubehör">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-bottle"></use></svg><span class="pick__label" data-i18n="form.pBottle">Flaschen</span></span>
+                </label>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Eigenes Textil">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-own"></use></svg><span class="pick__label" data-i18n="form.own">Eigenes Textil</span></span>
+                </label>
+                <label class="pick">
+                  <input class="pick__input" type="radio" name="product" value="Sonstiges">
+                  <span class="pick__card"><svg class="pick__icon" aria-hidden="true"><use href="#icon-more"></use></svg><span class="pick__label" data-i18n="form.other">Sonstiges</span></span>
+                </label>
+                </div>
+                <p class="field__error" data-error-for="product"></p>
+              </fieldset>
+
+              <div class="field">
+                <label class="field__label" for="f-qty"><span data-i18n="form.qty">Stückzahl</span> <span class="field__req" aria-hidden="true">*</span></label>
+                <input class="field__input" id="f-qty" name="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 25" required>
+                <p class="field__error" data-error-for="f-qty"></p>
               </div>
-            </fieldset>
-            <fieldset class="field field--radio" data-required-group="delivery">
-              <legend class="field__label"><span data-i18n="form.delivery">Abholung oder Versand?</span> <span class="field__req" aria-hidden="true">*</span></legend>
-              <div class="choice-group">
-                <label class="choice">
-                  <input class="choice__input" type="radio" name="delivery" value="Abholung in Trier">
-                  <span class="choice__label" data-i18n="form.pickup">Abholung in Trier</span>
-                </label>
-                <label class="choice">
-                  <input class="choice__input" type="radio" name="delivery" value="Versand">
-                  <span class="choice__label" data-i18n="form.shipping">Versand</span>
-                </label>
-              </div>
-              <p class="field__error" data-error-for="delivery"></p>
-              <div class="field__sub" data-shipping-only hidden>
+
+              <fieldset class="field field--radio" data-required-group="delivery">
+                <legend class="field__label"><span data-i18n="form.delivery">Abholung oder Versand?</span> <span class="field__req" aria-hidden="true">*</span></legend>
+                <div class="choice-group">
+                  <label class="choice">
+                    <input class="choice__input" type="radio" name="delivery" value="Abholung in Trier">
+                    <span class="choice__label" data-i18n="form.pickup">Abholung in Trier</span>
+                  </label>
+                  <label class="choice">
+                    <input class="choice__input" type="radio" name="delivery" value="Versand">
+                    <span class="choice__label" data-i18n="form.shipping">Versand</span>
+                  </label>
+                </div>
+                <p class="field__error" data-error-for="delivery"></p>
+              </fieldset>
+              <div class="field field--full" data-shipping-only hidden>
                 <label class="field__label" for="f-zip"><span data-i18n="form.zip">PLZ und Ort</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
                 <input class="field__input" id="f-zip" name="zip" type="text" autocomplete="postal-code" placeholder="z. B. 54290 Trier" data-i18n-placeholder="form.zipPh">
               </div>
-            </fieldset>
-            <!-- Switches with the Ja/Nein choice above (js/main.js) -->
-            <div class="field field--full upload" data-design-hint="Ja">
-              <label class="field__label" for="f-files"><span data-i18n="form.files">Deine Datei (Logo, Motiv)</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
-              <div class="upload__zone">
-                <input class="upload__input" id="f-files" name="files[]" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps,.psd,.tif,.tiff,.webp,.heic">
-                <svg class="upload__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
-                <span class="upload__cta" data-i18n="form.filesCta">Datei auswählen oder hierher ziehen</span>
-                <span class="upload__hint" data-i18n="form.filesHint">PNG, JPG, PDF, SVG, AI oder EPS. Bis zu 3 Dateien, zusammen max. 15 MB.</span>
-              </div>
-              <ul class="upload__list" role="list" data-file-list></ul>
-              <p class="field__error" data-error-for="f-files"></p>
+
+              <fieldset class="field field--full field--radio">
+                <legend class="field__label"><span data-i18n="form.position">Druckposition</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></legend>
+                <div class="choice-group choice-group--wrap">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="position" value="Vorne">
+                  <span class="choice__label" data-i18n="form.posFront">Vorne</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="position" value="Hinten">
+                  <span class="choice__label" data-i18n="form.posBack">Hinten</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="position" value="Vorne und hinten">
+                  <span class="choice__label" data-i18n="form.posBoth">Vorne &amp; hinten</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="position" value="Noch unklar">
+                  <span class="choice__label" data-i18n="form.posUnsure">Noch unklar</span>
+                </label>
+                </div>
+              </fieldset>
+
+              <details class="form-extras field--full">
+                <summary class="form-extras__toggle"><span data-i18n="form.extras">Farbe &amp; Wunschtermin</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></summary>
+                <div class="form-extras__grid">
+                  <div class="field">
+                    <label class="field__label" for="f-color" data-i18n="form.color">Farbe</label>
+                    <input class="field__input" id="f-color" name="color" type="text" placeholder="z. B. Schwarz" data-i18n-placeholder="form.colorPh">
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="f-deadline" data-i18n="form.deadline">Wunschtermin</label>
+                    <input class="field__input field__input--date" id="f-deadline" name="deadline" type="date">
+                    <p class="field__hint" data-i18n="form.deadlineHint">Zum Beispiel für ein Event oder einen JGA.</p>
+                  </div>
+                </div>
+              </details>
             </div>
-            <div class="field field--full design-hint" data-design-hint="Nein" hidden>
-              <p class="design-hint__text">
-                <svg class="design-hint__icon" aria-hidden="true"><use href="#icon-check"></use></svg>
-                <span data-i18n="form.hintNo">Kein Problem, wir erstellen dir gerne verschiedene Designvorschläge.</span>
-              </p>
-            </div>
-            <div class="field field--full">
-              <label class="field__label" for="f-message" data-i18n="form.message">Nachricht</label>
-              <textarea class="field__input field__input--area" id="f-message" name="message" rows="4" placeholder="Erzähl uns kurz von deiner Idee …" data-i18n-placeholder="form.messagePh"></textarea>
+
+            <div class="quote-form__footer">
+              <button class="btn btn--primary btn--block" type="button" data-step-next data-i18n="form.next">Weiter</button>
+              <p class="quote-form__note" data-i18n="form.nextNote">Noch ein kurzer Schritt: Kontakt und Datei.</p>
             </div>
           </div>
 
-          <div class="quote-form__footer" data-hide-float>
-            <button class="btn btn--primary btn--block" type="submit" data-i18n="form.submit">Angebot anfragen</button>
-            <p class="quote-form__note" data-i18n="form.note">Unverbindlich &amp; kostenlos. Antwort innerhalb von 24 Stunden.</p>
-            <p class="quote-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
+          <!-- ===== Step 2: Kontakt & Datei ===== -->
+          <div class="form-step" data-form-step="2" hidden>
+            <p class="form-step__count" data-i18n="form.step2">Schritt 2 von 2</p>
+            <h3 class="form-step__title" tabindex="-1" data-i18n="form.step2Title">Kontakt &amp; Datei</h3>
+            <p class="form-summary">
+              <span class="form-summary__text" data-form-summary></span>
+              <button class="form-summary__edit" type="button" data-step-back data-i18n="form.change">Ändern</button>
+            </p>
+
+            <div class="quote-form__grid">
+              <div class="field">
+                <label class="field__label" for="f-name"><span data-i18n="form.name">Name</span> <span class="field__req" aria-hidden="true">*</span></label>
+                <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" required>
+                <p class="field__error" data-error-for="f-name"></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="f-email"><span data-i18n="form.email">E-Mail</span> <span class="field__req" aria-hidden="true">*</span></label>
+                <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+                <p class="field__error" data-error-for="f-email"></p>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="f-phone"><span data-i18n="form.phone">Telefon</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+                <input class="field__input" id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+              </div>
+              <div class="field field--full upload">
+                <label class="field__label" for="f-files"><span data-i18n="form.files">Deine Datei (Logo, Motiv)</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+                <div class="upload__zone">
+                  <input class="upload__input" id="f-files" name="files[]" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps,.psd,.tif,.tiff,.webp,.heic">
+                  <svg class="upload__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
+                  <span class="upload__cta" data-i18n="form.filesCta">Datei auswählen oder hierher ziehen</span>
+                  <span class="upload__hint" data-i18n="form.filesHint">PNG, JPG, PDF, SVG, AI oder EPS. Bis zu 3 Dateien, zusammen max. 15 MB.</span>
+                </div>
+                <ul class="upload__list" role="list" data-file-list></ul>
+                <p class="field__error" data-error-for="f-files"></p>
+                <p class="upload__safe"><svg class="upload__safe-icon" aria-hidden="true"><use href="#icon-lock"></use></svg><span data-i18n="form.filesSafe">Deine Daten und Dateien sind sicher und verlassen vor dem Senden nicht dein Gerät.</span></p>
+                <p class="field__hint" data-i18n="form.noDesign">Noch kein Design? Kein Problem, wir erstellen dir gerne Vorschläge.</p>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="f-message"><span data-i18n="form.message">Nachricht</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+                <textarea class="field__input field__input--area" id="f-message" name="message" rows="3" placeholder="Weitere Wünsche oder Fragen …" data-i18n-placeholder="form.messagePh"></textarea>
+              </div>
+            </div>
+
+            <div class="quote-form__footer" data-hide-float>
+              <div class="form-nav">
+                <button class="btn btn--outline form-nav__back" type="button" data-step-back data-i18n="form.back">Zurück</button>
+                <button class="btn btn--primary form-nav__submit" type="submit" data-i18n="form.submit">Angebot anfragen</button>
+              </div>
+              <p class="quote-form__note" data-i18n="form.note">Unverbindlich &amp; kostenlos. Antwort innerhalb von 24 Stunden.</p>
+              <p class="quote-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
+            </div>
           </div>
           <div class="quote-form__status" role="status" aria-live="polite" tabindex="-1" data-form-status data-hide-float></div>
         </form>
@@ -895,6 +947,6 @@
     </svg>
   </a>
 
-  <script src="js/main.js?v=6b1089b4" defer></script>
+  <script src="js/main.js?v=0e08e8a6" defer></script>
 </body>
 </html>

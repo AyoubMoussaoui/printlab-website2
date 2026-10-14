@@ -53,12 +53,12 @@ A live design configurator (upload a logo, see it on a T-shirt or hoodie, send t
 
 The form posts to `anfrage.php` on the netcup server (`CONFIG.formEndpoint` in `js/main.js`). The script:
 
-- checks the fields again (name, e-mail, product, quantity, Abholung/Versand, optional Wunschtermin and PLZ),
+- checks the fields again (name, e-mail, product, quantity, Abholung/Versand, optional position, Wunschtermin and PLZ),
 - e-mails the request to `info@printlab-trier.de` with up to 3 uploaded files attached (PNG, JPG, PDF, SVG, AI, EPS, PSD, TIF, WebP, HEIC; max. 15 MB together). "Reply-To" is the customer, so replying in the mail app answers them directly,
 - sends the customer a short confirmation (fixed text plus product, quantity, date and delivery; their free text is never echoed back),
 - filters bots with a hidden honeypot field and a time check (submissions faster than 3 seconds are ignored), and limits each IP to 5 sent requests per hour (only a one-way hash of the IP is kept, for at most a day).
 
-The upload area appears when "Design vorhanden?" is **Ja**; for **Nein** a short note says PRINT LAB will create design proposals. If sending fails (server or mail problem), the visitor gets the previous fallback: the request opens pre-filled in their e-mail app or WhatsApp, plus a copy button.
+The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/Versand with optional PLZ, optional print position, colour and Wunschtermin folded away) and **2. Kontakt & Datei** (name, e-mail, optional phone, optional upload, optional message), with a progress bar and a summary of step 1. Step 1 is checked before step 2 opens; Enter in step 1 means "Weiter". Uploading is optional; a note tells visitors without a design that PRINT LAB creates proposals. If sending fails (server or mail problem), the visitor gets the previous fallback: the request opens pre-filled in their e-mail app or WhatsApp, plus a copy button.
 
 ## Claim form (Reklamation)
 

@@ -322,7 +322,9 @@ $product  = field('product', 80);
 $quantity = field('quantity', 7);
 $color    = field('color', 80);
 $position = field('position', 80);
-$design   = field('has_design', 4) === 'Nein' ? 'Nein' : 'Ja';
+// The form no longer asks "Design vorhanden?" (uploading is optional);
+// older senders may still send Ja or Nein
+$design   = in_array(field('has_design', 4), ['Ja', 'Nein'], true) ? field('has_design', 4) : '';
 $deadline = field('deadline', 10);
 $delivery = field('delivery', 40);
 $zip      = field('zip', 80);
@@ -361,7 +363,7 @@ if ($errors) {
 /* ---- Files (only when the customer has a design) */
 $files = [];
 $total = 0;
-if ($design === 'Ja') collect_files('files', ALLOWED_EXT, MAX_FILES, MAX_TOTAL, $files, $total);
+if ($design !== 'Nein') collect_files('files', ALLOWED_EXT, MAX_FILES, MAX_TOTAL, $files, $total);
 
 $sizeText = implode(', ', array_map(function ($s, $n) { return $s . ': ' . $n; }, array_keys($sizes), $sizes));
 
@@ -384,7 +386,7 @@ $rows = [
 ];
 $fileNames = array_map(function ($f) { return $f['name']; }, $files);
 if ($fileNames) $rows['Dateien'] = implode(', ', $fileNames);
-elseif ($design === 'Ja') $rows['Dateien'] = 'keine hochgeladen (kommen ggf. per E-Mail oder WhatsApp)';
+elseif ($design !== 'Nein') $rows['Dateien'] = 'keine hochgeladen (kommen ggf. per E-Mail oder WhatsApp, oder Designvorschläge gewünscht)';
 
 $shopText = "Neue Anfrage über printlab-trier.de\n\n" . rows_to_text($rows)
     . ($message !== '' ? "\n\nNachricht:\n" . $message : '')
