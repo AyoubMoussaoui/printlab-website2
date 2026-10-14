@@ -144,3 +144,7 @@ vite.config.ts.timestamp-*
 
 # Local screenshots
 /*.png
+
+# Review data written by the server (never committed)
+/data/*
+!/data/.htaccess

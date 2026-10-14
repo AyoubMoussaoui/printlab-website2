@@ -22,7 +22,7 @@ jobs:
         run: for f in js/*.js; do node --check "$f" || exit 1; done
 
       - name: Check PHP syntax
-        run: php -l anfrage.php
+        run: for f in *.php inc/*.php; do php -l "$f" || exit 1; done
 
       - name: Check links, assets and anchors
         run: node .github/scripts/check-links.mjs

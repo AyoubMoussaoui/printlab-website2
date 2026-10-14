@@ -13,6 +13,9 @@ Options -Indexes
   RewriteCond %{HTTP_HOST} ^www\.printlab-trier\.de$ [NC]
   RewriteRule ^ https://printlab-trier.de%{REQUEST_URI} [R=301,L]
 
+  # Server-side review code and data are not public
+  RewriteRule ^(inc|data)(/|$) - [R=404,L]
+
   # The review form moved to the reviews page (opens the form directly)
   RewriteRule ^bewertung\.html$ /bewertungen.html#bewerten [R=301,NE,L]
 
