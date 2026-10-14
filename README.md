@@ -39,19 +39,9 @@ The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile heade
 6. **Privacy policy upkeep:** `datenschutz.html` must describe what the site actually does. Connecting a form service, adding analytics or embedding any third-party content requires updating it.
 7. **Domain and hosting:** the site runs at `https://printlab-trier.de/` on netcup webhosting (Plesk). Plesk pulls the `main` branch from GitHub and deploys it to `/printlab-trier.de/httpdocs`. A GitHub webhook (Settings → Webhooks) tells Plesk about every push to `main`, so a merged pull request goes live within about a minute. If it doesn't, use **Jetzt Pull ausführen** in Plesk → Git. The address is written in `index.html` (canonical link, social preview tags, structured data), `sitemap.xml` and `robots.txt`. GitHub is only used for the source code.
 
-## Design-Konfigurator (`#gestalten`)
+## Design-Konfigurator (archived)
 
-Second section of the page (after hero and marquee), linked from the hero button "Dein Logo testen" and the menu item "Gestalten". Files: `css/configurator.css`, `js/configurator.js`.
-
-- **Products, colours, print areas** live in `CONFIG` at the top of `js/configurator.js`. Each print position has its rectangle on the garment drawing and its real size in cm (used for the size label and the resolution check). Only list colours and positions PRINT LAB really offers.
-- **Rendering:** a `<canvas>`; garments are vector drawings (`GARMENTS`) with fabric texture, light and shade that also fall over the design. PNG, JPG, WebP and SVG are shown directly; PDF, AI and EPS appear as a placeholder and are passed on unchanged.
-- **White background:** detected on raster logos and removed with an edge flood fill (white inside the logo stays), switchable.
-- **Resolution check:** warns below 150 dpi at the chosen print size (non-blocking).
-- **Gestures:** drag the design with a finger or the mouse (snaps to the centre line), two fingers or the mouse wheel resize it, arrow keys and +/- work too. Swipes outside the design still scroll the page.
-- **Request:** "Anfrage senden" opens a drawer (bottom sheet on phones) for name, e-mail, quantity per size (S to XXL) and a note. The request goes to `anfrage.php` with the original file and a 1000 × 1120 px preview image. If sending fails, WhatsApp and e-mail links with a prepared summary appear.
-- **Privacy:** nothing leaves the browser before the request is sent.
-
-To use real product photos later, replace the drawing in `Renderer.draw` with photo layers (a photo of the white garment per view, tinted per colour); the print areas and everything else stay the same.
+A live design configurator (upload a logo, see it on a T-shirt or hoodie, send the request with a preview image) was built and then taken off the site to keep the page light. The complete, tested code is in commit `8022479` ("Design-Konfigurator release 1 replaces the simple preview"): `css/configurator.css`, `js/configurator.js` and the section markup in `index.html`. To look at it: `git show 8022479 --stat`. To bring it back, restore those files from that commit (`git checkout 8022479 -- css/configurator.css js/configurator.js`) and re-add the section, the menu item and the two asset links. `anfrage.php` already accepts its requests (source `konfigurator`, sizes, print size, dpi).
 
 ## Quote form
 

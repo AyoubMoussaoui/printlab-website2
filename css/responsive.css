@@ -16,27 +16,16 @@
    -------------------------------------------------------------------------- */
 @media (min-width: 1100px) and (max-width: 1279px) {
   .site-header-desktop__inner {
-    column-gap: 16px;
-  }
-
-  .desktop-nav__list {
-    gap: 2px;
+    column-gap: 20px;
   }
 
   .desktop-nav__link {
-    padding-inline: 5px;
+    padding-inline: 9px;
     font-size: 14px;
   }
 
   .desktop-actions {
     gap: 12px;
-  }
-}
-
-/* 1280–1365px: eight menu items need a little less padding */
-@media (min-width: 1280px) and (max-width: 1365px) {
-  .desktop-nav__link {
-    padding-inline: 8px;
   }
 }
 
