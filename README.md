@@ -14,10 +14,11 @@ css/
   responsive.css   explicit breakpoints: 1100–1279 / 768–1099 / ≤767 / ≤359
 js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
-  bewertung.js     review form: stars, validation, sending
+  bewertungen.js   reviews page: overview and list from reviews.json, review form in a dialog
   reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
 zahlung.html       payment & delivery: order flow, Vorkasse/PayPal, shipping, no right of withdrawal for custom work, defects
-bewertung.html     review form (stars, name, context, message, optional e-mail, publishing consent); e-mailed via anfrage.php, never auto-published
+bewertungen.html   reviews page: average, star distribution and newest reviews from reviews.json; "Bewertung abgeben" opens the form (old bewertung.html redirects here)
+reviews.json       the published reviews, maintained by hand (see "Reviews")
 karriere.html      jobs page (student assistant opening, Google for Jobs data), linked in every footer
 reklamation.html   claim page ("Reklamation & Mängelrüge"), linked in every footer
 impressum.html     legal notice (§ 5 DDG)
@@ -64,6 +65,26 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 
 `reklamation.html` posts to the same `anfrage.php` with `form=reklamation`. Required: name, e-mail, type of issue, description, at least one photo of the defect (up to 4) and one of the whole item (up to 2); the order number is optional. Photos larger than 1.2 MB are redrawn in the browser at max. 2000 px as JPEG, so a claim is usually 1 to 3 MB. The shop mail has the photos attached (names start with `Mangel_` or `Artikel_`), the customer gets a short confirmation. Bot filter and the hourly limit are shared with the quote form. The issue types are listed twice: in `reklamation.html` and in `CLAIM_ISSUES` in `anfrage.php` (the server only accepts those values).
 
+## Reviews
+
+`bewertungen.html` shows only what is in `reviews.json`. With an empty list (`[]`) it says "Noch keine Bewertungen". The form ("Bewertung abgeben") e-mails each review to info@ ("Neue Bewertung: 5/5 von …", with whether publishing is allowed); nothing is published automatically.
+
+To publish a review: check that it belongs to a real order and that publishing was allowed, then add it to `reviews.json` (on GitHub: open the file, pencil icon, edit, commit). Use the customer's text as sent; do not change or shorten its meaning. Publish critical reviews too, as the page promises.
+
+```json
+[
+  {
+    "name": "Max vom SV Trier",
+    "context": "Verein",
+    "date": "2026-10-20T10:03",
+    "rating": 5,
+    "text": "Trikots super geworden, Druck sitzt perfekt."
+  }
+]
+```
+
+`name` "Anonym" if none was given; `context` is optional; `date` is when the review was sent (with or without time); `rating` 1 to 5. Average, star distribution and count are calculated on the page.
+
 PHP 7.4 or newer is enough; in Plesk (PHP-Einstellungen) choose the newest 8.x version. Uploads need `upload_max_filesize` ≥ 25M and `post_max_size` ≥ 26M (netcup's defaults are higher). If the e-mail settings ever change, update `SHOP_EMAIL` at the top of `anfrage.php` and the privacy policy.
 
 ## Checks
@@ -88,7 +109,7 @@ It adds a fingerprint (`?v=…`) to all CSS/JS links in the HTML pages. Without 
 Run all checks locally before pushing:
 
 ```
-npx html-validate index.html reklamation.html karriere.html zahlung.html bewertung.html impressum.html datenschutz.html 404.html
+npx html-validate index.html reklamation.html karriere.html zahlung.html bewertungen.html impressum.html datenschutz.html 404.html
 node --check js/main.js
 node .github/scripts/check-links.mjs
 node .github/scripts/stamp-assets.mjs --check

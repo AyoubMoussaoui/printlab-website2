@@ -104,7 +104,7 @@
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
     'footer.tag': 'Custom textile printing from 1 piece',
-    'footer.payment': 'Payment & delivery', 'footer.claim': 'Claims', 'footer.review': 'Write a review', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
+    'footer.payment': 'Payment & delivery', 'footer.claim': 'Claims', 'footer.review': 'Reviews', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier home page', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier, back to top',
     'aria.wa': 'Message us on WhatsApp', 'aria.backTop': 'Back to top',

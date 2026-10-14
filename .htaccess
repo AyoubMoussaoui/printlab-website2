@@ -13,6 +13,9 @@ Options -Indexes
   RewriteCond %{HTTP_HOST} ^www\.printlab-trier\.de$ [NC]
   RewriteRule ^ https://printlab-trier.de%{REQUEST_URI} [R=301,L]
 
+  # The review form moved to the reviews page (opens the form directly)
+  RewriteRule ^bewertung\.html$ /bewertungen.html#bewerten [R=301,NE,L]
+
   # Repository files that are not part of the website
   # (dot files and folders except .well-known, which Let's Encrypt uses)
   RewriteRule (^|/)\.(?!well-known/) - [R=404,L]
