@@ -208,7 +208,39 @@
     return msg;
   };
 
+  /* Changing the language changes text lengths, so everything below moves
+     and the screen would show a different place. Remember the first element
+     visible under the header and put it back at the same spot afterwards. */
+  function findScrollAnchor() {
+    const main = document.getElementById('main');
+    if (!main || window.scrollY < 1) return null;
+    let headerBottom = 0;
+    document.querySelectorAll('[data-header], [data-mobile-header]').forEach((h) => {
+      const r = h.getBoundingClientRect();
+      if (r.height > 0) headerBottom = Math.max(headerBottom, r.bottom);
+    });
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_ELEMENT);
+    let el = walker.nextNode();
+    while (el) {
+      const r = el.getBoundingClientRect();
+      if (r.height > 0 && r.top >= headerBottom - 1) return { el, top: r.top };
+      // Skip what lies completely above the visible area
+      el = r.bottom < headerBottom ? (walker.nextSibling() || nextOutside(walker)) : walker.nextNode();
+    }
+    return null;
+  }
+  function nextOutside(walker) {
+    while (walker.parentNode()) {
+      const next = walker.nextSibling();
+      if (next) return next;
+    }
+    return null;
+  }
+
   function applyLanguage(lang) {
+    const anchor = findScrollAnchor();
+    // The browser's own scroll anchoring would correct a second time
+    if (anchor) document.documentElement.style.overflowAnchor = 'none';
     currentLang = lang === 'en' ? 'en' : 'de';
     const dict = currentLang === 'en' ? EN : DE;
 
@@ -238,6 +270,11 @@
     updateMenuLabel();
     updateWhatsAppLinks();
     document.dispatchEvent(new CustomEvent('printlab:lang'));
+    if (anchor) {
+      const shift = anchor.el.getBoundingClientRect().top - anchor.top;
+      if (Math.abs(shift) >= 1) window.scrollTo({ top: window.scrollY + shift, behavior: 'auto' });
+      requestAnimationFrame(() => { document.documentElement.style.overflowAnchor = ''; });
+    }
     try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
   }
 
