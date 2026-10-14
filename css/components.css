@@ -954,6 +954,8 @@
 }
 
 .price-extra .btn {
+  /* Both cards' buttons the same width, whatever the label length */
+  min-width: 220px;
   margin-top: auto;
 }
 
