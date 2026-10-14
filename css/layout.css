@@ -72,7 +72,9 @@
   min-height: calc(100lvh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
   /* Touch devices: physical screen height (set in main.js), see there */
   --hero-touch-h: calc(max(100lvh, var(--screen-h, 0px)) - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h));
-  padding-block: 96px 88px;
+  --hero-pad-t: 96px;
+  --hero-pad-b: 88px;
+  padding-block: var(--hero-pad-t) var(--hero-pad-b);
   color: var(--color-text-on-dark);
   background-color: var(--color-black);
   /* Layer order (top → bottom):
@@ -90,9 +92,21 @@
   background-repeat: no-repeat;
 }
 
+/* Phones and tablets: the hero reaches down to the bottom of the physical
+   screen, but its content is centred in the SMALL viewport (toolbars
+   shown), which never changes. So the text sits in the same place on
+   every load and in every toolbar state; only empty space at the bottom
+   varies. */
 @media (hover: none) and (pointer: coarse) {
   .hero {
+    align-items: flex-start;
     min-height: var(--hero-touch-h);
+  }
+
+  .hero__inner {
+    min-height: calc(100vh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h) - var(--hero-pad-t) - var(--hero-pad-b));
+    min-height: calc(100svh - var(--header-real, calc(var(--header-h) + 1px)) - var(--marquee-h) - var(--hero-pad-t) - var(--hero-pad-b));
+    align-content: center;
   }
 }
 
