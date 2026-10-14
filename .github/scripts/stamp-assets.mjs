@@ -9,14 +9,14 @@ import { createHash } from 'node:crypto';
 
 const assets = [
   ...readdirSync('css').filter((f) => f.endsWith('.css')).sort().map((f) => `css/${f}`),
-  'js/main.js'
+  ...readdirSync('js').filter((f) => f.endsWith('.js')).sort().map((f) => `js/${f}`)
 ];
 const hash = createHash('sha1');
 assets.forEach((f) => hash.update(readFileSync(f)));
 const version = hash.digest('hex').slice(0, 8);
 
 const pages = readdirSync('.').filter((f) => f.endsWith('.html'));
-const pattern = /((?:href|src)="(?:css\/[\w-]+\.css|js\/main\.js))(?:\?v=[0-9a-f]+)?"/g;
+const pattern = /((?:href|src)="(?:css\/[\w-]+\.css|js\/[\w-]+\.js))(?:\?v=[0-9a-f]+)?"/g;
 const outdated = [];
 
 for (const page of pages) {

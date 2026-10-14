@@ -28,11 +28,12 @@
 
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=9971fb08">
-  <link rel="stylesheet" href="css/base.css?v=9971fb08">
-  <link rel="stylesheet" href="css/layout.css?v=9971fb08">
-  <link rel="stylesheet" href="css/components.css?v=9971fb08">
-  <link rel="stylesheet" href="css/responsive.css?v=9971fb08">
+  <link rel="stylesheet" href="css/variables.css?v=0d5e13b2">
+  <link rel="stylesheet" href="css/base.css?v=0d5e13b2">
+  <link rel="stylesheet" href="css/layout.css?v=0d5e13b2">
+  <link rel="stylesheet" href="css/components.css?v=0d5e13b2">
+  <link rel="stylesheet" href="css/configurator.css?v=0d5e13b2">
+  <link rel="stylesheet" href="css/responsive.css?v=0d5e13b2">
 
   <script type="application/ld+json">
   {
@@ -190,6 +191,7 @@
 
       <nav class="desktop-nav" aria-label="Hauptnavigation" data-i18n-aria="aria.nav">
         <ul class="desktop-nav__list" role="list">
+          <li><a class="desktop-nav__link" href="#gestalten" data-nav-link data-i18n="nav.cfg">Gestalten</a></li>
           <li><a class="desktop-nav__link" href="#services" data-nav-link data-i18n="nav.services">Leistungen</a></li>
           <li><a class="desktop-nav__link" href="#methods" data-nav-link data-i18n="nav.methods">Drucktechniken</a></li>
           <li><a class="desktop-nav__link" href="#how" data-nav-link data-i18n="nav.how">Ablauf</a></li>
@@ -249,6 +251,7 @@
 
     <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation" data-i18n-aria="aria.navMobile" data-mobile-menu hidden>
       <ul class="mobile-menu__list" role="list">
+        <li><a class="mobile-menu__link" href="#gestalten" data-mobile-link data-nav-link data-i18n="nav.cfg">Gestalten</a></li>
         <li><a class="mobile-menu__link" href="#services" data-mobile-link data-nav-link data-i18n="nav.services">Leistungen</a></li>
         <li><a class="mobile-menu__link" href="#methods" data-mobile-link data-nav-link data-i18n="nav.methods">Drucktechniken</a></li>
         <li><a class="mobile-menu__link" href="#how" data-mobile-link data-nav-link data-i18n="nav.how">Ablauf</a></li>
@@ -276,7 +279,7 @@
 
           <div class="hero__ctas" data-hide-float>
             <a class="btn btn--primary btn--hero" href="#contact" data-i18n="hero.cta1">Jetzt anfragen</a>
-            <a class="btn btn--glass btn--hero" href="#preview" data-i18n="hero.cta2">Dein Logo testen</a>
+            <a class="btn btn--glass btn--hero" href="#gestalten" data-i18n="hero.cta2">Dein Logo testen</a>
           </div>
 
           <ul class="hero-facts" role="list" aria-label="Unsere Vorteile" data-i18n-aria="aria.trust">
@@ -311,6 +314,146 @@
         <!-- Duplicate group is injected by JS for a seamless loop -->
       </div>
     </div>
+
+    <!-- =================================================================
+         DESIGN-KONFIGURATOR (css/configurator.css, js/configurator.js)
+         Everything is rendered in the browser. Files leave the device only
+         when the visitor sends the request (anfrage.php).
+         ================================================================= -->
+    <section class="section section--dark cfg" id="gestalten" aria-labelledby="cfg-title" data-section data-configurator>
+      <div class="container">
+        <header class="section-head section-head--on-dark cfg__head">
+          <p class="section-head__kicker" data-i18n="cfg.kicker">Live-Vorschau</p>
+          <h2 class="section-head__title" id="cfg-title" data-i18n="cfg.title">Sieh dein Design, bevor es gedruckt wird.</h2>
+          <p class="section-head__intro" data-i18n="cfg.intro">Lade dein Logo hoch, wähle Textil, Farbe und Position. Deine Datei bleibt dabei auf deinem Gerät.</p>
+        </header>
+
+        <div class="cfg__app">
+          <!-- Stage: canvas preview (sticky on phones) -->
+          <div class="cfg__stage" data-cfg-stage>
+            <canvas class="cfg__canvas" tabindex="0" data-cfg-canvas role="img" aria-label="Vorschau deines Designs auf dem Textil" data-i18n-aria="cfg.canvasLabel"></canvas>
+            <div class="cfg__view" role="radiogroup" aria-label="Ansicht" data-i18n-aria="cfg.view">
+              <label class="cfg__view-btn"><input class="cfg__sr" type="radio" name="cfg-view" value="front" checked><span data-i18n="cfg.front">Vorne</span></label>
+              <label class="cfg__view-btn"><input class="cfg__sr" type="radio" name="cfg-view" value="back"><span data-i18n="cfg.back">Hinten</span></label>
+            </div>
+            <div class="cfg__badges" aria-live="polite">
+              <p class="cfg__badge cfg__badge--info" data-cfg-vector hidden></p>
+              <p class="cfg__badge cfg__badge--warn" data-cfg-quality hidden></p>
+            </div>
+            <p class="cfg__measure" data-cfg-measure aria-live="polite"></p>
+          </div>
+
+          <!-- Controls -->
+          <div class="cfg__panel">
+            <div class="cfg__block">
+              <p class="cfg__step"><span class="cfg__step-num">1</span> <span data-i18n="cfg.step1">Dein Logo</span></p>
+              <div class="cfg__upload" data-cfg-drop>
+                <input class="cfg__sr" id="cfg-file" type="file" accept=".png,.jpg,.jpeg,.svg,.webp,.pdf,.ai,.eps,image/png,image/jpeg,image/svg+xml,image/webp,application/pdf">
+                <label class="btn btn--primary cfg__upload-btn" for="cfg-file">
+                  <svg class="btn__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
+                  <span data-i18n="cfg.upload">Logo hochladen</span>
+                </label>
+                <p class="cfg__formats" data-i18n="cfg.formats">PNG, JPG, SVG oder PDF bis 15 MB. Oder Datei hierher ziehen.</p>
+              </div>
+              <div class="cfg__file" data-cfg-file hidden>
+                <span class="cfg__file-icon" aria-hidden="true" data-cfg-file-type></span>
+                <span class="cfg__file-text"><span class="cfg__file-name" data-cfg-file-name></span><span class="cfg__file-meta" data-cfg-file-meta></span></span>
+                <button class="cfg__file-remove" type="button" data-cfg-remove aria-label="Datei entfernen" data-i18n-aria="cfg.remove">×</button>
+              </div>
+              <label class="cfg__switch" data-cfg-bg hidden>
+                <input class="cfg__switch-input" type="checkbox" role="switch" checked data-cfg-bg-toggle>
+                <span class="cfg__switch-track" aria-hidden="true"></span>
+                <span data-i18n="cfg.removeBg">Weißen Hintergrund entfernen</span>
+              </label>
+              <p class="cfg__error" data-cfg-error role="alert" hidden></p>
+            </div>
+
+            <fieldset class="cfg__block">
+              <legend class="cfg__step"><span class="cfg__step-num">2</span> <span data-i18n="cfg.step2">Textil und Farbe</span></legend>
+              <div class="cfg__segment" data-cfg-products></div>
+              <p class="cfg__label"><span data-i18n="cfg.color">Farbe</span>: <span class="cfg__value" data-cfg-color-name></span></p>
+              <div class="cfg__swatches" data-cfg-swatches></div>
+            </fieldset>
+
+            <fieldset class="cfg__block">
+              <legend class="cfg__step"><span class="cfg__step-num">3</span> <span data-i18n="cfg.step3">Position und Größe</span></legend>
+              <div class="cfg__segment" data-cfg-positions></div>
+              <div class="cfg__size">
+                <label class="cfg__label" for="cfg-size" data-i18n="cfg.size">Größe</label>
+                <input class="cfg__range" id="cfg-size" type="range" min="15" max="100" step="1" value="80" data-cfg-size>
+              </div>
+              <p class="cfg__hint" data-i18n="cfg.hint">Ziehen zum Verschieben, mit zwei Fingern vergrößern oder verkleinern.</p>
+            </fieldset>
+
+            <div class="cfg__block cfg__block--cta" data-hide-float>
+              <button class="btn btn--primary btn--block cfg__cta" type="button" data-cfg-open>
+                <span data-i18n="cfg.cta">Anfrage senden</span>
+                <svg class="btn__icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
+              </button>
+              <p class="cfg__note" data-i18n="cfg.note">Unverbindlich und kostenlos. Angebot innerhalb von 24 Stunden.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Request drawer -->
+      <dialog class="cfg-dialog" aria-labelledby="cfg-dialog-title" data-cfg-dialog>
+        <form class="cfg-form" novalidate data-cfg-form>
+          <div class="cfg-form__head">
+            <h3 class="cfg-form__title" id="cfg-dialog-title" data-i18n="cfg.dialogTitle">Anfrage senden</h3>
+            <button class="cfg-form__close" type="button" data-cfg-close aria-label="Schließen" data-i18n-aria="cfg.close">×</button>
+          </div>
+
+          <div class="cfg-form__body" data-cfg-form-body>
+            <div class="cfg-form__summary">
+              <img class="cfg-form__thumb" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="88" height="98" data-cfg-thumb>
+              <dl class="cfg-form__facts" data-cfg-facts></dl>
+            </div>
+
+            <div class="field-hidden" aria-hidden="true">
+              <label for="cfg-website">Website</label>
+              <input type="text" id="cfg-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="cfg-form__row">
+              <div class="cfg-field">
+                <label class="cfg-field__label" for="cfg-name"><span data-i18n="form.name">Name</span> <span class="field__req" aria-hidden="true">*</span></label>
+                <input class="cfg-field__input" id="cfg-name" name="name" type="text" autocomplete="name" required>
+                <p class="cfg-field__error" data-error-for="cfg-name"></p>
+              </div>
+              <div class="cfg-field">
+                <label class="cfg-field__label" for="cfg-email"><span data-i18n="form.email">E-Mail</span> <span class="field__req" aria-hidden="true">*</span></label>
+                <input class="cfg-field__input" id="cfg-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+                <p class="cfg-field__error" data-error-for="cfg-email"></p>
+              </div>
+            </div>
+
+            <fieldset class="cfg-field">
+              <legend class="cfg-field__label"><span data-i18n="cfg.sizes">Stückzahl pro Größe</span> <span class="field__req" aria-hidden="true">*</span></legend>
+              <div class="cfg-sizes" data-cfg-sizes></div>
+              <p class="cfg-sizes__total" data-cfg-total aria-live="polite"></p>
+              <p class="cfg-field__error" data-error-for="cfg-sizes"></p>
+            </fieldset>
+
+            <div class="cfg-field">
+              <label class="cfg-field__label" for="cfg-message"><span data-i18n="cfg.message">Nachricht</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
+              <textarea class="cfg-field__input cfg-field__input--area" id="cfg-message" name="message" rows="3" placeholder="z. B. Wunschtermin, Abholung oder Versand, zweiter Druck" data-i18n-placeholder="cfg.messagePh"></textarea>
+            </div>
+
+            <button class="btn btn--primary btn--block" type="submit" data-cfg-submit data-i18n="cfg.submit">Anfrage senden</button>
+            <p class="cfg-form__privacy"><span data-i18n="form.privacy">Wie wir deine Angaben verarbeiten, steht in unserer</span> <a class="quote-form__privacy-link" href="datenschutz.html" data-i18n="form.privacyLink">Datenschutzerklärung</a>.</p>
+            <div class="cfg-form__status" role="status" aria-live="polite" data-cfg-status></div>
+          </div>
+
+          <div class="cfg-form__done" data-cfg-done hidden tabindex="-1">
+            <svg class="cfg-form__done-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+            <p class="cfg-form__done-title" data-i18n="cfg.doneTitle">Danke! Deine Anfrage ist da.</p>
+            <p class="cfg-form__done-text" data-i18n="cfg.doneText">Du bekommst gleich eine Bestätigung per E-Mail. Wir melden uns innerhalb von 24 Stunden mit deinem Angebot.</p>
+            <button class="btn btn--light" type="button" data-cfg-close data-i18n="cfg.doneClose">Schließen</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
 
 <!-- =================================================================
          LEISTUNGEN
@@ -493,75 +636,9 @@
           <div>
             <p class="section-head__kicker" data-i18n="refs.kicker">Beispiele</p>
             <h2 class="section-head__title reveal-on-scroll" id="references-title" data-i18n="refs.title">So kann dein Druck aussehen.</h2>
-            <p class="section-head__intro reveal-on-scroll delay-100" data-i18n="refs.intro">Lade dein Logo hoch und sieh sofort, wie es auf deinem Textil wirkt.</p>
+            <p class="section-head__intro reveal-on-scroll delay-100" data-i18n="refs.note">Beispielbilder zur Veranschaulichung.</p>
           </div>
         </header>
-
-        <!-- ==========================================================
-             LIVE PREVIEW (js/main.js, section "Design preview").
-             Runs fully in the browser; files leave the device only when
-             the visitor sends the request.
-             ========================================================== -->
-        <div class="studio" id="preview" data-studio>
-          <div class="studio__stage">
-            <svg class="studio__svg" viewBox="0 0 500 560" role="img" aria-labelledby="studio-svg-title" data-studio-svg>
-              <title id="studio-svg-title" data-i18n="studio.svgTitle">Vorschau deines Designs auf dem Textil</title>
-            </svg>
-            <p class="studio__drag-hint" data-i18n="studio.dragHint">Tipp: Du kannst dein Logo auf dem Textil verschieben.</p>
-          </div>
-
-          <div class="studio__controls">
-            <div class="studio__upload">
-              <label class="btn btn--primary studio__upload-btn" for="studio-file">
-                <svg class="btn__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
-                <span data-i18n="studio.upload">Logo hochladen</span>
-              </label>
-              <input class="visually-hidden" id="studio-file" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp,image/heic,.png,.jpg,.jpeg,.svg,.webp,.heic,.pdf,.ai,.eps,.psd,.tif,.tiff">
-              <p class="studio__file" data-studio-empty data-i18n="studio.noFile">Noch kein Logo? Wir zeigen dir ein Beispiel.</p>
-              <p class="studio__file" data-studio-file hidden></p>
-              <label class="studio__check" data-studio-bg hidden>
-                <input type="checkbox" checked data-studio-bg-toggle>
-                <span data-i18n="studio.removeBg">Weißen Hintergrund entfernen</span>
-              </label>
-            </div>
-
-            <fieldset class="studio__group">
-              <legend class="studio__label" data-i18n="studio.product">Textil</legend>
-              <div class="choice-group choice-group--light">
-                <label class="choice"><input class="choice__input" type="radio" name="studio-product" value="tshirt" checked><span class="choice__label" data-i18n="studio.tshirt">T-Shirt</span></label>
-                <label class="choice"><input class="choice__input" type="radio" name="studio-product" value="hoodie"><span class="choice__label" data-i18n="studio.hoodie">Hoodie</span></label>
-              </div>
-            </fieldset>
-
-            <fieldset class="studio__group">
-              <legend class="studio__label"><span data-i18n="studio.color">Farbe</span>: <span class="studio__value" data-studio-color-name>Schwarz</span></legend>
-              <div class="swatches" data-studio-swatches></div>
-            </fieldset>
-
-            <fieldset class="studio__group">
-              <legend class="studio__label" data-i18n="studio.position">Position</legend>
-              <div class="choice-group choice-group--light choice-group--three">
-                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="center" checked><span class="choice__label" data-i18n="studio.posCenter">Brust mittig</span></label>
-                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="left"><span class="choice__label" data-i18n="studio.posLeft">Brust links</span></label>
-                <label class="choice"><input class="choice__input" type="radio" name="studio-position" value="back"><span class="choice__label" data-i18n="studio.posBack">Rücken</span></label>
-              </div>
-            </fieldset>
-
-            <div class="studio__group">
-              <label class="studio__label" for="studio-size" data-i18n="studio.size">Größe</label>
-              <input class="studio__range" id="studio-size" type="range" min="25" max="100" value="80" data-studio-size>
-            </div>
-
-            <button class="btn btn--primary btn--block studio__cta" type="button" data-studio-cta>
-              <span data-i18n="studio.cta">Mit diesem Design anfragen</span>
-              <svg class="btn__icon" aria-hidden="true"><use href="#icon-arrow"></use></svg>
-            </button>
-            <p class="studio__note" data-i18n="studio.note">Unverbindliche Vorschau. Deine Datei bleibt auf deinem Gerät, bis du die Anfrage sendest.</p>
-          </div>
-        </div>
-
-        <h3 class="ref-subhead" data-i18n="refs.examples">Beispiele</h3>
-        <p class="ref-subnote" data-i18n="refs.note">Beispielbilder zur Veranschaulichung.</p>
 
         <!-- Replace the .svg placeholders with real photos (same file names, .jpg) -->
         <ul class="grid grid--3 ref-grid" role="list">
@@ -952,6 +1029,7 @@
     </svg>
   </a>
 
-  <script src="js/main.js?v=9971fb08" defer></script>
+  <script src="js/configurator.js?v=0d5e13b2" defer></script>
+  <script src="js/main.js?v=0d5e13b2" defer></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ jobs:
         run: npx --yes html-validate@9 index.html impressum.html datenschutz.html 404.html
 
       - name: Check JavaScript syntax
-        run: node --check js/main.js
+        run: for f in js/*.js; do node --check "$f" || exit 1; done
 
       - name: Check PHP syntax
         run: php -l anfrage.php
