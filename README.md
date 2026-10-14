@@ -14,8 +14,10 @@ css/
   responsive.css   explicit breakpoints: 1100–1279 / 768–1099 / ≤767 / ≤359
 js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
+  bewertung.js     review form: stars, validation, sending
   reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
 zahlung.html       payment & delivery: order flow, Vorkasse/PayPal, shipping, no right of withdrawal for custom work, defects
+bewertung.html     review form (stars, name, context, message, optional e-mail, publishing consent); e-mailed via anfrage.php, never auto-published
 karriere.html      jobs page (student assistant opening, Google for Jobs data), linked in every footer
 reklamation.html   claim page ("Reklamation & Mängelrüge"), linked in every footer
 impressum.html     legal notice (§ 5 DDG)
@@ -86,7 +88,7 @@ It adds a fingerprint (`?v=…`) to all CSS/JS links in the HTML pages. Without 
 Run all checks locally before pushing:
 
 ```
-npx html-validate index.html reklamation.html karriere.html zahlung.html impressum.html datenschutz.html 404.html
+npx html-validate index.html reklamation.html karriere.html zahlung.html bewertung.html impressum.html datenschutz.html 404.html
 node --check js/main.js
 node .github/scripts/check-links.mjs
 node .github/scripts/stamp-assets.mjs --check

@@ -1,7 +1,8 @@
 <?php
 /* ==========================================================================
-   PRINT LAB Trier: receives the quote form (js/main.js posts here) and the
+   PRINT LAB Trier: receives the quote form (js/main.js posts here), the
    claim form (reklamation.html, js/reklamation.js, form=reklamation) and
+   the review form (bewertung.html, js/bewertung.js, form=bewertung) and
    e-mails them to the shop with the uploaded files attached, plus a short
    confirmation to the customer. Answers with JSON: { "ok": true|false }.
    Compatible with PHP 7.4+. No database. The only thing stored is a
@@ -30,6 +31,7 @@ const CLAIM_ISSUES  = [
     'Falsches Motiv oder Position' => 'Wrong design or position',
     'Sonstiges'                   => 'Other',
 ];
+const REVIEW_ROLES  = ['Privat', 'Verein', 'Unternehmen', 'Schule / Hochschule', 'Event / Feier', 'Sonstiges'];
 const MIN_SECONDS   = 3;  // faster than this is a bot
 const RATE_LIMIT    = 5;  // submissions per IP and hour
 
@@ -182,6 +184,51 @@ function field(string $name, int $max, bool $multiline = false): string
    Claim form (reklamation.html): description plus photos of the defect and
    of the whole item. Handled completely here, then the script ends.
    ========================================================================== */
+/* ==========================================================================
+   Review form (bewertung.html): goes to the shop only. Nothing is published
+   automatically; PRINT LAB checks each review and only shows it on the
+   website when the customer has agreed.
+   ========================================================================== */
+if (field('form', 20) === 'bewertung') {
+    $name    = field('name', 100);
+    $role    = field('role', 40);
+    $rating  = field('rating', 1);
+    $email   = field('email', 160);
+    $message = field('message', 3000, true);
+    $consent = field('consent', 2) === 'ja';
+
+    $errors = [];
+    if ($name === '') $errors[] = 'name';
+    if ($role !== '' && !in_array($role, REVIEW_ROLES, true)) $errors[] = 'role';
+    if (!in_array($rating, ['1', '2', '3', '4', '5'], true)) $errors[] = 'rating';
+    if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
+    if ($message === '') $errors[] = 'message';
+    if ($errors) {
+        respond(422, ['ok' => false, 'error' => 'fields', 'fields' => $errors]);
+    }
+
+    $stars = str_repeat('★', (int) $rating) . str_repeat('☆', 5 - (int) $rating);
+    $text = "Neue Bewertung über printlab-trier.de\n\n" . rows_to_text([
+        'Bewertung' => $stars . ' (' . $rating . ' von 5)',
+        'Name / Projekt' => $name,
+        'Kontext' => $role,
+        'E-Mail (nicht veröffentlichen)' => $email,
+        'Veröffentlichung' => $consent
+            ? 'erlaubt (mit Namen oder anonymisiert)'
+            : 'NICHT erlaubt, nur intern verwenden',
+    ]) . "\n\nFeedback:\n" . $message
+        . ($email !== '' ? "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.' : '');
+    $headers = ['From: ' . enc_header('PRINT LAB Website') . ' <' . SHOP_EMAIL . '>'];
+    if ($email !== '') {
+        $headers[] = 'Reply-To: ' . enc_header(str_replace(['"', '\\'], '', $name)) . ' <' . $email . '>';
+    }
+    if (!send_mail(SHOP_EMAIL, 'Neue Bewertung: ' . $rating . '/5 von ' . $name, $text, $headers)) {
+        respond(500, ['ok' => false, 'error' => 'mail']);
+    }
+    record_hit($hits);
+    respond(200, ['ok' => true]);
+}
+
 if (field('form', 20) === 'reklamation') {
     $lang    = field('lang', 2) === 'en' ? 'en' : 'de';
     $name    = field('name', 100);

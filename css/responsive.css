@@ -695,9 +695,14 @@
   }
 
   .site-footer__inner {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
+  }
+
+  .site-footer__inner > .footer-links {
+    justify-content: flex-start;
   }
 
   /* ---- Floating WhatsApp ---- */
