@@ -279,11 +279,29 @@
       if (Math.abs(shift) >= 1) window.scrollTo(0, window.scrollY + shift);
       requestAnimationFrame(() => { root.style.overflowAnchor = ''; root.style.scrollBehavior = ''; });
     }
-    try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
+  }
+
+  /* Once the visitor has chosen a language with our own switch, the
+     browser must not offer its own translation as well: in-app browsers
+     (e.g. the Google app) then put a translation bar over the top of the
+     page, which pushes the header down and hides the start of the hero. */
+  function declineBrowserTranslation() {
+    document.documentElement.setAttribute('translate', 'no');
+    if (!document.querySelector('meta[name="google"]')) {
+      const meta = document.createElement('meta');
+      meta.name = 'google';
+      meta.content = 'notranslate';
+      document.head.appendChild(meta);
+    }
   }
 
   document.querySelectorAll('[data-lang]').forEach((btn) => {
-    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    btn.addEventListener('click', () => {
+      declineBrowserTranslation();
+      applyLanguage(btn.dataset.lang);
+      // Remember only a real choice, so first-time visitors keep the browser's offer
+      try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
+    });
   });
 
   /* ------------------------------------------------------------------------
@@ -342,7 +360,8 @@
     const top = hash === '#top' ? 0 : target.getBoundingClientRect().top + window.pageYOffset - headerH + skip;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
-    if (history.replaceState) history.replaceState(null, '', hash);
+    // Back to top leaves a clean address, so a refresh simply starts at the top
+    if (history.replaceState) history.replaceState(null, '', hash === '#top' ? location.pathname + location.search : hash);
 
     // Move keyboard focus with the scroll (skip link, screen readers)
     const focusTarget = hash === '#top' ? document.getElementById('main') : target;
@@ -822,8 +841,53 @@
   let initialLang = 'de';
   try {
     const stored = localStorage.getItem(LANG_KEY);
-    if (stored) initialLang = stored;
+    if (stored) { initialLang = stored; declineBrowserTranslation(); }
   } catch (e) {}
-  
+
   applyLanguage(initialLang);
+
+  /* ------------------------------------------------------------------------
+     Viewport diagnostics, only with ?debug in the address (e.g. to find a
+     browser-specific layout problem on a real phone). Shows what the
+     browser reports about its screen, scroll position and the hero.
+     ------------------------------------------------------------------------ */
+  if (/[?&]debug\b/.test(window.location.search)) {
+    const box = document.createElement('pre');
+    box.style.cssText = 'position:fixed;left:6px;top:50%;z-index:99999;margin:0;padding:6px 8px;max-width:calc(100% - 12px);' +
+      'font:11px/1.35 ui-monospace,Menlo,monospace;color:#0f0;background:rgba(0,0,0,.85);border-radius:6px;pointer-events:none;white-space:pre-wrap';
+    const probe = (unit) => {
+      const d = document.createElement('div');
+      d.style.cssText = 'position:absolute;top:0;left:-9999px;width:1px;visibility:hidden;height:100' + unit;
+      document.body.appendChild(d);
+      return d;
+    };
+    const probes = { svh: probe('svh'), lvh: probe('lvh'), dvh: probe('dvh'), vh: probe('vh') };
+    document.body.appendChild(box);
+    const r = (el) => (el ? Math.round(el.getBoundingClientRect().top) + '/' + Math.round(el.getBoundingClientRect().bottom) : '-');
+    const header = document.querySelector('[data-mobile-header]').offsetHeight ? document.querySelector('[data-mobile-header]') : document.querySelector('[data-header]');
+    const log = [];
+    const draw = (why) => {
+      const vv = window.visualViewport;
+      const line = why + ' y=' + Math.round(window.scrollY) + ' ih=' + window.innerHeight + (vv ? ' vv=' + Math.round(vv.offsetTop) + '/' + Math.round(vv.height) : '');
+      if (why !== 'tick') { log.unshift(new Date().toISOString().slice(17, 22) + ' ' + line); log.length = Math.min(log.length, 5); }
+      box.textContent =
+        'scrollY ' + window.scrollY.toFixed(1) + '  docTop ' + document.documentElement.scrollTop.toFixed(1) + '\n' +
+        'inner ' + window.innerWidth + 'x' + window.innerHeight + '  client ' + document.documentElement.clientHeight + '\n' +
+        'screen ' + screen.width + 'x' + screen.height + '  --screen-h ' + document.documentElement.style.getPropertyValue('--screen-h') + '\n' +
+        (vv ? 'visualVP top ' + vv.offsetTop.toFixed(1) + ' h ' + vv.height.toFixed(1) + ' pageTop ' + vv.pageTop.toFixed(1) + '\n' : '') +
+        'svh ' + probes.svh.offsetHeight + ' lvh ' + probes.lvh.offsetHeight + ' dvh ' + probes.dvh.offsetHeight + ' vh ' + probes.vh.offsetHeight + '\n' +
+        '--header-real ' + document.documentElement.style.getPropertyValue('--header-real') + '\n' +
+        'header ' + r(header) + '  hero ' + r(heroEl) + '\n' +
+        'title ' + r(document.querySelector('.hero__title')) + '  marquee ' + r(document.querySelector('.marquee')) + '\n' +
+        'nav ' + ((performance.getEntriesByType && performance.getEntriesByType('navigation')[0] || {}).type || '?') +
+        '  restore ' + history.scrollRestoration + '\n' + log.join('\n');
+    };
+    ['scroll', 'resize', 'pageshow', 'load'].forEach((ev) => window.addEventListener(ev, () => draw(ev), { passive: true }));
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => draw('vv-resize'));
+      window.visualViewport.addEventListener('scroll', () => draw('vv-scroll'));
+    }
+    setInterval(() => draw('tick'), 400);
+    draw('start');
+  }
 })();
