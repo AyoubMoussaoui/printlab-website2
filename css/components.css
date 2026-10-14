@@ -1765,6 +1765,133 @@ a.contact-list__item:hover {
   margin-top: 8px;
 }
 
+/* ---------- Jobs page (karriere.html) ---------- */
+.job__inner {
+  max-width: 980px;
+}
+
+.job__title {
+  max-width: 820px;
+  margin-bottom: 0;
+}
+
+.job-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job-facts__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  color: var(--color-offwhite);
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+}
+
+.job-facts__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-magenta-on-dark);
+}
+
+.job__lead {
+  max-width: 720px;
+  margin-top: 28px;
+}
+
+.job-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.job-card {
+  padding: 28px;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-graphite);
+}
+
+.job-card__title {
+  margin-bottom: 18px;
+  color: var(--color-offwhite);
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+}
+
+.job-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.job-list__icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  color: var(--color-magenta-on-dark);
+}
+
+.job-apply {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: 16px;
+  padding: 32px;
+  border: 1px solid var(--color-line-dark);
+  border-left: 2px solid var(--color-magenta-on-dark);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-charcoal);
+}
+
+.job-apply__title {
+  color: var(--color-offwhite);
+  font-size: 24px;
+  font-weight: var(--fw-bold);
+}
+
+.job-apply__text {
+  max-width: 520px;
+  margin-top: 8px;
+  color: var(--color-text-on-dark-soft);
+}
+
+.job-apply__link {
+  color: var(--color-offwhite);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.job-apply__actions {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* ---------- Footer ---------- */
 .site-footer__meta {
   font-size: 14px;
@@ -1772,7 +1899,8 @@ a.contact-list__item:hover {
 
 .footer-links {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap; /* five links: wrap neatly on narrow phones */
+  gap: 8px 20px;
   margin: 0;
   padding: 0;
   list-style: none;

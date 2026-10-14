@@ -33,6 +33,11 @@
    TABLET  768–1099px
    -------------------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1099px) {
+  /* Jobs page: cards one below the other */
+  .job-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   :root {
     --container-pad: 28px;
     --header-h: 118px;
@@ -655,6 +660,24 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
+  }
+
+  /* ---- Jobs page ---- */
+  .job-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .job-card {
+    padding: 24px 20px;
+  }
+
+  .job-apply {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 24px 20px;
   }
 
   /* ---- Footer: leave room for the floating WhatsApp button ---- */
