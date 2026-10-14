@@ -25,7 +25,7 @@ const CLAIM_MAX_TOTAL = 25 * 1024 * 1024;
 const CLAIM_EXT     = ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'];
 const CLAIM_ISSUES  = [
     'Druckfehler / Druckqualität' => 'Print defect / print quality',
-    'Beschädigtes Textil'         => 'Damaged textile',
+    'Beschädigter Artikel'        => 'Damaged item',
     'Falsche Größe oder Farbe'    => 'Wrong size or colour',
     'Falsches Motiv oder Position' => 'Wrong design or position',
     'Sonstiges'                   => 'Other',
@@ -237,7 +237,7 @@ if (field('form', 20) === 'reklamation') {
         $confirmText = "Hello" . $greetName . ",\n\n"
             . "we are sorry that something is not right with your order. We have received your claim and the photos, will check everything carefully and usually get back to you within one working day with a solution.\n\n"
             . $summary . "\n\n"
-            . "Please keep the affected items as they are (unwashed) until we have sorted it out.\n"
+            . "Please keep the affected items as they are (unused and uncleaned) until we have sorted it out.\n"
             . "If you would like to add something, simply reply to this email or write to us on WhatsApp: " . WHATSAPP . "\n\n"
             . "Your statutory warranty rights are of course not affected.\n\n"
             . "Best regards\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";
@@ -251,7 +251,7 @@ if (field('form', 20) === 'reklamation') {
         $confirmText = "Hallo" . $greetName . ",\n\n"
             . "es tut uns leid, dass bei deinem Auftrag etwas nicht stimmt. Deine Reklamation und die Fotos sind bei uns angekommen. Wir prüfen alles sorgfältig und melden uns in der Regel innerhalb eines Werktags mit einer Lösung bei dir.\n\n"
             . $summary . "\n\n"
-            . "Bitte bewahre die betroffenen Artikel bis zur Klärung so auf, wie sie sind (ungewaschen).\n"
+            . "Bitte bewahre die betroffenen Artikel bis zur Klärung so auf, wie sie sind (möglichst unbenutzt und ungereinigt).\n"
             . "Möchtest du noch etwas ergänzen? Antworte einfach auf diese E-Mail oder schreib uns per WhatsApp: " . WHATSAPP . "\n\n"
             . "Deine gesetzlichen Gewährleistungsrechte bleiben selbstverständlich unberührt.\n\n"
             . "Viele Grüße\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";

@@ -7,17 +7,17 @@
   <meta name="description" content="Stimmt etwas mit deinem Auftrag nicht? Reklamation bei PRINT LAB Trier einfach online einreichen: Fotos hochladen, Problem beschreiben, schnelle Lösung.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/reklamation.html">
-  <link rel="icon" href="favicon.ico?v=0f153252" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=0f153252" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=0f153252">
-  <link rel="manifest" href="site.webmanifest?v=0f153252">
+  <link rel="icon" href="favicon.ico?v=f6e09f69" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=f6e09f69" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=f6e09f69">
+  <link rel="manifest" href="site.webmanifest?v=f6e09f69">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=0f153252">
-  <link rel="stylesheet" href="css/base.css?v=0f153252">
-  <link rel="stylesheet" href="css/layout.css?v=0f153252">
-  <link rel="stylesheet" href="css/components.css?v=0f153252">
-  <link rel="stylesheet" href="css/responsive.css?v=0f153252">
+  <link rel="stylesheet" href="css/variables.css?v=f6e09f69">
+  <link rel="stylesheet" href="css/base.css?v=f6e09f69">
+  <link rel="stylesheet" href="css/layout.css?v=f6e09f69">
+  <link rel="stylesheet" href="css/components.css?v=f6e09f69">
+  <link rel="stylesheet" href="css/responsive.css?v=f6e09f69">
 </head>
 <body class="page-dark">
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
@@ -57,7 +57,7 @@
       <div class="contact__info">
         <p class="section-head__kicker" data-i18n="kicker">Reklamation</p>
         <h1 class="section-head__title claim__title" data-i18n="title">Reklamation &amp; Mängelrüge</h1>
-        <p class="contact__lead" data-i18n="lead">Individueller Textildruck ist Präzisionsarbeit. Wenn bei deinem Auftrag trotzdem etwas nicht stimmt, kümmern wir uns schnell und unkompliziert darum.</p>
+        <p class="contact__lead" data-i18n="lead">Individuelle Produktion ist Präzisionsarbeit. Wenn bei deinem Auftrag trotzdem etwas nicht stimmt, kümmern wir uns schnell und unkompliziert darum.</p>
 
         <ol class="claim-steps" role="list">
           <li class="claim-steps__item">
@@ -74,7 +74,7 @@
           </li>
         </ol>
 
-        <p class="claim-note" data-i18n="note">Bitte bewahre die betroffenen Artikel bis zur Klärung so auf, wie sie sind, und wasche sie nicht mehr. Deine gesetzlichen Gewährleistungsrechte bleiben selbstverständlich unberührt.</p>
+        <p class="claim-note" data-i18n="note">Bitte bewahre die betroffenen Artikel bis zur Klärung so auf, wie sie sind, und benutze oder reinige sie möglichst nicht weiter. Deine gesetzlichen Gewährleistungsrechte bleiben selbstverständlich unberührt.</p>
       </div>
 
       <form class="quote-form" id="claim-form" action="anfrage.php" method="post" enctype="multipart/form-data" novalidate data-claim-form>
@@ -103,7 +103,7 @@
             <select class="field__input field__input--select" id="c-issue" name="issue" required>
               <option value="" data-i18n="choose">Bitte wählen</option>
               <option value="Druckfehler / Druckqualität" data-i18n="issue1">Druckfehler / Druckqualität</option>
-              <option value="Beschädigtes Textil" data-i18n="issue2">Beschädigtes Textil</option>
+              <option value="Beschädigter Artikel" data-i18n="issue2">Beschädigter Artikel</option>
               <option value="Falsche Größe oder Farbe" data-i18n="issue3">Falsche Größe oder Farbe</option>
               <option value="Falsches Motiv oder Position" data-i18n="issue4">Falsches Motiv oder Position</option>
               <option value="Sonstiges" data-i18n="issue5">Sonstiges</option>
@@ -112,7 +112,7 @@
           </div>
           <div class="field field--full">
             <label class="field__label" for="c-message"><span data-i18n="message">Beschreibung</span> <span class="field__req" aria-hidden="true">*</span></label>
-            <textarea class="field__input field__input--area" id="c-message" name="message" rows="5" placeholder="Was genau stimmt nicht, und wie viele Teile sind betroffen?" data-i18n-placeholder="messagePh" required></textarea>
+            <textarea class="field__input field__input--area" id="c-message" name="message" rows="5" placeholder="Was genau stimmt nicht, und wie viele Artikel sind betroffen?" data-i18n-placeholder="messagePh" required></textarea>
             <p class="field__error" data-error-for="c-message"></p>
           </div>
 
@@ -133,7 +133,7 @@
               <input class="upload__input" id="c-photos-item" type="file" accept="image/*,.heic,.heif" multiple>
               <svg class="upload__icon" aria-hidden="true"><use href="#icon-clip"></use></svg>
               <span class="upload__cta" data-i18n="photoCta">Foto auswählen oder aufnehmen</span>
-              <span class="upload__hint" data-i18n="photoItemHint">Das ganze Teil, gut erkennbar. Bis zu 2 Fotos.</span>
+              <span class="upload__hint" data-i18n="photoItemHint">Der ganze Artikel, gut erkennbar. Bis zu 2 Fotos.</span>
             </div>
             <ul class="photo-upload__list" role="list" data-photo-list></ul>
             <p class="field__error" data-error-for="c-photos-item"></p>
@@ -175,6 +175,6 @@
     </div>
   </footer>
 
-  <script src="js/reklamation.js?v=0f153252" defer></script>
+  <script src="js/reklamation.js?v=f6e09f69" defer></script>
 </body>
 </html>
