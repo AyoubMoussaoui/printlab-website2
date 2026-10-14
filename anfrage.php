@@ -101,12 +101,28 @@ $delivery = field('delivery', 40);
 $zip      = field('zip', 80);
 $message  = field('message', 5000, true);
 
+/* Requests from the Design-Konfigurator (js/configurator.js) bring
+   quantities per size, the print size and the image resolution, and don't
+   ask for pickup or shipping. */
+$fromConfigurator = field('source', 20) === 'konfigurator';
+$view      = field('view', 10);
+$printSize = field('print_size', 40);
+$dpi       = field('dpi', 5);
+$sizes = [];
+foreach (['S', 'M', 'L', 'XL', 'XXL'] as $s) {
+    $n = field('size_' . $s, 4);
+    if (ctype_digit($n) && (int) $n > 0) $sizes[$s] = (int) $n;
+}
+if ($sizes) $quantity = (string) array_sum($sizes);
+if ($fromConfigurator && $delivery === '') $delivery = 'Noch offen';
+
 $errors = [];
 if ($name === '') $errors[] = 'name';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'email';
 if ($product === '') $errors[] = 'product';
 if (!ctype_digit($quantity) || (int) $quantity < 1) $errors[] = 'quantity';
-if (!in_array($delivery, ['Abholung in Trier', 'Versand'], true)) $errors[] = 'delivery';
+if (!in_array($delivery, ['Abholung in Trier', 'Versand', 'Noch offen'], true)) $errors[] = 'delivery';
+if ($dpi !== '' && !ctype_digit($dpi)) $errors[] = 'dpi';
 if ($deadline !== '') {
     $d = DateTime::createFromFormat('!Y-m-d', $deadline);
     if (!$d || $d->format('Y-m-d') !== $deadline) $errors[] = 'deadline';
@@ -190,14 +206,20 @@ function send_mail(string $to, string $subject, string $text, array $headers, ar
     return mail($to, enc_header($subject), $body, implode("\r\n", $headers), '-f' . SHOP_EMAIL);
 }
 
+$sizeText = implode(', ', array_map(function ($s, $n) { return $s . ': ' . $n; }, array_keys($sizes), $sizes));
+
 $rows = [
+    'Quelle'        => $fromConfigurator ? 'Design-Konfigurator' : 'Anfrageformular',
     'Name'          => $name,
     'E-Mail'        => $email,
     'Telefon'       => $phone,
     'Produkt'       => $product,
     'Stückzahl'     => $quantity,
     'Farbe'         => $color,
-    'Druckposition' => $position,
+    'Druckposition' => $position . ($view !== '' ? ' (' . $view . ')' : ''),
+    'Druckgröße'    => $printSize,
+    'Auflösung'     => $dpi !== '' ? 'ca. ' . $dpi . ' dpi' . ((int) $dpi < 150 ? ' (gering, bitte prüfen)' : '') : '',
+    'Größen'        => $sizeText,
     'Wunschtermin'  => format_date($deadline),
     'Lieferung'     => $delivery,
     'PLZ und Ort'   => $delivery === 'Versand' ? $zip : '',
@@ -229,11 +251,13 @@ record_hit($hits);
 $greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
 $summary = rows_to_text([
     ($lang === 'en' ? 'Product' : 'Produkt') => $product,
-    ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity,
+    ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity . ($sizeText !== '' ? ' (' . $sizeText . ')' : ''),
+    ($lang === 'en' ? 'Colour' : 'Farbe') => $color,
+    ($lang === 'en' ? 'Position' : 'Position') => $position,
     ($lang === 'en' ? 'Preferred date' : 'Wunschtermin') => format_date($deadline),
-    ($lang === 'en' ? 'Delivery' : 'Lieferung') => $lang === 'en'
+    ($lang === 'en' ? 'Delivery' : 'Lieferung') => $delivery === 'Noch offen' ? '' : ($lang === 'en'
         ? ($delivery === 'Versand' ? 'Shipping' : 'Pickup in Trier')
-        : $delivery,
+        : $delivery),
     ($lang === 'en' ? 'Files' : 'Dateien') => $files ? (string) count($files) : '',
 ]);
 
