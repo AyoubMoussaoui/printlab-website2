@@ -18,7 +18,10 @@ js/
   reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
 zahlung.html       payment & delivery: order flow, Vorkasse/PayPal, shipping, no right of withdrawal for custom work, defects
 bewertungen.html   reviews page: average, star distribution and newest reviews from reviews.json; "Bewertung abgeben" opens the form (old bewertung.html redirects here)
-reviews.json       the published reviews, maintained by hand (see "Reviews")
+reviews.json       starting list of reviews, copied to the server once (see "Reviews")
+reviews.php        approved reviews as JSON for the pages
+freigabe.php       approve / reject / remove a review (links in the review e-mail)
+inc/reviews.php    review storage and signed links (not public)
 karriere.html      jobs page (student assistant opening, Google for Jobs data), linked in every footer
 reklamation.html   claim page ("Reklamation & Mängelrüge"), linked in every footer
 impressum.html     legal notice (§ 5 DDG)
@@ -67,23 +70,20 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 
 ## Reviews
 
-`bewertungen.html` shows only what is in `reviews.json`. With an empty list (`[]`) it says "Noch keine Bewertungen". The form ("Bewertung abgeben") e-mails each review to info@ ("Neue Bewertung: 5/5 von …", with whether publishing is allowed); nothing is published automatically.
+`bewertungen.html` and the home page (rating line in the hero, "Kundenstimmen" block at the top of the prices section) show only approved reviews; without any, all of it stays hidden or shows "Noch keine Bewertungen".
 
-To publish a review: check that it belongs to a real order and that publishing was allowed, then add it to `reviews.json` (on GitHub: open the file, pencil icon, edit, commit). Use the customer's text as sent; do not change or shorten its meaning. Publish critical reviews too, as the page promises.
+How a review gets published:
 
-```json
-[
-  {
-    "name": "Max vom SV Trier",
-    "context": "Verein",
-    "date": "2026-10-20T10:03",
-    "rating": 5,
-    "text": "Trikots super geworden, Druck sitzt perfekt."
-  }
-]
-```
+1. A customer sends the form ("Bewertung abgeben") and agrees to publishing.
+2. `anfrage.php` stores it as pending and e-mails it to info@ with three links: **Veröffentlichen**, **Ablehnen**, **Später wieder entfernen**.
+3. A link opens `freigabe.php`, which shows the review and a button. Only the button changes anything, so mail programs that open links in the background (Outlook Safe Links) cannot publish by themselves. Each link works only for its own review and action (HMAC with a random key created on the server).
+4. Approved reviews are served by `reviews.php` (public fields only, never the e-mail address).
 
-`name` "Anonym" if none was given; `context` is optional; `date` is when the review was sent (with or without time); `rating` 1 to 5. Average, star distribution and count are calculated on the page.
+Without consent the review is only e-mailed (marked "NICHT erlaubt"), nothing is stored.
+
+Storage (`inc/reviews.php`): the folder `printlab-data` next to the web folder (outside the public area, untouched by deployments), with `live.json`, `pending/` and `secret.key`. If that folder cannot be created, `data/` in the web folder is used; `.htaccess` blocks it and `inc/`. Pending reviews nobody answers are deleted after 60 days.
+
+`reviews.json` in the repository is only the starting list: the first time the server reads reviews, it copies it into `live.json`. Later changes to `reviews.json` have no effect on the live site.
 
 PHP 7.4 or newer is enough; in Plesk (PHP-Einstellungen) choose the newest 8.x version. Uploads need `upload_max_filesize` ≥ 25M and `post_max_size` ≥ 26M (netcup's defaults are higher). If the e-mail settings ever change, update `SHOP_EMAIL` at the top of `anfrage.php` and the privacy policy.
 

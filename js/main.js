@@ -145,6 +145,7 @@
     'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
     'faq.q11': 'How can I pay?',
     'faq.a11': 'Once you have approved the quote, you pay by bank transfer in advance (prepayment) or via PayPal. Production starts as soon as your payment has arrived.',
+    'reviews.kicker': 'Customer reviews', 'reviews.all': 'See all reviews',
     'faq.q9': 'How much is shipping?',
     'faq.a9': 'Within Germany, standard shipping costs €7.50 and express €14.00. Orders from €199 ship free. If you pick up your order in Trier by arrangement, there are no shipping costs.'
   };
@@ -890,6 +891,63 @@
   });
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+
+  /* Customer reviews: rating line in the hero and a short block in the
+     prices section. Only approved reviews (reviews.php, fallback
+     reviews.json); both stay hidden while there are none. */
+  const heroRating = document.querySelector('[data-hero-rating]');
+  const homeReviews = document.querySelector('[data-home-reviews]');
+  if (heroRating || homeReviews) {
+    const getJson = (url) => fetch(url, { cache: 'no-cache' }).then((res) => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    });
+    getJson('reviews.php').catch(() => getJson('reviews.json')).then((data) => {
+      const reviews = (Array.isArray(data) ? data : [])
+        .filter((r) => r && +r.rating >= 1 && +r.rating <= 5 && typeof r.text === 'string' && r.text.trim())
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+      if (!reviews.length) return;
+      const average = reviews.reduce((sum, r) => sum + Math.round(+r.rating), 0) / reviews.length;
+      const paint = () => {
+        const de = currentLang === 'de';
+        const score = average.toFixed(2).replace('.', de ? ',' : '.');
+        const count = reviews.length + ' ' + (de ? (reviews.length === 1 ? 'Bewertung' : 'Bewertungen') : (reviews.length === 1 ? 'review' : 'reviews'));
+        document.querySelectorAll('[data-rating-score]').forEach((el) => { el.textContent = score; });
+        document.querySelectorAll('[data-rating-count]').forEach((el) => { el.textContent = count; });
+        document.querySelectorAll('.home-reviews__of').forEach((el) => { el.textContent = '/ ' + (de ? '5,00' : '5.00'); });
+        if (heroRating) heroRating.setAttribute('aria-label', (de ? 'Kundenbewertung ' : 'Customer rating ') + score + ' / 5, ' + count);
+      };
+      document.querySelectorAll('[data-rating-stars]').forEach((el) => { el.style.width = (average / 5 * 100) + '%'; });
+      paint();
+      document.addEventListener('printlab:lang', paint);
+
+      const list = homeReviews && homeReviews.querySelector('[data-home-review-list]');
+      if (list) {
+        reviews.slice(0, 2).forEach((r) => {
+          const li = document.createElement('li');
+          li.className = 'rv-card home-reviews__item';
+          const stars = document.createElement('span');
+          stars.className = 'rv-stars';
+          stars.setAttribute('aria-label', Math.round(+r.rating) + ' / 5');
+          const fill = document.createElement('span');
+          fill.className = 'rv-stars__fill';
+          fill.style.width = (Math.round(+r.rating) / 5 * 100) + '%';
+          stars.appendChild(fill);
+          const text = document.createElement('p');
+          text.className = 'home-reviews__text';
+          text.textContent = '„' + r.text.trim() + '“';
+          const who = document.createElement('p');
+          who.className = 'home-reviews__who';
+          const d = new Date(r.date);
+          who.textContent = (r.name || 'Anonym') + (Number.isNaN(d.getTime()) ? '' : ' · ' + String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + d.getFullYear());
+          li.append(stars, text, who);
+          list.appendChild(li);
+        });
+      }
+      if (heroRating) heroRating.hidden = false;
+      if (homeReviews) homeReviews.hidden = false;
+    }).catch(() => { /* no reviews shown */ });
+  }
 
   // Scroll reveal. Content is only hidden while html.js is set (see CSS),
   // so it is revealed immediately where the observer is unavailable.

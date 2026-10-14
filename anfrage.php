@@ -185,9 +185,10 @@ function field(string $name, int $max, bool $multiline = false): string
    of the whole item. Handled completely here, then the script ends.
    ========================================================================== */
 /* ==========================================================================
-   Review form (bewertungen.html): goes to the shop only. Nothing is published
-   automatically; PRINT LAB checks each review and adds it to reviews.json
-   (shown on bewertungen.html) only when the customer has agreed.
+   Review form (bewertungen.html): e-mailed to the shop. With the customer's
+   consent it is also stored as pending (inc/reviews.php) and the e-mail
+   carries links to approve or reject it (freigabe.php). Nothing is
+   published without that approval.
    ========================================================================== */
 if (field('form', 20) === 'bewertung') {
     $name    = field('name', 100);
@@ -207,6 +208,25 @@ if (field('form', 20) === 'bewertung') {
         respond(422, ['ok' => false, 'error' => 'fields', 'fields' => $errors]);
     }
 
+    // With consent the review waits for approval; the e-mail gets the links
+    $approval = '';
+    if ($consent) {
+        try {
+            require_once __DIR__ . '/inc/reviews.php';
+            $reviewId = create_pending_review([
+                'name' => $name, 'context' => $role, 'rating' => (int) $rating,
+                'text' => $message, 'email' => $email,
+            ]);
+            $approval = "\n\n--------------------------------------------------\n"
+                . "VERÖFFENTLICHEN (öffnet eine Seite mit einem Bestätigungs-Button):\n" . review_link($reviewId, 'publish') . "\n\n"
+                . "ABLEHNEN:\n" . review_link($reviewId, 'reject') . "\n\n"
+                . "Später wieder von der Website entfernen:\n" . review_link($reviewId, 'remove') . "\n"
+                . "--------------------------------------------------";
+        } catch (Throwable $e) {
+            $approval = "\n\n(Freigabe-Links konnten nicht erstellt werden. Bitte die Bewertung von Hand eintragen.)";
+        }
+    }
+
     $stars = str_repeat('★', (int) $rating) . str_repeat('☆', 5 - (int) $rating);
     $text = "Neue Bewertung über printlab-trier.de\n\n" . rows_to_text([
         'Bewertung' => $stars . ' (' . $rating . ' von 5)',
@@ -217,7 +237,8 @@ if (field('form', 20) === 'bewertung') {
             ? 'erlaubt (mit Namen oder anonymisiert)'
             : 'NICHT erlaubt, nur intern verwenden',
     ]) . "\n\nFeedback:\n" . $message
-        . ($email !== '' ? "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.' : '');
+        . ($email !== '' ? "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.' : '')
+        . $approval;
     $headers = ['From: ' . enc_header('PRINT LAB Website') . ' <' . SHOP_EMAIL . '>'];
     if ($email !== '') {
         $headers[] = 'Reply-To: ' . enc_header(str_replace(['"', '\\'], '', $name)) . ' <' . $email . '>';

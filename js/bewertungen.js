@@ -1,18 +1,19 @@
 /* ==========================================================================
    PRINT LAB Trier: reviews page (bewertungen.html).
 
-   1. Overview and list are built from reviews.json, which PRINT LAB fills
-      by hand with checked reviews (see README). Nothing is invented: with
-      an empty file the page shows "Noch keine Bewertungen".
+   1. Overview and list are built from the approved reviews (reviews.php;
+      PRINT LAB approves each one with the link in the review e-mail).
+      Nothing is invented: without reviews the page shows "Noch keine
+      Bewertungen".
    2. "Bewertung abgeben" opens a dialog with the review form. It posts to
       anfrage.php (form=bewertung); the review is e-mailed to the shop and
-      only appears here after checking.
+      only appears here after it is approved.
    ========================================================================== */
 (function () {
   'use strict';
 
   const ENDPOINT = 'anfrage.php';
-  const DATA_URL = 'reviews.json';
+  const DATA_URL = 'reviews.php';
   const PAGE_SIZE = 10;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const RATING_TEXT = ['Bitte wählen', 'Schlecht', 'Geht so', 'In Ordnung', 'Gut', 'Sehr gut'];
@@ -130,8 +131,14 @@
     showMore();
   }
 
-  fetch(DATA_URL, { cache: 'no-cache' })
-    .then((res) => (res.ok ? res.json() : []))
+  // reviews.php returns the approved reviews from the server; reviews.json
+  // (the repository copy) is the fallback, e.g. without PHP
+  const getJson = (url) => fetch(url, { cache: 'no-cache' }).then((res) => {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  });
+  getJson(DATA_URL)
+    .catch(() => getJson('reviews.json'))
     .then((data) => { if (Array.isArray(data)) render(data); })
     .catch(() => { /* keeps the empty state */ });
 
