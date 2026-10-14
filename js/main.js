@@ -36,7 +36,7 @@
   const EN = {
     'skip': 'Skip to content', 'nav.services': 'Services', 'nav.methods': 'Techniques',
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
-    'nav.prices': 'Prices', 'nav.contact': 'Contact', 'cta.inquire': 'Enquire',
+    'nav.prices': 'Prices', 'nav.contact': 'Contact', 'nav.jobs': 'Jobs', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your textile.',
     'hero.lead': 'We print your logo or design on any textile. Sharp, colourfast and personal. Starting from a single piece.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
