@@ -340,6 +340,31 @@
   };
   setHeaderReal();
   window.addEventListener('resize', setHeaderReal, { passive: true });
+
+  /* Some mobile browsers hide their address bar after a jump to the top
+     (back-to-top button) and the screen then grows beyond the height CSS
+     knows about, so a strip of the next section shows under the marquee.
+     While the page is at the top, stretch the hero to close that gap. It
+     only grows, and only at the top, so nothing shifts while reading. */
+  const marqueeEl = document.querySelector('.marquee');
+  let heroFitQueued = false;
+  function fitHero() {
+    heroFitQueued = false;
+    if (!heroEl || !marqueeEl || window.scrollY > 4) return;
+    const gap = window.innerHeight - marqueeEl.getBoundingClientRect().bottom;
+    if (gap > 1 && gap < 260) heroEl.style.minHeight = Math.ceil(heroEl.offsetHeight + gap) + 'px';
+  }
+  const queueHeroFit = () => {
+    if (heroFitQueued) return;
+    heroFitQueued = true;
+    requestAnimationFrame(fitHero);
+  };
+  window.addEventListener('scroll', () => { if (window.scrollY <= 4) queueHeroFit(); }, { passive: true });
+  window.addEventListener('resize', queueHeroFit, { passive: true });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', queueHeroFit, { passive: true });
+  // A new orientation starts from the CSS size again
+  window.addEventListener('orientationchange', () => { if (heroEl) heroEl.style.minHeight = ''; setTimeout(queueHeroFit, 300); });
+  window.addEventListener('load', queueHeroFit);
   const onScroll = () => { if (desktopHeader) desktopHeader.classList.toggle('is-scrolled', window.scrollY > 8); };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
