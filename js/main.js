@@ -39,7 +39,7 @@
     'nav.prices': 'Prices', 'nav.contact': 'Contact', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your textile.',
     'hero.lead': 'We print your logo or design on any textile. Sharp, colourfast and personal. Starting from a single piece.',
-    'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
+    'hero.cta1': 'Request a quote', 'hero.cta2': 'Test your logo',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Services', 'services.title': 'What we print on',
     'services.intro': 'With DTF or screen printing we can print on almost any textile. Bring your own piece or choose from our range.',
@@ -74,7 +74,16 @@
     'design.title': 'No design yet? No problem.', 'design.text': 'We are happy to create several design proposals for you and you pick your favourite.',
     'design.cta': 'Request a design',
     'refs.kicker': 'Examples', 'refs.title': 'What your print could look like.',
-    'refs.note': 'Example images for illustration.',
+    'refs.note': 'Example images for illustration.', 'refs.examples': 'Examples',
+    'refs.intro': 'Upload your logo and see right away how it looks on your textile.',
+    'studio.svgTitle': 'Preview of your design on the textile',
+    'studio.dragHint': 'Tip: you can drag your logo on the textile.',
+    'studio.upload': 'Upload logo', 'studio.noFile': 'No logo yet? We show you an example.',
+    'studio.removeBg': 'Remove white background', 'studio.product': 'Textile',
+    'studio.tshirt': 'T-shirt', 'studio.hoodie': 'Hoodie', 'studio.color': 'Colour', 'studio.position': 'Position',
+    'studio.posCenter': 'Centre chest', 'studio.posLeft': 'Left chest', 'studio.posBack': 'Back',
+    'studio.size': 'Size', 'studio.cta': 'Request with this design',
+    'studio.note': 'Non-binding preview. Your file stays on your device until you send the request.',
     'refs.1': 'T-shirts', 'refs.2': 'Hoodies & sweatshirts', 'refs.5': 'Bachelor & event sets',
     'refs.6': 'Teamwear & club apparel', 'refs.more': 'More on Instagram',
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
@@ -157,6 +166,8 @@
       success: 'Danke! Deine Anfrage ist bei uns angekommen. Du bekommst gleich eine Bestätigung per E-Mail, und wir melden uns innerhalb von 24 Stunden.',
       rate: 'Du hast gerade schon mehrere Anfragen gesendet. Bitte versuche es später erneut oder schreib uns per WhatsApp.',
       fallbackTitle: 'Fast geschafft! Wie möchtest du deine Anfrage senden?',
+      studioNoPreview: 'Für {name} können wir hier keine Vorschau zeigen. Die Datei wird trotzdem mit deiner Anfrage gesendet.',
+      studioTooBig: 'Diese Datei ist größer als 15 MB. Schick sie uns gerne per E-Mail oder WhatsApp.',
       sendFailed: 'Das Senden hat gerade nicht geklappt. Schick uns deine Anfrage einfach per E-Mail oder WhatsApp, sie ist schon ausgefüllt:',
       viaEmail: 'Per E-Mail senden', viaWhatsApp: 'Per WhatsApp senden',
       steps: ['Wähle E-Mail oder WhatsApp, deine Anfrage ist schon ausgefüllt.', 'Hänge deine Datei (Logo, Motiv) mit der Büroklammer 📎 an.', 'Nachricht absenden, fertig!'],
@@ -178,6 +189,8 @@
       success: 'Thank you! Your request has arrived. You will get a confirmation by email shortly, and we will reply within 24 hours.',
       rate: 'You have already sent several requests. Please try again later or message us on WhatsApp.',
       fallbackTitle: 'Almost done! How would you like to send your request?',
+      studioNoPreview: 'We cannot show a preview for {name} here. The file will still be sent with your request.',
+      studioTooBig: 'This file is larger than 15 MB. Feel free to send it by email or WhatsApp.',
       sendFailed: 'Sending did not work just now. Simply send your request by email or WhatsApp, it is already filled in:',
       viaEmail: 'Send by email', viaWhatsApp: 'Send via WhatsApp',
       steps: ['Choose email or WhatsApp, your request is already filled in.', 'Attach your file (logo, artwork) with the paperclip 📎.', 'Send the message, done!'],
@@ -678,6 +691,27 @@
       form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
     }
 
+    /* ---- Design handed over from the live preview */
+    let studioFiles = [];
+    document.addEventListener('printlab:design', (e) => {
+      const d = e.detail || {};
+      const product = form.querySelector('#f-product');
+      const position = form.querySelector('#f-position');
+      const color = form.querySelector('#f-color');
+      if (product && d.product) product.value = d.product;
+      if (position && d.position) position.value = d.position;
+      if (color && d.color) color.value = d.color;
+      [product, color].forEach((el) => { if (el && el.value) setError(el, ''); });
+      if (d.files && d.files.length) {
+        const ja = form.querySelector('input[name="has_design"][value="Ja"]');
+        if (ja) ja.checked = true;
+        updateDesignHint();
+        selectedFiles = selectedFiles.filter((f) => !studioFiles.includes(f));
+        studioFiles = d.files.slice();
+        addFiles(d.files);
+      }
+    });
+
     async function sendToServer(data) {
       submitBtn.disabled = true;
       showStatus(t('sending'));
@@ -722,6 +756,475 @@
       if (CONFIG.formEndpoint) sendToServer(data);
       else showFallback(data);
     });
+  }
+
+  /* ------------------------------------------------------------------------
+     7b. DESIGN PREVIEW ("Dein Logo testen")
+     Everything happens in the browser: the uploaded logo is drawn onto an
+     SVG garment. "Mit diesem Design anfragen" hands the original file and
+     a rendered preview image over to the quote form.
+     ------------------------------------------------------------------------ */
+  const studio = document.querySelector('[data-studio]');
+
+  if (studio) {
+    const svg = studio.querySelector('[data-studio-svg]');
+    const fileInput = studio.querySelector('#studio-file');
+    const emptyNote = studio.querySelector('[data-studio-empty]');
+    const fileNote = studio.querySelector('[data-studio-file]');
+    const bgWrap = studio.querySelector('[data-studio-bg]');
+    const bgToggle = studio.querySelector('[data-studio-bg-toggle]');
+    const sizeInput = studio.querySelector('[data-studio-size]');
+    const swatchWrap = studio.querySelector('[data-studio-swatches]');
+    const colorName = studio.querySelector('[data-studio-color-name]');
+    const cta = studio.querySelector('[data-studio-cta]');
+    const NS = 'http://www.w3.org/2000/svg';
+
+    const COLORS = [
+      { id: 'black', de: 'Schwarz', en: 'Black', hex: '#1C1C1E' },
+      { id: 'white', de: 'Weiß', en: 'White', hex: '#F7F6F3' },
+      { id: 'grey', de: 'Grau meliert', en: 'Heather grey', hex: '#A4A7AC' },
+      { id: 'navy', de: 'Navy', en: 'Navy', hex: '#1F2A44' },
+      { id: 'red', de: 'Rot', en: 'Red', hex: '#B42A32' },
+      { id: 'green', de: 'Flaschengrün', en: 'Bottle green', hex: '#1F4A38' },
+      { id: 'sand', de: 'Sand', en: 'Sand', hex: '#D9C9AA' },
+      { id: 'pink', de: 'Rosa', en: 'Pink', hex: '#EDB3C6' }
+    ];
+
+    /* Garments in a 500 × 560 viewBox. Areas are the printable zones. */
+    const GARMENTS = {
+      tshirt: {
+        form: 'T-Shirts',
+        body: 'M200 58 C220 82 280 82 300 58 L372 80 C402 92 440 120 462 150 L418 218 L366 192 L362 516 C330 526 170 526 138 516 L134 192 L82 218 L38 150 C60 120 98 92 128 80 Z',
+        front: {
+          bands: ['M200 58 C220 82 280 82 300 58 C292 72 276 92 250 92 C224 92 208 72 200 58 Z'],
+          seams: ['M128 80 C130 120 132 160 134 192', 'M372 80 C370 120 368 160 366 192', 'M140 500 C172 509 328 509 360 500', 'M50 166 L94 226', 'M450 166 L406 226'],
+          extras: []
+        },
+        back: {
+          bands: ['M205 58 C225 66 275 66 295 58 C288 66 272 74 250 74 C228 74 212 66 205 58 Z'],
+          seams: ['M128 80 C130 120 132 160 134 192', 'M372 80 C370 120 368 160 366 192', 'M140 500 C172 509 328 509 360 500', 'M50 166 L94 226', 'M450 166 L406 226'],
+          extras: []
+        },
+        areas: { center: [175, 128, 150, 180], left: [268, 116, 54, 52], back: [165, 108, 170, 210] }
+      },
+      hoodie: {
+        form: 'Hoodies / Sweatshirts',
+        body: 'M172 88 L328 88 C366 96 398 114 416 152 C434 212 446 280 454 328 L412 342 C402 290 388 244 372 216 L370 498 C336 510 164 510 130 498 L128 216 C112 244 98 290 88 342 L46 328 C54 280 66 212 84 152 C102 114 134 96 172 88 Z',
+        front: {
+          under: ['M170 96 C164 40 208 12 250 12 C292 12 336 40 330 96 Z'],
+          bands: ['M206 94 C206 56 226 38 250 38 C274 38 294 56 294 94 C280 104 220 104 206 94 Z', 'M46 328 L88 342 L83 362 L41 348 Z', 'M454 328 L412 342 L417 362 L459 348 Z', 'M130 498 C164 510 336 510 370 498 L370 522 C336 534 164 534 130 522 Z'],
+          seams: ['M172 388 L328 388 L352 476 L148 476 Z', 'M198 388 L176 476', 'M302 388 L324 476', 'M128 216 C126 170 140 124 172 92', 'M372 216 C374 170 360 124 328 92'],
+          extras: [['M233 102 L229 196', 3.2], ['M267 102 L271 196', 3.2]]
+        },
+        back: {
+          bands: ['M46 328 L88 342 L83 362 L41 348 Z', 'M454 328 L412 342 L417 362 L459 348 Z', 'M130 498 C164 510 336 510 370 498 L370 522 C336 534 164 534 130 522 Z'],
+          seams: ['M128 216 C126 170 140 124 172 92', 'M372 216 C374 170 360 124 328 92'],
+          over: ['M176 96 C172 40 214 16 250 16 C286 16 328 40 324 96 C304 132 196 132 176 96 Z'],
+          overSeams: ['M250 18 L250 124'],
+          extras: []
+        },
+        areas: { center: [180, 196, 140, 168], left: [280, 146, 46, 46], back: [160, 146, 180, 228] }
+      }
+    };
+
+    const state = {
+      product: 'tshirt', color: 'black', position: 'center', size: 80,
+      dx: 0, dy: 0,
+      logo: null,           // { src, w, h, demo }
+      file: null,           // the visitor's original file
+      previewable: false,
+      bgDetected: false,
+      source: null          // canvas with the original pixels
+    };
+    const demoLogos = {};
+
+    const colorById = (id) => COLORS.find((c) => c.id === id) || COLORS[0];
+    const hexToRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    const isLight = (hex) => { const [r, g, b] = hexToRgb(hex); return (0.299 * r + 0.587 * g + 0.114 * b) > 150; };
+    const mix = (hex, target, amount) => {
+      const a = hexToRgb(hex), b = hexToRgb(target);
+      return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * amount).toString(16).padStart(2, '0')).join('');
+    };
+
+    /* ---- Colour swatches */
+    COLORS.forEach((c, i) => {
+      const label = document.createElement('label');
+      label.className = 'swatch';
+      label.title = c.de;
+      const input = document.createElement('input');
+      input.className = 'swatch__input';
+      input.type = 'radio';
+      input.name = 'studio-color';
+      input.value = c.id;
+      input.checked = i === 0;
+      input.setAttribute('aria-label', c.de);
+      const dot = document.createElement('span');
+      dot.className = 'swatch__dot';
+      dot.style.backgroundColor = c.hex;
+      label.append(input, dot);
+      swatchWrap.appendChild(label);
+    });
+
+    function updateColorLabels() {
+      const c = colorById(state.color);
+      colorName.textContent = currentLang === 'en' ? c.en : c.de;
+      swatchWrap.querySelectorAll('.swatch').forEach((label) => {
+        const col = colorById(label.querySelector('input').value);
+        const name = currentLang === 'en' ? col.en : col.de;
+        label.title = name;
+        label.querySelector('input').setAttribute('aria-label', name);
+      });
+    }
+
+    /* ---- Geometry of the logo inside the active print area */
+    function area() {
+      const a = GARMENTS[state.product].areas[state.position];
+      return { x: a[0], y: a[1], w: a[2], h: a[3] };
+    }
+
+    function logoRect() {
+      if (!state.logo) return null;
+      const a = area();
+      const ratio = state.logo.h / state.logo.w;
+      let w = a.w * state.size / 100;
+      let h = w * ratio;
+      if (h > a.h) { h = a.h; w = h / ratio; }
+      const freeX = (a.w - w) / 2, freeY = a.h - h;
+      // Chest prints sit high; keep the drag offset inside the area
+      state.dx = Math.max(-freeX, Math.min(freeX, state.dx));
+      const baseY = state.position === 'left' ? 0 : freeY * 0.15;
+      state.dy = Math.max(-baseY, Math.min(freeY - baseY, state.dy));
+      return { x: a.x + freeX + state.dx, y: a.y + baseY + state.dy, w, h };
+    }
+
+    /* ---- Build the SVG markup */
+    function garmentMarkup(forExport) {
+      const g = GARMENTS[state.product];
+      const view = state.position === 'back' ? g.back : g.front;
+      const base = colorById(state.color).hex;
+      const light = isLight(base);
+      const band = light ? mix(base, '#000000', 0.12) : mix(base, '#FFFFFF', 0.06);
+      const inner = light ? mix(base, '#000000', 0.22) : mix(base, '#000000', 0.35);
+      const seam = light ? 'rgba(0,0,0,0.16)' : 'rgba(255,255,255,0.10)';
+      const outline = light ? 'rgba(0,0,0,0.22)' : 'rgba(0,0,0,0.35)';
+      const r = logoRect();
+      const id = forExport ? 'x' : 's';
+      const p = (d, fill, extra) => '<path d="' + d + '" fill="' + fill + '"' + (extra || '') + '/>';
+      const strokes = (list, color, width) => list.map((d) => '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="' + width + '" stroke-linecap="round" stroke-dasharray="' + (width < 2 ? '3 4' : 'none') + '"/>').join('');
+      const title = currentLang === 'en' ? 'Preview of your design on the textile' : 'Vorschau deines Designs auf dem Textil';
+      let out = '<title' + (forExport ? '' : ' id="studio-svg-title"') + '>' + escapeXml(title) + '</title>';
+      out += '<defs>'
+        + '<clipPath id="' + id + '-clip"><path d="' + g.body + '"/></clipPath>'
+        + '<linearGradient id="' + id + '-side" x1="0" x2="1" y1="0" y2="0">'
+        + '<stop offset="0" stop-color="#000" stop-opacity="0.28"/><stop offset="0.2" stop-color="#000" stop-opacity="0"/>'
+        + '<stop offset="0.8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.28"/></linearGradient>'
+        + '<radialGradient id="' + id + '-light" cx="0.45" cy="0.3" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity="' + (light ? 0.18 : 0.08) + '"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>'
+        + '<filter id="' + id + '-noise" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0"/></filter>'
+        + '</defs>';
+      out += '<ellipse cx="250" cy="540" rx="170" ry="12" fill="#000" opacity="0.08"/>';
+      (view.under || []).forEach((d) => { out += p(d, band, ' stroke="' + outline + '" stroke-width="1"'); });
+      out += p(g.body, base, ' stroke="' + outline + '" stroke-width="1"');
+      if (r) {
+        out += '<g clip-path="url(#' + id + '-clip)"><image class="studio__logo" data-studio-logo="" href="' + state.logo.src + '" x="' + r.x.toFixed(1) + '" y="' + r.y.toFixed(1) + '" width="' + r.w.toFixed(1) + '" height="' + r.h.toFixed(1) + '" preserveAspectRatio="xMidYMid meet" opacity="0.96"/></g>';
+      }
+      out += '<g clip-path="url(#' + id + '-clip)" pointer-events="none">'
+        + '<rect x="0" y="0" width="500" height="560" fill="url(#' + id + '-side)"/>'
+        + '<rect x="0" y="0" width="500" height="560" fill="url(#' + id + '-light)"/>'
+        + '<rect x="0" y="0" width="500" height="560" filter="url(#' + id + '-noise)" opacity="' + (light ? 0.10 : 0.16) + '"/>'
+        + '</g>';
+      view.bands.forEach((d, i) => { out += p(d, i === 0 && state.product === 'hoodie' && view === g.front ? inner : band, ' stroke="' + outline + '" stroke-width="0.8"'); });
+      out += strokes(view.seams, seam, 1.4);
+      (view.over || []).forEach((d) => { out += p(d, mix(base, light ? '#000000' : '#FFFFFF', light ? 0.06 : 0.04), ' stroke="' + outline + '" stroke-width="1"'); });
+      out += strokes(view.overSeams || [], seam, 1.4);
+      view.extras.forEach(([d, w]) => { out += '<path d="' + d + '" fill="none" stroke="' + (light ? '#FFFFFF' : '#E9E6E0') + '" stroke-width="' + w + '" stroke-linecap="round"/>'; });
+      if (!forExport) {
+        const a = area();
+        out += '<rect class="studio__area" x="' + a.x + '" y="' + a.y + '" width="' + a.w + '" height="' + a.h + '" fill="none" stroke="' + (light ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.45)') + '" stroke-width="1.2" stroke-dasharray="5 5" rx="4" opacity="0"/>';
+      }
+      return out;
+    }
+
+    function escapeXml(text) {
+      return String(text).replace(/[<>&"]/g, (ch) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[ch]));
+    }
+
+    function render() {
+      if (state.logo && state.logo.demo) state.logo = demoLogos[isLight(colorById(state.color).hex) ? 'dark' : 'light'] || state.logo;
+      svg.innerHTML = garmentMarkup(false);
+      updateColorLabels();
+    }
+
+    function updateLogoOnly() {
+      const img = svg.querySelector('[data-studio-logo]');
+      const r = logoRect();
+      if (!img || !r) { render(); return; }
+      img.setAttribute('x', r.x.toFixed(1));
+      img.setAttribute('y', r.y.toFixed(1));
+      img.setAttribute('width', r.w.toFixed(1));
+      img.setAttribute('height', r.h.toFixed(1));
+    }
+
+    /* ---- Demo logo (PRINT LAB) until the visitor uploads their own */
+    async function loadDemo(url) {
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const vb = (text.match(/viewBox="([\d.\s-]+)"/) || [])[1];
+        const [, , w, h] = vb ? vb.split(/\s+/).map(Number) : [0, 0, 224, 64];
+        return { src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(text), w, h, demo: true };
+      } catch (e) { return null; }
+    }
+
+    Promise.all([
+      loadDemo('assets/images/logo/printlab-logo-white.svg'),
+      loadDemo('assets/images/logo/printlab-logo-black.svg')
+    ]).then(([lightLogo, darkLogo]) => {
+      demoLogos.light = lightLogo; // for dark textiles
+      demoLogos.dark = darkLogo;   // for light textiles
+      if (!state.logo) { state.logo = lightLogo || darkLogo; render(); }
+    });
+
+    /* ---- Uploads */
+    const PREVIEW_EXT = ['png', 'jpg', 'jpeg', 'webp', 'svg', 'heic', 'gif'];
+
+    function showFileNote(text, warning) {
+      emptyNote.hidden = true;
+      fileNote.hidden = false;
+      fileNote.textContent = text;
+      fileNote.classList.toggle('is-warning', Boolean(warning));
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    function hasWhiteBackground(ctx, w, h) {
+      const pts = [[0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1], [Math.floor(w / 2), 0], [Math.floor(w / 2), h - 1]];
+      return pts.every(([x, y]) => {
+        const d = ctx.getImageData(x, y, 1, 1).data;
+        return d[3] > 245 && d[0] > 232 && d[1] > 232 && d[2] > 232;
+      });
+    }
+
+    /* Flood-fill from the edges: only white connected to the border becomes
+       transparent, so white parts inside a logo stay white. */
+    function removeWhite(canvas) {
+      const ctx = canvas.getContext('2d');
+      const { width: w, height: h } = canvas;
+      const img = ctx.getImageData(0, 0, w, h);
+      const d = img.data;
+      const seen = new Uint8Array(w * h);
+      const stack = [];
+      const isWhite = (i) => d[i * 4 + 3] > 0 && d[i * 4] > 228 && d[i * 4 + 1] > 228 && d[i * 4 + 2] > 228;
+      for (let x = 0; x < w; x += 1) { stack.push(x, (h - 1) * w + x); }
+      for (let y = 0; y < h; y += 1) { stack.push(y * w, y * w + w - 1); }
+      while (stack.length) {
+        const i = stack.pop();
+        if (seen[i] || !isWhite(i)) continue;
+        seen[i] = 1;
+        d[i * 4 + 3] = 0;
+        const x = i % w;
+        if (x > 0) stack.push(i - 1);
+        if (x < w - 1) stack.push(i + 1);
+        if (i >= w) stack.push(i - w);
+        if (i < w * (h - 1)) stack.push(i + w);
+      }
+      // Soften the edge: light pixels next to removed ones become partly transparent
+      for (let i = 0; i < w * h; i += 1) {
+        if (seen[i]) continue;
+        const x = i % w;
+        const near = (x > 0 && seen[i - 1]) || (x < w - 1 && seen[i + 1]) || (i >= w && seen[i - w]) || (i < w * (h - 1) && seen[i + w]);
+        if (!near) continue;
+        const min = Math.min(d[i * 4], d[i * 4 + 1], d[i * 4 + 2]);
+        if (min > 170) d[i * 4 + 3] = Math.round(d[i * 4 + 3] * (255 - min) / 85);
+      }
+      ctx.putImageData(img, 0, 0);
+      return canvas;
+    }
+
+    /* Crop away transparent margins so the logo fills the print area */
+    function trim(canvas) {
+      const ctx = canvas.getContext('2d');
+      const { width: w, height: h } = canvas;
+      const d = ctx.getImageData(0, 0, w, h).data;
+      let x0 = w, y0 = h, x1 = -1, y1 = -1;
+      for (let y = 0; y < h; y += 1) {
+        for (let x = 0; x < w; x += 1) {
+          if (d[(y * w + x) * 4 + 3] > 12) {
+            if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+          }
+        }
+      }
+      if (x1 < 0) return canvas;
+      const out = document.createElement('canvas');
+      out.width = x1 - x0 + 1;
+      out.height = y1 - y0 + 1;
+      out.getContext('2d').drawImage(canvas, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
+      return out;
+    }
+
+    function copyCanvas(src) {
+      const c = document.createElement('canvas');
+      c.width = src.width;
+      c.height = src.height;
+      c.getContext('2d').drawImage(src, 0, 0);
+      return c;
+    }
+
+    function applySource() {
+      let canvas = copyCanvas(state.source);
+      if (state.bgDetected && bgToggle.checked) canvas = removeWhite(canvas);
+      canvas = trim(canvas);
+      state.logo = { src: canvas.toDataURL('image/png'), w: canvas.width, h: canvas.height, demo: false };
+      state.dx = 0;
+      state.dy = 0;
+      render();
+    }
+
+    async function handleFile(file) {
+      if (!file) return;
+      if (file.size > CONFIG.maxTotalBytes) { showFileNote(t('studioTooBig'), true); return; }
+      state.file = file;
+      state.previewable = false;
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const url = URL.createObjectURL(file);
+      try {
+        if (!PREVIEW_EXT.includes(ext)) throw new Error('no preview');
+        const img = await loadImage(url);
+        const nw = img.naturalWidth || 1000, nh = img.naturalHeight || 1000;
+        const scale = Math.min(1, 1200 / Math.max(nw, nh));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(nw * scale));
+        canvas.height = Math.max(1, Math.round(nh * scale));
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        state.source = canvas;
+        state.bgDetected = hasWhiteBackground(ctx, canvas.width, canvas.height);
+        bgWrap.hidden = !state.bgDetected;
+        bgToggle.checked = true;
+        state.previewable = true;
+        applySource();
+        showFileNote(file.name, false);
+      } catch (err) {
+        bgWrap.hidden = true;
+        showFileNote(t('studioNoPreview', { name: file.name }), true);
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    fileInput.addEventListener('change', () => {
+      handleFile(fileInput.files[0]);
+      fileInput.value = '';
+    });
+    bgToggle.addEventListener('change', () => { if (state.source) applySource(); });
+
+    /* ---- Options */
+    studio.addEventListener('change', (e) => {
+      const el = e.target;
+      if (el.name === 'studio-product') { state.product = el.value; state.dx = 0; state.dy = 0; render(); }
+      if (el.name === 'studio-color') { state.color = el.value; render(); }
+      if (el.name === 'studio-position') {
+        state.position = el.value; state.dx = 0; state.dy = 0;
+        state.size = el.value === 'left' ? 100 : 80;
+        sizeInput.value = state.size;
+        render();
+      }
+    });
+    sizeInput.addEventListener('input', () => { state.size = Number(sizeInput.value); updateLogoOnly(); });
+
+    /* ---- Drag the logo inside the print area */
+    let drag = null;
+    function svgPoint(evt) {
+      const pt = svg.createSVGPoint();
+      pt.x = evt.clientX;
+      pt.y = evt.clientY;
+      return pt.matrixTransform(svg.getScreenCTM().inverse());
+    }
+    svg.addEventListener('pointerdown', (e) => {
+      const img = e.target.closest('[data-studio-logo]');
+      if (!img) return;
+      e.preventDefault();
+      const p = svgPoint(e);
+      drag = { x: p.x, y: p.y, dx: state.dx, dy: state.dy, img };
+      img.classList.add('is-dragging');
+      const guide = svg.querySelector('.studio__area');
+      if (guide) guide.setAttribute('opacity', '1');
+      svg.setPointerCapture(e.pointerId);
+    });
+    svg.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const p = svgPoint(e);
+      state.dx = drag.dx + (p.x - drag.x);
+      state.dy = drag.dy + (p.y - drag.y);
+      updateLogoOnly();
+    });
+    const endDrag = () => {
+      if (!drag) return;
+      drag.img.classList.remove('is-dragging');
+      const guide = svg.querySelector('.studio__area');
+      if (guide) guide.setAttribute('opacity', '0');
+      drag = null;
+    };
+    svg.addEventListener('pointerup', endDrag);
+    svg.addEventListener('pointercancel', endDrag);
+
+    /* ---- Render the preview as a PNG for the request */
+    function previewFile() {
+      return new Promise((resolve) => {
+        const markup = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 560" width="1000" height="1120">' + garmentMarkup(true) + '</svg>';
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 1000;
+          canvas.height = 1120;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#F3F1EC';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((blob) => {
+            if (!blob) { resolve(null); return; }
+            const c = colorById(state.color);
+            const name = 'Vorschau-' + (state.product === 'hoodie' ? 'Hoodie' : 'T-Shirt') + '-' + c.de.replace(/\W+/g, '') + '-' + positionLabel().replace(/\W+/g, '') + '.png';
+            resolve(new File([blob], name, { type: 'image/png' }));
+          }, 'image/png');
+        };
+        img.onerror = () => resolve(null);
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(markup);
+      });
+    }
+
+    function positionLabel() {
+      return { center: 'Brust mittig', left: 'Brust links', back: 'Rücken' }[state.position];
+    }
+
+    cta.addEventListener('click', async () => {
+      const files = [];
+      if (state.file) {
+        files.push(state.file);
+        if (state.previewable) {
+          const preview = await previewFile();
+          if (preview) files.push(preview);
+        }
+      }
+      document.dispatchEvent(new CustomEvent('printlab:design', {
+        detail: {
+          product: GARMENTS[state.product].form,
+          color: colorById(state.color).de,
+          position: positionLabel(),
+          files
+        }
+      }));
+      scrollToHash('#contact');
+    });
+
+    document.addEventListener('printlab:lang', render);
+    render();
   }
 
   /* ------------------------------------------------------------------------

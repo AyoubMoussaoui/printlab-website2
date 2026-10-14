@@ -508,6 +508,22 @@
     gap: 16px;
   }
 
+  /* ---- Live preview: stage on top, controls below ---- */
+  .studio {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    margin-bottom: 56px;
+    padding: 14px 14px 22px;
+  }
+
+  .studio__controls {
+    padding-inline: 6px;
+  }
+
+  .studio__upload-btn {
+    width: 100%;
+  }
+
   /* ---- FAQ ---- */
   .faq {
     grid-template-columns: minmax(0, 1fr);
