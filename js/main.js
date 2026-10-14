@@ -272,8 +272,12 @@
     document.dispatchEvent(new CustomEvent('printlab:lang'));
     if (anchor) {
       const shift = anchor.el.getBoundingClientRect().top - anchor.top;
-      if (Math.abs(shift) >= 1) window.scrollTo({ top: window.scrollY + shift, behavior: 'auto' });
-      requestAnimationFrame(() => { document.documentElement.style.overflowAnchor = ''; });
+      // Instantly: 'auto' would follow the page's smooth scrolling and
+      // show the content jumping away and gliding back
+      const root = document.documentElement;
+      root.style.scrollBehavior = 'auto';
+      if (Math.abs(shift) >= 1) window.scrollTo(0, window.scrollY + shift);
+      requestAnimationFrame(() => { root.style.overflowAnchor = ''; root.style.scrollBehavior = ''; });
     }
     try { localStorage.setItem(LANG_KEY, currentLang); } catch (e) {}
   }
