@@ -16,7 +16,7 @@ jobs:
           node-version: 20
 
       - name: Validate HTML
-        run: npx --yes html-validate@9 index.html reklamation.html karriere.html zahlung.html impressum.html datenschutz.html 404.html
+        run: npx --yes html-validate@9 index.html reklamation.html karriere.html zahlung.html bewertung.html impressum.html datenschutz.html 404.html
 
       - name: Check JavaScript syntax
         run: for f in js/*.js; do node --check "$f" || exit 1; done

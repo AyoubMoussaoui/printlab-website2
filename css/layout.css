@@ -206,10 +206,27 @@
   padding-block: 36px;
 }
 
+/* Logo and links on the first row, copyright below (phones: stacked,
+   see responsive.css) */
 .site-footer__inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "brand links"
+    "meta  meta";
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 18px 40px;
+}
+
+.site-footer__inner > .brand {
+  grid-area: brand;
+}
+
+.site-footer__inner > .site-footer__meta {
+  grid-area: meta;
+}
+
+.site-footer__inner > .footer-links {
+  grid-area: links;
+  justify-content: flex-end;
 }
