@@ -1423,9 +1423,20 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  color: var(--color-text-on-dark-soft);
-  font-size: 13px;
+  color: var(--color-muted-on-dark);
+  font-size: 12.5px;
   line-height: 1.45;
+}
+
+.upload__safe-link {
+  color: var(--color-text-on-dark-soft);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.upload__safe-link:hover {
+  color: var(--color-offwhite);
 }
 
 .upload__safe-icon {
