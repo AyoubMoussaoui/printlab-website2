@@ -1658,6 +1658,16 @@ a.contact-list__item:hover {
   line-height: 1.55;
 }
 
+/* The 30-day rule comes first and stands out */
+.claim-note__deadline {
+  color: var(--color-offwhite);
+  font-weight: var(--fw-semibold);
+}
+
+.claim-note__text {
+  margin-top: 8px;
+}
+
 .photo-upload.is-invalid .upload__zone {
   border-color: #E5484D;
 }
