@@ -82,7 +82,6 @@
     'refs.6': 'Teamwear & club apparel', 'refs.more': 'More on Instagram',
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
     'contact.lead': 'Send us your request and you will receive a non-binding quote within 24 hours.',
-    'contact.wa': 'Message us directly', 'contact.loc': 'Location',
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.optional': '(optional)',
     'form.product': 'What would you like printed?',
     'form.pTshirt': 'T-shirts', 'form.pHoodie': 'Hoodies', 'form.pCap': 'Caps & beanies', 'form.pBag': 'Bags',
