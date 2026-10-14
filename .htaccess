@@ -2,6 +2,8 @@
 # HTTP → HTTPS is handled by Plesk ("Permanent SEO-safe 301 redirect").
 
 ErrorDocument 404 /404.html
+AddType application/manifest+json .webmanifest
+AddType image/x-icon .ico
 Options -Indexes
 
 <IfModule mod_rewrite.c>
@@ -37,4 +39,5 @@ Options -Indexes
   ExpiresByType image/png "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
 </IfModule>
