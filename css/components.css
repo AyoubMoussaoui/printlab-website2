@@ -2176,6 +2176,12 @@
   color: var(--color-text-on-dark-soft);
 }
 
+/* Key facts (delivery time, deadlines) stand out */
+.terms-card__text strong,
+.terms-card .job-list__item strong {
+  color: var(--color-offwhite);
+}
+
 .terms-card__text + .terms-card__text {
   margin-top: 12px;
 }
