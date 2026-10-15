@@ -2247,6 +2247,11 @@
   font-size: 13px;
 }
 
+/* "Ohne Druck" option under the product cards in the quote form */
+.form-blank {
+  margin-top: 16px;
+}
+
 /* ---------- Reviews page (bewertungen.html) ---------- */
 .rv__head {
   display: flex;

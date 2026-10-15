@@ -23,18 +23,18 @@
   <meta property="og:locale" content="de_DE">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="favicon.ico?v=6d707141" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=6d707141" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=6d707141">
-  <link rel="manifest" href="site.webmanifest?v=6d707141">
+  <link rel="icon" href="favicon.ico?v=33cfa53c" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=33cfa53c" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=33cfa53c">
+  <link rel="manifest" href="site.webmanifest?v=33cfa53c">
 
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=6d707141">
-  <link rel="stylesheet" href="css/base.css?v=6d707141">
-  <link rel="stylesheet" href="css/layout.css?v=6d707141">
-  <link rel="stylesheet" href="css/components.css?v=6d707141">
-  <link rel="stylesheet" href="css/responsive.css?v=6d707141">
+  <link rel="stylesheet" href="css/variables.css?v=33cfa53c">
+  <link rel="stylesheet" href="css/base.css?v=33cfa53c">
+  <link rel="stylesheet" href="css/layout.css?v=33cfa53c">
+  <link rel="stylesheet" href="css/components.css?v=33cfa53c">
+  <link rel="stylesheet" href="css/responsive.css?v=33cfa53c">
 
   <script type="application/ld+json">
   {
@@ -133,6 +133,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Ja! Bring dein Teil einfach vorbei. Wir prüfen vorher, ob Material und Oberfläche für den Druck geeignet sind. Den Transfer allein bekommst du ab 10,00 €."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann ich auch Artikel ohne Druck kaufen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. T-Shirts, Hoodies, Caps, Taschen, Flaschen und weitere Artikel bekommst du bei uns auch unbedruckt (Blanko). Den Preis nennen wir dir auf Anfrage, je nach Artikel, Farbe und Stückzahl."
         }
       },
       {
@@ -680,6 +688,10 @@
             <p class="faq-item__a" data-i18n="faq.a8">Ja! Bring dein Teil einfach vorbei. Wir prüfen vorher, ob Material und Oberfläche für den Druck geeignet sind. Den Transfer allein bekommst du ab 10,00 €.</p>
           </details>
           <details class="faq-item">
+            <summary class="faq-item__q" data-i18n="faq.q12">Kann ich auch Artikel ohne Druck kaufen?</summary>
+            <p class="faq-item__a" data-i18n="faq.a12">Ja. T-Shirts, Hoodies, Caps, Taschen, Flaschen und weitere Artikel bekommst du bei uns auch unbedruckt (Blanko). Den Preis nennen wir dir auf Anfrage, je nach Artikel, Farbe und Stückzahl. Wähle im Anfrageformular einfach „Ohne Druck“.</p>
+          </details>
+          <details class="faq-item">
             <summary class="faq-item__q" data-i18n="faq.q11">Wie kann ich bezahlen?</summary>
             <p class="faq-item__a" data-i18n="faq.a11">Nach deiner Freigabe des Angebots bezahlst du per Banküberweisung im Voraus (Vorkasse) oder per PayPal. Die Produktion startet direkt nach Zahlungseingang.</p>
           </details>
@@ -721,7 +733,7 @@
 
             <div class="quote-form__grid">
               <fieldset class="field field--full" data-required-group="product">
-                <legend class="field__label"><span data-i18n="form.product">Was möchtest du bedrucken?</span> <span class="field__req" aria-hidden="true">*</span></legend>
+                <legend class="field__label"><span data-i18n="form.product">Welches Produkt?</span> <span class="field__req" aria-hidden="true">*</span></legend>
                 <div class="pick-group">
                 <label class="pick">
                   <input class="pick__input" type="radio" name="product" value="T-Shirts" required>
@@ -753,6 +765,10 @@
                 </label>
                 </div>
                 <p class="field__error" data-error-for="product"></p>
+                <label class="consent form-blank" for="f-blank" data-blank-option>
+                  <input class="consent__input" id="f-blank" name="blank" type="checkbox" value="Ja">
+                  <span class="consent__text"><span data-i18n="form.blank">Ohne Druck: nur den Artikel (Blanko)</span> <span class="consent__hint" data-i18n="form.blankHint">Preis auf Anfrage.</span></span>
+                </label>
               </fieldset>
 
               <div class="field">
@@ -780,7 +796,7 @@
                 <input class="field__input" id="f-zip" name="zip" type="text" autocomplete="postal-code" placeholder="z. B. 54290 Trier" data-i18n-placeholder="form.zipPh">
               </div>
 
-              <fieldset class="field field--full field--radio">
+              <fieldset class="field field--full field--radio" data-print-only>
                 <legend class="field__label"><span data-i18n="form.position">Druckposition</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></legend>
                 <div class="choice-group choice-group--wrap">
                 <label class="choice">
@@ -848,7 +864,7 @@
                 <label class="field__label" for="f-phone"><span data-i18n="form.phone">Telefon</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
                 <input class="field__input" id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
               </div>
-              <div class="field field--full upload">
+              <div class="field field--full upload" data-print-only>
                 <label class="field__label" for="f-files"><span data-i18n="form.files">Deine Datei (Logo, Motiv)</span> <span class="field__opt" data-i18n="form.optional">(optional)</span></label>
                 <div class="upload__zone">
                   <input class="upload__input" id="f-files" name="files[]" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.svg,.ai,.eps,.psd,.tif,.tiff,.webp,.heic">
@@ -939,7 +955,7 @@
     </svg>
   </a>
 
-  <script src="js/main.js?v=6d707141" defer></script>
-  <script src="js/footer-rating.js?v=6d707141" defer></script>
+  <script src="js/main.js?v=33cfa53c" defer></script>
+  <script src="js/footer-rating.js?v=33cfa53c" defer></script>
 </body>
 </html>
