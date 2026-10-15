@@ -79,6 +79,7 @@ if ($result === 'invalid') http_response_code(403);
         <p class="approve__stars" aria-label="<?= (int) $review['rating'] ?> von 5 Sternen"><?= str_repeat('★', (int) $review['rating']) . str_repeat('☆', 5 - (int) $review['rating']) ?></p>
         <p class="rv-item__text"><?= $h((string) $review['text']) ?></p>
         <?php if (!empty($review['email'])): ?><p class="approve__meta">E-Mail (wird nicht veröffentlicht): <?= $h((string) $review['email']) ?></p><?php endif; ?>
+        <?php if (!empty($review['order'])): ?><p class="approve__meta">Bestellnummer (wird nicht veröffentlicht): <?= $h((string) $review['order']) ?></p><?php endif; ?>
       </article>
       <form method="post" class="approve__actions">
         <input type="hidden" name="id" value="<?= $h($id) ?>">
