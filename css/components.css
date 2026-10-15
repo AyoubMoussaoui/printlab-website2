@@ -454,22 +454,13 @@
 }
 
 .section-head__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
   margin-bottom: 16px;
   color: var(--color-magenta);
   font-size: 13px;
   font-weight: var(--fw-bold);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-}
-
-.section-head__kicker::before {
-  content: "";
-  width: 22px;
-  height: 2px;
-  background-color: currentColor;
 }
 
 .section-head__title {
