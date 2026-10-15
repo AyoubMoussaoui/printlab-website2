@@ -76,6 +76,7 @@
   const phNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
   const ariaNodes = Array.from(document.querySelectorAll('[data-i18n-aria]'));
   const DE = {};
+  const TITLE = { de: document.title, en: 'Claims & defect reports | PRINT LAB Trier' };
   i18nNodes.forEach((el) => { DE[el.dataset.i18n] = DE[el.dataset.i18n] || el.textContent; });
   phNodes.forEach((el) => { DE[el.dataset.i18nPlaceholder] = el.getAttribute('placeholder'); });
   ariaNodes.forEach((el) => { DE[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
@@ -87,7 +88,7 @@
     phNodes.forEach((el) => { if (dict[el.dataset.i18nPlaceholder] !== undefined) el.setAttribute('placeholder', dict[el.dataset.i18nPlaceholder]); });
     ariaNodes.forEach((el) => { if (dict[el.dataset.i18nAria] !== undefined) el.setAttribute('aria-label', dict[el.dataset.i18nAria]); });
     document.documentElement.lang = lang;
-    document.title = lang === 'en' ? 'Claims | PRINT LAB Trier' : 'Reklamation | PRINT LAB Trier';
+    document.title = TITLE[lang];
     document.querySelectorAll('[data-lang]').forEach((btn) => {
       const active = btn.dataset.lang === lang;
       btn.classList.toggle('is-active', active);
