@@ -41,7 +41,7 @@
     'hero.lead': 'We print textiles, promotional items and accessories. Sharp, colourfast and personal. Starting from a single piece.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our products',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
-    'services.kicker': 'Products', 'services.title1': 'Your blank.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
+    'services.kicker': 'Products', 'services.title1': 'Your product.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
     'services.intro': 'We order proven branded blanks for you and finish every piece individually with DTF, screen or special printing. Pick a product and send us your request, or bring your own piece.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
     'services.2.t': 'Hoodies & sweatshirts', 'services.2.d': 'Warm companions with a strong look. Chest, back or sleeve: we print every position.',
