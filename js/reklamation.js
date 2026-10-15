@@ -27,7 +27,7 @@
     step1: 'Send photos and a description', step1Text: 'A photo of the defect and one of the whole item help us most.',
     step2: 'We check your case', step2Text: 'We usually get back to you within one working day.',
     step3: 'We find a solution together', step3Text: 'For example a flawless reprint or a replacement.',
-    deadline: 'Claims can be made within 30 days of the order date. Please get in touch as early as possible.',
+    deadline: 'Please report defects within 14 days of receiving your order, so we can help quickly.',
     note: 'Please keep the affected items as they are until we have sorted it out, and avoid using or cleaning them further. Your statutory warranty rights are of course not affected.',
     name: 'Name', email: 'Email', order: 'Order number', optional: '(optional)', orderPh: 'e.g. from your invoice',
     issue: 'Type of issue', choose: 'Please choose', issue1: 'Print defect / print quality', issue2: 'Damaged item',
