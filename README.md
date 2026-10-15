@@ -1,6 +1,6 @@
 # PRINT LAB Trier – Website
 
-Marketing and quote-request site for PRINT LAB Trier (custom textile printing). Plain HTML, CSS and vanilla JS, with no build step. Open `index.html` in a browser to preview it.
+Marketing and quote-request site for PRINT LAB Trier (custom printing on textiles, promotional items and accessories). Plain HTML, CSS and vanilla JS, with no build step. Open `index.html` in a browser to preview it.
 
 ## Structure
 
