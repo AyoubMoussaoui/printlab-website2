@@ -42,7 +42,7 @@
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Services', 'services.title': 'What we print on',
-    'services.intro': 'With DTF, screen or special printing we can print on almost any textile and many other materials. Bring your own piece or choose from our range.',
+    'services.intro': 'With DTF, screen or special printing we can print on almost any textile and many other materials. Bring your own piece or we source the right items for you.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
     'services.2.t': 'Hoodies & sweatshirts', 'services.2.d': 'Warm companions with a strong look. Chest, back or sleeve: we print every position.',
     'services.3.t': 'Caps & beanies', 'services.3.d': 'Snapbacks, trucker caps and beanies with your logo, ideal for crews, clubs and brands.',
