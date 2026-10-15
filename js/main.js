@@ -42,13 +42,13 @@
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Services', 'services.title': 'What we print on',
-    'services.intro': 'With DTF or screen printing we can print on almost any textile. Bring your own piece or choose from our range.',
+    'services.intro': 'With DTF, screen or special printing we can print on almost any textile and many other materials. Bring your own piece or choose from our range.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
     'services.2.t': 'Hoodies & sweatshirts', 'services.2.d': 'Warm companions with a strong look. Chest, back or sleeve: we print every position.',
     'services.3.t': 'Caps & beanies', 'services.3.d': 'Snapbacks, trucker caps and beanies with your logo, ideal for crews, clubs and brands.',
     'services.4.t': 'Bags & totes', 'services.4.d': 'Tote bags, gym bags and shoppers. Sustainable promo pieces people love to carry.',
     'services.5.t': 'Bottles & accessories', 'services.5.d': 'Water bottles, promotional items and accessories, with special printing even on unusual materials.',
-    'services.6.t': 'Your own textile', 'services.6.d': 'Already have the perfect piece? Bring it in and we check the material and print it for you.',
+    'services.6.t': 'Your own item', 'services.6.d': 'Already have the perfect piece? Bring it in and we check the material and print it for you.',
     'methods.kicker': 'Techniques', 'methods.title': 'The right technique for your project',
     'methods.intro': 'We give you honest advice on which process fits your motif, material and quantity.',
     'methods.1.t': 'DTF printing', 'methods.1.d': 'Direct-to-film for brilliant, detailed motifs, including gradients and fine lines.',
@@ -57,15 +57,15 @@
     'methods.2.p1': 'Extremely durable prints', 'methods.2.p2': 'Ideal for larger quantities', 'methods.2.p3': 'Strong spot colours',
     'methods.3.t': 'Special printing', 'methods.3.d': 'For special materials such as EVA, plastics or promotional items, we find the right solution.',
     'methods.3.tag3': 'Special transfer',
-    'how.kicker': 'Process', 'how.title': 'Your textile in 5 steps',
+    'how.kicker': 'Process', 'how.title': 'Your print in 5 steps',
     'how.1.t': 'Request', 'how.1.d': 'Send us your idea and quantity.',
     'how.2.t': 'Design', 'how.2.d': 'On request, we create several proposals.',
-    'how.3.t': 'Selection', 'how.3.d': 'You choose textile, colour and design.',
-    'how.4.t': 'Production', 'how.4.d': 'We print your textiles.',
+    'how.3.t': 'Selection', 'how.3.d': 'You choose product, colour and design.',
+    'how.4.t': 'Production', 'how.4.d': 'We print and finish your products.',
     'how.5.t': 'Done', 'how.5.d': 'Pick-up or shipping.',
     'forwho.kicker': 'Who for?', 'forwho.title': 'For everyone with something to show.',
-    'forwho.text': 'Workwear, teamwear, merch, event textiles or one-off pieces: we print for small and large projects.',
-    'forwho.1.t': 'Businesses', 'forwho.1.d': 'Corporate wear & merch',
+    'forwho.text': 'Workwear, teamwear, merch, promotional items or one-off pieces: we print for small and large projects.',
+    'forwho.1.t': 'Businesses', 'forwho.1.d': 'Corporate wear, merch & promotional items',
     'forwho.2.t': 'Trades & hospitality', 'forwho.2.d': 'Workwear & team outfits',
     'forwho.3.t': 'Clubs', 'forwho.3.d': 'Club apparel & fan gear',
     'forwho.4.t': 'Sports teams', 'forwho.4.d': 'Jerseys, training & teamwear',
@@ -85,7 +85,7 @@
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.optional': '(optional)',
     'form.product': 'What would you like printed?',
     'form.pTshirt': 'T-shirts', 'form.pHoodie': 'Hoodies', 'form.pCap': 'Caps & beanies', 'form.pBag': 'Bags',
-    'form.pBottle': 'Bottles', 'form.own': 'Own textile', 'form.other': 'Other', 'form.qty': 'Quantity',
+    'form.pBottle': 'Bottles', 'form.own': 'Own item', 'form.other': 'Other', 'form.qty': 'Quantity',
     'form.color': 'Colour', 'form.colorPh': 'e.g. black', 'form.position': 'Print position',
     'form.posFront': 'Front', 'form.posBack': 'Back', 'form.posBoth': 'Front & back', 'form.posUnsure': 'Not sure yet',
     'form.extras': 'Colour & preferred date',
@@ -110,7 +110,7 @@
     'prices.kicker': 'Prices', 'prices.title': 'Fair prices. Clearly calculated.',
     'prices.intro': 'With us you know what you are paying for. Your exact price depends on effort, quantity and print position. Within 24 hours we send you a transparent quote with a fixed price, free and non-binding for you.',
     'prices.label': 'Guide prices', 'prices.from': 'Guide price from', 'prices.incl': 'incl. print',
-    'prices.note': 'Guide prices are starting prices for orientation. Elaborate or multi-colour designs, larger print areas, additional print positions and the choice of textile can change the final price. Your exact price is in your quote.',
+    'prices.note': 'Guide prices are starting prices for orientation. Elaborate or multi-colour designs, larger print areas, additional print positions and the choice of product can change the final price. Your exact price is in your quote.',
     'prices.premium': 'Premium / oversize shirt', 'prices.transfer': 'Transfer without textile',
     'prices.transferNote': 'You bring your own textile. The price depends on size, printing method and quantity.',
     'prices.legal': 'All prices are final prices plus shipping (none for pick-up). No VAT is charged under the small business rule (§ 19 UStG).',
@@ -138,7 +138,7 @@
     'faq.a6': 'Simply upload your file directly in the request form, up to 3 files at once. You can also send it to us later by email or WhatsApp.',
     'faq.q7': 'Which printing method is right for me?',
     'faq.a7': 'DTF printing suits single pieces, small quantities and detailed, colourful designs. Screen printing is ideal from 10 pieces for larger runs and is especially durable. For special materials such as plastic or EVA there is special printing. We are happy to advise which method fits your project.',
-    'faq.q8': 'Can I bring my own textile?',
+    'faq.q8': 'Can I bring my own items?',
     'faq.a8': 'Yes! Just bring your piece in. We first check whether the material and surface are suitable for printing. The transfer alone starts at €10.00.',
     'faq.q10': 'How long does the print last?',
     'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
@@ -731,7 +731,7 @@
     /* No form service configured: let the visitor choose e-mail or WhatsApp
        instead of silently firing a mailto: link that may do nothing. */
     function showFallback(data, failed) {
-      const subject = 'Anfrage: ' + (data.get('product') || 'Textildruck') + ', ' + data.get('quantity') + ' Stk.';
+      const subject = 'Anfrage: ' + (data.get('product') || 'Druck') + ', ' + data.get('quantity') + ' Stk.';
       const summary = buildSummary(data);
       const mailHref = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(summary);
       const waHref = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(t('waText') + '\n\n' + summary);
