@@ -14,6 +14,7 @@ css/
   responsive.css   explicit breakpoints: 1100–1279 / 768–1099 / ≤767 / ≤359
 js/
   main.js          i18n (DE/EN), mobile menu, active nav, form, marquee, WhatsApp
+  footer-rating.js review summary in the footer of every page
   bewertungen.js   reviews page: overview and list from reviews.json, review form in a dialog
   reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
 zahlung.html       payment & delivery: order flow, Vorkasse/PayPal, shipping, no right of withdrawal for custom work, defects
@@ -70,7 +71,7 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 
 ## Reviews
 
-`bewertungen.html` and the home page (rating line in the hero, "Kundenstimmen" block at the top of the prices section) show only approved reviews; without any, all of it stays hidden or shows "Noch keine Bewertungen".
+`bewertungen.html` and the rating in the footer of every page (stars, average, count; `js/footer-rating.js`, links to the reviews page) show only approved reviews; without any, the footer rating stays hidden and the page shows "Noch keine Bewertungen".
 
 How a review gets published:
 

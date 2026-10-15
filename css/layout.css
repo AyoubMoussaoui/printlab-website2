@@ -213,7 +213,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas:
     "brand links"
-    "meta  meta";
+    "meta  rating";
   align-items: center;
   gap: 18px 40px;
 }
@@ -229,4 +229,9 @@
 .site-footer__inner > .footer-links {
   grid-area: links;
   justify-content: flex-end;
+}
+
+.site-footer__inner > .footer-rating {
+  grid-area: rating;
+  justify-self: end;
 }
