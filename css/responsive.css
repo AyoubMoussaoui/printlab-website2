@@ -33,9 +33,10 @@
    TABLET  768–1099px
    -------------------------------------------------------------------------- */
 /* Footer links leave room for the floating buttons (WhatsApp, back to top)
-   on the right; from 1400px the page margin is wide enough. Phones: see
-   the ≤767px block. */
-@media (min-width: 768px) and (max-width: 1399px) {
+   on the right. The buttons need 80px at the right edge; the page margin
+   is (width - 1344px) / 2 + 32px, which reaches 80px at 1440px. Phones:
+   see the ≤767px block. */
+@media (min-width: 768px) and (max-width: 1439px) {
   .site-footer__inner > .footer-links {
     padding-right: 64px;
   }
