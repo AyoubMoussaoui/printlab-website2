@@ -160,3 +160,14 @@ button {
   background: var(--color-magenta);
   color: var(--color-white);
 }
+
+/* Stored English choice: hidden until the texts are switched (js/head.js),
+   at the latest after one second */
+.lang-pending body {
+  opacity: 0;
+  animation: lang-reveal 0s linear 1s forwards;
+}
+
+@keyframes lang-reveal {
+  to { opacity: 1; }
+}

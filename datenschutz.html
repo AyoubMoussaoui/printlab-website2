@@ -6,20 +6,21 @@
   <title>Datenschutzerklärung | PRINT LAB Trier</title>
   <meta name="description" content="Datenschutzerklärung von PRINT LAB Trier: welche Daten wir verarbeiten, warum und welche Rechte du hast.">
   <meta name="theme-color" content="#0B0B0B">
-  <link rel="icon" href="favicon.ico?v=eb939aaa" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=eb939aaa" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=eb939aaa">
-  <link rel="manifest" href="site.webmanifest?v=eb939aaa">
+  <link rel="icon" href="favicon.ico?v=5934b67e" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=5934b67e" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=5934b67e">
+  <link rel="manifest" href="site.webmanifest?v=5934b67e">
+  <script src="js/head.js?v=5934b67e"></script>
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/base.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/layout.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/components.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/responsive.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/variables.css?v=5934b67e">
+  <link rel="stylesheet" href="css/base.css?v=5934b67e">
+  <link rel="stylesheet" href="css/layout.css?v=5934b67e">
+  <link rel="stylesheet" href="css/components.css?v=5934b67e">
+  <link rel="stylesheet" href="css/responsive.css?v=5934b67e">
 </head>
 <body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -27,24 +28,32 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
-      <a class="legal-header__back" href="/">
-        <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
-        Zur Startseite
-      </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main" class="legal">
     <div class="container legal__inner">
-      <h1 class="legal__title">Datenschutz&shy;erklärung</h1>
-      <p class="legal__updated">Stand: Oktober 2026</p>
+      <h1 class="legal__title" data-i18n="title">Datenschutz&shy;erklärung</h1>
+      <p class="legal__text legal__en-note" data-lang-only="en" hidden>This is a translation for your convenience. Only the German version is legally binding.</p>
+      <p class="legal__updated" data-i18n="updated">Stand: Oktober 2026</p>
 
       <!--
         Alle gelb markierten Angaben (.legal__todo) vor dem Livegang ersetzen
@@ -53,232 +62,126 @@
         eingebetteter Dienst ergänzt, muss diese Erklärung erweitert werden.
       -->
 
-      <nav aria-label="Inhalt">
+      <nav aria-label="Inhalt" data-i18n-aria="toc">
       <ol class="legal__toc">
-        <li><a class="legal__toc-link" href="#verantwortlicher">Verantwortlicher</a></li>
-        <li><a class="legal__toc-link" href="#ueberblick">Das Wichtigste in Kürze</a></li>
-        <li><a class="legal__toc-link" href="#hosting">Hosting und Server-Logfiles</a></li>
-        <li><a class="legal__toc-link" href="#anfrage">Anfragen über Formular und E-Mail</a></li>
-        <li><a class="legal__toc-link" href="#whatsapp">Kontakt über WhatsApp</a></li>
-        <li><a class="legal__toc-link" href="#instagram">Link zu Instagram</a></li>
-        <li><a class="legal__toc-link" href="#speicher">Lokale Speicherung der Spracheinstellung</a></li>
-        <li><a class="legal__toc-link" href="#schriften">Schriftarten</a></li>
-        <li><a class="legal__toc-link" href="#dauer">Speicherdauer</a></li>
-        <li><a class="legal__toc-link" href="#rechte">Deine Rechte</a></li>
+        <li><a class="legal__toc-link" href="#verantwortlicher" data-i18n="p11">Verantwortlicher</a></li>
+        <li><a class="legal__toc-link" href="#ueberblick" data-i18n="p12">Das Wichtigste in Kürze</a></li>
+        <li><a class="legal__toc-link" href="#hosting" data-i18n="p13">Hosting und Server-Logfiles</a></li>
+        <li><a class="legal__toc-link" href="#anfrage" data-i18n="p14">Anfragen über Formular und E-Mail</a></li>
+        <li><a class="legal__toc-link" href="#whatsapp" data-i18n="p15">Kontakt über WhatsApp</a></li>
+        <li><a class="legal__toc-link" href="#instagram" data-i18n="p16">Link zu Instagram</a></li>
+        <li><a class="legal__toc-link" href="#speicher" data-i18n="p17">Lokale Speicherung der Spracheinstellung</a></li>
+        <li><a class="legal__toc-link" href="#schriften" data-i18n="p18">Schriftarten</a></li>
+        <li><a class="legal__toc-link" href="#dauer" data-i18n="p19">Speicherdauer</a></li>
+        <li><a class="legal__toc-link" href="#rechte" data-i18n="p20">Deine Rechte</a></li>
       </ol>
       </nav>
 
       <section class="legal__section" aria-labelledby="verantwortlicher">
-        <h2 class="legal__h2" id="verantwortlicher">1. Verantwortlicher</h2>
-        <p class="legal__text">Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+        <h2 class="legal__h2" id="verantwortlicher" data-i18n="p21">1. Verantwortlicher</h2>
+        <p class="legal__text" data-i18n="p22">Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
         <address class="legal__address">
           PRINT LAB Trier<br>
-          Inhaber: Ayoub Moussaoui<br>
+          <span data-i18n="owner">Inhaber:</span> Ayoub Moussaoui<br>
           Simone-de-beauvoirstr. 45<br>
-          54294 Trier, Deutschland<br>
-          E-Mail: <a class="legal__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a><br>
-          Telefon: <a class="legal__link" href="tel:+4915901378917">+49&nbsp;159&nbsp;01378917</a>
+          54294 Trier, <span data-i18n="country">Deutschland</span><br>
+          <span data-i18n="email">E-Mail:</span> <a class="legal__link" href="mailto:info@printlab-trier.de" data-i18n="p23">info@printlab-trier.de</a><br>
+          <span data-i18n="phone">Telefon:</span> <a class="legal__link" href="tel:+4915901378917" data-i18n="p24">+49&nbsp;159&nbsp;01378917</a>
         </address>
       </section>
 
       <section class="legal__section" aria-labelledby="ueberblick">
-        <h2 class="legal__h2" id="ueberblick">2. Das Wichtigste in Kürze</h2>
+        <h2 class="legal__h2" id="ueberblick" data-i18n="p25">2. Das Wichtigste in Kürze</h2>
         <ul class="legal__list">
-          <li>Wir setzen keine Cookies, keine Analyse- oder Tracking-Tools und keine Werbe-Pixel ein.</li>
-          <li>Schriftarten werden zusammen mit der Website geladen, nicht von Google oder anderen Schriftarten-Diensten.</li>
-          <li>Personenbezogene Daten erhalten wir nur, wenn du uns aktiv kontaktierst, zum Beispiel per Anfrageformular, E-Mail oder WhatsApp.</li>
-          <li>Wir verwenden deine Daten ausschließlich, um deine Anfrage zu beantworten und deinen Auftrag abzuwickeln. Wir verkaufen sie nicht und geben sie nicht zu Werbezwecken weiter.</li>
+          <li data-i18n="p26">Wir setzen keine Cookies, keine Analyse- oder Tracking-Tools und keine Werbe-Pixel ein.</li>
+          <li data-i18n="p27">Schriftarten werden zusammen mit der Website geladen, nicht von Google oder anderen Schriftarten-Diensten.</li>
+          <li data-i18n="p28">Personenbezogene Daten erhalten wir nur, wenn du uns aktiv kontaktierst, zum Beispiel per Anfrageformular, E-Mail oder WhatsApp.</li>
+          <li data-i18n="p29">Wir verwenden deine Daten ausschließlich, um deine Anfrage zu beantworten und deinen Auftrag abzuwickeln. Wir verkaufen sie nicht und geben sie nicht zu Werbezwecken weiter.</li>
         </ul>
       </section>
 
       <section class="legal__section" aria-labelledby="hosting">
-        <h2 class="legal__h2" id="hosting">3. Hosting und Server-Logfiles</h2>
-        <p class="legal__text">
-          Diese Website wird bei der netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe, Deutschland, gehostet. Beim Aufruf der Website verarbeitet der Server automatisch technische
-          Informationen, die dein Browser übermittelt (sogenannte Server-Logfiles), insbesondere:
-        </p>
+        <h2 class="legal__h2" id="hosting" data-i18n="p30">3. Hosting und Server-Logfiles</h2>
+        <p class="legal__text" data-i18n="p31">Diese Website wird bei der netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe, Deutschland, gehostet. Beim Aufruf der Website verarbeitet der Server automatisch technische Informationen, die dein Browser übermittelt (sogenannte Server-Logfiles), insbesondere:</p>
         <ul class="legal__list">
-          <li>IP-Adresse</li>
-          <li>Datum und Uhrzeit des Zugriffs</li>
-          <li>aufgerufene Seite bzw. Datei</li>
-          <li>Referrer-URL (die zuvor besuchte Seite)</li>
-          <li>Browsertyp, Browserversion und Betriebssystem</li>
+          <li data-i18n="p32">IP-Adresse</li>
+          <li data-i18n="p33">Datum und Uhrzeit des Zugriffs</li>
+          <li data-i18n="p34">aufgerufene Seite bzw. Datei</li>
+          <li data-i18n="p35">Referrer-URL (die zuvor besuchte Seite)</li>
+          <li data-i18n="p36">Browsertyp, Browserversion und Betriebssystem</li>
         </ul>
-        <p class="legal__text">
-          Diese Verarbeitung ist technisch erforderlich, um die Website auszuliefern und vor Angriffen zu schützen.
-          Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und funktionsfähigen Website
-          (Art. 6 Abs. 1 lit. f DSGVO).
-        </p>
-        <p class="legal__text">
-          Wir werten die Logfiles nicht aus und führen sie nicht mit anderen Daten zusammen. Sie werden im Rahmen
-          der regelmäßigen Log-Rotation des Servers automatisch gelöscht. Mit netcup haben wir einen Vertrag zur
-          Auftragsverarbeitung nach Art. 28 DSGVO geschlossen.
-        </p>
+        <p class="legal__text" data-i18n="p37">Diese Verarbeitung ist technisch erforderlich, um die Website auszuliefern und vor Angriffen zu schützen. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und funktionsfähigen Website (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <p class="legal__text" data-i18n="p38">Wir werten die Logfiles nicht aus und führen sie nicht mit anderen Daten zusammen. Sie werden im Rahmen der regelmäßigen Log-Rotation des Servers automatisch gelöscht. Mit netcup haben wir einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO geschlossen.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="anfrage">
-        <h2 class="legal__h2" id="anfrage">4. Anfragen über Formular und E-Mail</h2>
-        <p class="legal__text">
-          Wenn du unser Anfrageformular absendest, werden deine Angaben und die Dateien, die du hochlädst, verschlüsselt
-          (HTTPS) an unseren Server bei netcup (siehe Abschnitt 3) übertragen und von dort per E-Mail an unser Postfach
-          geschickt. Auf dem Server selbst speichern wir die Anfrage nicht. Du erhältst an die angegebene E-Mail-Adresse
-          eine automatische Bestätigung mit einer kurzen Zusammenfassung deiner Anfrage.
-        </p>
-        <p class="legal__text">
-          Klappt das Senden einmal nicht, kannst du deine vorbereitete Anfrage stattdessen per E-Mail oder WhatsApp
-          schicken. Das Gleiche gilt, wenn du uns direkt eine E-Mail schreibst. Für Nachrichten über WhatsApp gilt
-          zusätzlich Abschnitt 5.
-        </p>
-        <p class="legal__text">Wir verarbeiten dabei die Daten, die du uns mitteilst, insbesondere:</p>
+        <h2 class="legal__h2" id="anfrage" data-i18n="p39">4. Anfragen über Formular und E-Mail</h2>
+        <p class="legal__text" data-i18n="p40">Wenn du unser Anfrageformular absendest, werden deine Angaben und die Dateien, die du hochlädst, verschlüsselt (HTTPS) an unseren Server bei netcup (siehe Abschnitt 3) übertragen und von dort per E-Mail an unser Postfach geschickt. Auf dem Server selbst speichern wir die Anfrage nicht. Du erhältst an die angegebene E-Mail-Adresse eine automatische Bestätigung mit einer kurzen Zusammenfassung deiner Anfrage.</p>
+        <p class="legal__text" data-i18n="p41">Klappt das Senden einmal nicht, kannst du deine vorbereitete Anfrage stattdessen per E-Mail oder WhatsApp schicken. Das Gleiche gilt, wenn du uns direkt eine E-Mail schreibst. Für Nachrichten über WhatsApp gilt zusätzlich Abschnitt 5.</p>
+        <p class="legal__text" data-i18n="p42">Wir verarbeiten dabei die Daten, die du uns mitteilst, insbesondere:</p>
         <ul class="legal__list">
-          <li>Name und E-Mail-Adresse, optional deine Telefonnummer</li>
-          <li>Angaben zu deinem Auftrag (Produkt, Stückzahl, Farbe, Druckposition, Wunschtermin, Abholung oder Versand
-            mit Postleitzahl und Ort, Nachricht)</li>
-          <li>Dateien, die du hochlädst oder anhängst, zum Beispiel Logos oder Motive</li>
+          <li data-i18n="p43">Name und E-Mail-Adresse, optional deine Telefonnummer</li>
+          <li data-i18n="p44">Angaben zu deinem Auftrag (Produkt, Stückzahl, Farbe, Druckposition, Wunschtermin, Abholung oder Versand mit Postleitzahl und Ort, Nachricht)</li>
+          <li data-i18n="p45">Dateien, die du hochlädst oder anhängst, zum Beispiel Logos oder Motive</li>
         </ul>
-        <p class="legal__text">
-          Für Reklamationen gibt es ein eigenes Formular (Seite „Reklamation“). Es funktioniert genauso: Deine Angaben
-          (Name, E-Mail-Adresse, optional die Bestellnummer, die Art des Problems und deine Beschreibung) und die Fotos,
-          die du hochlädst, werden verschlüsselt an unseren Server übertragen und von dort per E-Mail an unser Postfach
-          geschickt, ohne auf dem Server gespeichert zu werden. Große Fotos werden dabei schon in deinem Browser
-          verkleinert. Wir nutzen diese Daten, um deine Reklamation zu prüfen und mit dir eine Lösung zu finden.
-          Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung und Gewährleistung).
-        </p>
-        <p class="legal__text">
-          Bewirbst du dich bei uns per E-Mail (Seite „Jobs“), verarbeiten wir deine Angaben und
-          Unterlagen nur für das Bewerbungsverfahren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines
-          Beschäftigungsverhältnisses). Kommt keine Zusammenarbeit zustande, löschen wir deine Bewerbung spätestens sechs
-          Monate nach Abschluss des Verfahrens.
-        </p>
-        <p class="legal__text">
-          Über die Seite „Bewertungen“ kannst du uns eine Bewertung schicken (Sterne, deine Nachricht, optional Name oder
-          Projekt und E-Mail-Adresse). Sie wird per E-Mail an uns übermittelt. Hast du der Veröffentlichung zugestimmt
-          (Art. 6 Abs. 1 lit. a DSGVO), speichern wir sie zusätzlich auf unserem Server bei netcup (siehe Abschnitt 3), bis
-          wir sie geprüft haben. Nach unserer Freigabe erscheint sie auf dieser Seite mit dem angegebenen Namen oder als
-          „Anonym“, mit Datum und Sternen, nie mit deiner E-Mail-Adresse. Abgelehnte Bewertungen löschen wir sofort, nicht
-          bearbeitete spätestens nach 60 Tagen. Außerdem nutzen wir dein Feedback, um unsere Arbeit zu verbessern
-          (Art. 6 Abs. 1 lit. f DSGVO). Deine Zustimmung kannst du jederzeit mit Wirkung für die Zukunft per E-Mail an
-          info@printlab-trier.de widerrufen; wir entfernen die Bewertung dann.
-        </p>
-        <p class="legal__text">
-          Bezahlst du per PayPal, wirst du dafür zu PayPal weitergeleitet bzw. zahlst über dein PayPal-Konto. Anbieter ist
-          die PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxemburg. PayPal erhält dabei die
-          für die Zahlung nötigen Daten (zum Beispiel Name, Betrag und Rechnungsnummer). Rechtsgrundlage ist
-          Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). Weitere Informationen:
-          <a class="legal__link" href="https://www.paypal.com/de/legalhub/privacy-full" target="_blank" rel="noopener">Datenschutzerklärung von PayPal</a>.
-        </p>
-        <p class="legal__text">
-          Zum Schutz vor Missbrauch der Formulare (zum Beispiel massenhaft automatisierte Anfragen) speichert unser
-          Server für höchstens einen Tag einen nicht umkehrbar verschlüsselten Wert (Hash) deiner IP-Adresse zusammen mit
-          dem Zeitpunkt der Anfrage. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren Formular
-          (Art. 6 Abs. 1 lit. f DSGVO).
-        </p>
-        <p class="legal__text">
-          Wir nutzen diese Daten, um deine Anfrage zu beantworten, ein Angebot zu erstellen und einen möglichen Auftrag
-          abzuwickeln. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung und -erfüllung). Die Angaben
-          sind freiwillig. Ohne sie können wir deine Anfrage jedoch nicht bearbeiten.
-        </p>
-        <p class="legal__text">
-          Unser E-Mail-Postfach wird ebenfalls von der netcup GmbH (siehe Abschnitt 3) betrieben. Eingehende E-Mails
-          leiten wir an ein Postfach weiter, das von der Microsoft Ireland Operations Limited (Outlook.com)
-          bereitgestellt wird. Dabei kann eine Übermittlung in die USA nicht ausgeschlossen werden. Microsoft ist unter
-          dem EU-US Data Privacy Framework zertifiziert, auf dessen Grundlage die EU-Kommission ein angemessenes
-          Datenschutzniveau festgestellt hat (Art. 45 DSGVO). Weitere Informationen:
-          <a class="legal__link" href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener">Datenschutzerklärung von Microsoft</a>.
-        </p>
+        <p class="legal__text" data-i18n="p46">Für Reklamationen gibt es ein eigenes Formular (Seite „Reklamation“). Es funktioniert genauso: Deine Angaben (Name, E-Mail-Adresse, optional die Bestellnummer, die Art des Problems und deine Beschreibung) und die Fotos, die du hochlädst, werden verschlüsselt an unseren Server übertragen und von dort per E-Mail an unser Postfach geschickt, ohne auf dem Server gespeichert zu werden. Große Fotos werden dabei schon in deinem Browser verkleinert. Wir nutzen diese Daten, um deine Reklamation zu prüfen und mit dir eine Lösung zu finden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung und Gewährleistung).</p>
+        <p class="legal__text" data-i18n="p47">Bewirbst du dich bei uns per E-Mail (Seite „Jobs“), verarbeiten wir deine Angaben und Unterlagen nur für das Bewerbungsverfahren. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung eines Beschäftigungsverhältnisses). Kommt keine Zusammenarbeit zustande, löschen wir deine Bewerbung spätestens sechs Monate nach Abschluss des Verfahrens.</p>
+        <p class="legal__text" data-i18n="p48">Über die Seite „Bewertungen“ kannst du uns eine Bewertung schicken (Sterne, deine Nachricht, optional Name oder Projekt und E-Mail-Adresse). Sie wird per E-Mail an uns übermittelt. Hast du der Veröffentlichung zugestimmt (Art. 6 Abs. 1 lit. a DSGVO), speichern wir sie zusätzlich auf unserem Server bei netcup (siehe Abschnitt 3), bis wir sie geprüft haben. Nach unserer Freigabe erscheint sie auf dieser Seite mit dem angegebenen Namen oder als „Anonym“, mit Datum und Sternen, nie mit deiner E-Mail-Adresse. Abgelehnte Bewertungen löschen wir sofort, nicht bearbeitete spätestens nach 60 Tagen. Außerdem nutzen wir dein Feedback, um unsere Arbeit zu verbessern (Art. 6 Abs. 1 lit. f DSGVO). Deine Zustimmung kannst du jederzeit mit Wirkung für die Zukunft per E-Mail an info@printlab-trier.de widerrufen; wir entfernen die Bewertung dann.</p>
+        <p class="legal__text"><span data-i18n="p1">Bezahlst du per PayPal, wirst du dafür zu PayPal weitergeleitet bzw. zahlst über dein PayPal-Konto. Anbieter ist die PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxemburg. PayPal erhält dabei die für die Zahlung nötigen Daten (zum Beispiel Name, Betrag und Rechnungsnummer). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). Weitere Informationen</span>: <a class="legal__link" href="https://www.paypal.com/de/legalhub/privacy-full" target="_blank" rel="noopener" data-i18n="p2">Datenschutzerklärung von PayPal</a>.</p>
+        <p class="legal__text" data-i18n="p49">Zum Schutz vor Missbrauch der Formulare (zum Beispiel massenhaft automatisierte Anfragen) speichert unser Server für höchstens einen Tag einen nicht umkehrbar verschlüsselten Wert (Hash) deiner IP-Adresse zusammen mit dem Zeitpunkt der Anfrage. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren Formular (Art. 6 Abs. 1 lit. f DSGVO).</p>
+        <p class="legal__text" data-i18n="p50">Wir nutzen diese Daten, um deine Anfrage zu beantworten, ein Angebot zu erstellen und einen möglichen Auftrag abzuwickeln. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung und -erfüllung). Die Angaben sind freiwillig. Ohne sie können wir deine Anfrage jedoch nicht bearbeiten.</p>
+        <p class="legal__text"><span data-i18n="p3">Unser E-Mail-Postfach wird ebenfalls von der netcup GmbH (siehe Abschnitt 3) betrieben. Eingehende E-Mails leiten wir an ein Postfach weiter, das von der Microsoft Ireland Operations Limited (Outlook.com) bereitgestellt wird. Dabei kann eine Übermittlung in die USA nicht ausgeschlossen werden. Microsoft ist unter dem EU-US Data Privacy Framework zertifiziert, auf dessen Grundlage die EU-Kommission ein angemessenes Datenschutzniveau festgestellt hat (Art. 45 DSGVO). Weitere Informationen</span>: <a class="legal__link" href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener" data-i18n="p4">Datenschutzerklärung von Microsoft</a>.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="whatsapp">
-        <h2 class="legal__h2" id="whatsapp">5. Kontakt über WhatsApp</h2>
-        <p class="legal__text">
-          Auf unserer Website verlinken wir auf WhatsApp. Beim Laden unserer Seite werden dabei keine Daten an WhatsApp
-          übertragen. Erst wenn du auf einen WhatsApp-Link klickst, öffnet sich WhatsApp und der Anbieter erhält die
-          dort üblichen Daten.
-        </p>
-        <p class="legal__text">
-          Wenn du uns über WhatsApp schreibst, verarbeiten wir deine Telefonnummer, deinen Profilnamen und die Inhalte
-          deiner Nachrichten, um deine Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO). Anbieter ist die WhatsApp
-          Ireland Limited, ein Unternehmen der Meta-Gruppe. Dabei kann eine Übermittlung in die USA nicht ausgeschlossen
-          werden. Meta ist unter dem EU-US Data Privacy Framework zertifiziert. Wenn du das nicht möchtest, erreichst du
-          uns auch per E-Mail. Weitere Informationen:
-          <a class="legal__link" href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">Datenschutzrichtlinie von WhatsApp</a>.
-        </p>
+        <h2 class="legal__h2" id="whatsapp" data-i18n="p51">5. Kontakt über WhatsApp</h2>
+        <p class="legal__text" data-i18n="p52">Auf unserer Website verlinken wir auf WhatsApp. Beim Laden unserer Seite werden dabei keine Daten an WhatsApp übertragen. Erst wenn du auf einen WhatsApp-Link klickst, öffnet sich WhatsApp und der Anbieter erhält die dort üblichen Daten.</p>
+        <p class="legal__text"><span data-i18n="p5">Wenn du uns über WhatsApp schreibst, verarbeiten wir deine Telefonnummer, deinen Profilnamen und die Inhalte deiner Nachrichten, um deine Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO). Anbieter ist die WhatsApp Ireland Limited, ein Unternehmen der Meta-Gruppe. Dabei kann eine Übermittlung in die USA nicht ausgeschlossen werden. Meta ist unter dem EU-US Data Privacy Framework zertifiziert. Wenn du das nicht möchtest, erreichst du uns auch per E-Mail. Weitere Informationen</span>: <a class="legal__link" href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener" data-i18n="p6">Datenschutzrichtlinie von WhatsApp</a>.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="instagram">
-        <h2 class="legal__h2" id="instagram">6. Link zu Instagram</h2>
-        <p class="legal__text">
-          Wir verlinken auf unser Instagram-Profil. Es handelt sich um einen einfachen Link, keine eingebettete Funktion:
-          Beim Besuch unserer Website werden keine Daten an Instagram übertragen. Erst wenn du den Link anklickst, gelangst
-          du zu Instagram, einem Dienst der Meta Platforms Ireland Limited. Dort gilt deren
-          <a class="legal__link" href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener">Datenschutzrichtlinie</a>.
-        </p>
+        <h2 class="legal__h2" id="instagram" data-i18n="p53">6. Link zu Instagram</h2>
+        <p class="legal__text"><span data-i18n="p7">Wir verlinken auf unser Instagram-Profil. Es handelt sich um einen einfachen Link, keine eingebettete Funktion: Beim Besuch unserer Website werden keine Daten an Instagram übertragen. Erst wenn du den Link anklickst, gelangst du zu Instagram, einem Dienst der Meta Platforms Ireland Limited. Dort gilt deren</span> <a class="legal__link" href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener" data-i18n="p8">Datenschutzrichtlinie</a>.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="speicher">
-        <h2 class="legal__h2" id="speicher">7. Lokale Speicherung der Spracheinstellung</h2>
-        <p class="legal__text">
-          Wenn du über den Schalter DE / EN die Sprache wechselst, speichern wir deine Auswahl im lokalen Speicher
-          (Local Storage) deines Browsers, damit die Website beim nächsten Besuch in deiner Sprache erscheint. Diese
-          Information verlässt dein Gerät nicht und wird nicht an uns übertragen. Die Speicherung ist für den von dir
-          ausdrücklich gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst sie jederzeit
-          über die Einstellungen deines Browsers löschen.
-        </p>
+        <h2 class="legal__h2" id="speicher" data-i18n="p54">7. Lokale Speicherung der Spracheinstellung</h2>
+        <p class="legal__text" data-i18n="p55">Wenn du über den Schalter DE / EN die Sprache wechselst, speichern wir deine Auswahl im lokalen Speicher (Local Storage) deines Browsers, damit die Website beim nächsten Besuch in deiner Sprache erscheint. Diese Information verlässt dein Gerät nicht und wird nicht an uns übertragen. Die Speicherung ist für den von dir ausdrücklich gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst sie jederzeit über die Einstellungen deines Browsers löschen.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="schriften">
-        <h2 class="legal__h2" id="schriften">8. Schriftarten</h2>
-        <p class="legal__text">
-          Die auf dieser Website verwendete Schriftart „Archivo“ ist direkt in die Website eingebunden und wird
-          zusammen mit ihr von unserem Hosting-Anbieter (siehe Abschnitt 3) geladen. Es wird keine Verbindung zu
-          Google Fonts oder anderen Schriftarten-Diensten hergestellt.
-        </p>
+        <h2 class="legal__h2" id="schriften" data-i18n="p56">8. Schriftarten</h2>
+        <p class="legal__text" data-i18n="p57">Die auf dieser Website verwendete Schriftart „Archivo“ ist direkt in die Website eingebunden und wird zusammen mit ihr von unserem Hosting-Anbieter (siehe Abschnitt 3) geladen. Es wird keine Verbindung zu Google Fonts oder anderen Schriftarten-Diensten hergestellt.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="dauer">
-        <h2 class="legal__h2" id="dauer">9. Speicherdauer</h2>
-        <p class="legal__text">
-          Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist. Anfragen,
-          aus denen kein Auftrag entsteht, löschen wir spätestens sechs Monate nach Abschluss der Kommunikation. Kommt ein
-          Auftrag zustande, bewahren wir die dafür relevanten Unterlagen gemäß den gesetzlichen Aufbewahrungspflichten auf
-          (in der Regel sechs bzw. zehn Jahre nach § 147 AO und § 257 HGB). Rechtsgrundlage dafür ist Art. 6 Abs. 1
-          lit. c DSGVO. Deine Motive und Druckdateien löschen wir nach Abschluss des Auftrags, sofern du uns nicht bittest,
-          sie für Nachbestellungen aufzubewahren.
-          Unterlagen und Fotos zu Reklamationen bewahren wir auf, solange das für die Klärung und mögliche
-          Gewährleistungsansprüche erforderlich ist.
-        </p>
+        <h2 class="legal__h2" id="dauer" data-i18n="p58">9. Speicherdauer</h2>
+        <p class="legal__text" data-i18n="p59">Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist. Anfragen, aus denen kein Auftrag entsteht, löschen wir spätestens sechs Monate nach Abschluss der Kommunikation. Kommt ein Auftrag zustande, bewahren wir die dafür relevanten Unterlagen gemäß den gesetzlichen Aufbewahrungspflichten auf (in der Regel sechs bzw. zehn Jahre nach § 147 AO und § 257 HGB). Rechtsgrundlage dafür ist Art. 6 Abs. 1 lit. c DSGVO. Deine Motive und Druckdateien löschen wir nach Abschluss des Auftrags, sofern du uns nicht bittest, sie für Nachbestellungen aufzubewahren. Unterlagen und Fotos zu Reklamationen bewahren wir auf, solange das für die Klärung und mögliche Gewährleistungsansprüche erforderlich ist.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="rechte">
-        <h2 class="legal__h2" id="rechte">10. Deine Rechte</h2>
-        <p class="legal__text">Du hast jederzeit das Recht auf:</p>
+        <h2 class="legal__h2" id="rechte" data-i18n="p60">10. Deine Rechte</h2>
+        <p class="legal__text" data-i18n="p61">Du hast jederzeit das Recht auf:</p>
         <ul class="legal__list">
-          <li>Auskunft über deine bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
-          <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-          <li>Löschung deiner Daten (Art. 17 DSGVO)</li>
-          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-          <li>Widerspruch gegen Verarbeitungen, die auf unserem berechtigten Interesse beruhen (Art. 21 DSGVO)</li>
-          <li>Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
+          <li data-i18n="p62">Auskunft über deine bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
+          <li data-i18n="p63">Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+          <li data-i18n="p64">Löschung deiner Daten (Art. 17 DSGVO)</li>
+          <li data-i18n="p65">Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li data-i18n="p66">Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li data-i18n="p67">Widerspruch gegen Verarbeitungen, die auf unserem berechtigten Interesse beruhen (Art. 21 DSGVO)</li>
+          <li data-i18n="p68">Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
         </ul>
-        <p class="legal__text">
-          Schreib uns dazu einfach eine E-Mail an
-          <a class="legal__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a>.
-        </p>
+        <p class="legal__text"><span data-i18n="p9">Schreib uns dazu einfach eine E-Mail an</span> <a class="legal__link" href="mailto:info@printlab-trier.de" data-i18n="p69">info@printlab-trier.de</a>.</p>
 
-        <h3 class="legal__h3">Beschwerderecht bei der Aufsichtsbehörde</h3>
-        <p class="legal__text">
-          Du hast außerdem das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Für uns
-          zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz
-          (<a class="legal__link" href="https://www.datenschutz.rlp.de" target="_blank" rel="noopener">www.datenschutz.rlp.de</a>).
-        </p>
+        <h3 class="legal__h3" data-i18n="p70">Beschwerderecht bei der Aufsichtsbehörde</h3>
+        <p class="legal__text"><span data-i18n="p10">Du hast außerdem das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Für uns zuständig ist der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz</span> (<a class="legal__link" href="https://www.datenschutz.rlp.de" target="_blank" rel="noopener" data-i18n="p71">www.datenschutz.rlp.de</a>).</p>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -288,12 +191,12 @@
       <p class="site-footer__meta">© <span data-year></span> PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz" aria-current="page">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" aria-current="page" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -303,6 +206,8 @@
     </div>
   </footer>
 
-  <script src="js/footer-rating.js?v=eb939aaa" defer></script>
+  <script src="js/lang-switch.js?v=5934b67e" defer></script>
+  <script src="js/datenschutz.js?v=5934b67e" defer></script>
+  <script src="js/footer-rating.js?v=5934b67e" defer></script>
 </body>
 </html>

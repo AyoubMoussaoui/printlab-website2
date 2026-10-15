@@ -4,18 +4,22 @@
    texts: PrintlabLang.init(EN, englishTabTitle).
    - [data-i18n]       text, swapped with textContent
    - [data-i18n-aria]  aria-label
+   - [data-i18n-placeholder]  placeholder
    - [data-lang-only]  shown only in that language (e.g. a note in English)
-   Pages always open in German; the switch offers English.
+   German unless English was chosen before; the choice (localStorage
+   "printlab-lang") is shared by all pages.
    ========================================================================== */
 window.PrintlabLang = {
   init(EN, enTitle) {
     'use strict';
     const i18nNodes = Array.from(document.querySelectorAll('[data-i18n]'));
     const ariaNodes = Array.from(document.querySelectorAll('[data-i18n-aria]'));
+    const phNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
     const onlyNodes = Array.from(document.querySelectorAll('[data-lang-only]'));
     const DE = {};
     i18nNodes.forEach((el) => { DE[el.dataset.i18n] = DE[el.dataset.i18n] || el.textContent; });
     ariaNodes.forEach((el) => { DE[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+    phNodes.forEach((el) => { DE[el.dataset.i18nPlaceholder] = el.getAttribute('placeholder'); });
     const TITLE = { de: document.title, en: enTitle };
 
     function applyLanguage(next) {
@@ -23,6 +27,7 @@ window.PrintlabLang = {
       const dict = lang === 'en' ? EN : DE;
       i18nNodes.forEach((el) => { if (dict[el.dataset.i18n] !== undefined) el.textContent = dict[el.dataset.i18n]; });
       ariaNodes.forEach((el) => { if (dict[el.dataset.i18nAria] !== undefined) el.setAttribute('aria-label', dict[el.dataset.i18nAria]); });
+      phNodes.forEach((el) => { if (dict[el.dataset.i18nPlaceholder] !== undefined) el.setAttribute('placeholder', dict[el.dataset.i18nPlaceholder]); });
       onlyNodes.forEach((el) => { el.hidden = el.dataset.langOnly !== lang; });
       document.documentElement.lang = lang;
       document.title = TITLE[lang];
@@ -50,7 +55,13 @@ window.PrintlabLang = {
       btn.addEventListener('click', () => {
         declineBrowserTranslation();
         applyLanguage(btn.dataset.lang);
+        try { localStorage.setItem('printlab-lang', btn.dataset.lang === 'en' ? 'en' : 'de'); } catch (e) {}
       });
     });
+
+    try {
+      if (localStorage.getItem('printlab-lang') === 'en') { declineBrowserTranslation(); applyLanguage('en'); }
+    } catch (e) { /* storage blocked: German */ }
+    document.documentElement.classList.remove('lang-pending');
   }
 };

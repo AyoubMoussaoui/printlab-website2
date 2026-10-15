@@ -7,17 +7,18 @@
   <meta name="description" content="PRINT LAB Trier sucht eine Aushilfe oder einen Werkstudenten (m/w/d) für Design und Produktion. Bis zu 10 Stunden pro Woche, flexibel neben dem Studium.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/karriere">
-  <link rel="icon" href="favicon.ico?v=eb939aaa" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=eb939aaa" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=eb939aaa">
-  <link rel="manifest" href="site.webmanifest?v=eb939aaa">
+  <link rel="icon" href="favicon.ico?v=5934b67e" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=5934b67e" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=5934b67e">
+  <link rel="manifest" href="site.webmanifest?v=5934b67e">
+  <script src="js/head.js?v=5934b67e"></script>
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/base.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/layout.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/components.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/responsive.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/variables.css?v=5934b67e">
+  <link rel="stylesheet" href="css/base.css?v=5934b67e">
+  <link rel="stylesheet" href="css/layout.css?v=5934b67e">
+  <link rel="stylesheet" href="css/components.css?v=5934b67e">
+  <link rel="stylesheet" href="css/responsive.css?v=5934b67e">
 
   <!-- Job posting for Google search (Google for Jobs) -->
   <script type="application/ld+json">
@@ -49,7 +50,7 @@
   </script>
 </head>
 <body class="page-dark">
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -60,66 +61,73 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
-      <a class="legal-header__back" href="/">
-        <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
-        Zur Startseite
-      </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main" class="section section--dark job">
     <div class="container job__inner">
-      <p class="section-head__kicker">Jobs bei PRINT LAB</p>
-      <h1 class="section-head__title job__title">Aushilfe / Werkstudent (m/w/d) für Design &amp; Produktion</h1>
+      <p class="section-head__kicker" data-i18n="kicker">Jobs bei PRINT LAB</p>
+      <h1 class="section-head__title job__title" data-i18n="title">Aushilfe / Werkstudent (m/w/d) für Design &amp; Produktion</h1>
       <ul class="job-facts" role="list">
         <li class="job-facts__item"><svg class="job-facts__icon" aria-hidden="true"><use href="#icon-pin"></use></svg>Trier</li>
-        <li class="job-facts__item">Bis zu 10 Stunden pro Woche</li>
-        <li class="job-facts__item">Werkstudent/in oder Minijob</li>
+        <li class="job-facts__item" data-i18n="fact2">Bis zu 10 Stunden pro Woche</li>
+        <li class="job-facts__item" data-i18n="fact3">Werkstudent/in oder Minijob</li>
       </ul>
-      <p class="contact__lead job__lead">Wir sind PRINT LAB aus Trier und veredeln Textilien, Werbeartikel und Accessoires, vom Einzelstück bis zur Vereinsbestellung. Für Design und Produktion suchen wir Verstärkung, ideal für Studierende in Trier.</p>
+      <p class="contact__lead job__lead" data-i18n="lead">Wir sind PRINT LAB aus Trier und veredeln Textilien, Werbeartikel und Accessoires, vom Einzelstück bis zur Vereinsbestellung. Für Design und Produktion suchen wir Verstärkung, ideal für Studierende in Trier.</p>
 
       <div class="job-cards">
           <section class="job-card" aria-labelledby="aufgaben">
-            <h2 class="job-card__title" id="aufgaben">Deine Aufgaben</h2>
+            <h2 class="job-card__title" id="aufgaben" data-i18n="tasksTitle">Deine Aufgaben</h2>
             <ul class="job-list" role="list">
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Designs gestalten: Logos und Motive entwerfen, anpassen und für den Druck vorbereiten</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Mitarbeit bei der Veredelung von Textilien, Werbeartikeln und Accessoires (z. B. DTF und Siebdruck)</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Qualitätskontrolle, Verpackung und Vorbereitung des Versands</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Ordnung und Organisation in der Produktion</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="task1">Designs gestalten: Logos und Motive entwerfen, anpassen und für den Druck vorbereiten</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="task2">Mitarbeit bei der Veredelung von Textilien, Werbeartikeln und Accessoires (z. B. DTF und Siebdruck)</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="task3">Qualitätskontrolle, Verpackung und Vorbereitung des Versands</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="task4">Ordnung und Organisation in der Produktion</span></li>
             </ul>
           </section>
           <section class="job-card" aria-labelledby="profil">
-            <h2 class="job-card__title" id="profil">Was du mitbringst</h2>
+            <h2 class="job-card__title" id="profil" data-i18n="profileTitle">Was du mitbringst</h2>
             <ul class="job-list" role="list">
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Zuverlässigkeit, handwerkliches Geschick und ein Auge fürs Detail</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Freude an Gestaltung. Erfahrung mit Grafikprogrammen wie Illustrator, Photoshop oder Canva ist ein Plus</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Eine motivierte, anpackende Art. Vorkenntnisse im Druck brauchst du nicht, wir lernen dich ein!</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Du bist an einer Hochschule eingeschrieben (Werkstudent/in) oder suchst einen Minijob</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="profile1">Zuverlässigkeit, handwerkliches Geschick und ein Auge fürs Detail</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="profile2">Freude an Gestaltung. Erfahrung mit Grafikprogrammen wie Illustrator, Photoshop oder Canva ist ein Plus</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="profile3">Eine motivierte, anpackende Art. Vorkenntnisse im Druck brauchst du nicht, wir lernen dich ein!</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="profile4">Du bist an einer Hochschule eingeschrieben (Werkstudent/in) oder suchst einen Minijob</span></li>
             </ul>
           </section>
           <section class="job-card" aria-labelledby="angebot">
-            <h2 class="job-card__title" id="angebot">Was wir bieten</h2>
+            <h2 class="job-card__title" id="angebot" data-i18n="offerTitle">Was wir bieten</h2>
             <ul class="job-list" role="list">
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Faire Bezahlung und flexible Arbeitszeiten, die gut zu deinem Studium passen</span></li>
-              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Einblicke in Design und Produktion, Raum für eigene Ideen und ein entspanntes, cooles Team</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="offer1">Faire Bezahlung und flexible Arbeitszeiten, die gut zu deinem Studium passen</span></li>
+              <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="offer2">Einblicke in Design und Produktion, Raum für eigene Ideen und ein entspanntes, cooles Team</span></li>
             </ul>
           </section>
       </div>
 
       <section class="job-apply" aria-labelledby="bewerbung">
         <div class="job-apply__body">
-          <h2 class="job-apply__title" id="bewerbung">Interesse?</h2>
-          <p class="job-apply__text">Schreib uns einfach eine kurze Mail mit ein paar Zeilen zu dir an <a class="job-apply__link" href="mailto:info@printlab-trier.de?subject=Bewerbung%20Aushilfe%20%2F%20Werkstudent%20(m%2Fw%2Fd)">info@printlab-trier.de</a>. Ein Lebenslauf ist nicht nötig. Wenn du schon Designs gemacht hast, schick gern ein paar Beispiele mit.</p>
+          <h2 class="job-apply__title" id="bewerbung" data-i18n="applyTitle">Interesse?</h2>
+          <p class="job-apply__text"><span data-i18n="apply1">Schreib uns einfach eine kurze Mail mit ein paar Zeilen zu dir an</span> <a class="job-apply__link" href="mailto:info@printlab-trier.de?subject=Bewerbung%20Aushilfe%20%2F%20Werkstudent%20(m%2Fw%2Fd)">info@printlab-trier.de</a><span data-i18n="apply2">. Ein Lebenslauf ist nicht nötig. Wenn du schon Designs gemacht hast, schick gern ein paar Beispiele mit.</span></p>
         </div>
         <div class="job-apply__actions">
-          <a class="btn btn--primary" href="mailto:info@printlab-trier.de?subject=Bewerbung%20Aushilfe%20%2F%20Werkstudent%20(m%2Fw%2Fd)">E-Mail schreiben</a>
+          <a class="btn btn--primary" href="mailto:info@printlab-trier.de?subject=Bewerbung%20Aushilfe%20%2F%20Werkstudent%20(m%2Fw%2Fd)" data-i18n="applyBtn">E-Mail schreiben</a>
         </div>
       </section>
     </div>
@@ -127,7 +135,7 @@
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -137,12 +145,12 @@
       <p class="site-footer__meta">© <span data-year></span> PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere" aria-current="page">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -152,6 +160,8 @@
     </div>
   </footer>
 
-  <script src="js/footer-rating.js?v=eb939aaa" defer></script>
+  <script src="js/lang-switch.js?v=5934b67e" defer></script>
+  <script src="js/karriere.js?v=5934b67e" defer></script>
+  <script src="js/footer-rating.js?v=5934b67e" defer></script>
 </body>
 </html>

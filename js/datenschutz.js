@@ -1,0 +1,75 @@
+/* ==========================================================================
+   PRINT LAB Trier: privacy policy (datenschutz.html). English texts for the
+   DE/EN switch (js/lang-switch.js); German is in the HTML and is the
+   legally binding version. Keys p1… follow the order of the page; when a
+   German text changes, update the English one with the same key.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  const EN = {
+    skip: 'Skip to content', back: 'Back to home page',
+    title: 'Privacy policy', updated: 'Last updated: October 2026', toc: 'Contents',
+    owner: 'Owner:', country: 'Germany', email: 'Email:', phone: 'Phone:',
+    p11: 'Controller', p12: 'The key points', p13: 'Hosting and server log files', p14: 'Requests via form and email',
+    p15: 'Contact via WhatsApp', p16: 'Link to Instagram', p17: 'Local storage of the language setting',
+    p18: 'Fonts', p19: 'Storage period', p20: 'Your rights',
+    p21: '1. Controller',
+    p22: 'The controller responsible for data processing on this website within the meaning of the General Data Protection Regulation (GDPR) is:',
+    p25: '2. The key points',
+    p26: 'We do not use cookies, analytics or tracking tools, or advertising pixels.',
+    p27: 'Fonts are loaded together with the website, not from Google or other font services.',
+    p28: 'We only receive personal data when you actively contact us, for example via the request form, email or WhatsApp.',
+    p29: 'We use your data exclusively to answer your request and to process your order. We do not sell it or pass it on for advertising purposes.',
+    p30: '3. Hosting and server log files',
+    p31: 'This website is hosted by netcup GmbH, Emmy-Noether-Straße 10, 76131 Karlsruhe, Germany. When you visit the website, the server automatically processes technical information transmitted by your browser (so-called server log files), in particular:',
+    p32: 'IP address', p33: 'Date and time of access', p34: 'Page or file requested',
+    p35: 'Referrer URL (the page visited before)', p36: 'Browser type, browser version and operating system',
+    p37: 'This processing is technically necessary to deliver the website and to protect it against attacks. The legal basis is our legitimate interest in a secure and functioning website (Art. 6 (1) (f) GDPR).',
+    p38: 'We do not analyse the log files or combine them with other data. They are deleted automatically as part of the server’s regular log rotation. We have concluded a data processing agreement with netcup in accordance with Art. 28 GDPR.',
+    p39: '4. Requests via form and email',
+    p40: 'When you submit our request form, your details and the files you upload are transmitted in encrypted form (HTTPS) to our server at netcup (see section 3) and sent from there by email to our mailbox. We do not store the request on the server itself. You receive an automatic confirmation with a short summary of your request at the email address you provided.',
+    p41: 'If sending ever fails, you can send your prepared request by email or WhatsApp instead. The same applies if you write to us directly by email. Section 5 also applies to messages via WhatsApp.',
+    p42: 'In doing so, we process the data you provide to us, in particular:',
+    p43: 'Name and email address, optionally your phone number',
+    p44: 'Details of your order (product, quantity, colour, print position, preferred date, pickup or shipping with postcode and town, message)',
+    p45: 'Files you upload or attach, for example logos or designs',
+    p46: 'There is a separate form for claims (page “Claims”). It works in the same way: your details (name, email address, optionally the order number, the type of issue and your description) and the photos you upload are transmitted in encrypted form to our server and sent from there by email to our mailbox, without being stored on the server. Large photos are already reduced in size in your browser. We use this data to examine your claim and to find a solution with you. The legal basis is Art. 6 (1) (b) GDPR (performance of a contract and warranty).',
+    p47: 'If you apply to us by email (page “Jobs”), we process your details and documents only for the application process. The legal basis is Art. 6 (1) (b) GDPR (steps prior to an employment relationship). If we do not end up working together, we delete your application no later than six months after the end of the process.',
+    p48: 'On the “Reviews” page you can send us a review (stars, your message, optionally a name or project and an email address). It is sent to us by email. If you have agreed to its publication (Art. 6 (1) (a) GDPR), we also store it on our server at netcup (see section 3) until we have checked it. After our approval it appears on that page with the name given or as “Anonymous”, with date and stars, never with your email address. We delete rejected reviews immediately, and unprocessed ones after 60 days at the latest. We also use your feedback to improve our work (Art. 6 (1) (f) GDPR). You can withdraw your consent at any time with effect for the future by email to info@printlab-trier.de; we will then remove the review.',
+    p1: 'If you pay with PayPal, you are redirected to PayPal or pay via your PayPal account. The provider is PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg. PayPal receives the data required for the payment (for example name, amount and invoice number). The legal basis is Art. 6 (1) (b) GDPR (performance of a contract). Further information',
+    p2: 'PayPal privacy statement',
+    p49: 'To protect the forms against misuse (for example large numbers of automated requests), our server stores an irreversibly encrypted value (hash) of your IP address together with the time of the request for no more than one day. The legal basis is our legitimate interest in a secure form (Art. 6 (1) (f) GDPR).',
+    p50: 'We use this data to answer your request, to prepare a quote and to process a possible order. The legal basis is Art. 6 (1) (b) GDPR (steps prior to entering into a contract and performance of a contract). Providing the details is voluntary. Without them, however, we cannot process your request.',
+    p3: 'Our email mailbox is also operated by netcup GmbH (see section 3). We forward incoming emails to a mailbox provided by Microsoft Ireland Operations Limited (Outlook.com). A transfer to the USA cannot be ruled out. Microsoft is certified under the EU-US Data Privacy Framework, on the basis of which the EU Commission has determined an adequate level of data protection (Art. 45 GDPR). Further information',
+    p4: 'Microsoft privacy statement',
+    p51: '5. Contact via WhatsApp',
+    p52: 'We link to WhatsApp on our website. No data is transmitted to WhatsApp when our page loads. Only when you click a WhatsApp link does WhatsApp open, and the provider then receives the data usual there.',
+    p5: 'If you write to us via WhatsApp, we process your phone number, your profile name and the content of your messages in order to answer your request (Art. 6 (1) (b) GDPR). The provider is WhatsApp Ireland Limited, a company of the Meta group. A transfer to the USA cannot be ruled out. Meta is certified under the EU-US Data Privacy Framework. If you do not want this, you can also reach us by email. Further information',
+    p6: 'WhatsApp privacy policy',
+    p53: '6. Link to Instagram',
+    p7: 'We link to our Instagram profile. This is a simple link, not an embedded feature: no data is transmitted to Instagram when you visit our website. Only when you click the link are you taken to Instagram, a service of Meta Platforms Ireland Limited. Their own',
+    p8: 'privacy policy applies',
+    p54: '7. Local storage of the language setting',
+    p55: 'When you change the language with the DE / EN switch, we store your choice in your browser’s local storage so that the website appears in your language on your next visit. This information does not leave your device and is not transmitted to us. The storage is strictly necessary for the service you have expressly requested (§ 25 (2) no. 2 TDDDG). You can delete it at any time in your browser settings.',
+    p56: '8. Fonts',
+    p57: 'The “Archivo” font used on this website is embedded directly in the website and is loaded together with it from our hosting provider (see section 3). No connection is made to Google Fonts or other font services.',
+    p58: '9. Storage period',
+    p59: 'We only store personal data for as long as is necessary for the respective purpose. We delete requests that do not lead to an order no later than six months after the end of the communication. If an order is placed, we keep the relevant documents in accordance with the statutory retention obligations (usually six or ten years under § 147 AO and § 257 HGB). The legal basis for this is Art. 6 (1) (c) GDPR. We delete your designs and print files after the order is completed, unless you ask us to keep them for repeat orders. We keep documents and photos relating to claims for as long as this is necessary for resolving them and for possible warranty claims.',
+    p60: '10. Your rights',
+    p61: 'You have the following rights at any time:',
+    p62: 'Access to the data we hold about you (Art. 15 GDPR)',
+    p63: 'Rectification of incorrect data (Art. 16 GDPR)',
+    p64: 'Erasure of your data (Art. 17 GDPR)',
+    p65: 'Restriction of processing (Art. 18 GDPR)',
+    p66: 'Data portability (Art. 20 GDPR)',
+    p67: 'Objection to processing based on our legitimate interest (Art. 21 GDPR)',
+    p68: 'Withdrawal of consent given, with effect for the future (Art. 7 (3) GDPR)',
+    p9: 'Just send us an email to',
+    p70: 'Right to lodge a complaint with a supervisory authority',
+    p10: 'You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR). The authority responsible for us is the State Commissioner for Data Protection and Freedom of Information of Rhineland-Palatinate',
+    footerPayment: 'Payment & delivery', footerClaim: 'Claims', footerReview: 'Reviews', footerImprint: 'Imprint', footerPrivacy: 'Privacy',
+    'aria.home': 'PRINT LAB Trier home page', 'aria.lang': 'Choose language'
+  };
+  window.PrintlabLang.init(EN, 'Privacy policy | PRINT LAB Trier');
+})();
