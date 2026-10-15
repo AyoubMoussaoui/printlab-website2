@@ -537,6 +537,61 @@
   font-size: 15px;
 }
 
+/* Headline in two lines, one sentence each */
+.title-line {
+  display: block;
+}
+
+/* Product photo (supplier blank) at the top of a card, replacing the icon:
+   <span class="service-card__media"><img src="assets/images/products/…" alt="…" width="800" height="600" loading="lazy"></span> */
+.service-card__media {
+  display: block;
+  margin: -32px -32px 24px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background-color: #FFFFFF; /* supplier photos are usually on white */
+  aspect-ratio: 4 / 3;
+}
+
+.service-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--dur) var(--ease);
+}
+
+.service-card:hover .service-card__media img {
+  transform: scale(1.03);
+}
+
+/* "Produkt anfragen": opens the request form with this product chosen */
+.service-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--color-magenta);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+}
+
+.service-card__cta:hover span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.service-card__cta span[aria-hidden] {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.service-card__cta:hover span[aria-hidden] {
+  transform: translateX(3px);
+}
+
 /* ---------- Method cards ---------- */
 .method-card {
   display: flex;

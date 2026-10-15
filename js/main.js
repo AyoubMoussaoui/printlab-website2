@@ -34,15 +34,15 @@
      2. i18n
      ------------------------------------------------------------------------ */
   const EN = {
-    'skip': 'Skip to content', 'nav.services': 'Services', 'nav.methods': 'Techniques',
+    'skip': 'Skip to content', 'nav.services': 'Products', 'nav.methods': 'Techniques',
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
     'nav.prices': 'Prices', 'nav.contact': 'Contact', 'nav.jobs': 'Jobs', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your finish.',
     'hero.lead': 'We print textiles, promotional items and accessories. Sharp, colourfast and personal. Starting from a single piece.',
-    'hero.cta1': 'Request a quote', 'hero.cta2': 'Our services',
+    'hero.cta1': 'Request a quote', 'hero.cta2': 'Our products',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote within 24 hours', 'fact.4': 'Local production in Trier',
-    'services.kicker': 'Services', 'services.title': 'What we print on',
-    'services.intro': 'With DTF, screen or special printing we can print on almost any textile and many other materials. Bring your own piece or we source the right items for you.',
+    'services.kicker': 'Products', 'services.title1': 'Your blank.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
+    'services.intro': 'We order proven branded blanks for you and finish every piece individually with DTF, screen or special printing. Pick a product and send us your request, or bring your own piece.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
     'services.2.t': 'Hoodies & sweatshirts', 'services.2.d': 'Warm companions with a strong look. Chest, back or sleeve: we print every position.',
     'services.3.t': 'Caps & beanies', 'services.3.d': 'Snapbacks, trucker caps and beanies with your logo, ideal for crews, clubs and brands.',
@@ -602,6 +602,17 @@
       if (productGroup) productGroup.classList.toggle('is-invalid', Boolean(message));
     }
     form.querySelectorAll('input[name="product"]').forEach((r) => r.addEventListener('change', () => { setProductError(''); updateBlank(); }));
+
+    /* ---- "Produkt anfragen" on the product cards: the link scrolls to the
+       form (#contact) and the product is chosen there already. */
+    document.querySelectorAll('[data-product-pick]').forEach((link) => link.addEventListener('click', () => {
+      const radio = Array.from(form.querySelectorAll('input[name="product"]')).find((r) => r.value === link.dataset.productPick);
+      if (!radio) return;
+      radio.checked = true;
+      setProductError('');
+      updateBlank();
+      if (currentStep === 2) updateSummary();
+    }));
 
     /* ---- "Ohne Druck": plain items only. Print position and file upload are
        hidden; not offered for the customer's own item. */
