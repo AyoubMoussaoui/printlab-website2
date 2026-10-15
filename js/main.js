@@ -103,7 +103,6 @@
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply within 24 hours.',
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
-    'footer.tag': 'Custom textile printing from 1 piece',
     'footer.payment': 'Payment & delivery', 'footer.claim': 'Claims', 'footer.review': 'Reviews', 'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy',
     'aria.lang': 'Choose language', 'aria.home': 'PRINT LAB Trier home page', 'aria.nav': 'Main navigation',
     'aria.navMobile': 'Mobile navigation', 'aria.trust': 'Our advantages', 'aria.top': 'PRINT LAB Trier, back to top',

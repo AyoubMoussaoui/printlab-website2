@@ -39,7 +39,7 @@
     submit: 'Submit claim', privacy: 'How we process your details and photos is explained in our', privacyLink: 'privacy policy',
     successTitle: 'Thank you, your claim has arrived.',
     successText: 'You will get a confirmation by email shortly. We will check your photos and usually get back to you within one working day with a solution.',
-    footerTag: 'Custom textile printing from 1 piece', footerPayment: 'Payment & delivery', footerClaim: 'Claims', footerReview: 'Reviews', footerImprint: 'Imprint', footerPrivacy: 'Privacy',
+    footerPayment: 'Payment & delivery', footerClaim: 'Claims', footerReview: 'Reviews', footerImprint: 'Imprint', footerPrivacy: 'Privacy',
     'aria.home': 'PRINT LAB Trier home page', 'aria.lang': 'Choose language'
   };
 
