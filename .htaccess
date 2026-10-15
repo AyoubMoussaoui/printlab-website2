@@ -17,7 +17,20 @@ Options -Indexes
   RewriteRule ^(inc|data)(/|$) - [R=404,L]
 
   # The review form moved to the reviews page (opens the form directly)
-  RewriteRule ^bewertung\.html$ /bewertungen.html#bewerten [R=301,NE,L]
+  RewriteRule ^bewertung\.html$ /bewertungen#bewerten [R=301,NE,L]
+
+  # Clean addresses without .html: /index.html → /, /zahlung.html → /zahlung
+  # (THE_REQUEST is the browser's request, so the internal rewrite below
+  # does not loop back here; query strings are kept)
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^ / [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?] [NC]
+  RewriteCond %1 !^404$
+  RewriteRule ^ /%1 [R=301,NE,L]
+
+  # …and serve /zahlung from zahlung.html
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([a-z0-9-]+)$ $1.html [L]
 
   # Repository files that are not part of the website
   # (dot files and folders except .well-known, which Let's Encrypt uses)
