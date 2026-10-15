@@ -2324,11 +2324,11 @@
   line-height: 1.5;
 }
 
-/* Stars: grey outline row with a gold row clipped to the score */
+/* Stars: a faint grey row with a plain gold row (no glow) clipped to the score */
 .rv-stars {
   position: relative;
   display: inline-block;
-  color: rgba(255, 215, 0, 0.22);
+  color: rgba(245, 243, 238, 0.16);
   font-size: 18px;
   line-height: 1;
   letter-spacing: 2px;
@@ -2343,8 +2343,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   overflow: hidden;
-  color: #FFD700;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  color: #F4B400;
 }
 
 .rv-stars__fill::before {
@@ -2375,7 +2374,7 @@
 }
 
 .rv-dist__label span[aria-hidden] {
-  color: #FFD700;
+  color: #F4B400;
 }
 
 .rv-dist__bar {
@@ -2594,7 +2593,7 @@
 
 .approve__stars {
   margin-top: 8px;
-  color: #FFD700;
+  color: #F4B400;
   font-size: 20px;
   letter-spacing: 2px;
 }
@@ -2651,7 +2650,7 @@
 }
 
 .footer-rating:hover {
-  border-color: rgba(255, 215, 0, 0.55);
+  border-color: rgba(244, 180, 0, 0.5);
 }
 
 .footer-rating__stars {
