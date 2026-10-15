@@ -78,7 +78,7 @@
     'design.cta': 'Request a design',
     'refs.kicker': 'Examples', 'refs.title': 'What your print could look like.',
     'refs.note': 'Example images for illustration.',
-    'refs.1': 'T-shirts', 'refs.2': 'Hoodies & sweatshirts', 'refs.5': 'Bachelor & event sets',
+    'refs.1': 'T-shirts', 'refs.2': 'Hoodies & sweatshirts', 'refs.3': 'Caps & beanies', 'refs.4': 'Bags & totes', 'refs.5': 'Bachelor & event sets',
     'refs.6': 'Teamwear & club apparel', 'refs.more': 'More on Instagram',
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
     'contact.lead': 'Send us your request and you will receive a non-binding quote within 24 hours.',
