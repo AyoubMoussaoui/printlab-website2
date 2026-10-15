@@ -2914,6 +2914,13 @@
   color: var(--color-text-soft);
 }
 
+/* Shown only in the English view of German legal pages */
+.legal__en-note {
+  margin-top: 12px;
+  font-size: 14px;
+  font-style: italic;
+}
+
 .legal__text + .legal__text,
 .legal__list + .legal__text,
 .legal__text + .legal__list,
