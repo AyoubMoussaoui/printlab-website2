@@ -32,6 +32,10 @@ const CLAIM_ISSUES  = [
     'Sonstiges'                   => 'Other',
 ];
 const REVIEW_ROLES  = ['Privat', 'Verein', 'Unternehmen', 'Schule / Hochschule', 'Event / Feier', 'Sonstiges'];
+// Values the quote form offers. Only these are repeated in the confirmation
+// to the customer, so the form cannot be used to mail arbitrary text.
+const QUOTE_PRODUCTS  = ['T-Shirts', 'Hoodies / Sweatshirts', 'Caps / Mützen', 'Taschen / Beutel', 'Flaschen / Zubehör', 'Eigener Artikel', 'Sonstiges'];
+const QUOTE_POSITIONS = ['Vorne', 'Hinten', 'Vorne und hinten', 'Noch unklar'];
 const MIN_SECONDS   = 3;  // faster than this is a bot
 const RATE_LIMIT    = 5;  // submissions per IP and hour
 
@@ -171,6 +175,13 @@ function collect_files(string $key, array $allowedExt, int $maxFiles, int $maxTo
     return $added;
 }
 
+/** Free text for the customer confirmation: dropped if it contains a link
+    or an e-mail address (the shop e-mail always gets the full value). */
+function echo_safe(string $value): string
+{
+    return preg_match('~https?:|www\.|@|[a-z0-9-]\.[a-z]{2,}~i', $value) ? '' : $value;
+}
+
 /* ---- Read and check the fields */
 function field(string $name, int $max, bool $multiline = false): string
 {
@@ -297,7 +308,7 @@ if (field('form', 20) === 'reklamation') {
     $greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
     if ($lang === 'en') {
         $summary = rows_to_text([
-            'Order number' => $order,
+            'Order number' => echo_safe($order),
             'Issue'        => CLAIM_ISSUES[$issue],
             'Photos'       => (string) count($files),
         ]);
@@ -311,7 +322,7 @@ if (field('form', 20) === 'reklamation') {
             . "Best regards\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";
     } else {
         $summary = rows_to_text([
-            'Auftragsnummer'   => $order,
+            'Auftragsnummer'   => echo_safe($order),
             'Art des Problems' => $issue,
             'Fotos'            => (string) count($files),
         ]);
@@ -434,10 +445,10 @@ record_hit($hits);
    send arbitrary content to strangers. */
 $greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
 $summary = rows_to_text([
-    ($lang === 'en' ? 'Product' : 'Produkt') => $product . ($blank ? ($lang === 'en' ? ' (no print)' : ' (ohne Druck)') : ''),
+    ($lang === 'en' ? 'Product' : 'Produkt') => trim((in_array($product, QUOTE_PRODUCTS, true) ? $product : '') . ($blank ? ($lang === 'en' ? ' (no print)' : ' (ohne Druck)') : '')),
     ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity . ($sizeText !== '' ? ' (' . $sizeText . ')' : ''),
-    ($lang === 'en' ? 'Colour' : 'Farbe') => $color,
-    ($lang === 'en' ? 'Position' : 'Position') => $position,
+    ($lang === 'en' ? 'Colour' : 'Farbe') => echo_safe($color),
+    ($lang === 'en' ? 'Position' : 'Position') => in_array($position, QUOTE_POSITIONS, true) ? $position : '',
     ($lang === 'en' ? 'Preferred date' : 'Wunschtermin') => format_date($deadline),
     ($lang === 'en' ? 'Delivery' : 'Lieferung') => $delivery === 'Noch offen' ? '' : ($lang === 'en'
         ? ($delivery === 'Versand' ? 'Shipping' : 'Pickup in Trier')

@@ -2990,3 +2990,18 @@
   border: 0;
   pointer-events: none;
 }
+/* ---------- 404 page ---------- */
+.notfound__text {
+  margin-top: 24px;
+}
+
+.notfound__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.notfound__btn {
+  border-color: var(--color-line-strong);
+}
