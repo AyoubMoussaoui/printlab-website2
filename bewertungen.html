@@ -7,18 +7,18 @@
   <meta name="description" content="Bewertungen von Kundinnen und Kunden von PRINT LAB Trier: Druckqualität, Service und Lieferung. Teile auch deine Erfahrung.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/bewertungen">
-  <link rel="icon" href="favicon.ico?v=708591cc" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=708591cc" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=708591cc">
-  <link rel="manifest" href="site.webmanifest?v=708591cc">
-  <script src="js/head.js?v=708591cc"></script>
+  <link rel="icon" href="favicon.ico?v=d0b3f472" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=d0b3f472" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=d0b3f472">
+  <link rel="manifest" href="site.webmanifest?v=d0b3f472">
+  <script src="js/head.js?v=d0b3f472"></script>
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=708591cc">
-  <link rel="stylesheet" href="css/base.css?v=708591cc">
-  <link rel="stylesheet" href="css/layout.css?v=708591cc">
-  <link rel="stylesheet" href="css/components.css?v=708591cc">
-  <link rel="stylesheet" href="css/responsive.css?v=708591cc">
+  <link rel="stylesheet" href="css/variables.css?v=d0b3f472">
+  <link rel="stylesheet" href="css/base.css?v=d0b3f472">
+  <link rel="stylesheet" href="css/layout.css?v=d0b3f472">
+  <link rel="stylesheet" href="css/components.css?v=d0b3f472">
+  <link rel="stylesheet" href="css/responsive.css?v=d0b3f472">
 </head>
 <body class="page-dark">
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
@@ -104,7 +104,7 @@
             <p class="rv-summary__empty-title" data-i18n="emptyTitle">Noch keine Bewertungen</p>
             <p class="rv-summary__empty-text" data-i18n="emptyText">Du hast bei uns bestellt? Erzähl anderen, wie es war. Deine Bewertung ist die erste.</p>
           </div>
-          <p class="rv-summary__note" data-i18n="note">Wir veröffentlichen nur Bewertungen, die wir einem Auftrag bei uns zuordnen können, und zwar alle, auch kritische. Jede Bewertung wird vor der Veröffentlichung geprüft.</p>
+          <p class="rv-summary__note" data-i18n="note">Bevor eine Bewertung erscheint, prüfen wir anhand von Name, E-Mail-Adresse oder Bestellnummer, ob sie zu einem Auftrag bei uns gehört. Wir veröffentlichen nur Bewertungen, die wir einem Auftrag zuordnen können, kritische genauso wie positive.</p>
         </aside>
 
         <section class="rv-feed" aria-labelledby="rv-feed-title">
@@ -179,6 +179,10 @@
           <p class="field__error" data-error-for="r-email"></p>
         </div>
         <div class="field">
+          <label class="field__label" for="r-order"><span data-i18n="orderLabel">Bestellnummer</span> <span class="field__opt" data-i18n="orderOpt">(optional, hilft uns bei der Zuordnung, wird nie veröffentlicht)</span></label>
+          <input class="field__input" id="r-order" name="order" type="text" autocomplete="off" placeholder="z. B. von deiner Rechnung" data-i18n-placeholder="orderPh">
+        </div>
+        <div class="field">
           <label class="consent" for="r-consent">
             <input class="consent__input" id="r-consent" name="consent" type="checkbox" value="ja" required>
             <span class="consent__text"><span data-i18n="consent">Ich bin damit einverstanden, dass meine Bewertung mit dem angegebenen Namen (oder „Anonym“) auf printlab-trier.de veröffentlicht wird.</span> <span class="field__req" aria-hidden="true">*</span> <span class="consent__hint" data-i18n="consentHint">Widerruf jederzeit per E-Mail an info@printlab-trier.de.</span></span>
@@ -194,7 +198,7 @@
       <div class="rv-dialog__success" tabindex="-1" data-review-success hidden>
         <span class="claim-success__icon"><svg aria-hidden="true"><use href="#icon-check"></use></svg></span>
         <h2 class="claim-success__title" data-i18n="thanks">Vielen Dank!</h2>
-        <p class="claim-success__text" data-i18n="thanksText">Dein Feedback hilft unserer lokalen Manufaktur sehr. Wir prüfen deine Bewertung und veröffentlichen sie hier in den nächsten Tagen.</p>
+        <p class="claim-success__text" data-i18n="thanksText">Dein Feedback hilft uns sehr. Wir prüfen deine Bewertung und veröffentlichen sie hier in den nächsten Tagen.</p>
         <button class="btn btn--outline" type="button" data-review-close data-i18n="closeBtn">Schließen</button>
       </div>
     </div>
@@ -227,8 +231,8 @@
     </div>
   </footer>
 
-  <script src="js/lang-switch.js?v=708591cc" defer></script>
-  <script src="js/bewertungen.js?v=708591cc" defer></script>
-  <script src="js/footer-rating.js?v=708591cc" defer></script>
+  <script src="js/lang-switch.js?v=d0b3f472" defer></script>
+  <script src="js/bewertungen.js?v=d0b3f472" defer></script>
+  <script src="js/footer-rating.js?v=d0b3f472" defer></script>
 </body>
 </html>

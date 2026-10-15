@@ -22,13 +22,14 @@
     skip: 'Skip to content', back: 'Back to home page',
     kicker: 'Reviews', title: 'What our customers say', write: 'Write a review', overview: 'Overview',
     emptyTitle: 'No reviews yet', emptyText: 'Have you ordered from us? Tell others how it went. Your review will be the first.',
-    note: 'We only publish reviews we can match to an order with us, and we publish all of them, including critical ones. Every review is checked before it is published.',
+    note: 'Before a review appears, we use the name, email address or order number to check that it belongs to an order with us. We only publish reviews we can match to an order, critical ones just like positive ones.',
     feedTitle: 'Latest reviews', feedEmpty: 'Our customers’ reviews will appear here as soon as we have checked them.',
     more: 'Show more reviews', close: 'Close', closeBtn: 'Close',
     dialogLead: 'How happy were you with quality, service and print?',
     ratingLabel: 'Your rating', nameLabel: 'Name or project', nameOpt: '(optional, otherwise “Anonymous”)', namePh: 'e.g. Max from SV Trier',
     messageLabel: 'Your experience', messagePh: 'Share your experience with PRINT LAB Trier …',
     emailLabel: 'Email', emailOpt: '(optional, only for questions, never published)',
+    orderLabel: 'Order number', orderOpt: '(optional, helps us match your review, never published)', orderPh: 'e.g. from your invoice',
     consent: 'I agree that my review will be published on printlab-trier.de with the name given (or “Anonymous”).',
     consentHint: 'You can withdraw at any time by email to info@printlab-trier.de.',
     submit: 'Send review', privacy: 'More in our', privacyLink: 'privacy policy',
@@ -314,6 +315,7 @@
     const data = new FormData(form);
     data.delete('website');
     data.set('t', String(formStart));
+    data.set('elapsed', String(Math.round((Date.now() - formStart) / 1000)));
     send(data);
   });
 })();

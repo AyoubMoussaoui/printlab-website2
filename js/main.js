@@ -48,7 +48,7 @@
     'services.3.t': 'Caps & beanies', 'services.3.d': 'Snapbacks, trucker caps and beanies with your logo, ideal for crews, clubs and brands.',
     'services.4.t': 'Bags & totes', 'services.4.d': 'Tote bags, gym bags and shoppers. Sustainable promo pieces people love to carry.',
     'services.5.t': 'Bottles & accessories', 'services.5.d': 'Water bottles, promotional items and accessories, with special printing even on unusual materials.',
-    'services.6.t': 'Your own item', 'services.6.d': 'Already have the perfect piece? Bring it in and we check the material and print it for you.',
+    'services.6.t': 'Your own item', 'services.6.d': 'Already have the perfect piece? Hand it over to us by arrangement and we check the material and print it for you.',
     'methods.kicker': 'Techniques', 'methods.title': 'The right technique for your project',
     'methods.intro': 'We give you honest advice on which process fits your motif, material and quantity.',
     'methods.1.t': 'DTF printing', 'methods.1.d': 'Direct-to-film for brilliant, detailed motifs, including gradients and fine lines.',
@@ -139,7 +139,7 @@
     'faq.q7': 'Which printing method is right for me?',
     'faq.a7': 'DTF printing suits single pieces as well as large orders, especially for detailed, colourful designs. Screen printing is ideal from 10 pieces for larger runs and is especially durable. For special materials such as plastic or EVA there is special printing. We are happy to advise which method fits your project.',
     'faq.q8': 'Can I bring my own items?',
-    'faq.a8': 'Yes! Just bring your piece in. We first check whether the material and surface are suitable for printing. The transfer alone starts at €10.00.',
+    'faq.a8': 'Yes! Hand your piece over to us in Trier by arrangement. We first check whether the material and surface are suitable for printing. The transfer alone starts at €10.00.',
     'faq.q10': 'How long does the print last?',
     'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
     'faq.q12': 'Can I also buy items without print?', 'faq.a12': 'Yes. T-shirts, hoodies, caps, bags, bottles and other items are also available unprinted (blank). The price is on request, depending on item, colour and quantity. Just choose “No print” in the request form.',
@@ -170,7 +170,7 @@
       fileLine: 'hänge ich an',
       altEmail: 'Öffnet sich kein E-Mail-Programm? Kopiere deine Anfrage und schick sie an',
       copy: 'Anfrage kopieren', copied: 'Kopiert ✓',
-      menuOpen: 'Menü öffnen', menuClose: 'Menü schließen', waText: 'Hallo Team PRINT LAB, ich habe eine Anfrage: '
+      menuOpen: 'Menü öffnen', menuClose: 'Menü schließen', waText: 'Hallo PRINT LAB, ich habe eine Anfrage: '
     },
     en: {
       required: 'Please fill in this field.',
@@ -898,6 +898,7 @@
       else selectedFiles.forEach((file) => data.append('files[]', file, file.name));
       if (!isBlank()) data.delete('blank');
       data.set('t', String(formStart));
+      data.set('elapsed', String(Math.round((Date.now() - formStart) / 1000)));
       data.set('lang', currentLang);
       if (CONFIG.formEndpoint) sendToServer(data);
       else showFallback(data);

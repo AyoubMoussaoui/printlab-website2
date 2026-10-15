@@ -27,7 +27,7 @@
     customText: 'All products are finished individually to your specifications and wishes (e.g. with DTF or screen printing). Under § 312g (2) no. 1 BGB (German Civil Code), the statutory right of withdrawal does not apply to goods made to customer specifications or clearly tailored to your personal needs.',
     customCheck: 'Please therefore check design, text, sizes, colours and quantities carefully before approving.',
     defectTitle: 'Defects & warranty',
-    defect1: 'If a product has a manufacturing or material defect, please contact us within', defect2: '14 days',
+    defect1: 'If a product has a manufacturing or material defect, please contact us, if possible, within', defect2: '14 days',
     defect3: 'of receipt via our', defect4: 'claims page',
     defect5: '– we will quickly and easily arrange a replacement or a flawless reprint. Your statutory warranty rights remain unaffected.',
     defectBtn: 'Go to claims',

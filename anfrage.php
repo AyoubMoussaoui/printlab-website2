@@ -55,10 +55,26 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     respond(405, ['ok' => false, 'error' => 'method']);
 }
 
-/* ---- Bots: honeypot and time trap. Pretend success so they move on. */
-$started = (int) ($_POST['t'] ?? 0);
-$age = time() - intdiv($started, 1000);
-if (trim((string) ($_POST['website'] ?? '')) !== '' || $started <= 0 || $age < MIN_SECONDS || $age > 86400) {
+/* ---- More data than the server accepts (post_max_size): PHP then drops
+   all fields. Answer with an error, so the visitor sees it and can use
+   e-mail or WhatsApp instead. */
+if (!$_POST && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+    respond(413, ['ok' => false, 'error' => 'size']);
+}
+
+/* ---- Bots: honeypot and time trap. Pretend success so they move on.
+   The form sends how many seconds it was open ("elapsed", measured in the
+   browser), so a wrong clock on the visitor's device does not matter and
+   a form left open for days still works. Older pages only send their
+   start time ("t"); there a clock running ahead is not held against them. */
+if (isset($_POST['elapsed'])) {
+    $age = (int) $_POST['elapsed'];
+} else {
+    $started = (int) ($_POST['t'] ?? 0);
+    $age = $started > 0 ? time() - intdiv($started, 1000) : 0;
+    if ($started > 0 && $age < 0) $age = MIN_SECONDS; // device clock ahead
+}
+if (trim((string) ($_POST['website'] ?? '')) !== '' || $age < MIN_SECONDS) {
     respond(200, ['ok' => true]);
 }
 
@@ -207,6 +223,7 @@ if (field('form', 20) === 'bewertung') {
     $role    = field('role', 40);
     $rating  = field('rating', 1);
     $email   = field('email', 160);
+    $order   = field('order', 60);
     $message = field('message', 3000, true);
     $consent = field('consent', 2) === 'ja';
 
@@ -226,7 +243,7 @@ if (field('form', 20) === 'bewertung') {
             require_once __DIR__ . '/inc/reviews.php';
             $reviewId = create_pending_review([
                 'name' => $name, 'context' => $role, 'rating' => (int) $rating,
-                'text' => $message, 'email' => $email,
+                'text' => $message, 'email' => $email, 'order' => $order,
             ]);
             $approval = "\n\n--------------------------------------------------\n"
                 . "VERÖFFENTLICHEN (öffnet eine Seite mit einem Bestätigungs-Button):\n" . review_link($reviewId, 'publish') . "\n\n"
@@ -244,6 +261,7 @@ if (field('form', 20) === 'bewertung') {
         'Name / Projekt' => $name,
         'Kontext' => $role,
         'E-Mail (nicht veröffentlichen)' => $email,
+        'Bestellnummer (nicht veröffentlichen)' => $order,
         'Veröffentlichung' => $consent
             ? 'erlaubt (mit Namen oder anonymisiert)'
             : 'NICHT erlaubt, nur intern verwenden',

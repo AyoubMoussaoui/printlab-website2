@@ -23,7 +23,7 @@
     profile4: 'You are enrolled at a university (working student) or looking for a mini-job',
     offerTitle: 'What we offer',
     offer1: 'Fair pay and flexible working hours that fit well with your studies',
-    offer2: 'Insights into design and production, room for your own ideas and a relaxed, friendly team',
+    offer2: 'Insights into design and production, room for your own ideas and working directly with the owner',
     applyTitle: 'Interested?',
     apply1: 'Just send us a short email with a few lines about yourself to',
     apply2: '. No CV needed. If you have already made designs, feel free to send a few examples.',

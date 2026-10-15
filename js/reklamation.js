@@ -29,7 +29,7 @@
     step1: 'Send photos and a description', step1Text: 'A photo of the defect and one of the whole item help us the most.',
     step2: 'We check your case', step2Text: 'We usually get back to you within one working day.',
     step3: 'We find a solution together', step3Text: 'For example a flawless reprint or a replacement.',
-    deadline: 'Claims can be submitted within 14 days of receiving your order. Please get in touch as soon as possible.',
+    deadline: 'Please report defects, if possible, within 14 days of receiving your order, so we can help quickly.',
     note: 'Please keep the affected items as they are until we have sorted it out, and avoid using or cleaning them further. Your statutory warranty rights are of course not affected.',
     name: 'Name', email: 'Email', order: 'Order number', optional: '(optional)', orderPh: 'e.g. from your invoice',
     issue: 'Type of issue', choose: 'Please choose', issue1: 'Print defect / print quality', issue2: 'Damaged item',
@@ -375,6 +375,7 @@
     data.delete('website');
     zones.forEach((zone) => zone.items.forEach((item) => data.append(zone.name + '[]', item.file, item.file.name)));
     data.set('t', String(formStart));
+    data.set('elapsed', String(Math.round((Date.now() - formStart) / 1000)));
     data.set('lang', lang);
     send(data);
   });
