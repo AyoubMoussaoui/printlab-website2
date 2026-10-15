@@ -343,6 +343,9 @@ $product  = field('product', 80);
 $quantity = field('quantity', 7);
 $color    = field('color', 80);
 $position = field('position', 80);
+// "Ohne Druck": plain items only (no print position, no files)
+$blank    = field('blank', 2) === 'Ja';
+if ($blank) $position = '';
 // The form no longer asks "Design vorhanden?" (uploading is optional);
 // older senders may still send Ja or Nein
 $design   = in_array(field('has_design', 4), ['Ja', 'Nein'], true) ? field('has_design', 4) : '';
@@ -384,7 +387,7 @@ if ($errors) {
 /* ---- Files (only when the customer has a design) */
 $files = [];
 $total = 0;
-if ($design !== 'Nein') collect_files('files', ALLOWED_EXT, MAX_FILES, MAX_TOTAL, $files, $total);
+if ($design !== 'Nein' && !$blank) collect_files('files', ALLOWED_EXT, MAX_FILES, MAX_TOTAL, $files, $total);
 
 $sizeText = implode(', ', array_map(function ($s, $n) { return $s . ': ' . $n; }, array_keys($sizes), $sizes));
 
@@ -394,6 +397,7 @@ $rows = [
     'E-Mail'        => $email,
     'Telefon'       => $phone,
     'Produkt'       => $product,
+    'Druck'         => $blank ? 'ohne Druck (Blanko), Preis auf Anfrage' : '',
     'Stückzahl'     => $quantity,
     'Farbe'         => $color,
     'Druckposition' => $position . ($view !== '' ? ' (' . $view . ')' : ''),
@@ -407,13 +411,13 @@ $rows = [
 ];
 $fileNames = array_map(function ($f) { return $f['name']; }, $files);
 if ($fileNames) $rows['Dateien'] = implode(', ', $fileNames);
-elseif ($design !== 'Nein') $rows['Dateien'] = 'keine hochgeladen (kommen ggf. per E-Mail oder WhatsApp, oder Designvorschläge gewünscht)';
+elseif ($design !== 'Nein' && !$blank) $rows['Dateien'] = 'keine hochgeladen (kommen ggf. per E-Mail oder WhatsApp, oder Designvorschläge gewünscht)';
 
 $shopText = "Neue Anfrage über printlab-trier.de\n\n" . rows_to_text($rows)
     . ($message !== '' ? "\n\nNachricht:\n" . $message : '')
     . "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.';
 
-$shopSubject = 'Neue Anfrage: ' . $product . ', ' . $quantity . ' Stk. (' . $name . ')';
+$shopSubject = 'Neue Anfrage: ' . $product . ($blank ? ' (ohne Druck)' : '') . ', ' . $quantity . ' Stk. (' . $name . ')';
 $safeName = str_replace(['"', '\\'], '', $name);
 $shopHeaders = [
     'From: ' . enc_header('PRINT LAB Website') . ' <' . SHOP_EMAIL . '>',
@@ -430,7 +434,7 @@ record_hit($hits);
    send arbitrary content to strangers. */
 $greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
 $summary = rows_to_text([
-    ($lang === 'en' ? 'Product' : 'Produkt') => $product,
+    ($lang === 'en' ? 'Product' : 'Produkt') => $product . ($blank ? ($lang === 'en' ? ' (no print)' : ' (ohne Druck)') : ''),
     ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity . ($sizeText !== '' ? ' (' . $sizeText . ')' : ''),
     ($lang === 'en' ? 'Colour' : 'Farbe') => $color,
     ($lang === 'en' ? 'Position' : 'Position') => $position,

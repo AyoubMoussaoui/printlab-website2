@@ -83,7 +83,7 @@
     'contact.kicker': 'Contact', 'contact.title': "Let's start your project.",
     'contact.lead': 'Send us your request and you will receive a non-binding quote within 24 hours.',
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.optional': '(optional)',
-    'form.product': 'What would you like printed?',
+    'form.product': 'Which product?', 'form.blank': 'No print: just the item (blank)', 'form.blankHint': 'Price on request.',
     'form.pTshirt': 'T-shirts', 'form.pHoodie': 'Hoodies', 'form.pCap': 'Caps & beanies', 'form.pBag': 'Bags',
     'form.pBottle': 'Bottles', 'form.own': 'Own item', 'form.other': 'Other', 'form.qty': 'Quantity',
     'form.color': 'Colour', 'form.colorPh': 'e.g. black', 'form.position': 'Print position',
@@ -142,6 +142,7 @@
     'faq.a8': 'Yes! Just bring your piece in. We first check whether the material and surface are suitable for printing. The transfer alone starts at €10.00.',
     'faq.q10': 'How long does the print last?',
     'faq.a10': 'With the right care, a long time: DTF prints last about 50 washes, screen prints even more than 50. Our care tips: wash inside out, no tumble dryer and do not iron directly on the print.',
+    'faq.q12': 'Can I also buy items without print?', 'faq.a12': 'Yes. T-shirts, hoodies, caps, bags, bottles and other items are also available unprinted (blank). The price is on request, depending on item, colour and quantity. Just choose “No print” in the request form.',
     'faq.q11': 'How can I pay?',
     'faq.a11': 'Once you have approved the quote, you pay by bank transfer in advance (prepayment) or via PayPal. Production starts as soon as your payment has arrived.',
     'faq.q9': 'How much is shipping?',
@@ -154,7 +155,7 @@
       email: 'Bitte gib eine gültige E-Mail-Adresse ein.',
       qty: 'Bitte gib eine Stückzahl ab 1 an.',
       delivery: 'Bitte wähle Abholung oder Versand.',
-      product: 'Bitte wähle aus, was wir bedrucken sollen.', pcs: 'Stk.',
+      product: 'Bitte wähle ein Produkt.', pcs: 'Stk.', blankShort: 'ohne Druck',
       fileType: 'Dieses Dateiformat können wir leider nicht annehmen: {name}',
       fileCount: 'Bitte höchstens 3 Dateien auswählen.',
       fileSize: 'Die Dateien sind zusammen größer als 15 MB. Schick größere Dateien gerne per E-Mail oder WhatsApp.',
@@ -176,7 +177,7 @@
       email: 'Please enter a valid email address.',
       qty: 'Please enter a quantity of at least 1.',
       delivery: 'Please choose pickup or shipping.',
-      product: 'Please choose what we should print on.', pcs: 'pcs',
+      product: 'Please choose a product.', pcs: 'pcs', blankShort: 'no print',
       fileType: 'We cannot accept this file format: {name}',
       fileCount: 'Please choose up to 3 files.',
       fileSize: 'The files are larger than 15 MB in total. Feel free to send bigger files by email or WhatsApp.',
@@ -548,7 +549,8 @@
       const delivery = form.querySelector('input[name="delivery"]:checked');
       const label = (input) => (input ? input.closest('label').textContent.trim() : '');
       const qty = form.querySelector('#f-qty').value.trim();
-      summaryEl.textContent = [label(product), qty ? qty + ' ' + t('pcs') : '', label(position), label(delivery)]
+      const blank = isBlank();
+      summaryEl.textContent = [label(product), blank ? t('blankShort') : '', qty ? qty + ' ' + t('pcs') : '', blank ? '' : label(position), label(delivery)]
         .filter(Boolean).join(' · ');
     }
 
@@ -599,7 +601,23 @@
       if (productError) productError.textContent = message || '';
       if (productGroup) productGroup.classList.toggle('is-invalid', Boolean(message));
     }
-    form.querySelectorAll('input[name="product"]').forEach((r) => r.addEventListener('change', () => setProductError('')));
+    form.querySelectorAll('input[name="product"]').forEach((r) => r.addEventListener('change', () => { setProductError(''); updateBlank(); }));
+
+    /* ---- "Ohne Druck": plain items only. Print position and file upload are
+       hidden; not offered for the customer's own item. */
+    const blankBox = form.querySelector('#f-blank');
+    const blankOption = form.querySelector('[data-blank-option]');
+    const printOnly = Array.from(form.querySelectorAll('[data-print-only]'));
+    function isBlank() { return Boolean(blankBox && blankBox.checked && !blankBox.disabled); }
+    function updateBlank() {
+      if (!blankBox) return;
+      const own = radioValue('product') === 'Eigener Artikel';
+      blankBox.disabled = own;
+      if (own) blankBox.checked = false;
+      blankOption.hidden = own;
+      printOnly.forEach((el) => { el.hidden = isBlank(); });
+    }
+    if (blankBox) blankBox.addEventListener('change', updateBlank);
     function updateDelivery() {
       shippingOnly.forEach((el) => { el.hidden = deliveryValue() !== 'Versand'; });
       if (deliveryValue()) setDeliveryError('');
@@ -719,12 +737,12 @@
     function buildSummary(data) {
       const rows = [
         ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Telefon', data.get('phone')],
-        ['Produkt', data.get('product')], ['Stückzahl', data.get('quantity')], ['Farbe', data.get('color')],
+        ['Produkt', data.get('product')], ['Druck', data.get('blank') ? 'ohne Druck (Blanko)' : ''], ['Stückzahl', data.get('quantity')], ['Farbe', data.get('color')],
         ['Druckposition', data.get('position')], ['Wunschtermin', formatDate(data.get('deadline'))],
         ['Lieferung', data.get('delivery')], ['PLZ und Ort', data.get('delivery') === 'Versand' ? data.get('zip') : ''],
         ['Nachricht', data.get('message')]
       ];
-      if (selectedFiles.length) rows.push(['Datei', t('fileLine')]);
+      if (selectedFiles.length && !data.get('blank')) rows.push(['Datei', t('fileLine')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }
 
@@ -798,6 +816,7 @@
       selectedFiles = [];
       renderFiles();
       updateDelivery();
+      updateBlank();
       goStep(1, false);
       form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
     }
@@ -864,7 +883,9 @@
       const data = new FormData(form);
       data.delete('website'); // honeypot is never sent
       data.delete('files[]');
-      selectedFiles.forEach((file) => data.append('files[]', file, file.name));
+      if (isBlank()) data.delete('position');
+      else selectedFiles.forEach((file) => data.append('files[]', file, file.name));
+      if (!isBlank()) data.delete('blank');
       data.set('t', String(formStart));
       data.set('lang', currentLang);
       if (CONFIG.formEndpoint) sendToServer(data);
