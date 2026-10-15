@@ -7,20 +7,21 @@
   <meta name="description" content="Bewertungen von Kundinnen und Kunden von PRINT LAB Trier: Druckqualität, Service und Lieferung. Teile auch deine Erfahrung.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/bewertungen">
-  <link rel="icon" href="favicon.ico?v=eb939aaa" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=eb939aaa" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=eb939aaa">
-  <link rel="manifest" href="site.webmanifest?v=eb939aaa">
+  <link rel="icon" href="favicon.ico?v=5934b67e" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=5934b67e" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=5934b67e">
+  <link rel="manifest" href="site.webmanifest?v=5934b67e">
+  <script src="js/head.js?v=5934b67e"></script>
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/base.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/layout.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/components.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/responsive.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/variables.css?v=5934b67e">
+  <link rel="stylesheet" href="css/base.css?v=5934b67e">
+  <link rel="stylesheet" href="css/layout.css?v=5934b67e">
+  <link rel="stylesheet" href="css/components.css?v=5934b67e">
+  <link rel="stylesheet" href="css/responsive.css?v=5934b67e">
 </head>
 <body class="page-dark">
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -31,17 +32,24 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
-      <a class="legal-header__back" href="/">
-        <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
-        Zur Startseite
-      </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -49,43 +57,43 @@
     <div class="container">
       <header class="rv__head">
         <div>
-          <p class="section-head__kicker">Bewertungen</p>
-          <h1 class="section-head__title rv__title">Das sagen unsere Kundinnen und Kunden</h1>
+          <p class="section-head__kicker" data-i18n="kicker">Bewertungen</p>
+          <h1 class="section-head__title rv__title" data-i18n="title">Das sagen unsere Kundinnen und Kunden</h1>
         </div>
-        <button class="btn btn--primary rv__write" type="button" data-review-open>Bewertung abgeben</button>
+        <button class="btn btn--primary rv__write" type="button" data-review-open data-i18n="write">Bewertung abgeben</button>
       </header>
 
       <div class="rv__layout">
         <!-- Overview: average, count and distribution, calculated from reviews.json -->
         <aside class="rv-card rv-summary" aria-labelledby="rv-summary-title">
-          <h2 class="visually-hidden" id="rv-summary-title">Übersicht</h2>
+          <h2 class="visually-hidden" id="rv-summary-title" data-i18n="overview">Übersicht</h2>
           <div data-rv-score hidden>
             <p class="rv-summary__score"><strong data-rv-average>0,00</strong> <span class="rv-summary__of">/ 5,00</span></p>
             <span class="rv-stars rv-stars--lg" aria-hidden="true"><span class="rv-stars__fill" data-rv-stars></span></span>
             <p class="rv-summary__count" data-rv-count></p>
             <ul class="rv-dist" role="list">
           <li class="rv-dist__row" data-dist="5">
-            <span class="rv-dist__label">5 <span aria-hidden="true">★</span><span class="visually-hidden">Sterne</span></span>
+            <span class="rv-dist__label">5 <span aria-hidden="true">★</span><span class="visually-hidden" data-i18n="stars">Sterne</span></span>
             <span class="rv-dist__bar"><span class="rv-dist__fill"></span></span>
             <span class="rv-dist__pct">0&nbsp;%</span>
           </li>
           <li class="rv-dist__row" data-dist="4">
-            <span class="rv-dist__label">4 <span aria-hidden="true">★</span><span class="visually-hidden">Sterne</span></span>
+            <span class="rv-dist__label">4 <span aria-hidden="true">★</span><span class="visually-hidden" data-i18n="stars">Sterne</span></span>
             <span class="rv-dist__bar"><span class="rv-dist__fill"></span></span>
             <span class="rv-dist__pct">0&nbsp;%</span>
           </li>
           <li class="rv-dist__row" data-dist="3">
-            <span class="rv-dist__label">3 <span aria-hidden="true">★</span><span class="visually-hidden">Sterne</span></span>
+            <span class="rv-dist__label">3 <span aria-hidden="true">★</span><span class="visually-hidden" data-i18n="stars">Sterne</span></span>
             <span class="rv-dist__bar"><span class="rv-dist__fill"></span></span>
             <span class="rv-dist__pct">0&nbsp;%</span>
           </li>
           <li class="rv-dist__row" data-dist="2">
-            <span class="rv-dist__label">2 <span aria-hidden="true">★</span><span class="visually-hidden">Sterne</span></span>
+            <span class="rv-dist__label">2 <span aria-hidden="true">★</span><span class="visually-hidden" data-i18n="stars">Sterne</span></span>
             <span class="rv-dist__bar"><span class="rv-dist__fill"></span></span>
             <span class="rv-dist__pct">0&nbsp;%</span>
           </li>
           <li class="rv-dist__row" data-dist="1">
-            <span class="rv-dist__label">1 <span aria-hidden="true">★</span><span class="visually-hidden">Sterne</span></span>
+            <span class="rv-dist__label">1 <span aria-hidden="true">★</span><span class="visually-hidden" data-i18n="stars">Sterne</span></span>
             <span class="rv-dist__bar"><span class="rv-dist__fill"></span></span>
             <span class="rv-dist__pct">0&nbsp;%</span>
           </li>
@@ -93,17 +101,17 @@
           </div>
           <div class="rv-summary__empty" data-rv-empty>
             <span class="rv-stars rv-stars--lg" aria-hidden="true"></span>
-            <p class="rv-summary__empty-title">Noch keine Bewertungen</p>
-            <p class="rv-summary__empty-text">Du hast bei uns bestellt? Erzähl anderen, wie es war. Deine Bewertung ist die erste.</p>
+            <p class="rv-summary__empty-title" data-i18n="emptyTitle">Noch keine Bewertungen</p>
+            <p class="rv-summary__empty-text" data-i18n="emptyText">Du hast bei uns bestellt? Erzähl anderen, wie es war. Deine Bewertung ist die erste.</p>
           </div>
-          <p class="rv-summary__note">Wir veröffentlichen nur Bewertungen, die wir einem Auftrag bei uns zuordnen können, und zwar alle, auch kritische. Jede Bewertung wird vor der Veröffentlichung geprüft.</p>
+          <p class="rv-summary__note" data-i18n="note">Wir veröffentlichen nur Bewertungen, die wir einem Auftrag bei uns zuordnen können, und zwar alle, auch kritische. Jede Bewertung wird vor der Veröffentlichung geprüft.</p>
         </aside>
 
         <section class="rv-feed" aria-labelledby="rv-feed-title">
-          <h2 class="rv-feed__title" id="rv-feed-title">Neueste Bewertungen</h2>
+          <h2 class="rv-feed__title" id="rv-feed-title" data-i18n="feedTitle">Neueste Bewertungen</h2>
           <ol class="rv-list" role="list" data-rv-list></ol>
-          <p class="rv-card rv-feed__empty" data-rv-feed-empty>Hier erscheinen die Bewertungen unserer Kundinnen und Kunden, sobald wir sie geprüft haben.</p>
-          <button class="btn btn--outline rv-feed__more" type="button" data-rv-more hidden>Weitere Bewertungen anzeigen</button>
+          <p class="rv-card rv-feed__empty" data-rv-feed-empty data-i18n="feedEmpty">Hier erscheinen die Bewertungen unserer Kundinnen und Kunden, sobald wir sie geprüft haben.</p>
+          <button class="btn btn--outline rv-feed__more" type="button" data-rv-more hidden data-i18n="more">Weitere Bewertungen anzeigen</button>
         </section>
       </div>
     </div>
@@ -112,11 +120,11 @@
   <!-- Review form in a dialog (opens with "Bewertung abgeben" or #bewerten) -->
   <dialog class="rv-dialog" id="bewerten" aria-labelledby="rv-dialog-title" data-review-dialog>
     <div class="rv-dialog__inner">
-      <button class="rv-dialog__close" type="button" aria-label="Schließen" data-review-close><svg aria-hidden="true"><use href="#icon-close"></use></svg></button>
+      <button class="rv-dialog__close" type="button" aria-label="Schließen" data-i18n-aria="close" data-review-close><svg aria-hidden="true"><use href="#icon-close"></use></svg></button>
 
       <form class="rv-form" id="review-form" action="anfrage.php" method="post" novalidate data-review-form>
-        <h2 class="rv-dialog__title" id="rv-dialog-title">Bewertung abgeben</h2>
-        <p class="rv-dialog__lead">Wie zufrieden warst du mit Qualität, Service und Druck?</p>
+        <h2 class="rv-dialog__title" id="rv-dialog-title" data-i18n="write">Bewertung abgeben</h2>
+        <p class="rv-dialog__lead" data-i18n="dialogLead">Wie zufrieden warst du mit Qualität, Service und Druck?</p>
         <input type="hidden" name="form" value="bewertung">
         <div class="field-hidden" aria-hidden="true">
           <label for="r-website">Website</label>
@@ -124,32 +132,32 @@
         </div>
 
         <fieldset class="field stars-field" data-rating-field>
-          <legend class="field__label">Deine Bewertung <span class="field__req" aria-hidden="true">*</span></legend>
+          <legend class="field__label"><span data-i18n="ratingLabel">Deine Bewertung</span> <span class="field__req" aria-hidden="true">*</span></legend>
           <div class="stars">
               <label class="stars__item">
                 <input class="stars__input" type="radio" name="rating" value="1" required>
                 <svg class="stars__icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-                <span class="visually-hidden">1 von 5 Sternen</span>
+                <span class="visually-hidden" data-i18n="star1">1 von 5 Sternen</span>
               </label>
               <label class="stars__item">
                 <input class="stars__input" type="radio" name="rating" value="2">
                 <svg class="stars__icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-                <span class="visually-hidden">2 von 5 Sternen</span>
+                <span class="visually-hidden" data-i18n="star2">2 von 5 Sternen</span>
               </label>
               <label class="stars__item">
                 <input class="stars__input" type="radio" name="rating" value="3">
                 <svg class="stars__icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-                <span class="visually-hidden">3 von 5 Sternen</span>
+                <span class="visually-hidden" data-i18n="star3">3 von 5 Sternen</span>
               </label>
               <label class="stars__item">
                 <input class="stars__input" type="radio" name="rating" value="4">
                 <svg class="stars__icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-                <span class="visually-hidden">4 von 5 Sternen</span>
+                <span class="visually-hidden" data-i18n="star4">4 von 5 Sternen</span>
               </label>
               <label class="stars__item">
                 <input class="stars__input" type="radio" name="rating" value="5">
                 <svg class="stars__icon" aria-hidden="true"><use href="#icon-star"></use></svg>
-                <span class="visually-hidden">5 von 5 Sternen</span>
+                <span class="visually-hidden" data-i18n="star5">5 von 5 Sternen</span>
               </label>
             <span class="stars__text" aria-hidden="true" data-rating-text>Bitte wählen</span>
           </div>
@@ -157,44 +165,44 @@
         </fieldset>
 
         <div class="field">
-          <label class="field__label" for="r-name">Name oder Projekt <span class="field__opt">(optional, sonst „Anonym“)</span></label>
-          <input class="field__input" id="r-name" name="name" type="text" autocomplete="name" placeholder="z. B. Max vom SV Trier">
+          <label class="field__label" for="r-name"><span data-i18n="nameLabel">Name oder Projekt</span> <span class="field__opt" data-i18n="nameOpt">(optional, sonst „Anonym“)</span></label>
+          <input class="field__input" id="r-name" name="name" type="text" autocomplete="name" placeholder="z. B. Max vom SV Trier" data-i18n-placeholder="namePh">
         </div>
         <div class="field">
-          <label class="field__label" for="r-message"><span>Deine Erfahrung</span> <span class="field__req" aria-hidden="true">*</span></label>
-          <textarea class="field__input field__input--area" id="r-message" name="message" rows="4" placeholder="Teile deine Erfahrung mit PRINT LAB Trier …" required></textarea>
+          <label class="field__label" for="r-message"><span data-i18n="messageLabel">Deine Erfahrung</span> <span class="field__req" aria-hidden="true">*</span></label>
+          <textarea class="field__input field__input--area" id="r-message" name="message" rows="4" placeholder="Teile deine Erfahrung mit PRINT LAB Trier …" data-i18n-placeholder="messagePh" required></textarea>
           <p class="field__error" data-error-for="r-message"></p>
         </div>
         <div class="field">
-          <label class="field__label" for="r-email">E-Mail <span class="field__opt">(optional, nur für Rückfragen, wird nie veröffentlicht)</span></label>
+          <label class="field__label" for="r-email"><span data-i18n="emailLabel">E-Mail</span> <span class="field__opt" data-i18n="emailOpt">(optional, nur für Rückfragen, wird nie veröffentlicht)</span></label>
           <input class="field__input" id="r-email" name="email" type="email" autocomplete="email" inputmode="email">
           <p class="field__error" data-error-for="r-email"></p>
         </div>
         <div class="field">
           <label class="consent" for="r-consent">
             <input class="consent__input" id="r-consent" name="consent" type="checkbox" value="ja" required>
-            <span class="consent__text">Ich bin damit einverstanden, dass meine Bewertung mit dem angegebenen Namen (oder „Anonym“) auf printlab-trier.de veröffentlicht wird. <span class="field__req" aria-hidden="true">*</span> <span class="consent__hint">Widerruf jederzeit per E-Mail an info@printlab-trier.de.</span></span>
+            <span class="consent__text"><span data-i18n="consent">Ich bin damit einverstanden, dass meine Bewertung mit dem angegebenen Namen (oder „Anonym“) auf printlab-trier.de veröffentlicht wird.</span> <span class="field__req" aria-hidden="true">*</span> <span class="consent__hint" data-i18n="consentHint">Widerruf jederzeit per E-Mail an info@printlab-trier.de.</span></span>
           </label>
           <p class="field__error" data-error-for="r-consent"></p>
         </div>
 
-        <button class="btn btn--primary btn--block" type="submit">Bewertung absenden</button>
-        <p class="quote-form__privacy">Mehr in unserer <a class="quote-form__privacy-link" href="datenschutz#anfrage">Datenschutzerklärung</a>.</p>
+        <button class="btn btn--primary btn--block" type="submit" data-i18n="submit">Bewertung absenden</button>
+        <p class="quote-form__privacy"><span data-i18n="privacy">Mehr in unserer</span> <a class="quote-form__privacy-link" href="datenschutz#anfrage" data-i18n="privacyLink">Datenschutzerklärung</a>.</p>
         <div class="quote-form__status" role="status" aria-live="polite" tabindex="-1" data-form-status></div>
       </form>
 
       <div class="rv-dialog__success" tabindex="-1" data-review-success hidden>
         <span class="claim-success__icon"><svg aria-hidden="true"><use href="#icon-check"></use></svg></span>
-        <h2 class="claim-success__title">Vielen Dank!</h2>
-        <p class="claim-success__text">Dein Feedback hilft unserer lokalen Manufaktur sehr. Wir prüfen deine Bewertung und veröffentlichen sie hier in den nächsten Tagen.</p>
-        <button class="btn btn--outline" type="button" data-review-close>Schließen</button>
+        <h2 class="claim-success__title" data-i18n="thanks">Vielen Dank!</h2>
+        <p class="claim-success__text" data-i18n="thanksText">Dein Feedback hilft unserer lokalen Manufaktur sehr. Wir prüfen deine Bewertung und veröffentlichen sie hier in den nächsten Tagen.</p>
+        <button class="btn btn--outline" type="button" data-review-close data-i18n="closeBtn">Schließen</button>
       </div>
     </div>
   </dialog>
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -204,12 +212,12 @@
       <p class="site-footer__meta">© <span data-year></span> PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen" aria-current="page">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" aria-current="page" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -219,7 +227,8 @@
     </div>
   </footer>
 
-  <script src="js/bewertungen.js?v=eb939aaa" defer></script>
-  <script src="js/footer-rating.js?v=eb939aaa" defer></script>
+  <script src="js/lang-switch.js?v=5934b67e" defer></script>
+  <script src="js/bewertungen.js?v=5934b67e" defer></script>
+  <script src="js/footer-rating.js?v=5934b67e" defer></script>
 </body>
 </html>

@@ -9,16 +9,17 @@
   <!-- The server shows this file for any unknown path (see .htaccess),
        so all links and assets resolve from the site root. -->
   <base href="/">
-  <link rel="icon" href="favicon.ico?v=eb939aaa" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=eb939aaa" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=eb939aaa">
-  <link rel="manifest" href="site.webmanifest?v=eb939aaa">
+  <script src="js/head.js?v=5934b67e"></script>
+  <link rel="icon" href="favicon.ico?v=5934b67e" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=5934b67e" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=5934b67e">
+  <link rel="manifest" href="site.webmanifest?v=5934b67e">
 
-  <link rel="stylesheet" href="css/variables.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/base.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/layout.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/components.css?v=eb939aaa">
-  <link rel="stylesheet" href="css/responsive.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/variables.css?v=5934b67e">
+  <link rel="stylesheet" href="css/base.css?v=5934b67e">
+  <link rel="stylesheet" href="css/layout.css?v=5934b67e">
+  <link rel="stylesheet" href="css/components.css?v=5934b67e">
+  <link rel="stylesheet" href="css/responsive.css?v=5934b67e">
 </head>
 <body>
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
@@ -27,27 +28,35 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main" class="legal">
     <div class="container legal__inner">
-      <h1 class="legal__title">Seite nicht gefunden</h1>
-      <p class="legal__updated">Fehler 404</p>
-      <p class="legal__text notfound__text">
-        Diese Seite gibt es leider nicht (mehr). Auf der Startseite findest du alle Infos zu unseren
-        Leistungen. Oder du schickst uns direkt deine Anfrage.
-      </p>
+      <h1 class="legal__title" data-i18n="title">Seite nicht gefunden</h1>
+      <p class="legal__updated" data-i18n="code">Fehler 404</p>
+      <p class="legal__text notfound__text" data-i18n="text">Diese Seite gibt es leider nicht (mehr). Auf der Startseite findest du alle Infos zu unseren Leistungen. Oder du schickst uns direkt deine Anfrage.</p>
       <p class="notfound__actions">
-        <a class="btn btn--primary" href="/">Zur Startseite</a>
-        <a class="btn btn--light notfound__btn" href="/#contact">Jetzt anfragen</a>
+        <a class="btn btn--primary" href="/" data-i18n="home">Zur Startseite</a>
+        <a class="btn btn--light notfound__btn" href="/#contact" data-i18n="request">Jetzt anfragen</a>
       </p>
     </div>
   </main>
@@ -57,12 +66,12 @@
       <p class="site-footer__meta">© PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -71,6 +80,8 @@
       </a>
     </div>
   </footer>
-  <script src="js/footer-rating.js?v=eb939aaa" defer></script>
+  <script src="js/lang-switch.js?v=5934b67e" defer></script>
+  <script src="js/notfound.js?v=5934b67e" defer></script>
+  <script src="js/footer-rating.js?v=5934b67e" defer></script>
 </body>
 </html>

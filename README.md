@@ -122,6 +122,7 @@ node .github/scripts/stamp-assets.mjs --check
 - Text colors meet WCAG AA contrast. Use `--color-muted` for secondary text (it switches automatically on dark sections) and `--color-magenta-on-dark` for small magenta text on dark backgrounds.
 - Scroll-reveal animations only hide content once JavaScript has run (`html.js`), so the page stays readable without JavaScript.
 - Translatable screen-reader labels use `data-i18n-aria="key"`, alongside `data-i18n` (text) and `data-i18n-placeholder`.
+- **Languages:** every page is German by default and has a DE/EN switch. The choice is stored in the browser (`localStorage` key `printlab-lang`) and applies to all pages; `js/head.js` keeps a page invisible for a moment while a stored English choice is applied. German is always in the HTML. English lives in `js/main.js` (home page), `js/reklamation.js`, `js/bewertungen.js`, and for the other pages in one small file each (`js/zahlung.js`, `js/impressum.js`, `js/datenschutz.js`, `js/karriere.js`, `js/notfound.js`) that hands its texts to the shared switch in `js/lang-switch.js`. When a German text changes, update the English text with the same key. On the legal pages, the English version shows a note that only the German version is legally binding.
 - The floating WhatsApp and back-to-top buttons step aside only while they would cover an element marked `data-hide-float` (hero buttons, form submit).
 
 ## Webshop-ready

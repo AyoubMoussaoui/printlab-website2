@@ -7,6 +7,8 @@
 (function () {
   'use strict';
 
+  const LANG_KEY = 'printlab-lang'; // shared by all pages
+
   const CONFIG = {
     endpoint: 'anfrage.php',
     email: 'info@printlab-trier.de',
@@ -113,11 +115,15 @@
     btn.addEventListener('click', () => {
       declineBrowserTranslation();
       applyLanguage(btn.dataset.lang);
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
     });
   });
 
-  // Like every subpage, the claim page always opens in German, even when
-  // English was chosen on the home page; the switch here offers English.
+  // German unless English was chosen before (on any page)
+  try {
+    if (localStorage.getItem(LANG_KEY) === 'en') { declineBrowserTranslation(); applyLanguage('en'); }
+  } catch (e) {}
+  document.documentElement.classList.remove('lang-pending');
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 

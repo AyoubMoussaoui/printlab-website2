@@ -16,21 +16,56 @@
   const DATA_URL = 'reviews.php';
   const PAGE_SIZE = 10;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const RATING_TEXT = ['Bitte wählen', 'Schlecht', 'Geht so', 'In Ordnung', 'Gut', 'Sehr gut'];
-  const MSG = {
-    required: 'Bitte fülle dieses Feld aus.',
-    rating: 'Bitte wähle 1 bis 5 Sterne.',
-    email: 'Bitte gib eine gültige E-Mail-Adresse ein oder lass das Feld leer.',
-    consent: 'Bitte bestätige, dass wir deine Bewertung veröffentlichen dürfen.',
-    sending: 'Wird gesendet …',
-    rate: 'Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einer Stunde erneut.',
-    failed: 'Das Senden hat leider nicht geklappt. Schick uns deine Bewertung gerne per E-Mail an info@printlab-trier.de.'
+  /* ---- Language: German in the HTML, English below (DE/EN switch in
+     js/lang-switch.js). Texts made here follow the current language. */
+  const EN = {
+    skip: 'Skip to content', back: 'Back to home page',
+    kicker: 'Reviews', title: 'What our customers say', write: 'Write a review', overview: 'Overview',
+    emptyTitle: 'No reviews yet', emptyText: 'Have you ordered from us? Tell others how it went. Your review will be the first.',
+    note: 'We only publish reviews we can match to an order with us, and we publish all of them, including critical ones. Every review is checked before it is published.',
+    feedTitle: 'Latest reviews', feedEmpty: 'Our customers’ reviews will appear here as soon as we have checked them.',
+    more: 'Show more reviews', close: 'Close', closeBtn: 'Close',
+    dialogLead: 'How happy were you with quality, service and print?',
+    ratingLabel: 'Your rating', nameLabel: 'Name or project', nameOpt: '(optional, otherwise “Anonymous”)', namePh: 'e.g. Max from SV Trier',
+    messageLabel: 'Your experience', messagePh: 'Share your experience with PRINT LAB Trier …',
+    emailLabel: 'Email', emailOpt: '(optional, only for questions, never published)',
+    consent: 'I agree that my review will be published on printlab-trier.de with the name given (or “Anonymous”).',
+    consentHint: 'You can withdraw at any time by email to info@printlab-trier.de.',
+    submit: 'Send review', privacy: 'More in our', privacyLink: 'privacy policy',
+    thanks: 'Thank you!', thanksText: 'Your feedback helps us a lot. We will check your review and publish it here in the next few days.',
+    star1: '1 out of 5 stars', star2: '2 out of 5 stars', star3: '3 out of 5 stars', star4: '4 out of 5 stars', star5: '5 out of 5 stars', stars: 'stars',
+    footerPayment: 'Payment & delivery', footerClaim: 'Claims', footerReview: 'Reviews', footerImprint: 'Imprint', footerPrivacy: 'Privacy',
+    'aria.home': 'PRINT LAB Trier home page', 'aria.lang': 'Choose language'
   };
-
-  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
-
-  const de2 = (n) => n.toFixed(2).replace('.', ',');
-  const de1 = (n) => n.toFixed(1).replace('.', ',');
+  const TEXT = {
+    de: {
+      ratings: ['Bitte wählen', 'Schlecht', 'Geht so', 'In Ordnung', 'Gut', 'Sehr gut'],
+      one: 'Bewertung', many: 'Bewertungen', anonymous: 'Anonym', of5: 'von 5 Sternen', time: ' Uhr',
+      required: 'Bitte fülle dieses Feld aus.',
+      rating: 'Bitte wähle 1 bis 5 Sterne.',
+      email: 'Bitte gib eine gültige E-Mail-Adresse ein oder lass das Feld leer.',
+      consent: 'Bitte bestätige, dass wir deine Bewertung veröffentlichen dürfen.',
+      sending: 'Wird gesendet …',
+      rate: 'Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einer Stunde erneut.',
+      failed: 'Das Senden hat leider nicht geklappt. Schick uns deine Bewertung gerne per E-Mail an info@printlab-trier.de.'
+    },
+    en: {
+      ratings: ['Please choose', 'Poor', 'Fair', 'Okay', 'Good', 'Very good'],
+      one: 'review', many: 'reviews', anonymous: 'Anonymous', of5: 'out of 5 stars', time: '',
+      required: 'Please fill in this field.',
+      rating: 'Please choose 1 to 5 stars.',
+      email: 'Please enter a valid email address or leave the field empty.',
+      consent: 'Please confirm that we may publish your review.',
+      sending: 'Sending …',
+      rate: 'Too many requests in a short time. Please try again in an hour.',
+      failed: 'Unfortunately sending did not work. Feel free to send us your review by email to info@printlab-trier.de.'
+    }
+  };
+  const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'de');
+  const T = (key) => TEXT[lang()][key];
+  // Numbers: 4,90 in German, 4.90 in English
+  const fmt = (n, digits) => { const s = n.toFixed(digits); return lang() === 'en' ? s : s.replace('.', ','); };
+  window.PrintlabLang.init(EN, 'Reviews | PRINT LAB Trier');
 
   /* ------------------------------------------------------------------------
      1. Overview and list
@@ -42,9 +77,10 @@
     const d = new Date(value);
     if (Number.isNaN(d.getTime())) return '';
     const pad = (n) => String(n).padStart(2, '0');
-    const date = pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.' + d.getFullYear();
+    const sep = lang() === 'en' ? '/' : '.';
+    const date = pad(d.getDate()) + sep + pad(d.getMonth() + 1) + sep + d.getFullYear();
     // Only show a time when the entry has one
-    return /T\d{2}:\d{2}/.test(value) ? date + ', ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' Uhr' : date;
+    return /T\d{2}:\d{2}/.test(value) ? date + ', ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + T('time') : date;
   }
 
   function starsEl(rating, large) {
@@ -65,7 +101,7 @@
     head.className = 'rv-item__head';
     const who = document.createElement('p');
     who.className = 'rv-item__name';
-    who.textContent = r.name || 'Anonym';
+    who.textContent = !r.name || r.name === 'Anonym' ? T('anonymous') : r.name;
     if (r.context) {
       const ctx = document.createElement('span');
       ctx.className = 'rv-item__context';
@@ -84,11 +120,11 @@
     score.appendChild(starsEl(r.rating));
     const num = document.createElement('span');
     num.className = 'rv-item__num';
-    num.textContent = de2(r.rating) + ' / 5,00';
+    num.textContent = fmt(r.rating, 2) + ' / ' + fmt(5, 2);
     score.appendChild(num);
     const label = document.createElement('span');
     label.className = 'visually-hidden';
-    label.textContent = r.rating + ' von 5 Sternen';
+    label.textContent = r.rating + ' ' + T('of5');
     score.appendChild(label);
 
     const text = document.createElement('p');
@@ -108,15 +144,19 @@
 
     const total = valid.length;
     const average = valid.reduce((sum, r) => sum + r.rating, 0) / total;
-    document.querySelector('[data-rv-average]').textContent = de2(average);
     document.querySelector('[data-rv-stars]').style.width = (average / 5 * 100) + '%';
-    document.querySelector('[data-rv-count]').textContent = total === 1 ? '1 Bewertung' : total + ' Bewertungen';
-    document.querySelectorAll('[data-dist]').forEach((row) => {
-      const stars = Number(row.dataset.dist);
-      const pct = valid.filter((r) => r.rating === stars).length / total * 100;
-      row.querySelector('.rv-dist__fill').style.width = pct + '%';
-      row.querySelector('.rv-dist__pct').textContent = de1(pct) + ' %';
-    });
+    const paintSummary = () => {
+      document.querySelector('[data-rv-average]').textContent = fmt(average, 2);
+      document.querySelector('.rv-summary__of').textContent = '/ ' + fmt(5, 2);
+      document.querySelector('[data-rv-count]').textContent = total + ' ' + (total === 1 ? T('one') : T('many'));
+      document.querySelectorAll('[data-dist]').forEach((row) => {
+        const stars = Number(row.dataset.dist);
+        const pct = valid.filter((r) => r.rating === stars).length / total * 100;
+        row.querySelector('.rv-dist__fill').style.width = pct + '%';
+        row.querySelector('.rv-dist__pct').textContent = fmt(pct, 1) + ' %';
+      });
+    };
+    paintSummary();
     document.querySelector('[data-rv-score]').hidden = false;
     document.querySelector('[data-rv-empty]').hidden = true;
     document.querySelector('[data-rv-feed-empty]').hidden = true;
@@ -129,6 +169,11 @@
     };
     moreBtn.addEventListener('click', showMore);
     showMore();
+    document.addEventListener('printlab:lang', () => {
+      paintSummary();
+      list.textContent = '';
+      valid.slice(0, shown).forEach((r) => list.appendChild(reviewItem(r)));
+    });
   }
 
   // reviews.php returns the approved reviews from the server; reviews.json
@@ -188,7 +233,7 @@
 
   function paint(value) {
     stars.forEach((item, i) => item.classList.toggle('is-on', i < value));
-    ratingText.textContent = RATING_TEXT[value];
+    ratingText.textContent = T('ratings')[value];
   }
   function setRatingError(message) {
     ratingError.textContent = message || '';
@@ -200,6 +245,7 @@
   });
   radios.forEach((radio) => radio.addEventListener('change', () => { paint(rating()); setRatingError(''); }));
   paint(0);
+  document.addEventListener('printlab:lang', () => paint(rating()));
 
   /* ---- Fields */
   const message = form.querySelector('#r-message');
@@ -218,8 +264,8 @@
       if (text) input.setAttribute('aria-describedby', errorEl.id);
     }
   }
-  const validateMessage = () => (message.value.trim() ? '' : MSG.required);
-  const validateEmail = () => (email.value.trim() && !EMAIL_RE.test(email.value.trim()) ? MSG.email : '');
+  const validateMessage = () => (message.value.trim() ? '' : T('required'));
+  const validateEmail = () => (email.value.trim() && !EMAIL_RE.test(email.value.trim()) ? T('email') : '');
   message.addEventListener('input', () => { if (message.getAttribute('aria-invalid') === 'true') setError(message, validateMessage()); });
   email.addEventListener('blur', () => setError(email, validateEmail()));
   consent.addEventListener('change', () => { if (consent.checked) consentError.textContent = ''; });
@@ -231,18 +277,18 @@
 
   async function send(data) {
     submitBtn.disabled = true;
-    showStatus(MSG.sending);
+    showStatus(T('sending'));
     try {
       const res = await fetch(ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       let body = {};
       try { body = await res.json(); } catch (e) { /* non-JSON reply */ }
-      if (res.status === 429) { showStatus(MSG.rate, 'error'); return; }
+      if (res.status === 429) { showStatus(T('rate'), 'error'); return; }
       if (!res.ok || body.ok !== true) throw new Error('HTTP ' + res.status);
       form.hidden = true;
       success.hidden = false;
       success.focus();
     } catch (err) {
-      showStatus(MSG.failed, 'error');
+      showStatus(T('failed'), 'error');
     } finally {
       submitBtn.disabled = false;
     }
@@ -254,14 +300,14 @@
     if (honeypot && honeypot.value.trim() !== '') return;
 
     let firstInvalid = null;
-    if (!rating()) { setRatingError(MSG.rating); firstInvalid = radios[0]; }
+    if (!rating()) { setRatingError(T('rating')); firstInvalid = radios[0]; }
     const msgError = validateMessage();
     setError(message, msgError);
     if (msgError && !firstInvalid) firstInvalid = message;
     const mailError = validateEmail();
     setError(email, mailError);
     if (mailError && !firstInvalid) firstInvalid = email;
-    consentError.textContent = consent.checked ? '' : MSG.consent;
+    consentError.textContent = consent.checked ? '' : T('consent');
     if (!consent.checked && !firstInvalid) firstInvalid = consent;
     if (firstInvalid) { firstInvalid.focus(); return; }
 

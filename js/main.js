@@ -947,4 +947,5 @@
   } catch (e) {}
 
   applyLanguage(initialLang);
+  document.documentElement.classList.remove('lang-pending');
 })();
