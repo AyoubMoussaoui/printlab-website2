@@ -2,10 +2,12 @@
    PRINT LAB Trier: review summary in the footer of every page (stars,
    average, number of reviews; links to bewertungen.html). Uses only the
    approved reviews (reviews.php, fallback reviews.json) and stays hidden
-   while there are none.
+   while there are none. Also fills in the current year in the footer.
    ========================================================================== */
 (function () {
   'use strict';
+
+  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
   const link = document.querySelector('[data-footer-rating]');
   if (!link) return;
