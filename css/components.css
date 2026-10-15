@@ -2552,6 +2552,18 @@
   gap: 18px;
 }
 
+/* The dialog sits outside the dark sections: outline buttons need light text */
+.rv-dialog .btn--outline {
+  border-color: rgba(245, 243, 238, 0.4);
+  color: var(--color-offwhite);
+}
+
+.rv-dialog .btn--outline:hover {
+  border-color: var(--color-offwhite);
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-offwhite);
+}
+
 .rv-dialog__success {
   display: flex;
   flex-direction: column;
