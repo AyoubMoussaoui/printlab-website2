@@ -7,20 +7,20 @@
   <meta name="description" content="Zahlung, Lieferung und rechtliche Hinweise bei PRINT LAB Trier: Vorkasse per Überweisung oder PayPal, Versand oder Abholung in Trier, individuelle Anfertigungen und Gewährleistung.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/zahlung">
-  <link rel="icon" href="favicon.ico?v=597a6db1" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=597a6db1" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=597a6db1">
-  <link rel="manifest" href="site.webmanifest?v=597a6db1">
+  <link rel="icon" href="favicon.ico?v=f75bd4ae" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=f75bd4ae" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=f75bd4ae">
+  <link rel="manifest" href="site.webmanifest?v=f75bd4ae">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=597a6db1">
-  <link rel="stylesheet" href="css/base.css?v=597a6db1">
-  <link rel="stylesheet" href="css/layout.css?v=597a6db1">
-  <link rel="stylesheet" href="css/components.css?v=597a6db1">
-  <link rel="stylesheet" href="css/responsive.css?v=597a6db1">
+  <link rel="stylesheet" href="css/variables.css?v=f75bd4ae">
+  <link rel="stylesheet" href="css/base.css?v=f75bd4ae">
+  <link rel="stylesheet" href="css/layout.css?v=f75bd4ae">
+  <link rel="stylesheet" href="css/components.css?v=f75bd4ae">
+  <link rel="stylesheet" href="css/responsive.css?v=f75bd4ae">
 </head>
 <body class="page-dark">
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -32,87 +32,93 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
-      <a class="legal-header__back" href="/">
-        <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
-        Zur Startseite
-      </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main" class="section section--dark terms">
     <div class="container terms__inner">
-      <p class="section-head__kicker">Bestellung</p>
-      <h1 class="section-head__title terms__title">Zahlung &amp; Lieferung</h1>
-      <p class="contact__lead terms__lead">Hier erfährst du alles Wichtige rund um Bezahlung, Versand und deine Bestellung. Transparent und ohne versteckte Bedingungen.</p>
+      <h1 class="section-head__title terms__title" data-i18n="title">Zahlung &amp; Lieferung</h1>
+      <p class="contact__lead terms__lead" data-i18n="lead">Hier erfährst du alles Wichtige rund um Bezahlung, Versand und deine Bestellung. Transparent und ohne versteckte Bedingungen.</p>
 
       <section class="terms-card" aria-labelledby="ablauf">
-        <h2 class="terms-card__title" id="ablauf">So läuft deine Bestellung ab</h2>
+        <h2 class="terms-card__title" id="ablauf" data-i18n="stepsTitle">So läuft deine Bestellung ab</h2>
         <ol class="claim-steps terms-steps" role="list">
           <li class="claim-steps__item">
             <span class="claim-steps__num">1</span>
-            <span class="claim-steps__body"><strong class="claim-steps__title">Anfrage &amp; Klärung</strong><span class="claim-steps__text">Wir besprechen gemeinsam dein Design, das gewünschte Produkt, die Stückzahl und den Wunschtermin.</span></span>
+            <span class="claim-steps__body"><strong class="claim-steps__title" data-i18n="step1">Anfrage &amp; Klärung</strong><span class="claim-steps__text" data-i18n="step1Text">Wir besprechen gemeinsam dein Design, das gewünschte Produkt, die Stückzahl und den Wunschtermin.</span></span>
           </li>
           <li class="claim-steps__item">
             <span class="claim-steps__num">2</span>
-            <span class="claim-steps__body"><strong class="claim-steps__title">Angebot &amp; Freigabe</strong><span class="claim-steps__text">Du erhältst dein transparentes Angebot und gibst es digital frei.</span></span>
+            <span class="claim-steps__body"><strong class="claim-steps__title" data-i18n="step2">Angebot &amp; Freigabe</strong><span class="claim-steps__text" data-i18n="step2Text">Du erhältst dein transparentes Angebot und gibst es digital frei.</span></span>
           </li>
           <li class="claim-steps__item">
             <span class="claim-steps__num">3</span>
-            <span class="claim-steps__body"><strong class="claim-steps__title">Rechnung &amp; Zahlung</strong><span class="claim-steps__text">Im Anschluss erhältst du die Rechnung mit allen Zahlungsinformationen.</span></span>
+            <span class="claim-steps__body"><strong class="claim-steps__title" data-i18n="step3">Rechnung &amp; Zahlung</strong><span class="claim-steps__text" data-i18n="step3Text">Im Anschluss erhältst du die Rechnung mit allen Zahlungsinformationen.</span></span>
           </li>
           <li class="claim-steps__item">
             <span class="claim-steps__num">4</span>
-            <span class="claim-steps__body"><strong class="claim-steps__title">Produktion</strong><span class="claim-steps__text">Direkt nach Zahlungseingang starten wir mit der Veredelung deiner Artikel.</span></span>
+            <span class="claim-steps__body"><strong class="claim-steps__title" data-i18n="step4">Produktion</strong><span class="claim-steps__text" data-i18n="step4Text">Direkt nach Zahlungseingang starten wir mit der Veredelung deiner Artikel.</span></span>
           </li>
         </ol>
       </section>
 
       <section class="terms-card" aria-labelledby="zahlungsarten">
-        <h2 class="terms-card__title" id="zahlungsarten">Zahlungsarten</h2>
-        <p class="terms-card__text">Nachdem deine Anfrage geklärt und das Angebot freigegeben wurde, senden wir dir die Rechnung zu. Wir akzeptieren:</p>
+        <h2 class="terms-card__title" id="zahlungsarten" data-i18n="payTitle">Zahlungsarten</h2>
+        <p class="terms-card__text" data-i18n="payText">Nachdem deine Anfrage geklärt und das Angebot freigegeben wurde, senden wir dir die Rechnung zu. Wir akzeptieren:</p>
         <ul class="job-facts terms-pay" role="list">
-          <li class="job-facts__item"><svg class="job-facts__icon" aria-hidden="true"><use href="#icon-check"></use></svg>Banküberweisung (Vorkasse)</li>
+          <li class="job-facts__item"><svg class="job-facts__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="payBank">Banküberweisung (Vorkasse)</span></li>
           <li class="job-facts__item"><svg class="job-facts__icon" aria-hidden="true"><use href="#icon-check"></use></svg>PayPal</li>
         </ul>
-        <p class="terms-card__text">Die Produktion startet unmittelbar nach Zahlungseingang. Alle Preise sind Endpreise. Gemäß §&nbsp;19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
+        <p class="terms-card__text" data-i18n="payNote">Die Produktion startet unmittelbar nach Zahlungseingang. Alle Preise sind Endpreise. Gemäß §&nbsp;19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
       </section>
 
       <section class="terms-card" aria-labelledby="lieferung">
-        <h2 class="terms-card__title" id="lieferung">Versand &amp; Abholung</h2>
+        <h2 class="terms-card__title" id="lieferung" data-i18n="shipTitle">Versand &amp; Abholung</h2>
         <ul class="job-list" role="list">
-          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Die Produktionszeit beträgt in der Regel <strong>5&nbsp;Werktage</strong> nach deiner Freigabe. Der Versand dauert weitere 1 bis 3&nbsp;Werktage.</span></li>
-          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span><strong>Versand innerhalb Deutschlands:</strong> Standard 7,50&nbsp;€, Express 14,00&nbsp;€. Kostenloser Versand ab 199&nbsp;€ Bestellwert.</span></li>
-          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span><strong>Abholung:</strong> Nach vorheriger Absprache direkt in Trier (kostenlos).</span></li>
-          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span>Du brauchst deine Bestellung zu einem festen Termin? Sag es uns bei der Anfrage – wir sagen dir ehrlich, ob es machbar ist.</span></li>
+          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span><span data-i18n="ship1a">Die Produktionszeit beträgt in der Regel</span> <strong data-i18n="ship1b">5&nbsp;Werktage</strong> <span data-i18n="ship1c">nach deiner Freigabe. Der Versand dauert weitere 1 bis 3&nbsp;Werktage.</span></span></li>
+          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span><strong data-i18n="ship2a">Versand innerhalb Deutschlands:</strong> <span data-i18n="ship2b">Standard 7,50&nbsp;€, Express 14,00&nbsp;€. Kostenloser Versand ab 199&nbsp;€ Bestellwert.</span></span></li>
+          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span><strong data-i18n="ship3a">Abholung:</strong> <span data-i18n="ship3b">Nach vorheriger Absprache direkt in Trier (kostenlos).</span></span></li>
+          <li class="job-list__item"><svg class="job-list__icon" aria-hidden="true"><use href="#icon-check"></use></svg><span data-i18n="ship4">Du brauchst deine Bestellung zu einem festen Termin? Sag es uns bei der Anfrage – wir sagen dir ehrlich, ob es machbar ist.</span></li>
         </ul>
       </section>
 
       <section class="terms-card" aria-labelledby="widerruf">
-        <h2 class="terms-card__title" id="widerruf">Sonderanfertigungen &amp; Widerrufsrecht</h2>
-        <p class="terms-card__text">Alle Produkte werden individuell nach deinen Vorgaben und Wünschen veredelt (z.&nbsp;B. via DTF- oder Siebdruck). Das gesetzliche Widerrufsrecht ist gemäß §&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB bei Waren ausgeschlossen, die nach Kundenspezifikation angefertigt werden oder eindeutig auf deine persönlichen Bedürfnisse zugeschnitten sind.</p>
-        <p class="terms-card__text">Bitte prüfe daher Design, Text, Größen, Farben und Stückzahlen vor der Freigabe sorgfältig.</p>
+        <h2 class="terms-card__title" id="widerruf" data-i18n="customTitle">Sonderanfertigungen &amp; Widerrufsrecht</h2>
+        <p class="terms-card__text" data-i18n="customText">Alle Produkte werden individuell nach deinen Vorgaben und Wünschen veredelt (z.&nbsp;B. via DTF- oder Siebdruck). Das gesetzliche Widerrufsrecht ist gemäß §&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB bei Waren ausgeschlossen, die nach Kundenspezifikation angefertigt werden oder eindeutig auf deine persönlichen Bedürfnisse zugeschnitten sind.</p>
+        <p class="terms-card__text" data-i18n="customCheck">Bitte prüfe daher Design, Text, Größen, Farben und Stückzahlen vor der Freigabe sorgfältig.</p>
       </section>
 
       <section class="terms-card" aria-labelledby="maengel">
-        <h2 class="terms-card__title" id="maengel">Mängel &amp; Gewährleistung</h2>
-        <p class="terms-card__text">Sollte ein Produkt einen Herstellungs- oder Materialfehler aufweisen, melde dich bitte innerhalb von <strong>14&nbsp;Tagen</strong> nach Erhalt über unsere <a class="terms-card__link" href="reklamation">Reklamationsseite</a> bei uns. Wir kümmern uns schnell und unkompliziert um Ersatz oder einen fehlerfreien Neudruck. Deine gesetzlichen Gewährleistungsrechte bleiben davon unberührt.</p>
-        <a class="btn btn--outline terms-card__btn" href="reklamation">Zur Reklamation</a>
+        <h2 class="terms-card__title" id="maengel" data-i18n="defectTitle">Mängel &amp; Gewährleistung</h2>
+        <p class="terms-card__text"><span data-i18n="defect1">Sollte ein Produkt einen Herstellungs- oder Materialfehler aufweisen, melde dich bitte innerhalb von</span> <strong data-i18n="defect2">14&nbsp;Tagen</strong> <span data-i18n="defect3">nach Erhalt über unsere</span> <a class="terms-card__link" href="reklamation" data-i18n="defect4">Reklamationsseite</a> <span data-i18n="defect5">bei uns. Wir kümmern uns schnell und unkompliziert um Ersatz oder einen fehlerfreien Neudruck. Deine gesetzlichen Gewährleistungsrechte bleiben davon unberührt.</span></p>
+        <a class="btn btn--outline terms-card__btn" href="reklamation" data-i18n="defectBtn">Zur Reklamation</a>
       </section>
 
       <section class="job-apply terms-contact" aria-labelledby="fragen">
         <div class="job-apply__body">
-          <h2 class="job-apply__title" id="fragen">Noch Fragen?</h2>
-          <p class="job-apply__text">Schreib uns einfach an <a class="job-apply__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a> oder per WhatsApp. Wir helfen dir gerne weiter.</p>
+          <h2 class="job-apply__title" id="fragen" data-i18n="askTitle">Noch Fragen?</h2>
+          <p class="job-apply__text"><span data-i18n="ask1">Schreib uns einfach an</span> <a class="job-apply__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a> <span data-i18n="ask2">oder per WhatsApp. Wir helfen dir gerne weiter.</span></p>
         </div>
         <div class="job-apply__actions">
-          <a class="btn btn--primary" href="/#contact">Anfrage stellen</a>
+          <a class="btn btn--primary" href="/#contact" data-i18n="askBtn">Anfrage stellen</a>
           <a class="btn btn--outline" href="https://wa.me/4915901378917" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </section>
@@ -121,7 +127,7 @@
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -131,12 +137,12 @@
       <p class="site-footer__meta">© <span data-year></span> PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung" aria-current="page">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" aria-current="page" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -146,6 +152,7 @@
     </div>
   </footer>
 
-  <script src="js/footer-rating.js?v=597a6db1" defer></script>
+  <script src="js/zahlung.js?v=f75bd4ae" defer></script>
+  <script src="js/footer-rating.js?v=f75bd4ae" defer></script>
 </body>
 </html>

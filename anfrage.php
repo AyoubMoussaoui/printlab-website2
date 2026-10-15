@@ -288,9 +288,9 @@ if (field('form', 20) === 'reklamation') {
     $shopText = "Neue Reklamation über printlab-trier.de\n\n" . rows_to_text([
         'Name'           => $name,
         'E-Mail'         => $email,
-        'Auftragsnummer' => $order !== '' ? $order : 'nicht angegeben',
+        'Bestellnummer'  => $order !== '' ? $order : 'nicht angegeben',
         'Art des Problems' => $issue,
-        'Fotos'          => $defectCount . ' vom Mangel, ' . $itemCount . ' vom ganzen Artikel (im Anhang)',
+        'Fotos'          => $defectCount . ' vom Defekt, ' . $itemCount . ' vom gesamten Artikel (im Anhang)',
     ]) . "\n\nBeschreibung:\n" . $message
         . "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.';
     $shopSubject = 'Reklamation: ' . $issue . ($order !== '' ? ', Auftrag ' . $order : '') . ' (' . $name . ')';
@@ -322,7 +322,7 @@ if (field('form', 20) === 'reklamation') {
             . "Best regards\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";
     } else {
         $summary = rows_to_text([
-            'Auftragsnummer'   => echo_safe($order),
+            'Bestellnummer'    => echo_safe($order),
             'Art des Problems' => $issue,
             'Fotos'            => (string) count($files),
         ]);
