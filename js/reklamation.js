@@ -22,12 +22,12 @@
      ------------------------------------------------------------------------ */
   const EN = {
     skip: 'Skip to content', back: 'Back to home page', kicker: 'Claims',
-    title: 'Claims & defects',
-    lead: 'Custom production is precision work. If something is still not right with your order, we will take care of it quickly and without fuss.',
-    step1: 'Send photos and a description', step1Text: 'A photo of the defect and one of the whole item help us most.',
+    title: 'Claims & defect reports',
+    lead: 'Custom finishing takes precision. If something is still not right with your order, we will take care of it quickly and without fuss.',
+    step1: 'Send photos and a description', step1Text: 'A photo of the defect and one of the whole item help us the most.',
     step2: 'We check your case', step2Text: 'We usually get back to you within one working day.',
     step3: 'We find a solution together', step3Text: 'For example a flawless reprint or a replacement.',
-    deadline: 'Please report defects within 14 days of receiving your order, so we can help quickly.',
+    deadline: 'Claims can be submitted within 14 days of receiving your order. Please get in touch as soon as possible.',
     note: 'Please keep the affected items as they are until we have sorted it out, and avoid using or cleaning them further. Your statutory warranty rights are of course not affected.',
     name: 'Name', email: 'Email', order: 'Order number', optional: '(optional)', orderPh: 'e.g. from your invoice',
     issue: 'Type of issue', choose: 'Please choose', issue1: 'Print defect / print quality', issue2: 'Damaged item',
@@ -291,7 +291,7 @@
   function showFallback(data) {
     const select = form.querySelector('#c-issue');
     const rows = [
-      ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Auftragsnummer', data.get('order')],
+      ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Bestellnummer', data.get('order')],
       ['Art des Problems', select.options[select.selectedIndex] ? select.value : ''], ['Beschreibung', data.get('message')]
     ].filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     const subject = t('subject') + (data.get('order') ? ' ' + data.get('order') : '') + ' (' + data.get('name') + ')';

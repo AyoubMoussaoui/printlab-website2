@@ -24,7 +24,7 @@ reviews.php        approved reviews as JSON for the pages
 freigabe.php       approve / reject / remove a review (links in the review e-mail)
 inc/reviews.php    review storage and signed links (not public)
 karriere.html      jobs page (student assistant opening, Google for Jobs data), linked in every footer
-reklamation.html   claim page ("Reklamation & Mängelrüge"), linked in every footer
+reklamation.html   claim page ("Reklamation & Mängelanzeige"), linked in every footer
 impressum.html     legal notice (§ 5 DDG)
 datenschutz.html   privacy policy (GDPR)
 404.html           "page not found" page (wired up in .htaccess)
