@@ -16,7 +16,6 @@
     reduceAbove: 1.2 * 1024 * 1024,
     fileTypes: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif']
   };
-  const LANG_KEY = 'printlab-lang'; // shared with js/main.js
 
   /* ------------------------------------------------------------------------
      i18n: German is in the HTML, English here
@@ -97,8 +96,8 @@
     document.dispatchEvent(new CustomEvent('printlab:lang'));
   }
 
-  // Same behaviour as the home page: a choice made with the switch is
-  // remembered, and the browser then doesn't offer its own translation
+  // After a choice with the switch the browser no longer offers its own
+  // translation (same as the home page)
   function declineBrowserTranslation() {
     document.documentElement.setAttribute('translate', 'no');
     if (!document.querySelector('meta[name="google"]')) {
@@ -113,17 +112,11 @@
     btn.addEventListener('click', () => {
       declineBrowserTranslation();
       applyLanguage(btn.dataset.lang);
-      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
     });
   });
 
-  // Language chosen earlier on the home page or here
-  let initial = 'de';
-  try {
-    const stored = localStorage.getItem(LANG_KEY);
-    if (stored) { initial = stored; declineBrowserTranslation(); }
-  } catch (e) {}
-  if (initial !== 'de') applyLanguage(initial);
+  // Like every subpage, the claim page always opens in German, even when
+  // English was chosen on the home page; the switch here offers English.
 
   document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
