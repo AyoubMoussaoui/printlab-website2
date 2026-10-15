@@ -85,12 +85,12 @@ if ($result === 'invalid') http_response_code(403);
         <input type="hidden" name="a" value="<?= $h($action) ?>">
         <input type="hidden" name="t" value="<?= $h($token) ?>">
         <button class="btn <?= $btn ?>" type="submit"><?= $h($label) ?></button>
-        <a class="btn btn--outline" href="bewertungen.html">Abbrechen</a>
+        <a class="btn btn--outline" href="bewertungen">Abbrechen</a>
       </form>
 <?php else: ?>
       <h1 class="approve__title"><?= $h(RESULTS[$result] ?? RESULTS['error']) ?></h1>
       <div class="approve__actions">
-        <a class="btn btn--primary" href="bewertungen.html">Zu den Bewertungen</a>
+        <a class="btn btn--primary" href="bewertungen">Zu den Bewertungen</a>
 <?php if ($result === 'published' && valid_review_id($id)): ?>
         <a class="btn btn--outline" href="<?= $h(review_link($id, 'remove')) ?>">Doch wieder entfernen</a>
 <?php endif; ?>

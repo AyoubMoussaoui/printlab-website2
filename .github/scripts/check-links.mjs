@@ -25,7 +25,9 @@ for (const file of htmlFiles) {
     if (!url || isExternal(url)) continue;
     const [pathWithQuery, frag] = url.split('#');
     const path = pathWithQuery.split('?')[0]; // ignore cache-busting ?v=
-    const target = path ? normalize(join(dirname(file), path)) : file;
+    // Clean addresses: "/" is index.html, "/x" and "x" are x.html
+    let target = path ? normalize(path.startsWith('/') ? path.slice(1) || 'index.html' : join(dirname(file), path)) : file;
+    if (path && !existsSync(join(root, target)) && existsSync(join(root, target + '.html'))) target += '.html';
     if (path && !existsSync(join(root, target))) errors.push(`${file}: ${attr}="${url}" → missing file`);
     else if (frag && target.endsWith('.html') && !ids(target).has(frag)) errors.push(`${file}: ${attr}="${url}" → no id="${frag}"`);
   }
