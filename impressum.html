@@ -6,20 +6,20 @@
   <title>Impressum | PRINT LAB Trier</title>
   <meta name="description" content="Impressum von PRINT LAB Trier: Anbieterkennzeichnung gemäß § 5 DDG.">
   <meta name="theme-color" content="#0B0B0B">
-  <link rel="icon" href="favicon.ico?v=f75bd4ae" sizes="48x48">
-  <link rel="icon" href="assets/icons/favicon.svg?v=f75bd4ae" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=f75bd4ae">
-  <link rel="manifest" href="site.webmanifest?v=f75bd4ae">
+  <link rel="icon" href="favicon.ico?v=eb939aaa" sizes="48x48">
+  <link rel="icon" href="assets/icons/favicon.svg?v=eb939aaa" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=eb939aaa">
+  <link rel="manifest" href="site.webmanifest?v=eb939aaa">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=f75bd4ae">
-  <link rel="stylesheet" href="css/base.css?v=f75bd4ae">
-  <link rel="stylesheet" href="css/layout.css?v=f75bd4ae">
-  <link rel="stylesheet" href="css/components.css?v=f75bd4ae">
-  <link rel="stylesheet" href="css/responsive.css?v=f75bd4ae">
+  <link rel="stylesheet" href="css/variables.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/base.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/layout.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/components.css?v=eb939aaa">
+  <link rel="stylesheet" href="css/responsive.css?v=eb939aaa">
 </head>
 <body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -27,53 +27,59 @@
 
   <header class="legal-header">
     <div class="container legal-header__inner">
-      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
           <span class="brand__tagline">Textildruck · Trier</span>
         </span>
       </a>
-      <a class="legal-header__back" href="/">
-        <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
-        Zur Startseite
-      </a>
+      <div class="legal-header__actions">
+        <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="aria.lang">
+          <button class="lang-switch__btn is-active" type="button" data-lang="de" aria-pressed="true">DE</button>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <button class="lang-switch__btn" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="legal-header__back" href="/">
+          <svg aria-hidden="true"><use href="#icon-arrow"></use></svg>
+          <span class="legal-header__back-label" data-i18n="back">Zur Startseite</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main" class="legal">
     <div class="container legal__inner">
-      <h1 class="legal__title">Impressum</h1>
+      <h1 class="legal__title" data-i18n="title">Impressum</h1>
+      <p class="legal__text legal__en-note" data-lang-only="en" hidden>This is a translation for your convenience. Only the German version is legally binding.</p>
 
       <section class="legal__section" aria-labelledby="anbieter">
-        <h2 class="legal__h2" id="anbieter">Angaben gemäß § 5 DDG</h2>
+        <h2 class="legal__h2" id="anbieter" data-i18n="provider">Angaben gemäß § 5 DDG</h2>
         <address class="legal__address">
           PRINT LAB Trier<br>
-          Inhaber: Ayoub Moussaoui<br>
+          <span data-i18n="owner">Inhaber:</span> Ayoub Moussaoui<br>
           Simone-de-beauvoirstr. 45<br>
           54294 Trier<br>
-          Deutschland
+          <span data-i18n="country">Deutschland</span>
         </address>
       </section>
 
       <section class="legal__section" aria-labelledby="kontakt">
-        <h2 class="legal__h2" id="kontakt">Kontakt</h2>
+        <h2 class="legal__h2" id="kontakt" data-i18n="contact">Kontakt</h2>
         <p class="legal__text">
-          Telefon / WhatsApp: <a class="legal__link" href="tel:+4915901378917">+49&nbsp;159&nbsp;01378917</a><br>
-          E-Mail: <a class="legal__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a><br>
+          <span data-i18n="phone">Telefon / WhatsApp:</span> <a class="legal__link" href="tel:+4915901378917">+49&nbsp;159&nbsp;01378917</a><br>
+          <span data-i18n="email">E-Mail:</span> <a class="legal__link" href="mailto:info@printlab-trier.de">info@printlab-trier.de</a><br>
           Instagram: <a class="legal__link" href="https://instagram.com/printlab_trier" target="_blank" rel="noopener">@printlab_trier</a>
         </p>
       </section>
 
       <section class="legal__section" aria-labelledby="ust">
-        <h2 class="legal__h2" id="ust">Umsatzsteuer</h2>
-        <p class="legal__text">
-          Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).
-        </p>
+        <h2 class="legal__h2" id="ust" data-i18n="vat">Umsatzsteuer</h2>
+        <p class="legal__text" data-i18n="vatText">Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
       </section>
 
       <section class="legal__section" aria-labelledby="verantwortlich">
-        <h2 class="legal__h2" id="verantwortlich">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <h2 class="legal__h2" id="verantwortlich" data-i18n="responsible">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
         <address class="legal__address">
           Ayoub Moussaoui<br>
           Simone-de-beauvoirstr. 45<br>
@@ -82,49 +88,26 @@
       </section>
 
       <section class="legal__section" aria-labelledby="streit">
-        <h2 class="legal__h2" id="streit">Verbraucherstreitbeilegung</h2>
-        <p class="legal__text">
-          Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
-          Verbraucherschlichtungsstelle teilzunehmen.
-        </p>
+        <h2 class="legal__h2" id="streit" data-i18n="dispute">Verbraucherstreitbeilegung</h2>
+        <p class="legal__text" data-i18n="disputeText">Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       </section>
 
       <section class="legal__section" aria-labelledby="haftung">
-        <h2 class="legal__h2" id="haftung">Haftung für Inhalte</h2>
-        <p class="legal__text">
-          Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
-          Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
-          Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen
-          Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder
-          gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
-          eine rechtswidrige Tätigkeit hinweisen. Sobald uns eine konkrete Rechtsverletzung bekannt
-          wird, entfernen wir den betreffenden Inhalt umgehend.
-        </p>
+        <h2 class="legal__h2" id="haftung" data-i18n="liability">Haftung für Inhalte</h2>
+        <p class="legal__text" data-i18n="liabilityText">Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Sobald uns eine konkrete Rechtsverletzung bekannt wird, entfernen wir den betreffenden Inhalt umgehend.</p>
 
-        <h3 class="legal__h3">Haftung für Links</h3>
-        <p class="legal__text">
-          Diese Website enthält Links zu externen Websites Dritter (z.&nbsp;B. Instagram und
-          WhatsApp), auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte ist
-          stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Zum Zeitpunkt der
-          Verlinkung waren keine Rechtsverstöße erkennbar. Sollten uns Rechtsverletzungen bekannt
-          werden, entfernen wir derartige Links umgehend.
-        </p>
+        <h3 class="legal__h3" data-i18n="links">Haftung für Links</h3>
+        <p class="legal__text" data-i18n="linksText">Diese Website enthält Links zu externen Websites Dritter (z.&nbsp;B. Instagram und WhatsApp), auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Sollten uns Rechtsverletzungen bekannt werden, entfernen wir derartige Links umgehend.</p>
 
-        <h3 class="legal__h3">Urheberrecht</h3>
-        <p class="legal__text">
-          Die auf dieser Website veröffentlichten Inhalte, Designs und Fotos unterliegen dem
-          deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
-          Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung
-          von PRINT LAB Trier. Motive, die wir im Auftrag unserer Kundinnen und Kunden drucken,
-          bleiben deren Eigentum.
-        </p>
+        <h3 class="legal__h3" data-i18n="copyright">Urheberrecht</h3>
+        <p class="legal__text" data-i18n="copyrightText">Die auf dieser Website veröffentlichten Inhalte, Designs und Fotos unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung von PRINT LAB Trier. Motive, die wir im Auftrag unserer Kundinnen und Kunden drucken, bleiben deren Eigentum.</p>
       </section>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier">
+      <a class="brand brand--footer" href="/" aria-label="Zur Startseite von PRINT LAB Trier" data-i18n-aria="aria.home">
         <img class="brand__mark" src="assets/images/logo/printlab-mark-on-dark.svg" alt="" width="64" height="64">
         <span class="brand__text">
           <span class="brand__word">PRINT LAB</span>
@@ -134,12 +117,12 @@
       <p class="site-footer__meta">© <span data-year></span> PRINT LAB Trier</p>
       <ul class="footer-links" role="list">
         <li><a class="footer-links__link" href="/#faq">FAQ</a></li>
-        <li><a class="footer-links__link" href="zahlung">Zahlung &amp; Lieferung</a></li>
-        <li><a class="footer-links__link" href="reklamation">Reklamation</a></li>
-        <li><a class="footer-links__link" href="bewertungen">Bewertungen</a></li>
+        <li><a class="footer-links__link" href="zahlung" data-i18n="footerPayment">Zahlung &amp; Lieferung</a></li>
+        <li><a class="footer-links__link" href="reklamation" data-i18n="footerClaim">Reklamation</a></li>
+        <li><a class="footer-links__link" href="bewertungen" data-i18n="footerReview">Bewertungen</a></li>
         <li><a class="footer-links__link" href="karriere">Jobs</a></li>
-        <li><a class="footer-links__link" href="impressum" aria-current="page">Impressum</a></li>
-        <li><a class="footer-links__link" href="datenschutz">Datenschutz</a></li>
+        <li><a class="footer-links__link" href="impressum" aria-current="page" data-i18n="footerImprint">Impressum</a></li>
+        <li><a class="footer-links__link" href="datenschutz" data-i18n="footerPrivacy">Datenschutz</a></li>
       </ul>
       <a class="footer-rating" href="bewertungen" hidden data-footer-rating>
         <span class="rv-stars footer-rating__stars" aria-hidden="true"><span class="rv-stars__fill" data-footer-stars></span></span>
@@ -149,6 +132,8 @@
     </div>
   </footer>
 
-  <script src="js/footer-rating.js?v=f75bd4ae" defer></script>
+  <script src="js/lang-switch.js?v=eb939aaa" defer></script>
+  <script src="js/impressum.js?v=eb939aaa" defer></script>
+  <script src="js/footer-rating.js?v=eb939aaa" defer></script>
 </body>
 </html>
