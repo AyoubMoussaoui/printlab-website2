@@ -2631,6 +2631,48 @@
   color: var(--color-offwhite);
 }
 
+/* Small review summary above the hero headline (js/footer-rating.js).
+   Invisible but taking its space until the numbers are in, so the
+   headline does not move. */
+.hero-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  margin-bottom: 22px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.hero-rating.is-ready {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hero-rating:hover {
+  color: var(--color-offwhite);
+}
+
+.hero-rating__stars {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.hero-rating__score {
+  color: var(--color-offwhite);
+  font-weight: var(--fw-bold);
+}
+
+.hero-rating:hover .hero-rating__count {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* Review summary in the footer (js/footer-rating.js) */
 .footer-rating {
   display: inline-flex;
