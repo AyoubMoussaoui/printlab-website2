@@ -629,6 +629,7 @@
       printOnly.forEach((el) => { el.hidden = isBlank(); });
     }
     if (blankBox) blankBox.addEventListener('change', updateBlank);
+    updateBlank(); // the browser may restore a ticked box after a reload
     function updateDelivery() {
       shippingOnly.forEach((el) => { el.hidden = deliveryValue() !== 'Versand'; });
       if (deliveryValue()) setDeliveryError('');
