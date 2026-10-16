@@ -191,6 +191,18 @@ function collect_files(string $key, array $allowedExt, int $maxFiles, int $maxTo
     return $added;
 }
 
+/** Name for the greeting in the customer confirmation (" Anna"): only a
+    plain name (letters, spaces, hyphen, apostrophe, dot; up to 40 characters
+    and 4 words), otherwise no name, so nobody can put a message into a
+    confirmation e-mail sent to someone else's address. */
+function greet_name(string $name): string
+{
+    $name = trim((string) preg_replace('/\s+/u', ' ', $name));
+    if ($name === '' || mb_strlen($name) > 40 || substr_count($name, ' ') > 3) return '';
+    if (preg_match('/\.\p{L}/u', $name)) return ''; // "example.com"
+    return preg_match("/^\p{L}[\p{L}\p{M} .'’-]*$/u", $name) ? ' ' . $name : '';
+}
+
 /** Free text for the customer confirmation: dropped if it contains a link
     or an e-mail address (the shop e-mail always gets the full value). */
 function echo_safe(string $value): string
@@ -323,7 +335,7 @@ if (field('form', 20) === 'reklamation') {
     record_hit($hits);
 
     // Confirmation: fixed text and the selected options only (no free text)
-    $greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
+    $greetName = greet_name($name);
     if ($lang === 'en') {
         $summary = rows_to_text([
             'Order number' => echo_safe($order),
@@ -461,7 +473,7 @@ record_hit($hits);
 /* ---- Confirmation to the customer: fixed text plus the selected options.
    Free text (message) is not echoed back, so the form can't be abused to
    send arbitrary content to strangers. */
-$greetName = preg_match('/https?:|www\.|@|\d{4,}/i', $name) ? '' : ' ' . $name;
+$greetName = greet_name($name);
 $summary = rows_to_text([
     ($lang === 'en' ? 'Product' : 'Produkt') => trim((in_array($product, QUOTE_PRODUCTS, true) ? $product : '') . ($blank ? ($lang === 'en' ? ' (no print)' : ' (ohne Druck)') : '')),
     ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity . ($sizeText !== '' ? ' (' . $sizeText . ')' : ''),
@@ -477,7 +489,7 @@ $summary = rows_to_text([
 if ($lang === 'en') {
     $confirmSubject = 'Your request at PRINT LAB Trier';
     $confirmText = "Hello" . $greetName . ",\n\n"
-        . "thank you for your request! We have received it and will get back to you with a non-binding quote within 24 hours.\n\n"
+        . "thank you for your request! We have received it and will get back to you with a non-binding quote usually within 24 hours (on working days).\n\n"
         . $summary . "\n\n"
         . ($blank ? "Unprinted items come with a 14-day statutory right of withdrawal for consumers. Withdrawal notice and model form: https://" . SITE_URL . "/zahlung#widerrufsbelehrung\n\n" : '')
         . "If you would like to add a file or a note, simply reply to this email.\n"
@@ -486,7 +498,7 @@ if ($lang === 'en') {
 } else {
     $confirmSubject = 'Deine Anfrage bei PRINT LAB Trier';
     $confirmText = "Hallo" . $greetName . ",\n\n"
-        . "vielen Dank für deine Anfrage! Sie ist bei uns angekommen und wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot bei dir.\n\n"
+        . "vielen Dank für deine Anfrage! Sie ist bei uns angekommen und wir melden uns in der Regel innerhalb von 24 Stunden (werktags) mit einem unverbindlichen Angebot bei dir.\n\n"
         . $summary . "\n\n"
         . ($blank ? "Für unbedruckte Artikel gilt für Verbraucher ein gesetzliches Widerrufsrecht von 14 Tagen. Widerrufsbelehrung und Muster-Widerrufsformular: https://" . SITE_URL . "/zahlung#widerrufsbelehrung\n\n" : '')
         . "Möchtest du noch eine Datei oder einen Hinweis ergänzen? Antworte einfach auf diese E-Mail.\n"
