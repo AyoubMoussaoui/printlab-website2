@@ -153,6 +153,16 @@ function find_live_review(string $id): ?array
 }
 
 /** publish | reject | remove. Returns a short status for the result page. */
+/** E-mail address and order number are only needed to check a review, so
+    they are not kept once it is published (also cleans older entries). */
+function strip_private(array $reviews): array
+{
+    return array_map(function ($r) {
+        if (is_array($r)) unset($r['email'], $r['order']);
+        return $r;
+    }, $reviews);
+}
+
 function apply_review_action(string $id, string $action): string
 {
     return reviews_locked(function () use ($id, $action) {
@@ -162,7 +172,7 @@ function apply_review_action(string $id, string $action): string
             if (!$review) return 'missing';
             $live = load_live_reviews();
             $live[] = $review;
-            write_json_file(reviews_dir() . '/live.json', $live);
+            write_json_file(reviews_dir() . '/live.json', strip_private($live));
             @unlink(pending_file($id));
             return 'published';
         }
@@ -175,7 +185,7 @@ function apply_review_action(string $id, string $action): string
             $live = load_live_reviews();
             $kept = array_values(array_filter($live, function ($r) use ($id) { return !is_array($r) || ($r['id'] ?? '') !== $id; }));
             if (count($kept) === count($live)) return 'missing';
-            write_json_file(reviews_dir() . '/live.json', $kept);
+            write_json_file(reviews_dir() . '/live.json', strip_private($kept));
             return 'removed';
         }
         return 'missing';

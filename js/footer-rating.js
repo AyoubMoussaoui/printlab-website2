@@ -3,8 +3,8 @@
    links to the reviews page) in the footer of every page and, small, above
    the headline on the home page. Uses only the approved reviews
    (reviews.php, fallback reviews.json). Without reviews the footer summary
-   stays hidden and the home page one is removed. Also fills in the current
-   year in the footer.
+   stays hidden; the home page one is only shown from five reviews on.
+   Also fills in the current year in the footer.
    ========================================================================== */
 (function () {
   'use strict';
@@ -14,6 +14,7 @@
   const footer = document.querySelector('[data-footer-rating]');
   const hero = document.querySelector('[data-hero-rating]');
   if (!footer && !hero) return;
+  const HERO_MIN = 5; // the home page summary only from this many reviews
   const noReviews = () => { if (hero) hero.hidden = true; };
 
   const getJson = (url) => fetch(url, { cache: 'no-cache' }).then((res) => {
@@ -53,6 +54,7 @@
     paint();
     document.addEventListener('printlab:lang', paint);
     if (footer) footer.hidden = false;
-    if (hero) hero.classList.add('is-ready');
+    if (hero && ratings.length >= HERO_MIN) hero.classList.add('is-ready');
+    else noReviews();
   }).catch(noReviews);
 })();

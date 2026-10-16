@@ -9,7 +9,7 @@
     skip: 'Skip to content', back: 'Back to home page',
     kicker: 'Jobs at PRINT LAB',
     title: 'Part-time assistant / working student (m/f/d) for design & production',
-    fact2: 'Up to 10 hours per week', fact3: 'Working student or mini-job',
+    fact2: 'Up to approx. 9 hours per week', fact3: 'Working student or mini-job',
     lead: 'We are PRINT LAB from Trier and finish textiles, promotional items and accessories, from single pieces to club orders. We are looking for support in design and production, ideal for students in Trier.',
     tasksTitle: 'Your tasks',
     task1: 'Creating designs: drafting, adapting and preparing logos and motifs for print',
