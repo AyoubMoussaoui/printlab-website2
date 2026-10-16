@@ -2186,6 +2186,30 @@
   margin-top: 12px;
 }
 
+.terms-card__sub {
+  margin-top: 22px;
+  margin-bottom: 8px;
+  color: var(--color-offwhite);
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+}
+
+.terms-card__note {
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Model withdrawal form: lines to fill in */
+.terms-form {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 12px;
+  padding: 14px 18px;
+  border: 1px dashed var(--color-line-dark);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-on-dark-soft);
+}
+
 .terms-card__link {
   color: var(--color-offwhite);
   text-decoration: underline;

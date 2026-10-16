@@ -479,6 +479,7 @@ if ($lang === 'en') {
     $confirmText = "Hello" . $greetName . ",\n\n"
         . "thank you for your request! We have received it and will get back to you with a non-binding quote within 24 hours.\n\n"
         . $summary . "\n\n"
+        . ($blank ? "Unprinted items come with a 14-day statutory right of withdrawal for consumers. Withdrawal notice and model form: https://" . SITE_URL . "/zahlung#widerrufsbelehrung\n\n" : '')
         . "If you would like to add a file or a note, simply reply to this email.\n"
         . "You can also reach us on WhatsApp: " . WHATSAPP . "\n\n"
         . "Best regards\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";
@@ -487,6 +488,7 @@ if ($lang === 'en') {
     $confirmText = "Hallo" . $greetName . ",\n\n"
         . "vielen Dank für deine Anfrage! Sie ist bei uns angekommen und wir melden uns innerhalb von 24 Stunden mit einem unverbindlichen Angebot bei dir.\n\n"
         . $summary . "\n\n"
+        . ($blank ? "Für unbedruckte Artikel gilt für Verbraucher ein gesetzliches Widerrufsrecht von 14 Tagen. Widerrufsbelehrung und Muster-Widerrufsformular: https://" . SITE_URL . "/zahlung#widerrufsbelehrung\n\n" : '')
         . "Möchtest du noch eine Datei oder einen Hinweis ergänzen? Antworte einfach auf diese E-Mail.\n"
         . "Du erreichst uns auch per WhatsApp: " . WHATSAPP . "\n\n"
         . "Viele Grüße\nAyoub\n" . SHOP_NAME . "\n" . SITE_URL . "\n";
