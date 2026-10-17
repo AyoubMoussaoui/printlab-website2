@@ -19,6 +19,10 @@ Options -Indexes
   # The review form moved to the reviews page (opens the form directly)
   RewriteRule ^bewertung\.html$ /bewertungen#bewerten [R=301,NE,L]
 
+  # iPhones (link previews in iMessage/WhatsApp, home screen) look for the
+  # icon at these fixed root addresses; serve the real one from assets/icons
+  RewriteRule ^apple-touch-icon(-[0-9]+x[0-9]+)?(-precomposed)?\.png$ assets/icons/apple-touch-icon.png [L]
+
   # Clean addresses without .html: /index.html → /, /zahlung.html → /zahlung
   # (THE_REQUEST is the browser's request, so the internal rewrite below
   # does not loop back here; query strings are kept)
