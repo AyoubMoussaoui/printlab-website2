@@ -60,7 +60,12 @@ if ($result === 'invalid') http_response_code(403);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Bewertung freigeben | PRINT LAB Trier</title>
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/assets/icons/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/assets/icons/favicon-96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="css/variables.css?v=<?= (int) @filemtime(__DIR__ . '/css/variables.css') ?>">
   <link rel="stylesheet" href="css/base.css?v=<?= (int) @filemtime(__DIR__ . '/css/base.css') ?>">
   <link rel="stylesheet" href="css/layout.css?v=<?= (int) @filemtime(__DIR__ . '/css/layout.css') ?>">

@@ -12,14 +12,15 @@ const assets = [
   ...readdirSync('js').filter((f) => f.endsWith('.js')).sort().map((f) => `js/${f}`),
   // Icons: browsers cache them for a long time, so their links get the
   // version too and a new icon shows up right after a deploy
-  'favicon.ico', 'assets/icons/favicon.svg', 'assets/icons/apple-touch-icon.png', 'site.webmanifest'
+  'favicon.ico', 'site.webmanifest',
+  ...readdirSync('assets/icons').filter((f) => f.endsWith('.png')).sort().map((f) => `assets/icons/${f}`)
 ];
 const hash = createHash('sha1');
 assets.forEach((f) => hash.update(readFileSync(f)));
 const version = hash.digest('hex').slice(0, 8);
 
 const pages = readdirSync('.').filter((f) => f.endsWith('.html'));
-const pattern = /((?:href|src)="(?:css\/[\w-]+\.css|js\/[\w-]+\.js|favicon\.ico|assets\/icons\/favicon\.svg|assets\/icons\/apple-touch-icon\.png|site\.webmanifest))(?:\?v=[0-9a-f]+)?"/g;
+const pattern = /((?:href|src)="(?:css\/[\w-]+\.css|js\/[\w-]+\.js|\/?(?:favicon\.ico|assets\/icons\/[\w-]+\.png|site\.webmanifest)))(?:\?v=[0-9a-f]+)?"/g;
 const outdated = [];
 
 for (const page of pages) {
