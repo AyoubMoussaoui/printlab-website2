@@ -390,6 +390,9 @@ if ($blank) $position = '';
 // The form no longer asks "Design vorhanden?" (uploading is optional);
 // older senders may still send Ja or Nein
 $design   = in_array(field('has_design', 4), ['Ja', 'Nein'], true) ? field('has_design', 4) : '';
+// "Ich habe noch kein Design": the customer wants design proposals (not
+// with "Ohne Druck", where nothing is printed)
+$designService = !$blank && field('design_service', 2) === 'Ja';
 $deadline = field('deadline', 10);
 $delivery = field('delivery', 40);
 $zip      = field('zip', 80);
@@ -449,16 +452,18 @@ $rows = [
     'Lieferung'     => $delivery,
     'PLZ und Ort'   => $delivery === 'Versand' ? $zip : '',
     'Design vorhanden' => $design,
+    'Design'        => $designService ? 'bitte Vorschläge erstellen (Kunde hat noch kein Design)' : '',
 ];
 $fileNames = array_map(function ($f) { return $f['name']; }, $files);
 if ($fileNames) $rows['Dateien'] = implode(', ', $fileNames);
+elseif ($designService) $rows['Dateien'] = 'keine hochgeladen';
 elseif ($design !== 'Nein' && !$blank) $rows['Dateien'] = 'keine hochgeladen (kommen ggf. per E-Mail oder WhatsApp, oder Designvorschläge gewünscht)';
 
 $shopText = "Neue Anfrage über printlab-trier.de\n\n" . rows_to_text($rows)
     . ($message !== '' ? "\n\nNachricht:\n" . $message : '')
     . "\n\nAntworten: einfach auf diese E-Mail antworten, sie geht direkt an " . $email . '.';
 
-$shopSubject = 'Neue Anfrage: ' . $product . ($blank ? ' (ohne Druck)' : '') . ', ' . $quantity . ' Stk. (' . $name . ')';
+$shopSubject = 'Neue Anfrage: ' . $product . ($blank ? ' (ohne Druck)' : '') . ($designService ? ' (mit Design)' : '') . ', ' . $quantity . ' Stk. (' . $name . ')';
 $safeName = str_replace(['"', '\\'], '', $name);
 $shopHeaders = [
     'From: ' . enc_header('PRINT LAB Website') . ' <' . SHOP_EMAIL . '>',
@@ -479,6 +484,7 @@ $summary = rows_to_text([
     ($lang === 'en' ? 'Quantity' : 'Stückzahl') => $quantity . ($sizeText !== '' ? ' (' . $sizeText . ')' : ''),
     ($lang === 'en' ? 'Colour' : 'Farbe') => echo_safe($color),
     ($lang === 'en' ? 'Position' : 'Position') => in_array($position, QUOTE_POSITIONS, true) ? $position : '',
+    'Design' => $designService ? ($lang === 'en' ? 'proposals by PRINT LAB' : 'Vorschläge von PRINT LAB') : '',
     ($lang === 'en' ? 'Preferred date' : 'Wunschtermin') => format_date($deadline),
     ($lang === 'en' ? 'Delivery' : 'Lieferung') => $delivery === 'Noch offen' ? '' : ($lang === 'en'
         ? ($delivery === 'Versand' ? 'Shipping' : 'Pickup in Trier')

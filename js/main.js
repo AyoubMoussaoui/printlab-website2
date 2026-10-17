@@ -38,7 +38,7 @@
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
     'nav.prices': 'Prices', 'nav.contact': 'Contact', 'nav.jobs': 'Jobs', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your finish.',
-    'hero.lead': 'We print textiles, promotional items and accessories. Sharp, colourfast and personal. Starting from a single piece.',
+    'hero.lead': 'We print textiles, promotional items and accessories, with your design or one we create for you. Starting from a single piece.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our products',
     'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote usually within 24 h', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Products', 'services.title1': 'Your product.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
@@ -99,7 +99,8 @@
     'form.filesHint': 'PNG, JPG, PDF, SVG, AI or EPS. Up to 3 files, max. 15 MB in total.',
     'form.filesSafe': 'We use your files only for your quote and your order. They are transferred encrypted and deleted once everything is done.',
     'form.filesSafeLink': 'More on privacy',
-    'form.noDesign': 'No design yet? No problem, we are happy to create proposals for you.',
+    'form.design': 'I don\u2019t have a design yet, please create one for me', 'form.designHint': 'Cost depends on the effort; we tell you the price upfront in the quote.',
+    'form.designNote': 'Briefly describe your idea in the message. You can upload sketches, photos or examples above.',
     'form.submit': 'Request quote', 'form.note': 'Free & non-binding. Reply usually within 24 hours (on working days).',
     'form.privacy': 'How we handle your details is explained in our',
     'form.privacyLink': 'privacy policy (German)',
@@ -630,6 +631,26 @@
     }
     if (blankBox) blankBox.addEventListener('change', updateBlank);
     updateBlank(); // the browser may restore a ticked box after a reload
+
+    /* ---- "Noch kein Design": the customer wants design proposals. Shown
+       with the upload (hidden for "Ohne Druck"); a short note asks for the
+       idea. "Design anfragen" in the design banner opens the form with it
+       ticked. */
+    const designBox = form.querySelector('#f-design');
+    const designNote = form.querySelector('[data-design-note]');
+    function updateDesign() {
+      if (designNote) designNote.hidden = !(designBox && designBox.checked);
+    }
+    if (designBox) designBox.addEventListener('change', updateDesign);
+    updateDesign();
+    document.querySelectorAll('[data-design-pick]').forEach((link) => link.addEventListener('click', () => {
+      if (!designBox) return;
+      if (blankBox) blankBox.checked = false; // a design means a print
+      designBox.checked = true;
+      updateBlank();
+      updateDesign();
+      if (currentStep === 2) updateSummary();
+    }));
     function updateDelivery() {
       shippingOnly.forEach((el) => { el.hidden = deliveryValue() !== 'Versand'; });
       if (deliveryValue()) setDeliveryError('');
@@ -750,7 +771,8 @@
       const rows = [
         ['Name', data.get('name')], ['E-Mail', data.get('email')], ['Telefon', data.get('phone')],
         ['Produkt', data.get('product')], ['Druck', data.get('blank') ? 'ohne Druck (Blanko)' : ''], ['Stückzahl', data.get('quantity')], ['Farbe', data.get('color')],
-        ['Druckposition', data.get('position')], ['Wunschtermin', formatDate(data.get('deadline'))],
+        ['Druckposition', data.get('position')], ['Design', data.get('design_service') ? 'bitte Vorschläge erstellen (noch kein Design)' : ''],
+        ['Wunschtermin', formatDate(data.get('deadline'))],
         ['Lieferung', data.get('delivery')], ['PLZ und Ort', data.get('delivery') === 'Versand' ? data.get('zip') : ''],
         ['Nachricht', data.get('message')]
       ];
@@ -761,7 +783,7 @@
     /* No form service configured: let the visitor choose e-mail or WhatsApp
        instead of silently firing a mailto: link that may do nothing. */
     function showFallback(data, failed) {
-      const subject = 'Anfrage: ' + (data.get('product') || 'Druck') + ', ' + data.get('quantity') + ' Stk.';
+      const subject = 'Anfrage: ' + (data.get('product') || 'Druck') + (data.get('design_service') ? ' (mit Design)' : '') + ', ' + data.get('quantity') + ' Stk.';
       const summary = buildSummary(data);
       const mailHref = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(summary);
       const waHref = 'https://wa.me/' + CONFIG.whatsappNumber + '?text=' + encodeURIComponent(t('waText') + '\n\n' + summary);
@@ -829,6 +851,7 @@
       renderFiles();
       updateDelivery();
       updateBlank();
+      updateDesign();
       goStep(1, false);
       form.querySelectorAll('.is-valid').forEach((el) => el.classList.remove('is-valid'));
     }
@@ -895,7 +918,7 @@
       const data = new FormData(form);
       data.delete('website'); // honeypot is never sent
       data.delete('files[]');
-      if (isBlank()) data.delete('position');
+      if (isBlank()) { data.delete('position'); data.delete('design_service'); }
       else selectedFiles.forEach((file) => data.append('files[]', file, file.name));
       if (!isBlank()) data.delete('blank');
       data.set('t', String(formStart));

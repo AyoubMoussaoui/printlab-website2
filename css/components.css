@@ -2328,6 +2328,12 @@
   margin-top: 16px;
 }
 
+/* Note under "Ich habe noch kein Design", in line with the checkbox text */
+.form-design__note {
+  margin-top: -2px;
+  padding-left: 32px;
+}
+
 /* ---------- Reviews page (bewertungen.html) ---------- */
 .rv__head {
   display: flex;
