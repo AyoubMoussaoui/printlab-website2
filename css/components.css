@@ -90,7 +90,7 @@
 }
 
 .brand__tagline {
-  color: var(--color-magenta);
+  color: var(--color-magenta-on-dark);
   font-size: 8.5px;
   font-weight: var(--fw-bold);
   letter-spacing: 0.3em;
