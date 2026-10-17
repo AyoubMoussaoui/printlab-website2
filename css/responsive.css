@@ -463,18 +463,48 @@
     gap: 14px;
   }
 
+  /* Products: two compact cards per row, so the form comes sooner */
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
   .service-card {
-    padding: 24px;
+    padding: 16px 14px;
   }
 
   .service-card__icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 18px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+
+  .service-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .service-card__title {
+    font-size: 17px;
+    hyphens: auto;
+  }
+
+  .service-card__text {
+    margin-top: 6px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    hyphens: auto;
+  }
+
+  .service-card__cta {
+    gap: 4px;
+    padding-top: 12px;
+    font-size: 13.5px;
+    white-space: nowrap;
   }
 
   .service-card__media {
-    margin: -24px -24px 18px;
+    margin: -16px -14px 12px;
   }
 
   .method-card {
@@ -909,7 +939,8 @@
 }
 
 @media (max-width: 359px) {
-  .price-grid {
+  .price-grid,
+  .service-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
