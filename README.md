@@ -35,7 +35,7 @@ assets/
   fonts/           Archivo, self-hosted (no requests to Google), OFL license
   images/          hero + reference imagery
   images/logo/     logo files (see "Logo" below)
-  icons/           favicon, standalone icon SVGs
+  icons/           favicon and app icons (sources in icons/source/), standalone icon SVGs
 ```
 
 The desktop header (`.site-header-desktop`, `.desktop-nav`) and the mobile header (`.site-header-mobile`, `.mobile-menu`, `.hamburger`) are separate components. All mobile-only styling lives inside `@media (max-width: 767px)`.
@@ -146,5 +146,14 @@ The `on-dark` and `white` SVG/PNG files have a transparent background and light 
 
 Colors: magenta `#C91F6F`, black `#0B0B0B`, off-white `#F5F3EE`. Keep clear space around the logo of at least half the monogram's height, and don't use the monogram smaller than 16px on screen or about 12mm in print.
 
-The favicon (`assets/icons/favicon.svg`) and Apple touch icon (`assets/icons/apple-touch-icon.png`) use the same monogram.
+Favicon and app icons show the monogram as on the website header: off-white frame and magenta P, centred with wide padding on black `#0B0B0B` (so Google's round crop never cuts it).
+
+| File | Size | Used by |
+|---|---|---|
+| `favicon.ico` | 16, 32, 48 | browser tabs, Google, old browsers (`/favicon.ico`) |
+| `assets/icons/favicon-48.png`, `favicon-96.png` | 48, 96 | Google search results, browsers |
+| `assets/icons/icon-192.png`, `icon-512.png`, `icon-maskable-512.png` | 192, 512 | `site.webmanifest` (Android, home screen) |
+| `assets/icons/apple-touch-icon.png` | 180 | iPhone/iPad home screen |
+
+The vector sources are in `assets/icons/source/`: `favicon.svg` is the master (96 px and up), and `favicon-16/32/48.svg` are versions aligned to the pixel grid, so the frame and the P stay sharp at those sizes. To change the icon, edit the sources, export them as PNG at exactly these sizes, rebuild `favicon.ico` from the 16/32/48 PNGs and run `node .github/scripts/stamp-assets.mjs`. The `<head>` icon links are the same on every page.
 
