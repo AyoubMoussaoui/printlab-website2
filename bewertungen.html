@@ -7,20 +7,20 @@
   <meta name="description" content="Bewertungen von Kundinnen und Kunden von PRINT LAB Trier: Druckqualität, Service und Lieferung. Teile auch deine Erfahrung.">
   <meta name="theme-color" content="#0B0B0B">
   <link rel="canonical" href="https://printlab-trier.de/bewertungen">
-  <link rel="icon" href="/favicon.ico?v=1d7f61c2" sizes="16x16 32x32 48x48">
-  <link rel="icon" href="/assets/icons/favicon-48.png?v=1d7f61c2" type="image/png" sizes="48x48">
-  <link rel="icon" href="/assets/icons/favicon-96.png?v=1d7f61c2" type="image/png" sizes="96x96">
-  <link rel="icon" href="/assets/icons/icon-192.png?v=1d7f61c2" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png?v=1d7f61c2" sizes="180x180">
-  <link rel="manifest" href="/site.webmanifest?v=1d7f61c2">
-  <script src="js/head.js?v=1d7f61c2"></script>
+  <link rel="icon" href="/favicon.ico?v=29937734" sizes="16x16 32x32 48x48">
+  <link rel="icon" href="/assets/icons/favicon-48.png?v=29937734" type="image/png" sizes="48x48">
+  <link rel="icon" href="/assets/icons/favicon-96.png?v=29937734" type="image/png" sizes="96x96">
+  <link rel="icon" href="/assets/icons/icon-192.png?v=29937734" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png?v=29937734" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest?v=29937734">
+  <script src="js/head.js?v=29937734"></script>
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/variables.css?v=1d7f61c2">
-  <link rel="stylesheet" href="css/base.css?v=1d7f61c2">
-  <link rel="stylesheet" href="css/layout.css?v=1d7f61c2">
-  <link rel="stylesheet" href="css/components.css?v=1d7f61c2">
-  <link rel="stylesheet" href="css/responsive.css?v=1d7f61c2">
+  <link rel="stylesheet" href="css/variables.css?v=29937734">
+  <link rel="stylesheet" href="css/base.css?v=29937734">
+  <link rel="stylesheet" href="css/layout.css?v=29937734">
+  <link rel="stylesheet" href="css/components.css?v=29937734">
+  <link rel="stylesheet" href="css/responsive.css?v=29937734">
 </head>
 <body class="page-dark">
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
@@ -62,7 +62,10 @@
           <p class="section-head__kicker" data-i18n="kicker">Bewertungen</p>
           <h1 class="section-head__title rv__title" data-i18n="title">Das sagen unsere Kundinnen und Kunden</h1>
         </div>
-        <button class="btn btn--primary rv__write" type="button" data-review-open data-i18n="write">Bewertung abgeben</button>
+        <div class="rv__actions">
+          <a class="btn btn--primary rv__google" href="https://g.page/r/CY2uPU34xFR7EBM/review" target="_blank" rel="noopener"><span data-i18n="google">Auf Google bewerten</span> <span aria-hidden="true">↗</span> <span class="visually-hidden" data-i18n="newTab">(öffnet in neuem Tab)</span></a>
+          <button class="btn btn--outline rv__write" type="button" data-review-open data-i18n="writeSite">Hier auf der Website bewerten</button>
+        </div>
       </header>
 
       <div class="rv__layout">
@@ -127,6 +130,7 @@
       <form class="rv-form" id="review-form" action="anfrage.php" method="post" novalidate data-review-form>
         <h2 class="rv-dialog__title" id="rv-dialog-title" data-i18n="write">Bewertung abgeben</h2>
         <p class="rv-dialog__lead" data-i18n="dialogLead">Wie zufrieden warst du mit Qualität, Service und Druck?</p>
+        <p class="rv-dialog__google"><span data-i18n="googleHint">Du hast ein Google-Konto? Dort hilft uns deine Bewertung am meisten:</span> <a class="rv-dialog__google-link" href="https://g.page/r/CY2uPU34xFR7EBM/review" target="_blank" rel="noopener"><span data-i18n="google">Auf Google bewerten</span> <span aria-hidden="true">↗</span> <span class="visually-hidden" data-i18n="newTab">(öffnet in neuem Tab)</span></a></p>
         <input type="hidden" name="form" value="bewertung">
         <div class="field-hidden" aria-hidden="true">
           <label for="r-website">Website</label>
@@ -201,6 +205,9 @@
         <span class="claim-success__icon"><svg aria-hidden="true"><use href="#icon-check"></use></svg></span>
         <h2 class="claim-success__title" data-i18n="thanks">Vielen Dank!</h2>
         <p class="claim-success__text" data-i18n="thanksText">Dein Feedback hilft uns sehr. Wir prüfen deine Bewertung und veröffentlichen sie hier in den nächsten Tagen.</p>
+        <p class="claim-success__text" data-i18n="thanksGoogle">Magst du sie auch auf Google teilen? Wir kopieren deinen Text, du musst ihn dort nur noch einfügen.</p>
+        <a class="btn btn--primary rv-dialog__google-btn" href="https://g.page/r/CY2uPU34xFR7EBM/review" target="_blank" rel="noopener" data-review-google-copy><span data-i18n="copyGoogle">Text kopieren &amp; auf Google bewerten</span> <span aria-hidden="true">↗</span> <span class="visually-hidden" data-i18n="newTab">(öffnet in neuem Tab)</span></a>
+        <p class="field__hint" role="status" aria-live="polite" data-copy-status></p>
         <button class="btn btn--outline" type="button" data-review-close data-i18n="closeBtn">Schließen</button>
       </div>
     </div>
@@ -233,8 +240,8 @@
     </div>
   </footer>
 
-  <script src="js/lang-switch.js?v=1d7f61c2" defer></script>
-  <script src="js/bewertungen.js?v=1d7f61c2" defer></script>
-  <script src="js/footer-rating.js?v=1d7f61c2" defer></script>
+  <script src="js/lang-switch.js?v=29937734" defer></script>
+  <script src="js/bewertungen.js?v=29937734" defer></script>
+  <script src="js/footer-rating.js?v=29937734" defer></script>
 </body>
 </html>

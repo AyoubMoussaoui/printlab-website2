@@ -785,6 +785,15 @@
     width: 100%;
   }
 
+  .rv__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .rv__actions .btn {
+    width: 100%;
+  }
+
   .rv-card {
     padding: 20px;
   }
