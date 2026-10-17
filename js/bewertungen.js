@@ -21,6 +21,8 @@
   const EN = {
     skip: 'Skip to content', back: 'Back to home page',
     kicker: 'Reviews', title: 'What our customers say', write: 'Write a review', overview: 'Overview',
+    google: 'Review us on Google', writeSite: 'Review on this website', newTab: '(opens in a new tab)',
+    googleHint: 'Do you have a Google account? A review there helps us most:',
     emptyTitle: 'No reviews yet', emptyText: 'Have you ordered from us? Tell others how it went. Your review will be the first.',
     note: 'Before a review appears, we use the name, email address or order number to check that it belongs to an order with us. We only publish reviews we can match to an order, critical ones just like positive ones.',
     feedTitle: 'Latest reviews', feedEmpty: 'Our customers’ reviews will appear here as soon as we have checked them.',
@@ -34,6 +36,7 @@
     consentHint: 'You can withdraw at any time by email to info@printlab-trier.de.',
     submit: 'Send review', privacy: 'More in our', privacyLink: 'privacy policy',
     thanks: 'Thank you!', thanksText: 'Your feedback helps us a lot. We will check your review and publish it here in the next few days.',
+    thanksGoogle: 'Would you like to share it on Google too? We copy your text, you just paste it there.', copyGoogle: 'Copy text & review on Google',
     star1: '1 out of 5 stars', star2: '2 out of 5 stars', star3: '3 out of 5 stars', star4: '4 out of 5 stars', star5: '5 out of 5 stars', stars: 'stars',
     footerPayment: 'Payment & delivery', footerClaim: 'Claims', footerReview: 'Reviews', footerImprint: 'Imprint', footerPrivacy: 'Privacy',
     'aria.home': 'PRINT LAB Trier home page', 'aria.lang': 'Choose language'
@@ -43,6 +46,7 @@
       ratings: ['Bitte wählen', 'Schlecht', 'Geht so', 'In Ordnung', 'Gut', 'Sehr gut'],
       one: 'Bewertung', many: 'Bewertungen', anonymous: 'Anonym', of5: 'von 5 Sternen', time: ' Uhr',
       required: 'Bitte fülle dieses Feld aus.',
+      copied: 'Text kopiert. Füge ihn bei Google einfach ein (lange tippen oder Strg+V).',
       rating: 'Bitte wähle 1 bis 5 Sterne.',
       email: 'Bitte gib eine gültige E-Mail-Adresse ein oder lass das Feld leer.',
       consent: 'Bitte bestätige, dass wir deine Bewertung veröffentlichen dürfen.',
@@ -54,6 +58,7 @@
       ratings: ['Please choose', 'Poor', 'Fair', 'Okay', 'Good', 'Very good'],
       one: 'review', many: 'reviews', anonymous: 'Anonymous', of5: 'out of 5 stars', time: '',
       required: 'Please fill in this field.',
+      copied: 'Text copied. Just paste it on Google (long-press or Ctrl+V).',
       rating: 'Please choose 1 to 5 stars.',
       email: 'Please enter a valid email address or leave the field empty.',
       consent: 'Please confirm that we may publish your review.',
@@ -294,6 +299,19 @@
       submitBtn.disabled = false;
     }
   }
+
+  /* ---- After sending: "Text kopieren & auf Google bewerten" copies the
+     review text to the clipboard; the link itself opens Google in a new
+     tab as usual (also when copying is not possible). */
+  const googleCopy = success && success.querySelector('[data-review-google-copy]');
+  const copyStatus = success && success.querySelector('[data-copy-status]');
+  if (googleCopy) googleCopy.addEventListener('click', () => {
+    const text = message.value.trim();
+    if (!text || !navigator.clipboard || !navigator.clipboard.writeText) return;
+    navigator.clipboard.writeText(text).then(() => {
+      if (copyStatus) copyStatus.textContent = T('copied');
+    }).catch(() => { /* not allowed: the visitor types the review on Google */ });
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();

@@ -18,7 +18,7 @@ js/
   bewertungen.js   reviews page: overview and list from reviews.json, review form in a dialog
   reklamation.js   claim form: photo upload (reduced in the browser), DE/EN, sending
 zahlung.html       payment & delivery: order flow, Vorkasse/PayPal, shipping, no right of withdrawal for custom work, defects
-bewertungen.html   reviews page: average, star distribution and newest reviews from reviews.json; "Bewertung abgeben" opens the form (old bewertung.html redirects here)
+bewertungen.html   reviews page: average, star distribution and newest reviews from reviews.json; "Auf Google bewerten" and "Hier auf der Website bewerten" (opens the form; old bewertung.html redirects here)
 reviews.json       starting list of reviews, copied to the server once (see "Reviews")
 reviews.php        approved reviews as JSON for the pages
 freigabe.php       approve / reject / remove a review (links in the review e-mail)
@@ -72,6 +72,8 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 `reklamation.html` posts to the same `anfrage.php` with `form=reklamation`. Required: name, e-mail, type of issue, description, at least one photo of the defect (up to 4) and one of the whole item (up to 2); the order number is optional. Photos larger than 1.2 MB are redrawn in the browser at max. 2000 px as JPEG, so a claim is usually 1 to 3 MB. The shop mail has the photos attached (names start with `Mangel_` or `Artikel_`), the customer gets a short confirmation. Bot filter and the hourly limit are shared with the quote form. The issue types are listed twice: in `reklamation.html` and in `CLAIM_ISSUES` in `anfrage.php` (the server only accepts those values).
 
 ## Reviews
+
+**Google reviews:** the main button on `bewertungen.html` is "Auf Google bewerten" and links to the Google review link `https://g.page/r/CY2uPU34xFR7EBM/review`. The link appears 3 times in `bewertungen.html`; change all three if it ever changes. The website form stays for visitors without a Google account. After sending, "Text kopieren & auf Google bewerten" copies their text to the clipboard and opens Google, so they can post the same review there. Google reviews can only be posted by the customers themselves; a website can't send them to Google. The privacy policy covers the link in section 6.
 
 `bewertungen.html` and the rating in the footer of every page (stars, average, count; `js/footer-rating.js`, links to the reviews page) show only approved reviews; without any, the footer rating stays hidden and the page shows "Noch keine Bewertungen".
 

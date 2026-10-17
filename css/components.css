@@ -2335,6 +2335,13 @@
 }
 
 /* ---------- Reviews page (bewertungen.html) ---------- */
+/* "Auf Google bewerten" (main) and "Hier auf der Website bewerten" */
+.rv__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .rv__head {
   display: flex;
   flex-wrap: wrap;
@@ -2630,6 +2637,28 @@
   margin: 6px 0 22px;
   color: var(--color-text-on-dark-soft);
   font-size: 15px;
+}
+
+/* "Auf Google bewerten" in the review form, under the lead */
+.rv-dialog__google {
+  margin: -12px 0 22px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 14px;
+}
+
+/* Long label: may wrap instead of overflowing the dialog on phones */
+.rv-dialog__google-btn {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+.rv-dialog__google-link {
+  color: var(--color-magenta-on-dark);
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
 }
 
 .rv-form {
