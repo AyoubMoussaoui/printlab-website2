@@ -962,6 +962,29 @@
     font-size: 15px;
   }
 
+  /* Sub-page header (logo, DE/EN, back arrow): a bit more compact so it
+     fits next to each other without sideways scrolling */
+  .legal-header .brand {
+    gap: 8px;
+  }
+
+  .legal-header .brand__mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .legal-header .brand__word {
+    font-size: 17px;
+  }
+
+  .legal-header .brand__tagline {
+    letter-spacing: 0.18em;
+  }
+
+  .legal-header__actions {
+    gap: 4px;
+  }
+
   .audience {
     grid-template-columns: minmax(0, 1fr);
   }
