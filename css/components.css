@@ -348,6 +348,17 @@
   line-height: 1.6;
 }
 
+/* USP, the first thing read under the headline */
+.hero__usp {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-offwhite);
+  font-size: 1.12em;
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
 .hero__ctas {
   display: flex;
   flex-wrap: wrap;

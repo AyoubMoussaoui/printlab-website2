@@ -38,11 +38,12 @@
     'nav.how': 'Process', 'nav.forwho': 'Who for?', 'nav.references': 'Examples',
     'nav.prices': 'Prices', 'nav.contact': 'Contact', 'nav.jobs': 'Jobs', 'cta.inquire': 'Enquire',
     'hero.title1': 'Your design.', 'hero.title2': 'Your finish.',
-    'hero.lead': 'We print textiles, promotional items and accessories, with your design or one we create for you. Starting from a single piece.',
+    'hero.usp': 'No minimum order, printing from just\u00a01\u00a0piece.',
+    'hero.lead': 'We print textiles, promotional items and accessories, with your design or one we create for you.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our products',
-    'fact.1': 'Printing from 1 piece', 'fact.2': 'Free artwork check', 'fact.3': 'Quote usually within 24 h', 'fact.4': 'Local production in Trier',
+    'fact.1': 'Single pieces & small runs', 'fact.2': 'Free artwork check', 'fact.3': 'Quote usually within 24 h', 'fact.4': 'Local production in Trier',
     'services.kicker': 'Products', 'services.title1': 'Your product.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
-    'services.intro': 'We order proven branded blanks for you and finish every piece individually with DTF, screen or special printing. Pick a product and send us your request, or bring your own piece.',
+    'services.intro': 'We order proven branded blanks for you and finish every piece individually with DTF, screen or special printing. Every product is available from just 1 piece, with no minimum order. Pick a product and send us your request, or bring your own piece.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
     'services.2.t': 'Hoodies & sweatshirts', 'services.2.d': 'Warm companions with a strong look. Chest, back or sleeve: we print every position.',
     'services.3.t': 'Caps & beanies', 'services.3.d': 'Snapbacks, trucker caps and beanies with your logo, ideal for crews, clubs and brands.',
@@ -91,7 +92,7 @@
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.optional': '(optional)',
     'form.product': 'Which product?', 'form.blank': 'No print: just the item (blank)', 'form.blankHint': 'Price on request.',
     'form.pTshirt': 'T-shirts', 'form.pHoodie': 'Hoodies', 'form.pCap': 'Caps & beanies', 'form.pBag': 'Bags',
-    'form.pBottle': 'Bottles', 'form.own': 'Own item', 'form.other': 'Other', 'form.qty': 'Quantity',
+    'form.pBottle': 'Bottles', 'form.own': 'Own item', 'form.other': 'Other', 'form.qty': 'Quantity', 'form.qtyPh': 'e.g. 1 or 50', 'form.qtyHint': 'No minimum order, from just 1 piece.',
     'form.color': 'Colour', 'form.colorPh': 'e.g. black', 'form.position': 'Print position',
     'form.posFront': 'Front', 'form.posBack': 'Back', 'form.posBoth': 'Front & back', 'form.posUnsure': 'Not sure yet',
     'form.extras': 'Colour & preferred date',
@@ -275,9 +276,6 @@
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-pressed', String(active));
     });
-
-    const qty = document.getElementById('f-qty');
-    if (qty) qty.placeholder = currentLang === 'en' ? 'e.g. 25' : 'z. B. 25';
 
     updateMenuLabel();
     updateWhatsAppLinks();
