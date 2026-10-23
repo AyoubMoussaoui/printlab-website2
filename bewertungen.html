@@ -24,15 +24,6 @@
 </head>
 <body class="page-dark">
   <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
-  <!-- Christmas campaign: shown only through html.promo-soon / html.promo-now (js/head.js) -->
-  <div class="promo-bar">
-    <p class="promo-bar__text">
-      <strong data-i18n="promo.label">Weihnachtsaktion:</strong>
-      <span class="promo-soon-only"><span class="promo-long" data-i18n="promo.soon">10 % auf alle Druckaufträge vom 14.11. bis 14.12.2026</span><span class="promo-short" data-i18n="promo.soonShort">10 % ab 14.11.</span></span>
-      <span class="promo-now-only"><span class="promo-long" data-i18n="promo.now">10 % auf alle Druckaufträge bis 14.12.2026</span><span class="promo-short" data-i18n="promo.nowShort">10 % bis 14.12.</span></span>
-      <a class="promo-bar__link" href="/#contact" data-i18n="promo.cta">Jetzt anfragen</a>
-    </p>
-  </div>
 
   <svg class="visually-hidden" aria-hidden="true" focusable="false">
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
@@ -63,6 +54,18 @@
       </div>
     </div>
   </header>
+
+  <!-- Christmas campaign: shown only through html.promo-soon / html.promo-now (js/head.js);
+       below the header, so in-app browsers (Instagram) and Safari tint
+       their toolbar black like the header, not pink -->
+  <div class="promo-bar">
+    <p class="promo-bar__text">
+      <strong data-i18n="promo.label">Weihnachtsaktion:</strong>
+      <span class="promo-soon-only"><span class="promo-long" data-i18n="promo.soon">10 % auf alle Druckaufträge vom 14.11. bis 14.12.2026</span><span class="promo-short" data-i18n="promo.soonShort">10 % ab 14.11.</span></span>
+      <span class="promo-now-only"><span class="promo-long" data-i18n="promo.now">10 % auf alle Druckaufträge bis 14.12.2026</span><span class="promo-short" data-i18n="promo.nowShort">10 % bis 14.12.</span></span>
+      <a class="promo-bar__link" href="/#contact" data-i18n="promo.cta">Jetzt anfragen</a>
+    </p>
+  </div>
 
   <main id="main" class="section section--dark rv">
     <div class="container">
