@@ -41,7 +41,7 @@
     'hero.usp': 'No minimum order, printing from just\u00a01\u00a0piece.',
     'hero.lead': 'We print textiles, promotional items and accessories, with your design or one we create for you.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'Our products',
-    'fact.1': 'Single pieces & small runs', 'fact.2': 'Free artwork check', 'fact.3': 'Quote usually within 24 h', 'fact.4': 'Local production in Trier',
+    'fact.1': 'From one-offs to club orders', 'fact.2': 'We check your file for free', 'fact.3': 'Quote usually by the next working day', 'fact.4': 'Pick up in Trier or have it shipped',
     'services.kicker': 'Products', 'services.title1': 'Your product.', 'services.title2': 'Your finish.', 'services.cta': 'Request product',
     'services.intro': 'We order proven branded blanks for you and finish every piece individually with DTF, screen or special printing. Every product is available from just 1 piece, with no minimum order. Pick a product and send us your request, or bring your own piece.',
     'services.1.t': 'T-shirts', 'services.1.d': 'The classic for teams, events and merch. From basic to premium cotton, in many colours and sizes.',
