@@ -76,7 +76,7 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 10 % on all print orders placed (beauftragt) from 14.11. to 14.12.2026; not for items without print, not for shipping. It is announced on the website from 23.10.2026.
 
 - **Dates:** in `js/head.js` (`ANNOUNCE`, `START`, `END`) and `anfrage.php` (`PROMO_ANNOUNCE`, `PROMO_START`, `PROMO_END`, `PROMO_PERCENT`). Keep both in sync. The dates are checked in German time. Before the start date the site shows the announcement (`html.promo-soon`), from the start to the end date it shows the running campaign (`html.promo-now`), and afterwards nothing.
-- **Where it shows:** a slim banner at the top of every page except 404, a box above the guide prices, and a note at the top of the request form. Request e-mails get a "Weihnachtsaktion" row and the customer's confirmation mentions the discount. The subject line is unchanged.
+- **Where it shows:** a slim banner at the top of every page except 404, and a note at the top of the request form that also states the terms. Request e-mails get a "Weihnachtsaktion" row and the customer's confirmation mentions the discount. The subject line is unchanged.
 - **Texts:** in the HTML (`promo.*` keys). English is in `js/main.js` (home page) and `PRINTLAB_SHARED_EN` in `js/lang-switch.js` (subpages). If the percentage or the dates change, update the texts too.
 - **End early:** set `END` and `PROMO_END` to yesterday's date.
 - **Legal:** the guide prices (Richtpreise) must not be raised during or shortly before the campaign. A discount is measured against the lowest price of the last 30 days (§ 11 PAngV).
