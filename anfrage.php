@@ -210,6 +210,22 @@ function echo_safe(string $value): string
     return preg_match('~https?:|www\.|@|[a-z0-9-]\.[a-z]{2,}~i', $value) ? '' : $value;
 }
 
+/* ---- Christmas campaign ("Weihnachtsaktion"): 10 % on print orders placed
+   (beauftragt) from START to END; announced on the website from ANNOUNCE.
+   Same dates in js/head.js. Returns 'soon', 'now' or ''. */
+const PROMO_ANNOUNCE = '2026-10-23';
+const PROMO_START = '2026-11-14';
+const PROMO_END = '2026-12-14';
+const PROMO_PERCENT = 10;
+
+function promo_phase(): string
+{
+    $today = (new DateTime('now', new DateTimeZone('Europe/Berlin')))->format('Y-m-d');
+    if ($today >= PROMO_START && $today <= PROMO_END) return 'now';
+    if ($today >= PROMO_ANNOUNCE && $today < PROMO_START) return 'soon';
+    return '';
+}
+
 /* ---- Read and check the fields */
 function field(string $name, int $max, bool $multiline = false): string
 {
@@ -393,6 +409,8 @@ $design   = in_array(field('has_design', 4), ['Ja', 'Nein'], true) ? field('has_
 // "Ich habe noch kein Design": the customer wants design proposals (not
 // with "Ohne Druck", where nothing is printed)
 $designService = !$blank && field('design_service', 2) === 'Ja';
+// Christmas campaign: only for print orders
+$promo = $blank ? '' : promo_phase();
 $deadline = field('deadline', 10);
 $delivery = field('delivery', 40);
 $zip      = field('zip', 80);
@@ -453,6 +471,9 @@ $rows = [
     'PLZ und Ort'   => $delivery === 'Versand' ? $zip : '',
     'Design vorhanden' => $design,
     'Design'        => $designService ? 'bitte Vorschläge erstellen (Kunde hat noch kein Design)' : '',
+    'Weihnachtsaktion' => $promo === 'now'
+        ? PROMO_PERCENT . ' % Rabatt im Angebot abziehen (bei Beauftragung bis ' . format_date(PROMO_END) . ')'
+        : ($promo === 'soon' ? 'angekündigt: ' . PROMO_PERCENT . ' % bei Beauftragung vom ' . format_date(PROMO_START) . ' bis ' . format_date(PROMO_END) : ''),
 ];
 $fileNames = array_map(function ($f) { return $f['name']; }, $files);
 if ($fileNames) $rows['Dateien'] = implode(', ', $fileNames);
@@ -485,6 +506,13 @@ $summary = rows_to_text([
     ($lang === 'en' ? 'Colour' : 'Farbe') => echo_safe($color),
     ($lang === 'en' ? 'Position' : 'Position') => in_array($position, QUOTE_POSITIONS, true) ? $position : '',
     'Design' => $designService ? ($lang === 'en' ? 'proposals by PRINT LAB' : 'Vorschläge von PRINT LAB') : '',
+    ($lang === 'en' ? 'Christmas offer' : 'Weihnachtsaktion') => $promo === '' ? '' : ($lang === 'en'
+        ? ($promo === 'now'
+            ? PROMO_PERCENT . ' % off, deducted in your quote (for orders placed by ' . format_date(PROMO_END) . ')'
+            : PROMO_PERCENT . ' % off for orders placed from ' . format_date(PROMO_START) . ' to ' . format_date(PROMO_END))
+        : ($promo === 'now'
+            ? PROMO_PERCENT . ' % Rabatt, den wir im Angebot abziehen (bei Beauftragung bis ' . format_date(PROMO_END) . ')'
+            : PROMO_PERCENT . ' % Rabatt bei Beauftragung vom ' . format_date(PROMO_START) . ' bis ' . format_date(PROMO_END))),
     ($lang === 'en' ? 'Preferred date' : 'Wunschtermin') => format_date($deadline),
     ($lang === 'en' ? 'Delivery' : 'Lieferung') => $delivery === 'Noch offen' ? '' : ($lang === 'en'
         ? ($delivery === 'Versand' ? 'Shipping' : 'Pickup in Trier')

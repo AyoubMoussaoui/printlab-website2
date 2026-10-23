@@ -9,9 +9,17 @@
    German unless English was chosen before; the choice (localStorage
    "printlab-lang") is shared by all pages.
    ========================================================================== */
+/* English texts shared by all subpages (Christmas campaign banner) */
+const PRINTLAB_SHARED_EN = {
+  'promo.label': 'Christmas offer:', 'promo.cta': 'Request a quote',
+  'promo.soon': '10 % off all print orders from 14.11. to 14.12.2026', 'promo.soonShort': '10 % from 14.11.',
+  'promo.now': '10 % off all print orders until 14.12.2026', 'promo.nowShort': '10 % until 14.12.',
+};
+
 window.PrintlabLang = {
-  init(EN, enTitle) {
+  init(pageEN, enTitle) {
     'use strict';
+    const EN = Object.assign({}, PRINTLAB_SHARED_EN, pageEN);
     const i18nNodes = Array.from(document.querySelectorAll('[data-i18n]'));
     const ariaNodes = Array.from(document.querySelectorAll('[data-i18n-aria]'));
     const phNodes = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
