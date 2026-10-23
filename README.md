@@ -71,6 +71,16 @@ The form has two steps: **1. Dein Projekt** (product cards, quantity, Abholung/V
 
 `reklamation.html` posts to the same `anfrage.php` with `form=reklamation`. Required: name, e-mail, type of issue, description, at least one photo of the defect (up to 4) and one of the whole item (up to 2); the order number is optional. Photos larger than 1.2 MB are redrawn in the browser at max. 2000 px as JPEG, so a claim is usually 1 to 3 MB. The shop mail has the photos attached (names start with `Mangel_` or `Artikel_`), the customer gets a short confirmation. Bot filter and the hourly limit are shared with the quote form. The issue types are listed twice: in `reklamation.html` and in `CLAIM_ISSUES` in `anfrage.php` (the server only accepts those values).
 
+## Christmas campaign (Weihnachtsaktion 2026)
+
+10 % on all print orders placed (beauftragt) from 14.11. to 14.12.2026; not for items without print, not for shipping. It is announced on the website from 23.10.2026.
+
+- **Dates:** in `js/head.js` (`ANNOUNCE`, `START`, `END`) and `anfrage.php` (`PROMO_ANNOUNCE`, `PROMO_START`, `PROMO_END`, `PROMO_PERCENT`). Keep both in sync. The dates are checked in German time. Before the start date the site shows the announcement (`html.promo-soon`), from the start to the end date it shows the running campaign (`html.promo-now`), and afterwards nothing.
+- **Where it shows:** a slim banner at the top of every page except 404, a box above the guide prices, and a note at the top of the request form. Request e-mails get a "Weihnachtsaktion" row and the customer's confirmation mentions the discount. The subject line is unchanged.
+- **Texts:** in the HTML (`promo.*` keys). English is in `js/main.js` (home page) and `PRINTLAB_SHARED_EN` in `js/lang-switch.js` (subpages). If the percentage or the dates change, update the texts too.
+- **End early:** set `END` and `PROMO_END` to yesterday's date.
+- **Legal:** the guide prices (Richtpreise) must not be raised during or shortly before the campaign. A discount is measured against the lowest price of the last 30 days (§ 11 PAngV).
+
 ## Reviews
 
 **Google reviews:** the main button on `bewertungen.html` is "Auf Google bewerten" and links to the Google review link `https://g.page/r/CY2uPU34xFR7EBM/review`. The link appears 3 times in `bewertungen.html`; change all three if it ever changes. The website form stays for visitors without a Google account. After sending, "Text kopieren & auf Google bewerten" copies their text to the clipboard and opens Google, so they can post the same review there. Google reviews can only be posted by the customers themselves; a website can't send them to Google. The privacy policy covers the link in section 6.

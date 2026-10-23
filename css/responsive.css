@@ -382,6 +382,24 @@
     color: var(--color-magenta-on-dark);
   }
 
+  /* ---- Christmas campaign banner: short text ---- */
+  .promo-bar {
+    padding-block: 8px;
+  }
+
+  .promo-bar__text {
+    font-size: 13px;
+  }
+
+  .promo-long {
+    display: none;
+  }
+
+  .promo-soon .promo-short,
+  .promo-now .promo-short {
+    display: inline;
+  }
+
   /* ---- Hero ---- */
   .hero {
     --hero-pad-t: 28px;

@@ -76,6 +76,15 @@
     'forwho.9.t': 'Private customers', 'forwho.9.d': 'Gifts & one-offs',
     'design.title': 'No design yet? No problem.', 'design.text': 'We are happy to create several design proposals for you and you pick your favourite.',
     'design.cta': 'Request a design',
+    'promo.label': 'Christmas offer:', 'promo.cta': 'Request a quote',
+    'promo.soon': '10 % off all print orders from 14.11. to 14.12.2026', 'promo.soonShort': '10 % from 14.11.',
+    'promo.now': '10 % off all print orders until 14.12.2026', 'promo.nowShort': '10 % until 14.12.',
+    'promo.title': 'Christmas offer: 10 % off',
+    'promo.pricesSoon': 'On all print orders you place from 14.11. to 14.12.2026. Ask for a quote now; we deduct the discount directly in your quote.',
+    'promo.pricesNow': 'On all print orders you place by 14.12.2026. We deduct the discount directly in your quote.',
+    'promo.terms': 'Does not apply to items without print or to shipping costs.',
+    'promo.formSoon': '10 % off all print orders you place from 14.11. to 14.12.2026.',
+    'promo.formNow': '10 % off all print orders you place by 14.12.2026. We deduct the discount in your quote.',
     'refs.kicker': 'Examples', 'refs.title': 'What your print could look like.',
     'refs.note': 'Example images for illustration.',
     'refs.1': 'Chest logo', 'refs.2': 'Restaurant & merch', 'refs.3': 'Tote bags', 'refs.4': 'Statement shirts', 'refs.5': 'Large back print',
@@ -776,6 +785,10 @@
         ['Lieferung', data.get('delivery')], ['PLZ und Ort', data.get('delivery') === 'Versand' ? data.get('zip') : ''],
         ['Nachricht', data.get('message')]
       ];
+      // Christmas campaign (dates in js/head.js), only for print orders
+      const promoClass = document.documentElement.classList;
+      if (!data.get('blank') && promoClass.contains('promo-now')) rows.push(['Weihnachtsaktion', '10 % (Beauftragung bis 14.12.2026)']);
+      else if (!data.get('blank') && promoClass.contains('promo-soon')) rows.push(['Weihnachtsaktion', '10 % bei Beauftragung vom 14.11. bis 14.12.2026']);
       if (selectedFiles.length && !data.get('blank')) rows.push(['Datei', t('fileLine')]);
       return rows.filter((r) => r[1]).map((r) => r[0] + ': ' + r[1]).join('\n');
     }

@@ -3174,3 +3174,91 @@
 .notfound__btn {
   border-color: var(--color-line-strong);
 }
+
+/* ---------- Christmas campaign (Weihnachtsaktion) ----------
+   Hidden by default; js/head.js sets html.promo-soon (announcement) or
+   html.promo-now (running) by the date, before the first paint. */
+.promo-bar,
+.promo-note,
+.promo-soon-only,
+.promo-now-only,
+.promo-short {
+  display: none;
+}
+
+.promo-soon .promo-bar,
+.promo-now .promo-bar,
+.promo-soon .promo-note,
+.promo-now .promo-note {
+  display: block;
+}
+
+.promo-soon .promo-soon-only,
+.promo-now .promo-now-only {
+  display: inline;
+}
+
+.promo-bar {
+  padding: 9px var(--container-pad);
+  background-color: var(--color-magenta);
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.promo-bar__text {
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+}
+
+.promo-bar__text strong {
+  font-weight: var(--fw-bold);
+}
+
+.promo-bar__link {
+  margin-left: 10px;
+  color: #FFFFFF;
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.promo-bar__link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.promo-note--prices {
+  margin-bottom: 28px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-magenta);
+  border-radius: var(--radius-md);
+  background-color: var(--color-magenta-soft);
+}
+
+.promo-note__title {
+  color: var(--color-offwhite);
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+}
+
+.promo-note__text {
+  margin-top: 6px;
+  color: var(--color-text-on-dark-soft);
+  font-size: 15px;
+}
+
+.promo-note--form {
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--color-magenta);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background-color: var(--color-magenta-soft);
+  color: var(--color-offwhite);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.promo-note--form strong {
+  color: var(--color-magenta-on-dark);
+}
