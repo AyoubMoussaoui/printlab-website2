@@ -34,7 +34,8 @@ const CLAIM_ISSUES  = [
 const REVIEW_ROLES  = ['Privat', 'Verein', 'Unternehmen', 'Schule / Hochschule', 'Event / Feier', 'Sonstiges'];
 // Values the quote form offers. Only these are repeated in the confirmation
 // to the customer, so the form cannot be used to mail arbitrary text.
-const QUOTE_PRODUCTS  = ['T-Shirts', 'Hoodies / Sweatshirts', 'Caps / Mützen', 'Taschen / Beutel', 'Flaschen / Zubehör', 'Eigener Artikel', 'Sonstiges'];
+// 'Flaschen / Zubehör' was the old name of 'Werbeartikel' (still accepted from cached pages)
+const QUOTE_PRODUCTS  = ['T-Shirts', 'Hoodies / Sweatshirts', 'Caps / Mützen', 'Taschen / Beutel', 'Werbeartikel', 'Flaschen / Zubehör', 'Eigener Artikel', 'Sonstiges'];
 const QUOTE_POSITIONS = ['Vorne', 'Hinten', 'Vorne und hinten', 'Noch unklar'];
 const MIN_SECONDS   = 3;  // faster than this is a bot
 const RATE_LIMIT    = 5;  // submissions per IP and hour
